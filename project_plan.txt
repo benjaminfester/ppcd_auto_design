@@ -1,0 +1,4 @@
+- Create project in LateX
+- Generate data containing information regarding thresholds for when a point foundation calculation is verified
+	- Extract functions from calc_point_foundation.js
+	- Do this for several fi
