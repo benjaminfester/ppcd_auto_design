@@ -1,4 +1,4 @@
 - Create project in LateX
 - Generate data containing information regarding thresholds for when a point foundation calculation is verified
 	- Extract functions from calc_point_foundation.js
-	- Do this for several fi
+	- Do this for several fixed values in the (talk to Daniel about what values are realistic to fix and generate dat from)
