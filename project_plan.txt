@@ -2,3 +2,11 @@
 - Generate data containing information regarding thresholds for when a point foundation calculation is verified
 	- Extract functions from calc_point_foundation.js
 	- Do this for several fixed values in the (talk to Daniel about what values are realistic to fix and generate dat from)
+
+
+
+Observations (calculation_type = 1 from db)
+N: 4090
+lmd_known = "on": 250
+lmd_known = !"on":  
+
