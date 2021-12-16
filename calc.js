@@ -7,7 +7,7 @@ dimension_known = undefined
 point_foundation_shape = 'rectangular'
 length = 1500
 width = 1800
-radius = 0
+radius = 100
 height = 650
 height_p_hor = height
 depth = 900
@@ -207,78 +207,141 @@ m_total_dr_st_rb = matix.get_m_total_dr_st_rb(m_F_p_dr_st_r, m_h_width, m_v_dr_s
 m_total_dr_lt_rb = matix.get_m_total_dr_lt_rb(m_F_p_dr_lt_r, m_h_width, m_v_dr_lt_width, m_width, m_F_a_dr_lt_r)
 m_total_ud_st_rb = matix.get_m_total_ud_st_rb(m_F_p_ud_st_r, m_h_width, m_v_ud_st_width, m_width, m_F_a_ud_st_r)
 m_total_ud_lt_rb = matix.get_m_total_ud_lt_rb(m_F_p_ud_lt_r, m_h_width, m_v_ud_lt_width, m_width, m_F_a_ud_lt_r)
-
-
-
-
-
-
-
-
-console.log(m_total_dr_st_rl)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+m_dim_length = matix.get_m_dim_length(m_h_length, m_length, m_v_dim_length)
+m_dim_width = matix.get_m_dim_width(m_h_width, m_width, m_v_dim_width)
+m_dim_r_length = matix.get_m_dim_r_length(m_h_length, m_length, m_v_dim_length)
+m_dim_r_width = matix.get_m_dim_r_width(m_h_width, m_width, m_v_dim_width)
+
+//EFFECTIVE DIMENSIONS
+e_total_dr_st_l = matix.get_e_total_dr_st_l(m_total_dr_st_l, vl_total_dr_st)
+e_total_dr_lt_l = matix.get_e_total_dr_lt_l(m_total_dr_lt_l, vl_total_dr_lt)
+e_total_ud_st_l = matix.get_e_total_ud_st_l(m_total_ud_st_l, vl_total_ud_st)
+e_total_ud_lt_l = matix.get_e_total_ud_lt_l(m_total_ud_lt_l, vl_total_ud_lt)
+e_total_dr_st_b = matix.get_e_total_dr_st_b(m_total_dr_st_b, vl_total_dr_st)
+e_total_dr_lt_b = matix.get_e_total_dr_lt_b(m_total_dr_lt_b, vl_total_dr_lt)
+e_total_ud_st_b = matix.get_e_total_ud_st_b(m_total_ud_st_b, vl_total_ud_st)
+e_total_ud_lt_b = matix.get_e_total_ud_lt_b(m_total_ud_lt_b, vl_total_ud_lt)
+e_total_dr_st_rl = matix.get_e_total_dr_st_rl(m_total_dr_st_rl, vl_total_dr_st)
+e_total_dr_lt_rl = matix.get_e_total_dr_lt_rl(m_total_dr_lt_rl, vl_total_dr_lt)
+e_total_ud_st_rl = matix.get_e_total_ud_st_rl(m_total_ud_st_rl, vl_total_ud_st)
+e_total_ud_lt_rl = matix.get_e_total_ud_lt_rl(m_total_ud_lt_rl, vl_total_ud_lt)
+e_total_dr_st_rb = matix.get_e_total_dr_st_rb(m_total_dr_st_rb, vl_total_dr_st)
+e_total_dr_lt_rb = matix.get_e_total_dr_lt_rb(m_total_dr_lt_rb, vl_total_dr_lt)
+e_total_ud_st_rb = matix.get_e_total_ud_st_rb(m_total_ud_st_rb, vl_total_ud_st)
+e_total_ud_lt_rb = matix.get_e_total_ud_lt_rb(m_total_ud_lt_rb, vl_total_ud_lt)
+e_total_dr_st_r = matix.get_e_total_dr_st_r(e_total_dr_st_rl, e_total_dr_st_rb)
+e_total_dr_lt_r = matix.get_e_total_dr_lt_r(e_total_dr_lt_rl, e_total_dr_lt_rb)
+e_total_ud_st_r = matix.get_e_total_ud_st_r(e_total_ud_st_rl, e_total_ud_st_rb)
+e_total_ud_lt_r = matix.get_e_total_ud_lt_r(e_total_ud_lt_rl, e_total_ud_lt_rb)
+e_dim_l = matix.get_e_dim_l(m_dim_length, vl_dim_total)
+e_dim_b = matix.get_e_dim_b(m_dim_width, vl_dim_total)
+e_dim_rl = matix.get_e_dim_rl(m_dim_r_length, vl_dim_total) 
+e_dim_rb = matix.get_e_dim_rb(m_dim_r_width, vl_dim_total)
+e_dim_r = matix.get_e_dim_r(e_dim_rl, e_dim_rb)
+v_dr_st_r = matix.get_v_dr_st_r(e_total_dr_st_r, radius)
+v_dr_lt_r = matix.get_v_dr_lt_r(e_total_dr_lt_r, radius)
+v_ud_st_r = matix.get_v_ud_st_r(e_total_ud_st_r, radius) 
+v_ud_lt_r = matix.get_v_ud_lt_r(e_total_ud_lt_r, radius)
+v_dim_r = matix.get_v_dim_r(e_dim_r, radius) 
+ef_dr_st_l = matix.get_ef_dr_st_l(point_foundation_shape, length, e_total_dr_st_l, radius, v_dr_st_r)
+ef_dr_lt_l = matix.get_ef_dr_lt_l(point_foundation_shape, length, e_total_dr_lt_l, radius, v_dr_lt_r)
+ef_ud_st_l = matix.get_ef_ud_st_l(point_foundation_shape, length, e_total_ud_st_l, radius, v_ud_st_r)
+ef_ud_lt_l = matix.get_ef_ud_lt_l(point_foundation_shape, length, e_total_ud_lt_l, radius, v_ud_lt_r)
+ef_dim_l = matix.get_ef_dim_l(point_foundation_shape, length, e_dim_l, radius, v_dim_r)
+ef_dr_st_b = matix.get_ef_dr_st_b(point_foundation_shape, width, e_total_dr_st_b, radius, v_dr_st_r)
+ef_dr_lt_b = matix.get_ef_dr_lt_b(point_foundation_shape, width, e_total_dr_lt_b, radius, v_dr_lt_r)
+ef_ud_st_b = matix.get_ef_ud_st_b(point_foundation_shape, width, e_total_ud_st_b, radius, v_ud_st_r)
+ef_ud_lt_b = matix.get_ef_ud_lt_b(point_foundation_shape, width, e_total_ud_lt_b, radius, v_ud_lt_r)
+ef_dim_b = matix.get_ef_dim_b(point_foundation_shape, width, e_dim_b, radius, v_dim_r)
+A_eff_dr_st = matix.get_A_eff_dr_st(point_foundation_shape, ef_dr_st_l, ef_dr_st_b, radius, v_dr_st_r)
+A_eff_dr_lt = matix.get_A_eff_dr_lt(point_foundation_shape, ef_dr_lt_l, ef_dr_lt_b, radius, v_dr_lt_r)
+A_eff_ud_st = matix.get_A_eff_ud_st(point_foundation_shape, ef_ud_st_l, ef_ud_st_b, radius, v_ud_st_r)
+A_eff_ud_lt = matix.get_A_eff_ud_lt(point_foundation_shape, ef_ud_lt_l, ef_ud_lt_b, radius, v_ud_lt_r)
+A_dim_eff = matix.get_A_dim_eff(point_foundation_shape, ef_dim_l, ef_dim_b, radius, v_dim_r)
+
+// GROUND BEARING CAPACITY
+N_q_dr_st = matix.get_N_q_dr_st(point_foundation_shape, e_total_dr_st_l, length, e_total_dr_st_b, width, dr_st_af_d, e_total_dr_st_r, radius)
+N_c_dr_st = matix.get_N_c_dr_st(point_foundation_shape, e_total_dr_st_l, length, e_total_dr_st_b, width, N_q_dr_st, dr_st_af_d, e_total_dr_st_r, radius)
+N_g_dr_st = matix.get_N_g_dr_st(point_foundation_shape, e_total_dr_st_l, length, e_total_dr_st_b, width, N_q_dr_st, dr_st_af_d, e_total_dr_st_r, radius)
+N_q_dr_lt = matix.get_N_q_dr_lt(point_foundation_shape, e_total_dr_lt_l, length, e_total_dr_lt_b, width, dr_lt_af_d, e_total_dr_lt_r, radius)
+N_c_dr_lt = matix.get_N_c_dr_lt(point_foundation_shape, e_total_dr_lt_l, length, e_total_dr_lt_b, width, N_q_dr_lt, dr_lt_af_d, e_total_dr_lt_r, radius)
+N_g_dr_lt = matix.get_N_g_dr_lt(point_foundation_shape, e_total_dr_lt_l, length, e_total_dr_lt_b, width, N_q_dr_lt, dr_lt_af_d, e_total_dr_lt_r, radius)
+N_q_ud_st = matix.get_N_q_ud_st(point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, e_total_ud_st_r, radius)
+N_c_ud_st = matix.get_N_c_ud_st(point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, ud_st_af_d, e_total_ud_st_r, radius)
+N_g_ud_st = matix.get_N_g_ud_st(point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, e_total_ud_st_r, radius)
+N_q_ud_lt = matix.get_N_q_ud_lt(point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, e_total_ud_lt_r, radius)
+N_c_ud_lt = matix.get_N_c_ud_lt(point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, N_q_ud_lt, e_total_ud_lt_r, radius)
+N_g_ud_lt = matix.get_N_g_ud_lt(point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, N_q_ud_lt, e_total_ud_lt_r, radius)
+s_g_dr_st = matix.get_s_g_dr_st(ef_dr_st_l, ef_dr_st_b)
+s_g_dr_lt = matix.get_s_g_dr_lt(ef_dr_lt_l, ef_dr_lt_b)
+s_g_ud_st = matix.get_s_g_ud_st(ef_ud_st_l, ef_ud_st_b)
+s_g_ud_lt = matix.get_s_g_ud_lt(ef_ud_lt_l, ef_ud_lt_b)
+s_q_dr_st = matix.get_s_q_dr_st(ef_dr_st_l, ef_dr_st_b)
+s_q_dr_lt = matix.get_s_q_dr_lt(ef_dr_lt_l, ef_dr_lt_b)
+s_q_ud_st = matix.get_s_q_ud_st(ef_ud_st_l, ef_ud_st_b)
+s_q_ud_lt = matix.get_s_q_ud_lt(ef_ud_lt_l, ef_ud_lt_b)
+s_c_dr_st = matix.get_s_c_dr_st(s_q_dr_st)
+s_c_dr_lt = matix.get_s_c_dr_lt(s_q_dr_lt)
+s_c_ud_st = matix.get_s_c_ud_st(s_q_ud_st)
+s_c_ud_lt = matix.get_s_c_ud_lt(s_q_ud_lt)
+i_q_dr_st = matix.get_i_q_dr_st(H_res_dr_st, vl_total_dr_st, A_eff_dr_st, dr_st_cohesion_d, dr_st_af_d)
+i_g_dr_st = matix.get_i_g_dr_st(H_res_dr_st, vl_total_dr_st, point_foundation_shape, e_total_dr_st_l, length, e_total_dr_st_b, width, e_total_dr_st_r, radius)
+i_c_dr_st = matix.get_i_c_dr_st(H_res_dr_st, point_foundation_shape, e_total_dr_st_l, length, e_total_dr_st_b, width, vl_total_dr_st, dr_st_af_d, e_total_dr_st_r, radius)
+i_q_dr_lt = matix.get_i_q_dr_lt(H_res_dr_lt, vl_total_dr_lt, A_eff_dr_lt, dr_lt_cohesion_d, dr_lt_af_d)
+i_g_dr_lt = matix.get_i_g_dr_lt(H_res_dr_lt, vl_total_dr_lt, A_eff_dr_lt, dr_lt_cohesion_d, dr_lt_af_d, point_foundation_shape, e_total_dr_lt_l, length, e_total_dr_lt_b, width, e_total_dr_lt_r, radius)
+i_c_dr_lt = matix.get_i_c_dr_lt(H_res_dr_lt, vl_total_dr_lt, A_eff_dr_lt, dr_lt_cohesion_d, dr_lt_af_d, point_foundation_shape, e_total_dr_lt_l, length, e_total_dr_lt_b, width, e_total_dr_lt_r, radius)
+i_q_ud_st = matix.get_i_q_ud_st(H_res_ud_st)
+i_g_ud_st = matix.get_i_g_ud_st(H_res_ud_st, point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, vl_total_ud_st, e_total_ud_st_r, radius)
+i_c_ud_st = matix.get_i_c_ud_st(H_res_ud_st, point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, A_eff_ud_st, ud_st_cohesion_d, ud_st_af_d, e_total_ud_st_r, radius, vl_total_ud_st)
+i_q_ud_lt = matix.get_i_q_ud_lt(H_res_ud_lt, ud_lt_af_d, vl_total_ud_lt, A_eff_ud_lt, ud_lt_cohesion_d)
+i_g_ud_lt = matix.get_i_g_ud_lt(H_res_ud_lt, point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, i_q_ud_lt, e_total_ud_lt_r, radius, vl_total_ud_lt)
+i_c_ud_lt = matix.get_i_c_ud_lt(H_res_ud_lt, point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, A_eff_ud_lt, ud_lt_cohesion_d, i_q_ud_lt, vl_total_ud_lt, e_total_ud_lt_r, radius)
+R_q_dr_st = matix.get_R_q_dr_st(q, N_q_dr_st, s_q_dr_st, i_q_dr_st, d_q)
+R_q_dr_lt = matix.get_R_q_dr_lt(q, N_q_dr_lt, s_q_dr_lt, i_q_dr_lt, d_q)
+R_q_ud_st = matix.get_R_q_ud_st(q)
+R_q_ud_lt = matix.get_R_q_ud_lt(ud_lt_af_d, q, N_q_ud_lt, s_q_ud_lt, i_q_ud_lt, d_q)
+R_c_dr_st = matix.get_R_c_dr_st(dr_st_cohesion_d, N_c_dr_st, s_c_dr_st, i_c_dr_st, d_c)
+R_c_dr_lt = matix.get_R_c_dr_lt(dr_lt_cohesion_d, N_c_dr_lt, s_c_dr_lt, i_c_dr_lt, d_c)
+R_c_ud_st = matix.get_R_c_ud_st(ud_st_cohesion_d, N_c_ud_st, s_c_ud_st, i_c_ud_st)
+R_c_ud_lt = matix.get_R_c_ud_lt(ud_lt_af_d, ud_lt_cohesion_d, N_c_ud_lt, s_c_ud_lt, i_c_ud_lt, d_c)
+R_g_dr_st = matix.get_R_g_dr_st(ground_density, ef_dr_st_l, ef_dr_st_b, N_g_dr_st, s_g_dr_st, i_g_dr_st)
+R_g_dr_lt = matix.get_R_g_dr_lt(ground_density, ef_dr_lt_l, ef_dr_lt_b, N_g_dr_lt, s_g_dr_lt, i_g_dr_lt)
+R_g_ud_st = matix.get_R_g_ud_st()
+R_g_ud_lt = matix.get_R_g_ud_lt(ud_lt_af_d, ground_density, ef_ud_lt_l, ef_ud_lt_b, N_g_ud_lt, s_g_ud_lt, i_g_ud_lt)
+R_total_dr_st = matix.get_R_total_dr_st(R_q_dr_st, R_c_dr_st, R_g_dr_st, A_eff_dr_st)
+R_total_dr_lt = matix.get_R_total_dr_lt(R_q_dr_lt, R_c_dr_lt, R_g_dr_lt, A_eff_dr_lt)
+R_total_ud_st = matix.get_R_total_ud_st(R_q_ud_st, R_c_ud_st, R_g_ud_st, A_eff_ud_st)
+R_total_ud_lt = matix.get_R_total_ud_lt(R_q_ud_lt, R_c_ud_lt, R_g_ud_lt, A_eff_ud_lt)
+R_total = matix.get_R_total(R_total_dr_st, R_total_dr_lt, R_total_ud_st, R_total_ud_lt)
+H_dr_st = matix.get_H_dr_st(vl_total_dr_st, dr_st_af_d, A_eff_dr_st, a_d_dr_st)
+H_dr_lt = matix.get_H_dr_lt(vl_total_dr_lt, dr_lt_af_d, A_eff_dr_lt, a_d_dr_lt)
+H_ud_st = matix.get_H_ud_st(A_eff_ud_st, ud_st_cohesion_d, vl_total_ud_st)
+H_ud_lt = matix.get_H_ud_lt(ud_lt_af_d, A_eff_ud_lt, ud_lt_cohesion_d, vl_total_ud_lt)
+H_total = matix.get_H_total(H_dr_st, H_dr_lt, H_ud_st, H_ud_lt)
+
+// MOMENT CAPACITY
+f_cd = matix.get_f_cd(f_ck, gamma_c)
+f_cm = matix.get_f_cm(f_ck)
+f_ctm = matix.get_f_ctm(f_ck)
+E_cm = matix.get_E_cm(f_cm)
+sigma_r1 = matix.get_sigma_r1(f_R_1)
+sigma_r4 = matix.get_sigma_r4(f_R_4)
+gamma_m = matix.get_gamma_m()
+f_ctd_fl = matix.get_f_ctd_fl(height, f_ctm, gamma_m)
+M_n = matix.get_M_n(f_ctd_fl, height)
+f_yd = matix.get_f_yd(f_yk, gamma_s)
+A_c = matix.get_A_c(height)
+rho = matix.get_rho(include_steel, A_s, A_c)
+h_ux = matix.get_h_ux(rho, height, sigma_r1, sigma_r4, A_s, f_yk, f_ck)
+ef_height = matix.get_ef_height(rho, height, cover_layer)
+lambda = get_lambda(f_ck)
+eta = matix.get_eta(f_ck)
+omega = matix.get_omega(A_s, f_yd, ef_height, eta, f_cd)
+mu = matix.get_mu(omega)
+M_p = matix.get_M_p(include_fiber, mu, ef_height, eta, f_cd, height, gamma_m, gamma_s, sigma_r4, sigma_r1, A_s, f_yk, h_ux)
+M_p_l = matix.get_M_p_l(include_fiber, M_p, width, rho)
+
+console.log(M_p_l)
 
 
 

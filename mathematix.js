@@ -657,9 +657,9 @@ module.exports.get_H_res_dr_st = (point_foundation_shape, h_res_dr_st_l, h_res_d
 
 module.exports.get_H_res_dr_lt = (point_foundation_shape, h_res_dr_lt_l, h_res_dr_lt_b, h_res_dr_lt_rl, h_res_dr_lt_rb) => {
     if (point_foundation_shape == 'rectangular') {
-        var H_res_dr_lt = Math.sqrt(Math.pow(h_res_dr_lt_l, 2) + Math.pow(h_res_dr_lt_b, 2))
+        return Math.sqrt(Math.pow(h_res_dr_lt_l, 2) + Math.pow(h_res_dr_lt_b, 2))
     } else if (point_foundation_shape == 'circular') {
-        var H_res_dr_lt = Math.sqrt(Math.pow(h_res_dr_lt_rl, 2) + Math.pow(h_res_dr_lt_rb, 2))
+        return Math.sqrt(Math.pow(h_res_dr_lt_rl, 2) + Math.pow(h_res_dr_lt_rb, 2))
     }
 }
 
@@ -673,9 +673,9 @@ module.exports.get_H_res_ud_st = (point_foundation_shape, h_res_ud_st_l, h_res_u
 
 module.exports.get_H_res_ud_lt = (point_foundation_shape, h_res_ud_lt_l, h_res_ud_lt_b, h_res_ud_lt_rl, h_res_ud_lt_rb) => {
     if (point_foundation_shape == 'rectangular') {
-        var H_res_ud_lt = Math.sqrt(Math.pow(h_res_ud_lt_l, 2) + Math.pow(h_res_ud_lt_b, 2))
+        return Math.sqrt(Math.pow(h_res_ud_lt_l, 2) + Math.pow(h_res_ud_lt_b, 2))
     } else if (point_foundation_shape == 'circular') {
-        var H_res_ud_lt = Math.sqrt(Math.pow(h_res_ud_lt_rl, 2) + Math.pow(h_res_ud_lt_rb, 2))
+        return Math.sqrt(Math.pow(h_res_ud_lt_rl, 2) + Math.pow(h_res_ud_lt_rb, 2))
     }
 }
 
@@ -1016,12 +1016,12 @@ module.exports.get_m_total_dr_st_b = (m_F_p_dr_st_b, m_h_width, m_v_dr_st_width,
 
 module.exports.get_m_total_dr_lt_b = (m_F_p_dr_lt_b, m_h_width, m_v_dr_lt_width, m_width, m_F_a_dr_lt_b) => {
     if (m_F_p_dr_lt_b > Math.abs(m_h_width + m_v_dr_lt_width + m_width) + m_F_a_dr_lt_b) {
-        var m_total_dr_lt_b = 0
+        return 0
     } else {
         if (m_h_width + m_v_dr_lt_width + m_width < 0) {
-            var m_total_dr_lt_b = m_h_width + m_v_dr_lt_width + m_width - m_F_a_dr_lt_b + m_F_p_dr_lt_b
+            return m_h_width + m_v_dr_lt_width + m_width - m_F_a_dr_lt_b + m_F_p_dr_lt_b
         } else if (m_h_width + m_v_dr_lt_width + m_width >= 0) {
-            var m_total_dr_lt_b = m_h_width + m_v_dr_lt_width + m_width + m_F_a_dr_lt_b - m_F_p_dr_lt_b
+            return m_h_width + m_v_dr_lt_width + m_width + m_F_a_dr_lt_b - m_F_p_dr_lt_b
         }
     }
 }
@@ -1164,7 +1164,7 @@ module.exports.get_m_dim_r_width = (m_h_width, m_width, m_v_dim_width) => {
 
 //EFFECTIVE DIMENSIONS
 
-module.exports.get_e_total_dr_st_l = (arg1, arg2) => {
+module.exports.get_e_total_dr_st_l = (m_total_dr_st_l, vl_total_dr_st) => {
     return Math.abs(m_total_dr_st_l) / vl_total_dr_st * 1000
 }
 
@@ -1283,84 +1283,97 @@ module.exports.get_v_dim_r = (e_dim_r, radius) => {
     return 2 * Math.acos(e_dim_r / radius) * 180 / Math.PI
 }
 
-
-
-module.exports.get_ef_dr_st_l = (point_foundation_shape, length, e_total_dr_st_l, A_eff_dr_st, ef_dr_st_b) => {
+module.exports.get_ef_dr_st_l = (point_foundation_shape, length, e_total_dr_st_l, radius, v_dr_st_r) => {
     if (point_foundation_shape == 'rectangular') {
         return length - 2 * e_total_dr_st_l
     } else if (point_foundation_shape == 'circular') {
+        var A_eff_dr_st = Math.pow(radius / 1000, 2) * (v_dr_st_r * Math.PI / 180 - Math.sin(v_dr_st_r * Math.PI / 180))
+        var ef_dr_st_b = Math.sqrt(Math.tan(v_dr_st_r * Math.PI / 180 / 4) * A_eff_dr_st * 1000000)
         return A_eff_dr_st * 1000000 / ef_dr_st_b
     }
 }
 
-module.exports.get_ef_dr_lt_l = (point_foundation_shape, length, e_total_dr_lt_l, A_eff_dr_lt, ef_dr_lt_b) => {
+module.exports.get_ef_dr_lt_l = (point_foundation_shape, length, e_total_dr_lt_l, radius, v_dr_lt_r) => {
     if (point_foundation_shape == 'rectangular') {
-        var ef_dr_lt_l = length - 2 * e_total_dr_lt_l
+        return length - 2 * e_total_dr_lt_l
     } else if (point_foundation_shape == 'circular') {
-        var ef_dr_lt_l = A_eff_dr_lt * 1000000 / ef_dr_lt_b
+        var A_eff_dr_lt = Math.pow(radius / 1000, 2) * (v_dr_lt_r * Math.PI / 180 - Math.sin(v_dr_lt_r * Math.PI / 180))
+        var ef_dr_lt_b = Math.sqrt(Math.tan(v_dr_lt_r * Math.PI / 180 / 4) * A_eff_dr_lt * 1000000)
+        return A_eff_dr_lt * 1000000 / ef_dr_lt_b
     }
 }
 
-module.exports.get_ef_ud_st_l = (point_foundation_shape, length, e_total_ud_st_l, A_eff_ud_st, ef_ud_st_b) => {
+module.exports.get_ef_ud_st_l = (point_foundation_shape, length, e_total_ud_st_l, radius, v_ud_st_r) => {
     if (point_foundation_shape == 'rectangular') {
         return length - 2 * e_total_ud_st_l
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
+        var A_eff_ud_st = Math.pow(radius / 1000, 2) * (v_ud_st_r * Math.PI / 180 - Math.sin(v_ud_st_r * Math.PI / 180))
+        var ef_ud_st_b = Math.sqrt(Math.tan(v_ud_st_r * Math.PI / 180 / 4) * A_eff_ud_st * 1000000)
         return A_eff_ud_st * 1000000 / ef_ud_st_b
     }
 }
 
-module.exports.get_ef_ud_lt_l = (point_foundation_shape, length, e_total_ud_lt_l, A_eff_ud_lt, ef_ud_lt_b) => {
+module.exports.get_ef_ud_lt_l = (point_foundation_shape, length, e_total_ud_lt_l, radius, v_ud_lt_r) => {
     if (point_foundation_shape == 'rectangular') {
         return length - 2 * e_total_ud_lt_l
-    } else if (point_foundation_shape == 'circular') {
-        return A_eff_ud_lt * 1000000 / ef_ud_lt_b
+    } else if (point_foundation_shape == 'circular') { 
+        var A_eff_ud_lt = Math.pow(radius / 1000, 2) * (v_ud_lt_r * Math.PI / 180 - Math.sin(v_ud_lt_r * Math.PI / 180))
+        var ef_ud_lt_b = Math.sqrt(Math.tan(v_ud_lt_r * Math.PI / 180 / 4) * A_eff_ud_lt * 1000000)
+        return ef_ud_lt_l = A_eff_ud_lt * 1000000 / ef_ud_lt_b
     }
 }
 
-module.exports.get_ef_dim_l = (point_foundation_shape, length, e_dim_l, A_dim_eff, ef_dim_b) => {
+module.exports.get_ef_dim_l = (point_foundation_shape, length, e_dim_l, radius, v_dim_r) => {
     if (point_foundation_shape == 'rectangular') {
         return length - 2 * e_dim_l
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
+        var A_dim_eff = Math.pow(radius / 1000, 2) * (v_dim_r * Math.PI / 180 - Math.sin(v_dim_r * Math.PI / 180))
+        var ef_dim_b = Math.sqrt(Math.tan(v_dim_r * Math.PI / 180 / 4) * A_dim_eff * 1000000)
         return A_dim_eff * 1000000 / ef_dim_b
     }
 }
 
-module.exports.get_ef_dr_st_b = (point_foundation_shape, width, e_total_dr_st_b, v_dr_st_r, A_eff_dr_st) => {
+module.exports.get_ef_dr_st_b = (point_foundation_shape, width, e_total_dr_st_b, radius, v_dr_st_r) => {
     if (point_foundation_shape == 'rectangular') {
         return width - 2 * e_total_dr_st_b
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
+        var A_eff_dr_st = Math.pow(radius / 1000, 2) * (v_dr_st_r * Math.PI / 180 - Math.sin(v_dr_st_r * Math.PI / 180))
         return Math.sqrt(Math.tan(v_dr_st_r * Math.PI / 180 / 4) * A_eff_dr_st * 1000000)
     }
 }
 
-module.exports.get_ef_dr_lt_b = (point_foundation_shape, width, e_total_dr_lt_b, v_dr_lt_r, A_eff_dr_lt) => {
+module.exports.get_ef_dr_lt_b = (point_foundation_shape, width, e_total_dr_lt_b, radius, v_dr_lt_r) => {
     if (point_foundation_shape == 'rectangular') {
         return width - 2 * e_total_dr_lt_b
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
+        var A_eff_dr_lt = Math.pow(radius / 1000, 2) * (v_dr_lt_r * Math.PI / 180 - Math.sin(v_dr_lt_r * Math.PI / 180))
         return Math.sqrt(Math.tan(v_dr_lt_r * Math.PI / 180 / 4) * A_eff_dr_lt * 1000000)
     }
 }
 
-module.exports.get_ef_ud_st_b = (point_foundation_shape, e_total_ud_st_b, v_ud_st_r, A_eff_ud_st) => {
+module.exports.get_ef_ud_st_b = (point_foundation_shape, width, e_total_ud_st_b, radius, v_ud_st_r) => {
     if (point_foundation_shape == 'rectangular') {
         return width - 2 * e_total_ud_st_b
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
+        var A_eff_ud_st = Math.pow(radius / 1000, 2) * (v_ud_st_r * Math.PI / 180 - Math.sin(v_ud_st_r * Math.PI / 180))
         return Math.sqrt(Math.tan(v_ud_st_r * Math.PI / 180 / 4) * A_eff_ud_st * 1000000)
     }
 }
 
-module.exports.get_ef_ud_lt_b = (point_foundation_shape, width, e_total_ud_lt_b, v_ud_lt_r, A_eff_ud_lt) => {
+module.exports.get_ef_ud_lt_b = (point_foundation_shape, width, e_total_ud_lt_b, radius, v_ud_lt_r) => {
     if (point_foundation_shape == 'rectangular') {
         return width - 2 * e_total_ud_lt_b
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
+        var A_eff_ud_lt = Math.pow(radius / 1000, 2) * (v_ud_lt_r * Math.PI / 180 - Math.sin(v_ud_lt_r * Math.PI / 180))
         return Math.sqrt(Math.tan(v_ud_lt_r * Math.PI / 180 / 4) * A_eff_ud_lt * 1000000)
     }
 }
 
-module.exports.get_ef_dim_b = (point_foundation_shape, width, e_dim_b, v_dim_r, A_dim_eff) => {
+module.exports.get_ef_dim_b = (point_foundation_shape, width, e_dim_b, radius, v_dim_r) => {
     if (point_foundation_shape == 'rectangular') {
         return width - 2 * e_dim_b
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
+        var A_dim_eff = Math.pow(radius / 1000, 2) * (v_dim_r * Math.PI / 180 - Math.sin(v_dim_r * Math.PI / 180))
         return Math.sqrt(Math.tan(v_dim_r * Math.PI / 180 / 4) * A_dim_eff * 1000000)
     }
 }
@@ -1368,7 +1381,7 @@ module.exports.get_ef_dim_b = (point_foundation_shape, width, e_dim_b, v_dim_r, 
 module.exports.get_A_eff_dr_st = (point_foundation_shape, ef_dr_st_l, ef_dr_st_b, radius, v_dr_st_r) => {
     if (point_foundation_shape == 'rectangular') {
         return ef_dr_st_l * ef_dr_st_b / 1000000
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
         return Math.pow(radius / 1000, 2) * (v_dr_st_r * Math.PI / 180 - Math.sin(v_dr_st_r * Math.PI / 180))
     }
 }
@@ -1376,7 +1389,7 @@ module.exports.get_A_eff_dr_st = (point_foundation_shape, ef_dr_st_l, ef_dr_st_b
 module.exports.get_A_eff_dr_lt = (point_foundation_shape, ef_dr_lt_l, ef_dr_lt_b, radius, v_dr_lt_r) => {
     if (point_foundation_shape == 'rectangular') {
         return ef_dr_lt_l * ef_dr_lt_b / 1000000
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
         return Math.pow(radius / 1000, 2) * (v_dr_lt_r * Math.PI / 180 - Math.sin(v_dr_lt_r * Math.PI / 180))
     }
 }
@@ -1384,15 +1397,15 @@ module.exports.get_A_eff_dr_lt = (point_foundation_shape, ef_dr_lt_l, ef_dr_lt_b
 module.exports.get_A_eff_ud_st = (point_foundation_shape, ef_ud_st_l, ef_ud_st_b, radius, v_ud_st_r) => {
     if (point_foundation_shape == 'rectangular') {
         return ef_ud_st_l * ef_ud_st_b / 1000000
-    } else if (point_foundation_shape == 'circular') {
-        return Math.pow(radius / 1000, 2) * (v_ud_st_r * Math.PI / 180 - Math.sin(v_ud_st_r * Math.PI / 180))
+    } else if (point_foundation_shape == 'circular') { 
+        return  Math.pow(radius / 1000, 2) * (v_ud_st_r * Math.PI / 180 - Math.sin(v_ud_st_r * Math.PI / 180))
     }
 }
 
 module.exports.get_A_eff_ud_lt = (point_foundation_shape, ef_ud_lt_l, ef_ud_lt_b, radius, v_ud_lt_r) => {
     if (point_foundation_shape == 'rectangular') {
         return ef_ud_lt_l * ef_ud_lt_b / 1000000
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
         return Math.pow(radius / 1000, 2) * (v_ud_lt_r * Math.PI / 180 - Math.sin(v_ud_lt_r * Math.PI / 180))
     }
 }
@@ -1400,10 +1413,12 @@ module.exports.get_A_eff_ud_lt = (point_foundation_shape, ef_ud_lt_l, ef_ud_lt_b
 module.exports.get_A_dim_eff = (point_foundation_shape, ef_dim_l, ef_dim_b, radius, v_dim_r) => {
     if (point_foundation_shape == 'rectangular') {
         return ef_dim_l * ef_dim_b / 1000000
-    } else if (point_foundation_shape == 'circular') {
+    } else if (point_foundation_shape == 'circular') { 
         return Math.pow(radius / 1000, 2) * (v_dim_r * Math.PI / 180 - Math.sin(v_dim_r * Math.PI / 180))
     }
 }
+
+
 
 // GROUND BEARING CAPACITY
 
@@ -1505,13 +1520,6 @@ module.exports.get_N_g_dr_lt = (point_foundation_shape, e_total_dr_lt_l, length,
     }
 }
 
-module.exports.get_ = (arg1, arg2) => {
-    if (point_foundation_shape == 'rectangular') {
-
-    } else if (point_foundation_shape == 'circular') {
-    
-    }
-}
 
 module.exports.get_N_q_ud_st = (point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, e_total_ud_st_r, radius) => {
     if (point_foundation_shape == 'rectangular') {
@@ -1595,9 +1603,7 @@ module.exports.get_N_q_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length,
 
 module.exports.get_N_c_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, N_q_ud_lt, e_total_ud_lt_r, radius) => {
     if (point_foundation_shape == 'rectangular') {
-
         if (e_total_ud_lt_l < 0.3 * length && e_total_ud_lt_b < 0.3 * width) {
-
             if (ud_lt_af_d == 0) {     
                 return 2 + Math.PI // + (N_q_ud_lt - 1) / Math.tan(ud_lt_af_d * Math.PI / 180)
             } else {
@@ -1612,7 +1618,6 @@ module.exports.get_N_c_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length,
         }
     } else if (point_foundation_shape == 'circular') {
         if (e_total_ud_lt_r < 0.3 * 2 * radius) {
-
             if (ud_lt_af_d == 0) {
                 return 2 + Math.PI // + (N_q_ud_lt - 1) / Math.tan(ud_lt_af_d * Math.PI / 180)
             } else {
@@ -1628,7 +1633,7 @@ module.exports.get_N_c_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length,
     }
 }
 
-module.exports.get_ = (point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, N_q_ud_lt, e_total_ud_lt_r, radius) => {
+module.exports.get_N_g_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, N_q_ud_lt, e_total_ud_lt_r, radius) => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_ud_lt_l < 0.3 * length && e_total_ud_lt_b < 0.3 * width) {
             if (ud_lt_af_d == 0) {
@@ -1647,7 +1652,6 @@ module.exports.get_ = (point_foundation_shape, e_total_ud_lt_l, length, e_total_
         if (e_total_ud_lt_r < 0.3 * 2 * radius) {
             if (ud_lt_af_d == 0) {
                 return 0
-
             } else {
                 return 1 / 4 * Math.pow((N_q_ud_lt - 1) * Math.cos(ud_lt_af_d * Math.PI / 180), (3 / 2))
             }
