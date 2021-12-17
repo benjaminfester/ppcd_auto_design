@@ -1,4 +1,4 @@
-module.exports.get_volume = (point_foundation_shape, length, width, radius, height) => {
+module.exports.get_volume = () => {
     if (point_foundation_shape == 'rectangular') {
         return length * width * height / 1000000000
     } else if (point_foundation_shape == 'circular') {
@@ -6,9 +6,9 @@ module.exports.get_volume = (point_foundation_shape, length, width, radius, heig
     }
 }
 
-module.exports.get_q = (depth, ground_density) => depth / 1000 * ground_density
+module.exports.get_q = () => depth / 1000 * ground_density
 
-module.exports.get_g = (ground_density, depth, height) => {
+module.exports.get_g = () => {
     if (height < depth) {
         return ground_density * (depth - height) / 1000;
     } else if (height >= depth) {
@@ -18,25 +18,25 @@ module.exports.get_g = (ground_density, depth, height) => {
 
 module.exports.get_af_pc = () => 1.2
 
-module.exports.get_dr_st_af_d = (dr_st_af_k, af_pc) => 180 / Math.PI * Math.atan(Math.tan(dr_st_af_k * Math.PI / 180) / af_pc)
+module.exports.get_dr_st_af_d = () => 180 / Math.PI * Math.atan(Math.tan(dr_st_af_k * Math.PI / 180) / af_pc)
 
-module.exports.get_dr_lt_af_d = (dr_lt_af_k, af_pc) => 180 / Math.PI * Math.atan(Math.tan(dr_lt_af_k * Math.PI / 180) / af_pc)
+module.exports.get_dr_lt_af_d = () => 180 / Math.PI * Math.atan(Math.tan(dr_lt_af_k * Math.PI / 180) / af_pc)
 
-module.exports.get_ud_st_af_d = (ud_st_af_k, af_pc) => 180 / Math.PI * Math.atan(Math.tan(ud_st_af_k * Math.PI / 180) / af_pc)
+module.exports.get_ud_st_af_d = () => 180 / Math.PI * Math.atan(Math.tan(ud_st_af_k * Math.PI / 180) / af_pc)
 
-module.exports.get_ud_lt_af_d = (ud_lt_af_k, af_pc) => 180 / Math.PI * Math.atan(Math.tan(ud_lt_af_k * Math.PI / 180) / af_pc)
+module.exports.get_ud_lt_af_d = () => 180 / Math.PI * Math.atan(Math.tan(ud_lt_af_k * Math.PI / 180) / af_pc)
 
 module.exports.get_dr_cohesion_pc = () => 1.2
 
 module.exports.get_ud_cohesion_pc = () => 1.8
 
-module.exports.get_dr_st_cohesion_d = (dr_st_cohesion_k, dr_cohesion_pc) => dr_st_cohesion_k / dr_cohesion_pc
+module.exports.get_dr_st_cohesion_d = () => dr_st_cohesion_k / dr_cohesion_pc
 
-module.exports.get_dr_lt_cohesion_d = (dr_lt_cohesion_k, dr_cohesion_pc) =>  dr_lt_cohesion_k / dr_cohesion_pc
+module.exports.get_dr_lt_cohesion_d = () =>  dr_lt_cohesion_k / dr_cohesion_pc
 
-module.exports.get_ud_st_cohesion_d = (ud_st_cohesion_k, ud_cohesion_pc) =>  ud_st_cohesion_k / ud_cohesion_pc
+module.exports.get_ud_st_cohesion_d = () =>  ud_st_cohesion_k / ud_cohesion_pc
 
-module.exports.get_ud_lt_cohesion_d = (ud_lt_cohesion_k, ud_cohesion_pc) => ud_lt_cohesion_k / ud_cohesion_pc
+module.exports.get_ud_lt_cohesion_d = () => ud_lt_cohesion_k / ud_cohesion_pc
 
 module.exports.get_a_d_dr_st = (fabrication_method, dr_st_cohesion_d) => {
     if (fabrication_method == 'in_situ') {
@@ -58,41 +58,41 @@ module.exports.get_d_c = () => 1
 
 module.exports.get_d_q = () => 1
 
-module.exports.get_K_g_a_dr_st = (dr_st_af_d) => (1 - Math.sin(dr_st_af_d * Math.PI / 180)) / (1 + Math.sin(dr_st_af_d * Math.PI / 180))
+module.exports.get_K_g_a_dr_st = () => (1 - Math.sin(dr_st_af_d * Math.PI / 180)) / (1 + Math.sin(dr_st_af_d * Math.PI / 180))
 
-module.exports.get_K_g_a_dr_lt = (dr_lt_af_d) => (1 - Math.sin(dr_lt_af_d * Math.PI / 180)) / (1 + Math.sin(dr_lt_af_d * Math.PI / 180))
+module.exports.get_K_g_a_dr_lt = () => (1 - Math.sin(dr_lt_af_d * Math.PI / 180)) / (1 + Math.sin(dr_lt_af_d * Math.PI / 180))
 
-module.exports.get_K_g_a_ud_st = (ud_st_af_d) => (1 - Math.sin(ud_st_af_d * Math.PI / 180)) / (1 + Math.sin(ud_st_af_d * Math.PI / 180))
+module.exports.get_K_g_a_ud_st = () => (1 - Math.sin(ud_st_af_d * Math.PI / 180)) / (1 + Math.sin(ud_st_af_d * Math.PI / 180))
 
-module.exports.get_K_g_a_ud_lt = (ud_lt_af_d) => (1 - Math.sin(ud_lt_af_d * Math.PI / 180)) / (1 + Math.sin(ud_lt_af_d * Math.PI / 180))
+module.exports.get_K_g_a_ud_lt = () => (1 - Math.sin(ud_lt_af_d * Math.PI / 180)) / (1 + Math.sin(ud_lt_af_d * Math.PI / 180))
 
-module.exports.get_K_c_a_dr_st = (dr_st_af_d) => -(2 * Math.cos(dr_st_af_d * Math.PI / 180)) / (1 + Math.sin(dr_st_af_d * Math.PI / 180))
+module.exports.get_K_c_a_dr_st = () => -(2 * Math.cos(dr_st_af_d * Math.PI / 180)) / (1 + Math.sin(dr_st_af_d * Math.PI / 180))
 
-module.exports.get_K_c_a_dr_lt = (dr_lt_af_d) => -(2 * Math.cos(dr_lt_af_d * Math.PI / 180)) / (1 + Math.sin(dr_lt_af_d * Math.PI / 180))
+module.exports.get_K_c_a_dr_lt = () => -(2 * Math.cos(dr_lt_af_d * Math.PI / 180)) / (1 + Math.sin(dr_lt_af_d * Math.PI / 180))
 
-module.exports.get_K_c_a_ud_st = (ud_st_af_d) => -(2 * Math.cos(ud_st_af_d * Math.PI / 180)) / (1 + Math.sin(ud_st_af_d * Math.PI / 180))
+module.exports.get_K_c_a_ud_st = () => -(2 * Math.cos(ud_st_af_d * Math.PI / 180)) / (1 + Math.sin(ud_st_af_d * Math.PI / 180))
 
-module.exports.get_K_c_a_ud_lt = (ud_lt_af_d) => -(2 * Math.cos(ud_lt_af_d * Math.PI / 180)) / (1 + Math.sin(ud_lt_af_d * Math.PI / 180))
+module.exports.get_K_c_a_ud_lt = () => -(2 * Math.cos(ud_lt_af_d * Math.PI / 180)) / (1 + Math.sin(ud_lt_af_d * Math.PI / 180))
 
-module.exports.get_K_g_p_dr_st = (dr_st_af_d) => (1 + Math.sin(dr_st_af_d * Math.PI / 180)) / (1 - Math.sin(dr_st_af_d * Math.PI / 180))
+module.exports.get_K_g_p_dr_st = () => (1 + Math.sin(dr_st_af_d * Math.PI / 180)) / (1 - Math.sin(dr_st_af_d * Math.PI / 180))
 
-module.exports.get_K_g_p_dr_lt = (dr_lt_af_d) => (1 + Math.sin(dr_lt_af_d * Math.PI / 180)) / (1 - Math.sin(dr_lt_af_d * Math.PI / 180))
+module.exports.get_K_g_p_dr_lt = () => (1 + Math.sin(dr_lt_af_d * Math.PI / 180)) / (1 - Math.sin(dr_lt_af_d * Math.PI / 180))
 
-module.exports.get_K_g_p_ud_st = (ud_st_af_d) => (1 + Math.sin(ud_st_af_d * Math.PI / 180)) / (1 - Math.sin(ud_st_af_d * Math.PI / 180))
+module.exports.get_K_g_p_ud_st = () => (1 + Math.sin(ud_st_af_d * Math.PI / 180)) / (1 - Math.sin(ud_st_af_d * Math.PI / 180))
 
-module.exports.get_K_g_p_ud_lt = (ud_lt_af_d) => (1 + Math.sin(ud_lt_af_d * Math.PI / 180)) / (1 - Math.sin(ud_lt_af_d * Math.PI / 180))
+module.exports.get_K_g_p_ud_lt = () => (1 + Math.sin(ud_lt_af_d * Math.PI / 180)) / (1 - Math.sin(ud_lt_af_d * Math.PI / 180))
 
-module.exports.get_K_c_p_dr_st = (dr_st_af_d) => (2 * Math.cos(dr_st_af_d * Math.PI / 180)) / (1 - Math.sin(dr_st_af_d * Math.PI / 180))
+module.exports.get_K_c_p_dr_st = () => (2 * Math.cos(dr_st_af_d * Math.PI / 180)) / (1 - Math.sin(dr_st_af_d * Math.PI / 180))
 
-module.exports.get_K_c_p_dr_lt = (dr_lt_af_d) => (2 * Math.cos(dr_lt_af_d * Math.PI / 180)) / (1 - Math.sin(dr_lt_af_d * Math.PI / 180))
+module.exports.get_K_c_p_dr_lt = () => (2 * Math.cos(dr_lt_af_d * Math.PI / 180)) / (1 - Math.sin(dr_lt_af_d * Math.PI / 180))
 
-module.exports.get_K_c_p_ud_st = (ud_st_af_d) => (2 * Math.cos(ud_st_af_d * Math.PI / 180)) / (1 - Math.sin(ud_st_af_d * Math.PI / 180))
+module.exports.get_K_c_p_ud_st = () => (2 * Math.cos(ud_st_af_d * Math.PI / 180)) / (1 - Math.sin(ud_st_af_d * Math.PI / 180))
 
-module.exports.get_K_c_p_ud_lt = (ud_lt_af_d) => (2 * Math.cos(ud_lt_af_d * Math.PI / 180)) / (1 - Math.sin(ud_lt_af_d * Math.PI / 180))
+module.exports.get_K_c_p_ud_lt = () => (2 * Math.cos(ud_lt_af_d * Math.PI / 180)) / (1 - Math.sin(ud_lt_af_d * Math.PI / 180))
 
-module.exports.get_self_weight = (volume, concrete_density) => volume * concrete_density
+module.exports.get_self_weight = () => volume * concrete_density
 
-module.exports.get_ground_area = (depth, height, column_shape, volume, column_length, column_width, column_radius) => {
+module.exports.get_ground_area = () => {
     if (depth > height) {
         if (column_shape == 'rectangular') {
             return (volume / (height / 1000) - column_length * column_width / 1000000)
@@ -104,43 +104,43 @@ module.exports.get_ground_area = (depth, height, column_shape, volume, column_le
     }
 } 
 
-module.exports.get_ground_weight = (ground_area, g) => ground_area * g
+module.exports.get_ground_weight = () => ground_area * g
 
-module.exports.get_vl_total_dr_st = (self_weight, ground_weight, vl_external) => {
+module.exports.get_vl_total_dr_st = () => {
     return self_weight + ground_weight + vl_external
 }
 
-module.exports.get_vl_total_dr_lt = (self_weight, ground_weight, vl_external) => {
+module.exports.get_vl_total_dr_lt = () => {
     return self_weight + ground_weight + vl_external
 }
 
-module.exports.get_vl_total_ud_st = (self_weight, ground_weight, vl_external) => {
+module.exports.get_vl_total_ud_st = () => {
     return self_weight + ground_weight + vl_external
 }
 
-module.exports.get_vl_total_ud_lt = (self_weight, ground_weight, vl_external) => {
+module.exports.get_vl_total_ud_lt = () => {
     return self_weight + ground_weight + vl_external
 }
 
-module.exports.get_vl_total = (self_weight, ground_weight, vl_external) => self_weight + ground_weight + vl_external
+module.exports.get_vl_total = () => self_weight + ground_weight + vl_external
 
-module.exports.get_vl_dim_total = (vl_external, self_weight) => vl_external + self_weight
+module.exports.get_vl_dim_total = () => vl_external + self_weight
 
-module.exports.get_vl_total_internal = (vl_external, self_weight) => vl_external + self_weight
+module.exports.get_vl_total_internal = () => vl_external + self_weight
 
-module.exports.get_vl_total_max = (vl_total_dr_st, vl_total_dr_lt, vl_total_ud_st, vl_total_ud_lt) => Math.max(vl_total_dr_st, vl_total_dr_lt, vl_total_ud_st, vl_total_ud_lt)
+module.exports.get_vl_total_max = () => Math.max(vl_total_dr_st, vl_total_dr_lt, vl_total_ud_st, vl_total_ud_lt)
 
-module.exports.get_hl_total = (hl_length, hl_width) => Math.sqrt(Math.pow(hl_length, 2) + Math.pow(hl_width, 2))
+module.exports.get_hl_total = () => Math.sqrt(Math.pow(hl_length, 2) + Math.pow(hl_width, 2))
 
-module.exports.get_d_0_dr_st = (K_c_a_dr_st, dr_st_cohesion_d, K_p_a_dr_st, terrain_live_load, ground_density, K_g_a_dr_st) => -((K_c_a_dr_st * dr_st_cohesion_d + K_p_a_dr_st * terrain_live_load) / (ground_density * K_g_a_dr_st)) * 1000
+module.exports.get_d_0_dr_st = () => -((K_c_a_dr_st * dr_st_cohesion_d + K_p_a_dr_st * terrain_live_load) / (ground_density * K_g_a_dr_st)) * 1000
 
-module.exports.get_d_0_dr_lt = (K_c_a_dr_lt, dr_lt_cohesion_d, K_p_a_dr_lt, terrain_live_load, ground_density, K_g_a_dr_lt) => -((K_c_a_dr_lt * dr_lt_cohesion_d + K_p_a_dr_lt * terrain_live_load) / (ground_density * K_g_a_dr_lt)) * 1000
+module.exports.get_d_0_dr_lt = () => -((K_c_a_dr_lt * dr_lt_cohesion_d + K_p_a_dr_lt * terrain_live_load) / (ground_density * K_g_a_dr_lt)) * 1000
 
-module.exports.get_d_0_ud_st = (K_c_a_ud_st, ud_st_cohesion_d, K_p_a_ud_st, terrain_live_load, ground_density, K_g_a_ud_st) => -((K_c_a_ud_st * ud_st_cohesion_d + K_p_a_ud_st * terrain_live_load) / (ground_density * K_g_a_ud_st)) * 1000
+module.exports.get_d_0_ud_st = () => -((K_c_a_ud_st * ud_st_cohesion_d + K_p_a_ud_st * terrain_live_load) / (ground_density * K_g_a_ud_st)) * 1000
 
-module.exports.get_d_0_ud_lt = (K_c_a_ud_lt, ud_lt_cohesion_d, K_p_a_ud_lt, terrain_live_load, ground_density, K_g_a_ud_lt) => -((K_c_a_ud_lt * ud_lt_cohesion_d + K_p_a_ud_lt * terrain_live_load) / (ground_density * K_g_a_ud_lt)) * 1000
+module.exports.get_d_0_ud_lt = () => -((K_c_a_ud_lt * ud_lt_cohesion_d + K_p_a_ud_lt * terrain_live_load) / (ground_density * K_g_a_ud_lt)) * 1000
 
-module.exports.get_F_a_dr_st_l = (d_0_dr_st, depth, height, width, K_c_a_dr_st, dr_st_cohesion_d, K_p_a_dr_st, terrain_live_load, ground_density, K_g_a_dr_st) => {
+module.exports.get_F_a_dr_st_l = () => {
     if (d_0_dr_st >= depth) {
         return 0
     } else if (d_0_dr_st < depth && (depth - height) > 0) {
@@ -158,7 +158,7 @@ module.exports.get_F_a_dr_st_l = (d_0_dr_st, depth, height, width, K_c_a_dr_st, 
     }
 }
 
-module.exports.get_F_a_dr_lt_l = (d_0_dr_lt, depth, height, width, K_c_a_dr_lt, dr_lt_cohesion_d, K_p_a_dr_lt, terrain_live_load, ground_density, K_g_a_dr_lt) => {
+module.exports.get_F_a_dr_lt_l = () => {
     if (d_0_dr_lt >= depth) {
         return 0
     } else if (d_0_dr_lt < depth && (depth - height) > 0) {
@@ -176,7 +176,7 @@ module.exports.get_F_a_dr_lt_l = (d_0_dr_lt, depth, height, width, K_c_a_dr_lt, 
     }
 }
 
-module.exports.get_F_a_ud_st_l = (d_0_ud_st, depth, height, width, K_c_a_ud_st, ud_st_cohesion_d, K_p_a_ud_st, terrain_live_load, ground_density, K_g_a_ud_st) => {
+module.exports.get_F_a_ud_st_l = () => {
     if (d_0_ud_st >= depth) {
         return 0
     } else if (d_0_ud_st < depth && (depth - height) > 0) {
@@ -194,7 +194,7 @@ module.exports.get_F_a_ud_st_l = (d_0_ud_st, depth, height, width, K_c_a_ud_st, 
     }
 }
 
-module.exports.get_F_a_ud_lt_l = (d_0_ud_lt, depth, height, width, K_c_a_ud_lt, ud_lt_cohesion_d, K_p_a_ud_lt, terrain_live_load, ground_density, K_g_a_ud_lt) => {
+module.exports.get_F_a_ud_lt_l = () => {
     if (d_0_ud_lt >= depth) {
         return 0
     } else if (d_0_ud_lt < depth && (depth - height) > 0) {
@@ -212,7 +212,7 @@ module.exports.get_F_a_ud_lt_l = (d_0_ud_lt, depth, height, width, K_c_a_ud_lt, 
     }
 }
 
-module.exports.get_F_p_dr_st_l = (height, depth, width, K_c_p_dr_st, dr_st_cohesion_d, ground_density, K_g_p_dr_st) => {
+module.exports.get_F_p_dr_st_l = () => {
     if (height >= depth) {
         return width / 1000 * (depth / 1000 * (2 * K_c_p_dr_st * dr_st_cohesion_d + depth / 1000 * ground_density * K_g_p_dr_st) / 2)
     } else if (height < depth) {
@@ -220,7 +220,7 @@ module.exports.get_F_p_dr_st_l = (height, depth, width, K_c_p_dr_st, dr_st_cohes
     }
 }
 
-module.exports.get_F_p_dr_lt_l = (height, depth, width, K_c_p_dr_lt, dr_lt_cohesion_d, ground_density, K_g_p_dr_lt) => {
+module.exports.get_F_p_dr_lt_l = () => {
     if (height >= depth) {
         return width / 1000 * (depth / 1000 * (2 * K_c_p_dr_lt * dr_lt_cohesion_d + depth / 1000 * ground_density * K_g_p_dr_lt) / 2)
     } else if (height < depth) {
@@ -228,7 +228,7 @@ module.exports.get_F_p_dr_lt_l = (height, depth, width, K_c_p_dr_lt, dr_lt_cohes
     }
 }
 
-module.exports.get_F_p_ud_st_l = (height, depth, width, K_c_p_ud_st, ud_st_cohesion_d, ground_density, K_g_p_ud_st) => {
+module.exports.get_F_p_ud_st_l = () => {
     if (height >= depth) {
         return width / 1000 * (depth / 1000 * (2 * K_c_p_ud_st * ud_st_cohesion_d + depth / 1000 * ground_density * K_g_p_ud_st) / 2)
     } else if (height < depth) {
@@ -236,7 +236,7 @@ module.exports.get_F_p_ud_st_l = (height, depth, width, K_c_p_ud_st, ud_st_cohes
     }
 }
 
-module.exports.get_F_p_ud_lt_l = (height, depth, width, K_c_p_ud_lt, ud_lt_cohesion_d, ground_density, K_g_p_ud_lt) => {
+module.exports.get_F_p_ud_lt_l = () => {
     if (height >= depth) {
         return width / 1000 * (depth / 1000 * (2 * K_c_p_ud_lt * ud_lt_cohesion_d + depth / 1000 * ground_density * K_g_p_ud_lt) / 2)
     } else if (height < depth) {
@@ -244,7 +244,7 @@ module.exports.get_F_p_ud_lt_l = (height, depth, width, K_c_p_ud_lt, ud_lt_cohes
     }
 }
 
-module.exports.get_F_a_dr_st_b = (d_0_dr_st, depth, height, length, K_c_a_dr_st, dr_st_cohesion_d, K_p_a_dr_st, terrain_live_load, ground_density, K_g_a_dr_st) => {
+module.exports.get_F_a_dr_st_b = () => {
     if (d_0_dr_st >= depth) {
         return 0
     } else if (d_0_dr_st < depth && (depth - height) > 0) {
@@ -262,7 +262,7 @@ module.exports.get_F_a_dr_st_b = (d_0_dr_st, depth, height, length, K_c_a_dr_st,
     }
 }
 
-module.exports.get_F_a_dr_lt_b = (d_0_dr_lt, depth, height, length, K_c_a_dr_lt, dr_lt_cohesion_d, K_p_a_dr_lt, terrain_live_load, ground_density, K_g_a_dr_lt) => {
+module.exports.get_F_a_dr_lt_b = () => {
     if (d_0_dr_lt >= depth) {
         return 0
     } else if (d_0_dr_lt < depth && (depth - height) > 0) {
@@ -280,7 +280,7 @@ module.exports.get_F_a_dr_lt_b = (d_0_dr_lt, depth, height, length, K_c_a_dr_lt,
     }
 }
 
-module.exports.get_F_a_ud_st_b = (d_0_ud_st, depth, height, length, K_c_a_ud_st, ud_st_cohesion_d, K_p_a_ud_st, terrain_live_load, ground_density, K_g_a_ud_st) => {
+module.exports.get_F_a_ud_st_b = () => {
     if (d_0_ud_st >= depth) {
         return 0
     } else if (d_0_ud_st < depth && (depth - height) > 0) {
@@ -298,7 +298,7 @@ module.exports.get_F_a_ud_st_b = (d_0_ud_st, depth, height, length, K_c_a_ud_st,
     }
 }
 
-module.exports.get_F_a_ud_lt_b = (d_0_ud_lt, depth, height, length, K_c_a_ud_lt, ud_lt_cohesion_d, K_p_a_ud_lt, terrain_live_load, ground_density, K_g_a_ud_lt) => {
+module.exports.get_F_a_ud_lt_b = () => {
     if (d_0_ud_lt >= depth) {
         return 0
     } else if (d_0_ud_lt < depth && (depth - height) > 0) {
@@ -316,7 +316,7 @@ module.exports.get_F_a_ud_lt_b = (d_0_ud_lt, depth, height, length, K_c_a_ud_lt,
     }
 }
 
-module.exports.get_F_p_dr_st_b = (height, depth, length, K_c_p_dr_st, dr_st_cohesion_d, ground_density, K_g_p_dr_st) => {
+module.exports.get_F_p_dr_st_b = () => {
     if (height >= depth) {
         return length / 1000 * (depth / 1000 * (2 * K_c_p_dr_st * dr_st_cohesion_d + depth / 1000 * ground_density * K_g_p_dr_st) / 2)
         } else if (height < depth) {
@@ -324,7 +324,7 @@ module.exports.get_F_p_dr_st_b = (height, depth, length, K_c_p_dr_st, dr_st_cohe
    }
 }
 
-module.exports.get_F_p_dr_lt_b = (height, depth, length, K_c_p_dr_lt, dr_lt_cohesion_d, ground_density, K_g_p_dr_lt) => {
+module.exports.get_F_p_dr_lt_b = () => {
     if (height >= depth) {
         return length / 1000 * (depth / 1000 * (2 * K_c_p_dr_lt * dr_lt_cohesion_d + depth / 1000 * ground_density * K_g_p_dr_lt) / 2)
     } else if (height < depth) {
@@ -332,7 +332,7 @@ module.exports.get_F_p_dr_lt_b = (height, depth, length, K_c_p_dr_lt, dr_lt_cohe
     }
 }
 
-module.exports.get_F_p_ud_st_b = (height, depth, length, K_c_p_ud_st, ud_st_cohesion_d, ground_density, K_g_p_ud_st) => {
+module.exports.get_F_p_ud_st_b = () => {
     if (height >= depth) {
         return length / 1000 * (depth / 1000 * (2 * K_c_p_ud_st * ud_st_cohesion_d + depth / 1000 * ground_density * K_g_p_ud_st) / 2)
     } else if (height < depth) {
@@ -340,7 +340,7 @@ module.exports.get_F_p_ud_st_b = (height, depth, length, K_c_p_ud_st, ud_st_cohe
     }
 }
 
-module.exports.get_F_p_ud_lt_b = (height, depth, length, K_c_p_ud_lt, ud_lt_cohesion_d, ground_density, K_g_p_ud_lt) => {
+module.exports.get_F_p_ud_lt_b = () => {
     if (height >= depth) {
         return length / 1000 * (depth / 1000 * (2 * K_c_p_ud_lt * ud_lt_cohesion_d + depth / 1000 * ground_density * K_g_p_ud_lt) / 2)  
     } else if (height < depth) {
@@ -348,7 +348,7 @@ module.exports.get_F_p_ud_lt_b = (height, depth, length, K_c_p_ud_lt, ud_lt_cohe
     }
 }
 
-module.exports.get_F_a_dr_st_r = (d_0_dr_st, depth, height, radius, K_c_a_dr_st, dr_st_cohesion_d, K_p_a_dr_st, terrain_live_load, ground_density, K_g_a_dr_st) => {
+module.exports.get_F_a_dr_st_r = () => {
     if (d_0_dr_st >= depth) {
         return 0
     } else if (d_0_dr_st < depth && (depth - height) > 0) {
@@ -366,7 +366,7 @@ module.exports.get_F_a_dr_st_r = (d_0_dr_st, depth, height, radius, K_c_a_dr_st,
     }
 }
 
-module.exports.get_F_a_dr_lt_r = (d_0_dr_lt, depth, height, radius, K_c_a_dr_lt, dr_lt_cohesion_d, K_p_a_dr_lt, terrain_live_load, ground_density, K_g_a_dr_lt) => {
+module.exports.get_F_a_dr_lt_r = () => {
     if (d_0_dr_lt >= depth) {
         return 0
     } else if (d_0_dr_lt < depth && (depth - height) > 0) {
@@ -384,7 +384,7 @@ module.exports.get_F_a_dr_lt_r = (d_0_dr_lt, depth, height, radius, K_c_a_dr_lt,
     }
 }
 
-module.exports.get_F_a_ud_st_r = (d_0_ud_st, depth, height, radius, K_c_a_ud_st, ud_st_cohesion_d, K_p_a_ud_st, terrain_live_load, ground_density, K_g_a_ud_st) => {
+module.exports.get_F_a_ud_st_r = () => {
     if (d_0_ud_st >= depth) {
         return 0
     } else if (d_0_ud_st < depth && (depth - height) > 0) {
@@ -402,7 +402,7 @@ module.exports.get_F_a_ud_st_r = (d_0_ud_st, depth, height, radius, K_c_a_ud_st,
     }
 }
 
-module.exports.get_F_a_ud_lt_r = (d_0_ud_lt, depth, height, radius, K_c_a_ud_lt, ud_lt_cohesion_d, K_p_a_ud_lt, terrain_live_load, ground_density, K_g_a_ud_lt) => {
+module.exports.get_F_a_ud_lt_r = () => {
     if (d_0_ud_lt >= depth) {
         return 0
     } else if (d_0_ud_lt < depth && (depth - height) > 0) {
@@ -420,7 +420,7 @@ module.exports.get_F_a_ud_lt_r = (d_0_ud_lt, depth, height, radius, K_c_a_ud_lt,
     }
 }
 
-module.exports.get_F_p_dr_st_r = (height, depth, radius, K_c_p_dr_st, dr_st_cohesion_d, ground_density, K_g_p_dr_st) => {
+module.exports.get_F_p_dr_st_r = () => {
     if (height >= depth) {
         return Math.PI / 2 * radius / 1000 * (depth / 1000 * (2 * K_c_p_dr_st * dr_st_cohesion_d + depth / 1000 * ground_density * K_g_p_dr_st) / 2)
     } else if (height < depth) {
@@ -428,7 +428,7 @@ module.exports.get_F_p_dr_st_r = (height, depth, radius, K_c_p_dr_st, dr_st_cohe
     }
 }
 
-module.exports.get_F_p_dr_lt_r = (height, depth, radius, K_c_p_dr_lt, dr_lt_cohesion_d, ground_density, K_g_p_dr_lt) => {
+module.exports.get_F_p_dr_lt_r = () => {
     if (height >= depth) {
         return Math.PI / 2 * radius / 1000 * (depth / 1000 * (2 * K_c_p_dr_lt * dr_lt_cohesion_d + depth / 1000 * ground_density * K_g_p_dr_lt) / 2)
     } else if (height < depth) {
@@ -436,7 +436,7 @@ module.exports.get_F_p_dr_lt_r = (height, depth, radius, K_c_p_dr_lt, dr_lt_cohe
     }
 }
 
-module.exports.get_F_p_ud_st_r = (height, depth, radius, K_c_p_ud_st, ud_st_cohesion_d, ground_density, K_g_p_ud_st) => {
+module.exports.get_F_p_ud_st_r = () => {
     if (height >= depth) {
         return Math.PI / 2 * radius / 1000 * (depth / 1000 * (2 * K_c_p_ud_st * ud_st_cohesion_d + depth / 1000 * ground_density * K_g_p_ud_st) / 2)
     } else if (height < depth) {
@@ -444,7 +444,7 @@ module.exports.get_F_p_ud_st_r = (height, depth, radius, K_c_p_ud_st, ud_st_cohe
     }
 }
 
-module.exports.get_F_p_ud_lt_r = (height, depth, radius, K_c_p_ud_lt, ud_lt_cohesion_d, ground_density, K_g_p_ud_lt) => {
+module.exports.get_F_p_ud_lt_r = () => {
     if (height >= depth) {
         return Math.PI / 2 * radius / 1000 * (depth / 1000 * (2 * K_c_p_ud_lt * ud_lt_cohesion_d + depth / 1000 * ground_density * K_g_p_ud_lt) / 2)
     } else if (height < depth) {
@@ -452,7 +452,7 @@ module.exports.get_F_p_ud_lt_r = (height, depth, radius, K_c_p_ud_lt, ud_lt_cohe
     }
 }
 
-module.exports.get_h_res_dr_st_l = (F_p_dr_st_l, hl_length, F_a_dr_st_l) => {
+module.exports.get_h_res_dr_st_l = () => {
     if (F_p_dr_st_l >= Math.abs(hl_length) + F_a_dr_st_l) {
         return 0
     } else {
@@ -464,7 +464,7 @@ module.exports.get_h_res_dr_st_l = (F_p_dr_st_l, hl_length, F_a_dr_st_l) => {
     }
 }
 
-module.exports.get_h_res_dr_lt_l = (F_p_dr_lt_l, hl_length, F_a_dr_lt_l) => {
+module.exports.get_h_res_dr_lt_l = () => {
 
     if (F_p_dr_lt_l >= Math.abs(hl_length) + F_a_dr_lt_l) {
         return 0
@@ -477,7 +477,7 @@ module.exports.get_h_res_dr_lt_l = (F_p_dr_lt_l, hl_length, F_a_dr_lt_l) => {
     }
 }
 
-module.exports.get_h_res_ud_st_l = (F_p_ud_st_l, hl_length, F_a_ud_st_l) => {
+module.exports.get_h_res_ud_st_l = () => {
     if (F_p_ud_st_l >= Math.abs(hl_length) + F_a_ud_st_l) {
         return 0
     } else {
@@ -489,7 +489,7 @@ module.exports.get_h_res_ud_st_l = (F_p_ud_st_l, hl_length, F_a_ud_st_l) => {
     }
 }
 
-module.exports.get_h_res_ud_lt_l = (F_p_ud_lt_l, hl_length, F_a_ud_lt_l) => {
+module.exports.get_h_res_ud_lt_l = () => {
     if (F_p_ud_lt_l >= Math.abs(hl_length) + F_a_ud_lt_l) {
         return 0
     } else {
@@ -501,7 +501,7 @@ module.exports.get_h_res_ud_lt_l = (F_p_ud_lt_l, hl_length, F_a_ud_lt_l) => {
     }
 }
 
-module.exports.get_h_res_dr_st_b = (F_p_dr_st_b, hl_width, F_a_dr_st_b) => {
+module.exports.get_h_res_dr_st_b = () => {
     if (F_p_dr_st_b >= Math.abs(hl_width) + F_a_dr_st_b) {
         return 0
     } else {
@@ -513,7 +513,7 @@ module.exports.get_h_res_dr_st_b = (F_p_dr_st_b, hl_width, F_a_dr_st_b) => {
     }
 }
 
-module.exports.get_h_res_dr_lt_b = (F_p_dr_lt_b, hl_width, F_a_dr_lt_b) => {
+module.exports.get_h_res_dr_lt_b = () => {
     if (F_p_dr_lt_b >= Math.abs(hl_width) + F_a_dr_lt_b) {
         return 0
     } else {
@@ -525,7 +525,7 @@ module.exports.get_h_res_dr_lt_b = (F_p_dr_lt_b, hl_width, F_a_dr_lt_b) => {
     }
 }
 
-module.exports.get_h_res_ud_st_b = (F_p_ud_st_b, hl_width, F_a_ud_st_b) => {
+module.exports.get_h_res_ud_st_b = () => {
     if (F_p_ud_st_b >= Math.abs(hl_width) + F_a_ud_st_b) {
         return 0
     } else {
@@ -537,7 +537,7 @@ module.exports.get_h_res_ud_st_b = (F_p_ud_st_b, hl_width, F_a_ud_st_b) => {
     }
 }
 
-module.exports.get_h_res_ud_lt_b = (F_p_ud_lt_b, hl_width, F_a_ud_lt_b) => {
+module.exports.get_h_res_ud_lt_b = () => {
     if (F_p_ud_lt_b >= Math.abs(hl_width) + F_a_ud_lt_b) {
         return 0
     } else {
@@ -549,7 +549,7 @@ module.exports.get_h_res_ud_lt_b = (F_p_ud_lt_b, hl_width, F_a_ud_lt_b) => {
     }
 }
 
-module.exports.get_h_res_dr_st_rl = (F_p_dr_st_r, hl_length, F_a_dr_st_r) => {
+module.exports.get_h_res_dr_st_rl = () => {
     if (F_p_dr_st_r >= Math.abs(hl_length) + F_a_dr_st_r) {
         return 0
     } else {
@@ -561,7 +561,7 @@ module.exports.get_h_res_dr_st_rl = (F_p_dr_st_r, hl_length, F_a_dr_st_r) => {
     }
 }
 
-module.exports.get_h_res_dr_lt_rl = (F_p_dr_lt_r, hl_length, F_a_dr_lt_r) => {
+module.exports.get_h_res_dr_lt_rl = () => {
     if (F_p_dr_lt_r >= Math.abs(hl_length) + F_a_dr_lt_r) {
         return 0
     } else {
@@ -573,7 +573,7 @@ module.exports.get_h_res_dr_lt_rl = (F_p_dr_lt_r, hl_length, F_a_dr_lt_r) => {
     }
 }
 
-module.exports.get_h_res_ud_st_rl = (F_p_ud_st_r, hl_length, F_a_ud_st_r) => {
+module.exports.get_h_res_ud_st_rl = () => {
     if (F_p_ud_st_r >= Math.abs(hl_length) + F_a_ud_st_r) {
         return 0
     } else {
@@ -585,7 +585,7 @@ module.exports.get_h_res_ud_st_rl = (F_p_ud_st_r, hl_length, F_a_ud_st_r) => {
     }
 }
 
-module.exports.get_h_res_ud_lt_rl = (F_p_ud_lt_r, hl_length, F_a_ud_lt_r) => {
+module.exports.get_h_res_ud_lt_rl = () => {
     if (F_p_ud_lt_r >= Math.abs(hl_length) + F_a_ud_lt_r) {
         return 0
     } else {
@@ -597,7 +597,7 @@ module.exports.get_h_res_ud_lt_rl = (F_p_ud_lt_r, hl_length, F_a_ud_lt_r) => {
     }
 }
 
-module.exports.get_h_res_dr_st_rb = (F_p_dr_st_r, hl_width, F_a_dr_st_r) => {
+module.exports.get_h_res_dr_st_rb = () => {
     if (F_p_dr_st_r >= Math.abs(hl_width) + F_a_dr_st_r) {
         return 0
     } else {
@@ -609,7 +609,7 @@ module.exports.get_h_res_dr_st_rb = (F_p_dr_st_r, hl_width, F_a_dr_st_r) => {
     }
 }
 
-module.exports.get_h_res_dr_lt_rb = (F_p_dr_lt_r, hl_width, F_a_dr_lt_r) => {
+module.exports.get_h_res_dr_lt_rb = () => {
     if (F_p_dr_lt_r >= Math.abs(hl_width) + F_a_dr_lt_r) {
         return 0
     } else {
@@ -621,7 +621,7 @@ module.exports.get_h_res_dr_lt_rb = (F_p_dr_lt_r, hl_width, F_a_dr_lt_r) => {
     }
 }
 
-module.exports.get_h_res_ud_st_rb = (F_p_ud_st_r, hl_width, F_a_ud_st_r) => {
+module.exports.get_h_res_ud_st_rb = () => {
     if (F_p_ud_st_r >= Math.abs(hl_width) + F_a_ud_st_r) {
         return 0
     } else {
@@ -633,7 +633,7 @@ module.exports.get_h_res_ud_st_rb = (F_p_ud_st_r, hl_width, F_a_ud_st_r) => {
     }
 }
 
-module.exports.get_h_res_ud_lt_rb = (F_p_ud_lt_r, hl_width, F_a_ud_lt_r) => {
+module.exports.get_h_res_ud_lt_rb = () => {
     if (F_p_ud_lt_r >= Math.abs(hl_width) + F_a_ud_lt_r) {
         return 0
     } else {
@@ -645,7 +645,7 @@ module.exports.get_h_res_ud_lt_rb = (F_p_ud_lt_r, hl_width, F_a_ud_lt_r) => {
     }
 }
 
-module.exports.get_H_res_dr_st = (point_foundation_shape, h_res_dr_st_l, h_res_dr_st_b,h_res_dr_st_rl,h_res_dr_st_rb) => {
+module.exports.get_H_res_dr_st = () => {
 
     if (point_foundation_shape == 'rectangular') {
         return Math.sqrt(Math.pow(h_res_dr_st_l, 2) + Math.pow(h_res_dr_st_b, 2))
@@ -655,7 +655,7 @@ module.exports.get_H_res_dr_st = (point_foundation_shape, h_res_dr_st_l, h_res_d
     }
 }
 
-module.exports.get_H_res_dr_lt = (point_foundation_shape, h_res_dr_lt_l, h_res_dr_lt_b, h_res_dr_lt_rl, h_res_dr_lt_rb) => {
+module.exports.get_H_res_dr_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         return Math.sqrt(Math.pow(h_res_dr_lt_l, 2) + Math.pow(h_res_dr_lt_b, 2))
     } else if (point_foundation_shape == 'circular') {
@@ -663,7 +663,7 @@ module.exports.get_H_res_dr_lt = (point_foundation_shape, h_res_dr_lt_l, h_res_d
     }
 }
 
-module.exports.get_H_res_ud_st = (point_foundation_shape, h_res_ud_st_l, h_res_ud_st_b, h_res_ud_st_rl, h_res_ud_st_rb) => {
+module.exports.get_H_res_ud_st = () => {
     if (point_foundation_shape == 'rectangular') {
         return Math.sqrt(Math.pow(h_res_ud_st_l, 2) + Math.pow(h_res_ud_st_b, 2))
     } else if (point_foundation_shape == 'circular') {
@@ -671,7 +671,7 @@ module.exports.get_H_res_ud_st = (point_foundation_shape, h_res_ud_st_l, h_res_u
     }
 }
 
-module.exports.get_H_res_ud_lt = (point_foundation_shape, h_res_ud_lt_l, h_res_ud_lt_b, h_res_ud_lt_rl, h_res_ud_lt_rb) => {
+module.exports.get_H_res_ud_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         return Math.sqrt(Math.pow(h_res_ud_lt_l, 2) + Math.pow(h_res_ud_lt_b, 2))
     } else if (point_foundation_shape == 'circular') {
@@ -679,11 +679,11 @@ module.exports.get_H_res_ud_lt = (point_foundation_shape, h_res_ud_lt_l, h_res_u
     }
 }
 
-module.exports.get_H_res_both = (H_res_dr_st, H_res_dr_lt, H_res_ud_st, H_res_ud_lt) => {
+module.exports.get_H_res_both = () => {
     return Math.max(H_res_dr_st, H_res_dr_lt, H_res_ud_st, H_res_ud_lt)
 }
 
-module.exports.get_h_cg_a_dr_st = (d_0_dr_st, depth, height, K_c_a_dr_st, dr_st_cohesion_d, K_p_a_dr_st, terrain_live_load, ground_density, K_g_a_dr_st) => {
+module.exports.get_h_cg_a_dr_st = () => {
     if (d_0_dr_st >= depth) {
         return 0
     } else if (d_0_dr_st < depth && (depth - height) > 0) {
@@ -701,7 +701,7 @@ module.exports.get_h_cg_a_dr_st = (d_0_dr_st, depth, height, K_c_a_dr_st, dr_st_
     }
 }
 
-module.exports.get_h_cg_a_dr_lt = (d_0_dr_lt, depth, height, K_c_a_dr_lt, dr_lt_cohesion_d, K_p_a_dr_lt, terrain_live_load, ground_density, K_g_a_dr_lt) => {
+module.exports.get_h_cg_a_dr_lt = () => {
     if (d_0_dr_lt >= depth) {
         return 0
     } else if (d_0_dr_lt < depth && (depth - height) > 0) {
@@ -719,7 +719,7 @@ module.exports.get_h_cg_a_dr_lt = (d_0_dr_lt, depth, height, K_c_a_dr_lt, dr_lt_
     }
 }
 
-module.exports.get_h_cg_a_ud_st = (d_0_ud_st, depth, height, K_c_a_ud_st, ud_st_cohesion_d, K_p_a_ud_st, terrain_live_load, ground_density, K_g_a_ud_st) => {
+module.exports.get_h_cg_a_ud_st = () => {
     if (d_0_ud_st >= depth) {
         return 0
     } else if (d_0_ud_st < depth && (depth - height) > 0) {
@@ -737,7 +737,7 @@ module.exports.get_h_cg_a_ud_st = (d_0_ud_st, depth, height, K_c_a_ud_st, ud_st_
     }
 }
 
-module.exports.get_h_cg_a_ud_lt = (d_0_ud_lt, depth, height, K_c_a_ud_lt, ud_lt_cohesion_d, K_p_a_ud_lt, terrain_live_load, ground_density, K_g_a_ud_lt) => {
+module.exports.get_h_cg_a_ud_lt = () => {
     if (d_0_ud_lt >= depth) {
         return 0
     } else if (d_0_ud_lt < depth && (depth - height) > 0) {
@@ -755,7 +755,7 @@ module.exports.get_h_cg_a_ud_lt = (d_0_ud_lt, depth, height, K_c_a_ud_lt, ud_lt_
     }
 }
 
-module.exports.get_h_cg_p_dr_st = (depth, height, K_c_p_dr_st, dr_st_cohesion_d, K_p_p_dr_st, terrain_live_load, ground_density, K_g_p_dr_st) => {
+module.exports.get_h_cg_p_dr_st = () => {
     if (depth == 0) {
         return 0
     } else if (depth > 0) {
@@ -767,7 +767,7 @@ module.exports.get_h_cg_p_dr_st = (depth, height, K_c_p_dr_st, dr_st_cohesion_d,
     }
 }
 
-module.exports.get_h_cg_p_dr_lt = (depth, height, K_c_p_dr_lt, dr_lt_cohesion_d, K_p_p_dr_lt, terrain_live_load, ground_density, K_g_p_dr_lt) => {
+module.exports.get_h_cg_p_dr_lt = () => {
     if (depth ==0) {
         return 0
     } else if (depth > 0) {
@@ -779,7 +779,7 @@ module.exports.get_h_cg_p_dr_lt = (depth, height, K_c_p_dr_lt, dr_lt_cohesion_d,
     }
 }
 
-module.exports.get_h_cg_p_ud_st = (depth, height, K_c_p_ud_st, ud_st_cohesion_d, K_p_p_ud_st, terrain_live_load, ground_density, K_g_p_ud_st) => {
+module.exports.get_h_cg_p_ud_st = () => {
     if (depth == 0) {
         return 0
     } else if (depth > 0) {
@@ -791,7 +791,7 @@ module.exports.get_h_cg_p_ud_st = (depth, height, K_c_p_ud_st, ud_st_cohesion_d,
     }
 }
 
-module.exports.get_h_cg_p_ud_lt = (depth, height, K_c_p_ud_lt, ud_lt_cohesion_d, K_p_p_ud_lt, terrain_live_load, ground_density, K_g_p_ud_lt) => {
+module.exports.get_h_cg_p_ud_lt = () => {
     if (depth == 0) {
         return 0
     } else if (depth > 0) {
@@ -803,158 +803,158 @@ module.exports.get_h_cg_p_ud_lt = (depth, height, K_c_p_ud_lt, ud_lt_cohesion_d,
     }
 }
 
-module.exports.get_m_h_length = (height_p_hor, hl_length) => {
+module.exports.get_m_h_length = () => {
     return height_p_hor / 1000 * hl_length
 }
 
-module.exports.get_m_h_width = (height_p_hor, hl_width) => {
+module.exports.get_m_h_width = () => {
     return height_p_hor / 1000 * hl_width
 }
 
-module.exports.get_m_h_r = (height_p_hor, hl_total) => {
+module.exports.get_m_h_r = () => {
     return height_p_hor / 1000 * hl_total
 }
-module.exports.get_m_v_dr_st_length = (vl_external, ec_vl_length) => {
+module.exports.get_m_v_dr_st_length = () => {
     return vl_external * ec_vl_length / 1000
 }
 
-module.exports.get_m_v_dr_lt_length = (vl_external, ec_vl_length) => {
+module.exports.get_m_v_dr_lt_length = () => {
     return vl_external * ec_vl_length / 1000
 }
 
-module.exports.get_m_v_ud_st_length = (vl_external, ec_vl_length) => {
+module.exports.get_m_v_ud_st_length = () => {
     return vl_external * ec_vl_length / 1000
 }
 
-module.exports.get_m_v_ud_lt_length = (vl_external, ec_vl_length) => {
+module.exports.get_m_v_ud_lt_length = () => {
     return vl_external * ec_vl_length / 1000
 }
 
-module.exports.get_m_v_dim_length = (vl_external, ec_vl_length) => {
+module.exports.get_m_v_dim_length = () => {
     return vl_external * ec_vl_length / 1000
 }
 
-module.exports.get_m_v_dr_st_width = (vl_external, ec_vl_width) => {
+module.exports.get_m_v_dr_st_width = () => {
     return vl_external * ec_vl_width / 1000
 }
 
-module.exports.get_m_v_dr_lt_width = (vl_external, ec_vl_width) => {
+module.exports.get_m_v_dr_lt_width = () => {
     return vl_external * ec_vl_width / 1000
 }
 
-module.exports.get_m_v_ud_st_width = (vl_external, ec_vl_width) => {
+module.exports.get_m_v_ud_st_width = () => {
     return vl_external * ec_vl_width / 1000
 }
 
-module.exports.get_m_v_ud_lt_width = (vl_external, ec_vl_width) => {
+module.exports.get_m_v_ud_lt_width = () => {
     return vl_external * ec_vl_width / 1000
 }
 
-module.exports.get_m_v_dim_width = (vl_external, ec_vl_width) => {
+module.exports.get_m_v_dim_width = () => {
     return vl_external * ec_vl_width / 1000
 }
 
-module.exports.get_m_F_a_dr_st_l = (h_cg_a_dr_st, F_a_dr_st_l) => {
+module.exports.get_m_F_a_dr_st_l = () => {
     return h_cg_a_dr_st / 1000 * F_a_dr_st_l
 }
 
-module.exports.get_m_F_a_dr_lt_l = (h_cg_a_dr_lt, F_a_dr_lt_l) => {
+module.exports.get_m_F_a_dr_lt_l = () => {
     return h_cg_a_dr_lt / 1000 * F_a_dr_lt_l
 }
 
-module.exports.get_m_F_a_ud_st_l = (h_cg_a_ud_st, F_a_ud_st_l) => {
+module.exports.get_m_F_a_ud_st_l = () => {
     return h_cg_a_ud_st / 1000 * F_a_ud_st_l
 }
 
-module.exports.get_m_F_a_ud_lt_l = (h_cg_a_ud_lt, F_a_ud_lt_l) => {
+module.exports.get_m_F_a_ud_lt_l = () => {
     return h_cg_a_ud_lt / 1000 * F_a_ud_lt_l
 }
 
-module.exports.get_m_F_p_dr_st_l = (h_cg_p_dr_st, F_p_dr_st_l) => {
+module.exports.get_m_F_p_dr_st_l = () => {
     return h_cg_p_dr_st / 1000 * F_p_dr_st_l
 }
 
-module.exports.get_m_F_p_dr_lt_l = (h_cg_p_dr_lt, F_p_dr_lt_l) => {
+module.exports.get_m_F_p_dr_lt_l = () => {
     return h_cg_p_dr_lt / 1000 * F_p_dr_lt_l
 }
 
-module.exports.get_m_F_p_ud_st_l = (h_cg_p_ud_st, F_p_ud_st_l) => {
+module.exports.get_m_F_p_ud_st_l = () => {
     return h_cg_p_ud_st / 1000 * F_p_ud_st_l
 }
 
-module.exports.get_m_F_p_ud_lt_l = (h_cg_p_ud_lt, F_p_ud_lt_l) => {
+module.exports.get_m_F_p_ud_lt_l = () => {
     return h_cg_p_ud_lt / 1000 * F_p_ud_lt_l
 }
 
-module.exports.get_m_F_a_dr_st_b = (h_cg_a_dr_st, F_a_dr_st_b) => {
+module.exports.get_m_F_a_dr_st_b = () => {
     return h_cg_a_dr_st / 1000 * F_a_dr_st_b
 }
 
-module.exports.get_m_F_a_dr_lt_b = (h_cg_a_dr_lt, F_a_dr_lt_b) => {
+module.exports.get_m_F_a_dr_lt_b = () => {
     return h_cg_a_dr_lt / 1000 * F_a_dr_lt_b
 }
 
-module.exports.get_m_F_a_ud_st_b = (h_cg_a_ud_st, F_a_ud_st_b) => {
+module.exports.get_m_F_a_ud_st_b = () => {
     return h_cg_a_ud_st / 1000 * F_a_ud_st_b
 }
 
-module.exports.get_m_F_a_ud_lt_b = (h_cg_a_ud_lt, F_a_ud_lt_b) => {
+module.exports.get_m_F_a_ud_lt_b = () => {
     return h_cg_a_ud_lt / 1000 * F_a_ud_lt_b
 }
 
-module.exports.get_m_F_p_dr_st_b = (h_cg_p_dr_st, F_p_dr_st_b) => {
+module.exports.get_m_F_p_dr_st_b = () => {
     return h_cg_p_dr_st / 1000 * F_p_dr_st_b
 }
 
-module.exports.get_m_F_p_dr_lt_b = (h_cg_p_dr_lt, F_p_dr_lt_b) => {
+module.exports.get_m_F_p_dr_lt_b = () => {
     return h_cg_p_dr_lt / 1000 * F_p_dr_lt_b
 }
 
-module.exports.get_m_F_p_ud_st_b = (h_cg_p_ud_st, F_p_ud_st_b) => {
+module.exports.get_m_F_p_ud_st_b = () => {
     return h_cg_p_ud_st / 1000 * F_p_ud_st_b
 }
 
-module.exports.get_m_F_p_ud_lt_b = (h_cg_p_ud_lt, F_p_ud_lt_b) => {
+module.exports.get_m_F_p_ud_lt_b = () => {
     return h_cg_p_ud_lt / 1000 * F_p_ud_lt_b
 }
 
-module.exports.get_m_F_a_dr_st_r = (h_cg_a_dr_st, F_a_dr_st_r) => {
+module.exports.get_m_F_a_dr_st_r = () => {
     return h_cg_a_dr_st / 1000 * F_a_dr_st_r
 }
 
-module.exports.get_m_F_a_dr_lt_r = (h_cg_a_dr_lt, F_a_dr_lt_r) => {
+module.exports.get_m_F_a_dr_lt_r = () => {
     return h_cg_a_dr_lt / 1000 * F_a_dr_lt_r
 }
 
-module.exports.get_m_F_a_ud_st_r = (h_cg_a_ud_st, F_a_ud_st_r) => {
+module.exports.get_m_F_a_ud_st_r = () => {
     return h_cg_a_ud_st / 1000 * F_a_ud_st_r
 }
 
-module.exports.get_m_F_a_ud_lt_r = (h_cg_a_ud_lt, F_a_ud_lt_r) => {
+module.exports.get_m_F_a_ud_lt_r = () => {
     return h_cg_a_ud_lt / 1000 * F_a_ud_lt_r
 }
 
-module.exports.get_m_F_p_dr_st_r = (h_cg_p_dr_st, F_p_dr_st_r) => {
+module.exports.get_m_F_p_dr_st_r = () => {
     return h_cg_p_dr_st / 1000 * F_p_dr_st_r
 }
 
-module.exports.get_m_F_p_dr_lt_r = (h_cg_p_dr_lt, F_p_dr_lt_r) => {
+module.exports.get_m_F_p_dr_lt_r = () => {
     return h_cg_p_dr_lt / 1000 * F_p_dr_lt_r
 }
 
-module.exports.get_m_F_p_ud_st_r = (h_cg_p_ud_st, F_p_ud_st_r) => {
+module.exports.get_m_F_p_ud_st_r = () => {
     return h_cg_p_ud_st / 1000 * F_p_ud_st_r
 }
 
-module.exports.get_m_F_p_ud_lt_r = (h_cg_p_ud_lt, F_p_ud_lt_r) => {
+module.exports.get_m_F_p_ud_lt_r = () => {
     return h_cg_p_ud_lt / 1000 * F_p_ud_lt_r
 }
 
-module.exports.get_m_r = (m_length, m_width) => {
+module.exports.get_m_r = () => {
     return Math.sqrt(Math.pow(m_length, 2) + Math.pow(m_width, 2))
 }
 
-module.exports.get_m_total_dr_st_l = (m_F_p_dr_st_l, m_h_length, m_v_dr_st_length, m_length, m_F_a_dr_st_l) => {
+module.exports.get_m_total_dr_st_l = () => {
     if (m_F_p_dr_st_l > Math.abs(m_h_length + m_v_dr_st_length + m_length) + m_F_a_dr_st_l) {
         return 0
     } else {
@@ -966,7 +966,7 @@ module.exports.get_m_total_dr_st_l = (m_F_p_dr_st_l, m_h_length, m_v_dr_st_lengt
     }
 }
 
-module.exports.get_m_total_dr_lt_l = (m_F_p_dr_lt_l, m_h_length, m_v_dr_lt_length, m_length, m_F_a_dr_lt_l) => {
+module.exports.get_m_total_dr_lt_l = () => {
     if (m_F_p_dr_lt_l > Math.abs(m_h_length + m_v_dr_lt_length + m_length) + m_F_a_dr_lt_l) {
         return 0
     } else {
@@ -978,7 +978,7 @@ module.exports.get_m_total_dr_lt_l = (m_F_p_dr_lt_l, m_h_length, m_v_dr_lt_lengt
     }
 }
 
-module.exports.get_m_total_ud_st_l = (m_F_p_ud_st_l, m_h_length, m_v_ud_st_length, m_length, m_F_a_ud_st_l) => {
+module.exports.get_m_total_ud_st_l = () => {
     if (m_F_p_ud_st_l > Math.abs(m_h_length + m_v_ud_st_length + m_length) + m_F_a_ud_st_l) {
         return  0
     } else {
@@ -990,7 +990,7 @@ module.exports.get_m_total_ud_st_l = (m_F_p_ud_st_l, m_h_length, m_v_ud_st_lengt
     }
 }
 
-module.exports.get_m_total_ud_lt_l = (m_F_p_ud_lt_l, m_h_length, m_v_ud_lt_length, m_length, m_F_a_ud_lt_l) => {
+module.exports.get_m_total_ud_lt_l = () => {
     if (m_F_p_ud_lt_l > Math.abs(m_h_length + m_v_ud_lt_length + m_length) + m_F_a_ud_lt_l) {
         return 0
     } else {
@@ -1002,7 +1002,7 @@ module.exports.get_m_total_ud_lt_l = (m_F_p_ud_lt_l, m_h_length, m_v_ud_lt_lengt
     }
 }
 
-module.exports.get_m_total_dr_st_b = (m_F_p_dr_st_b, m_h_width, m_v_dr_st_width, m_width, m_F_a_dr_st_b) => {
+module.exports.get_m_total_dr_st_b = () => {
     if (m_F_p_dr_st_b > Math.abs(m_h_width + m_v_dr_st_width + m_width) + m_F_a_dr_st_b) {
         return 0
     } else {
@@ -1014,7 +1014,7 @@ module.exports.get_m_total_dr_st_b = (m_F_p_dr_st_b, m_h_width, m_v_dr_st_width,
     }
 }
 
-module.exports.get_m_total_dr_lt_b = (m_F_p_dr_lt_b, m_h_width, m_v_dr_lt_width, m_width, m_F_a_dr_lt_b) => {
+module.exports.get_m_total_dr_lt_b = () => {
     if (m_F_p_dr_lt_b > Math.abs(m_h_width + m_v_dr_lt_width + m_width) + m_F_a_dr_lt_b) {
         return 0
     } else {
@@ -1026,7 +1026,7 @@ module.exports.get_m_total_dr_lt_b = (m_F_p_dr_lt_b, m_h_width, m_v_dr_lt_width,
     }
 }
 
-module.exports.get_m_total_ud_st_b = (m_F_p_ud_st_b, m_h_width, m_v_ud_st_width, m_width, m_F_a_ud_st_b) => {
+module.exports.get_m_total_ud_st_b = () => {
     if (m_F_p_ud_st_b > Math.abs(m_h_width + m_v_ud_st_width + m_width) + m_F_a_ud_st_b) {
         return 0
     } else {
@@ -1038,7 +1038,7 @@ module.exports.get_m_total_ud_st_b = (m_F_p_ud_st_b, m_h_width, m_v_ud_st_width,
     }
 }
 
-module.exports.get_m_total_ud_lt_b = (m_F_p_ud_lt_b, m_h_width, m_v_ud_lt_width, m_width, m_F_a_ud_lt_b) => {
+module.exports.get_m_total_ud_lt_b = () => {
     if (m_F_p_ud_lt_b > Math.abs(m_h_width + m_v_ud_lt_width + m_width) + m_F_a_ud_lt_b) {
         return 0
     } else {
@@ -1050,7 +1050,7 @@ module.exports.get_m_total_ud_lt_b = (m_F_p_ud_lt_b, m_h_width, m_v_ud_lt_width,
     }
 }
 
-module.exports.get_m_total_dr_st_rl = (m_F_p_dr_st_r, m_h_length, m_v_dr_st_length, m_length, m_F_a_dr_st_r) => {
+module.exports.get_m_total_dr_st_rl = () => {
     if (m_F_p_dr_st_r > Math.abs(m_h_length + m_v_dr_st_length + m_length) + m_F_a_dr_st_r) {
         return 0
     } else {
@@ -1062,7 +1062,7 @@ module.exports.get_m_total_dr_st_rl = (m_F_p_dr_st_r, m_h_length, m_v_dr_st_leng
     }
 }
 
-module.exports.get_m_total_dr_lt_rl = (m_F_p_dr_lt_r, m_h_length, m_v_dr_lt_length, m_length, m_F_a_dr_lt_r) => {
+module.exports.get_m_total_dr_lt_rl = () => {
     if (m_F_p_dr_lt_r > Math.abs(m_h_length + m_v_dr_lt_length + m_length) + m_F_a_dr_lt_r) {
         return 0
     } else {
@@ -1074,7 +1074,7 @@ module.exports.get_m_total_dr_lt_rl = (m_F_p_dr_lt_r, m_h_length, m_v_dr_lt_leng
     }
 }
 
-module.exports.get_m_total_ud_st_rl = (m_F_p_ud_st_r, m_h_length, m_v_ud_st_length, m_length, m_F_a_ud_st_r) => {
+module.exports.get_m_total_ud_st_rl = () => {
     if (m_F_p_ud_st_r > Math.abs(m_h_length + m_v_ud_st_length + m_length) + m_F_a_ud_st_r) {
         return 0
     } else {
@@ -1086,7 +1086,7 @@ module.exports.get_m_total_ud_st_rl = (m_F_p_ud_st_r, m_h_length, m_v_ud_st_leng
     }
 }
 
-module.exports.get_m_total_ud_lt_rl = (m_F_p_ud_lt_r, m_h_length, m_v_ud_lt_length, m_length, m_F_a_ud_lt_r) => {
+module.exports.get_m_total_ud_lt_rl = () => {
     if (m_F_p_ud_lt_r > Math.abs(m_h_length + m_v_ud_lt_length + m_length) + m_F_a_ud_lt_r) {
         return 0
     } else {
@@ -1098,7 +1098,7 @@ module.exports.get_m_total_ud_lt_rl = (m_F_p_ud_lt_r, m_h_length, m_v_ud_lt_leng
     }
 }
 
-module.exports.get_m_total_dr_st_rb = (m_F_p_dr_st_r, m_h_width, m_v_dr_st_width, m_width, m_F_a_dr_st_r) => {
+module.exports.get_m_total_dr_st_rb = () => {
     if (m_F_p_dr_st_r > Math.abs(m_h_width + m_v_dr_st_width + m_width) + m_F_a_dr_st_r) {
         return 0
     } else {
@@ -1110,7 +1110,7 @@ module.exports.get_m_total_dr_st_rb = (m_F_p_dr_st_r, m_h_width, m_v_dr_st_width
     }
 }
 
-module.exports.get_m_total_dr_lt_rb = (m_F_p_dr_lt_r, m_h_width, m_v_dr_lt_width, m_width, m_F_a_dr_lt_r) => {
+module.exports.get_m_total_dr_lt_rb = () => {
     if (m_F_p_dr_lt_r > Math.abs(m_h_width + m_v_dr_lt_width + m_width) + m_F_a_dr_lt_r) {
         return 0
     } else {
@@ -1122,7 +1122,7 @@ module.exports.get_m_total_dr_lt_rb = (m_F_p_dr_lt_r, m_h_width, m_v_dr_lt_width
     }
 }
 
-module.exports.get_m_total_ud_st_rb = (m_F_p_ud_st_r, m_h_width, m_v_ud_st_width, m_width, m_F_a_ud_st_r) => {
+module.exports.get_m_total_ud_st_rb = () => {
     if (m_F_p_ud_st_r > Math.abs(m_h_width + m_v_ud_st_width + m_width) + m_F_a_ud_st_r) {
         return 0
     } else {
@@ -1134,7 +1134,7 @@ module.exports.get_m_total_ud_st_rb = (m_F_p_ud_st_r, m_h_width, m_v_ud_st_width
     }
 }
 
-module.exports.get_m_total_ud_lt_rb = (m_F_p_ud_lt_r, m_h_width, m_v_ud_lt_width, m_width, m_F_a_ud_lt_r) => {
+module.exports.get_m_total_ud_lt_rb = () => {
     if (m_F_p_ud_lt_r > Math.abs(m_h_width + m_v_ud_lt_width + m_width) + m_F_a_ud_lt_r) {
         return 0
     } else {
@@ -1146,112 +1146,112 @@ module.exports.get_m_total_ud_lt_rb = (m_F_p_ud_lt_r, m_h_width, m_v_ud_lt_width
     }
 }
 
-module.exports.get_m_dim_length = (m_h_length, m_length, m_v_dim_length) => {
+module.exports.get_m_dim_length = () => {
     return m_h_length + m_length + m_v_dim_length
 }
 
-module.exports.get_m_dim_width = (m_h_width, m_width, m_v_dim_width) => {
+module.exports.get_m_dim_width = () => {
     return m_h_width + m_width + m_v_dim_width
 }
 
-module.exports.get_m_dim_r_length = (m_h_length, m_length, m_v_dim_length) => {
+module.exports.get_m_dim_r_length = () => {
     return m_h_length + m_length + m_v_dim_length
 }
 
-module.exports.get_m_dim_r_width = (m_h_width, m_width, m_v_dim_width) => {
+module.exports.get_m_dim_r_width = () => {
     return m_h_width + m_width + m_v_dim_width
 }
 
 //EFFECTIVE DIMENSIONS
 
-module.exports.get_e_total_dr_st_l = (m_total_dr_st_l, vl_total_dr_st) => {
+module.exports.get_e_total_dr_st_l = () => {
     return Math.abs(m_total_dr_st_l) / vl_total_dr_st * 1000
 }
 
-module.exports.get_e_total_dr_lt_l = (m_total_dr_lt_l, vl_total_dr_lt) => {
+module.exports.get_e_total_dr_lt_l = () => {
     return Math.abs(m_total_dr_lt_l) / vl_total_dr_lt * 1000
 }
 
-module.exports.get_e_total_ud_st_l = (m_total_ud_st_l, vl_total_ud_st) => {
+module.exports.get_e_total_ud_st_l = () => {
     return Math.abs(m_total_ud_st_l) / vl_total_ud_st * 1000
 }
 
-module.exports.get_e_total_ud_lt_l = (m_total_ud_lt_l, vl_total_ud_lt) => {
+module.exports.get_e_total_ud_lt_l = () => {
     return Math.abs(m_total_ud_lt_l) / vl_total_ud_lt * 1000
 }
 
-module.exports.get_e_total_dr_st_b = (m_total_dr_st_b, vl_total_dr_st) => {
+module.exports.get_e_total_dr_st_b = () => {
     return Math.abs(m_total_dr_st_b) / vl_total_dr_st * 1000
 }
 
-module.exports.get_e_total_dr_lt_b = (m_total_dr_lt_b, vl_total_dr_lt) => {
+module.exports.get_e_total_dr_lt_b = () => {
     return Math.abs(m_total_dr_lt_b) / vl_total_dr_lt * 1000
 }
 
-module.exports.get_e_total_ud_st_b = (m_total_ud_st_b, vl_total_ud_st) => {
+module.exports.get_e_total_ud_st_b = () => {
     return Math.abs(m_total_ud_st_b) / vl_total_ud_st * 1000
 }
 
-module.exports.get_e_total_ud_lt_b = (m_total_ud_lt_b, vl_total_ud_lt) => {
+module.exports.get_e_total_ud_lt_b = () => {
     return Math.abs(m_total_ud_lt_b) / vl_total_ud_lt * 1000
 }
 
-module.exports.get_e_total_dr_st_rl = (m_total_dr_st_rl, vl_total_dr_st) => {
+module.exports.get_e_total_dr_st_rl = () => {
     return Math.abs(m_total_dr_st_rl) / vl_total_dr_st * 1000
 }
 
-module.exports.get_e_total_dr_lt_rl = (m_total_dr_lt_rl, vl_total_dr_lt) => {
+module.exports.get_e_total_dr_lt_rl = () => {
     return Math.abs(m_total_dr_lt_rl) / vl_total_dr_lt * 1000
 }
-module.exports.get_e_total_ud_st_rl = (m_total_ud_st_rl, vl_total_ud_st) => {
+module.exports.get_e_total_ud_st_rl = () => {
     return Math.abs(m_total_ud_st_rl) / vl_total_ud_st * 1000
 }
 
-module.exports.get_e_total_ud_lt_rl = (m_total_ud_lt_rl, vl_total_ud_lt) => {
+module.exports.get_e_total_ud_lt_rl = () => {
     return Math.abs(m_total_ud_lt_rl) / vl_total_ud_lt * 1000
 }
 
-module.exports.get_e_total_dr_st_rb = (m_total_dr_st_rb, vl_total_dr_st) => {
+module.exports.get_e_total_dr_st_rb = () => {
     return Math.abs(m_total_dr_st_rb) / vl_total_dr_st * 1000
 }
 
-module.exports.get_e_total_dr_lt_rb = (m_total_dr_lt_rb, vl_total_dr_lt) => {
+module.exports.get_e_total_dr_lt_rb = () => {
     return Math.abs(m_total_dr_lt_rb) / vl_total_dr_lt * 1000
 }
 
-module.exports.get_e_total_ud_st_rb = (m_total_ud_st_rb, vl_total_ud_st) => {
+module.exports.get_e_total_ud_st_rb = () => {
     return Math.abs(m_total_ud_st_rb) / vl_total_ud_st * 1000
 }
 
-module.exports.get_e_total_ud_lt_rb = (m_total_ud_lt_rb, vl_total_ud_lt) => {
+module.exports.get_e_total_ud_lt_rb = () => {
     return Math.abs(m_total_ud_lt_rb) / vl_total_ud_lt * 1000
 }
 
-module.exports.get_e_total_dr_st_r = (e_total_dr_st_rl, e_total_dr_st_rb) => {
+module.exports.get_e_total_dr_st_r = () => {
     return Math.sqrt(Math.pow(e_total_dr_st_rl, 2) + Math.pow(e_total_dr_st_rb, 2))
 }
 
-module.exports.get_e_total_dr_lt_r = (e_total_dr_lt_rl, e_total_dr_lt_rb) => {
+module.exports.get_e_total_dr_lt_r = () => {
     return Math.sqrt(Math.pow(e_total_dr_lt_rl, 2) + Math.pow(e_total_dr_lt_rb, 2))
 }
 
-module.exports.get_e_total_ud_st_r = (e_total_ud_st_rl, e_total_ud_st_rb) => {
+module.exports.get_e_total_ud_st_r = () => {
     return Math.sqrt(Math.pow(e_total_ud_st_rl, 2) + Math.pow(e_total_ud_st_rb, 2))
 }
 
-module.exports.get_e_total_ud_lt_r = (e_total_ud_lt_rl, e_total_ud_lt_rb) => {
+module.exports.get_e_total_ud_lt_r = () => {
     return Math.sqrt(Math.pow(e_total_ud_lt_rl, 2) + Math.pow(e_total_ud_lt_rb, 2))
 }
 
-module.exports.get_e_dim_l = (m_dim_length, vl_dim_total) => {
+module.exports.get_e_dim_l = () => {
     return Math.abs(m_dim_length) / vl_dim_total * 1000
 }
 
-module.exports.get_e_dim_b = (m_dim_width, vl_dim_total) => {
+module.exports.get_e_dim_b = () => {
     return Math.abs(m_dim_width) / vl_dim_total * 1000
 }
 
-module.exports.get_e_dim_rl = (m_dim_r_length, vl_dim_total) => {
+module.exports.get_e_dim_rl = () => {
     return Math.abs(m_dim_r_length) / vl_dim_total * 1000
 }
 
@@ -1259,31 +1259,31 @@ module.exports.get_e_dim_rb = (m_dim_r_width, vl_dim_total) => {
     return Math.abs(m_dim_r_width) / vl_dim_total * 1000
 }
 
-module.exports.get_e_dim_r = (e_dim_rl, e_dim_rb) => {
+module.exports.get_e_dim_r = () => {
     return Math.sqrt(Math.pow(e_dim_rl, 2) + Math.pow(e_dim_rb, 2))
 }
 
-module.exports.get_v_dr_st_r = (e_total_dr_st_r, radius) => {
+module.exports.get_v_dr_st_r = () => {
     return 2 * Math.acos(e_total_dr_st_r / radius) * 180 / Math.PI
 }
 
-module.exports.get_v_dr_lt_r = (e_total_dr_lt_r, radius) => {
+module.exports.get_v_dr_lt_r = () => {
     return 2 * Math.acos(e_total_dr_lt_r / radius) * 180 / Math.PI
 }
 
-module.exports.get_v_ud_st_r = (e_total_ud_st_r, radius) => {
+module.exports.get_v_ud_st_r = () => {
     return 2 * Math.acos(e_total_ud_st_r / radius) * 180 / Math.PI
 }
 
-module.exports.get_v_ud_lt_r = (e_total_ud_lt_r, radius) => {
+module.exports.get_v_ud_lt_r = () => {
     return 2 * Math.acos(e_total_ud_lt_r / radius) * 180 / Math.PI
 }
 
-module.exports.get_v_dim_r = (e_dim_r, radius) => {
+module.exports.get_v_dim_r = () => {
     return 2 * Math.acos(e_dim_r / radius) * 180 / Math.PI
 }
 
-module.exports.get_ef_dr_st_l = (point_foundation_shape, length, e_total_dr_st_l, radius, v_dr_st_r) => {
+module.exports.get_ef_dr_st_l = () => {
     if (point_foundation_shape == 'rectangular') {
         return length - 2 * e_total_dr_st_l
     } else if (point_foundation_shape == 'circular') {
@@ -1293,7 +1293,7 @@ module.exports.get_ef_dr_st_l = (point_foundation_shape, length, e_total_dr_st_l
     }
 }
 
-module.exports.get_ef_dr_lt_l = (point_foundation_shape, length, e_total_dr_lt_l, radius, v_dr_lt_r) => {
+module.exports.get_ef_dr_lt_l = () => {
     if (point_foundation_shape == 'rectangular') {
         return length - 2 * e_total_dr_lt_l
     } else if (point_foundation_shape == 'circular') {
@@ -1303,7 +1303,7 @@ module.exports.get_ef_dr_lt_l = (point_foundation_shape, length, e_total_dr_lt_l
     }
 }
 
-module.exports.get_ef_ud_st_l = (point_foundation_shape, length, e_total_ud_st_l, radius, v_ud_st_r) => {
+module.exports.get_ef_ud_st_l = () => {
     if (point_foundation_shape == 'rectangular') {
         return length - 2 * e_total_ud_st_l
     } else if (point_foundation_shape == 'circular') { 
@@ -1313,7 +1313,7 @@ module.exports.get_ef_ud_st_l = (point_foundation_shape, length, e_total_ud_st_l
     }
 }
 
-module.exports.get_ef_ud_lt_l = (point_foundation_shape, length, e_total_ud_lt_l, radius, v_ud_lt_r) => {
+module.exports.get_ef_ud_lt_l = () => {
     if (point_foundation_shape == 'rectangular') {
         return length - 2 * e_total_ud_lt_l
     } else if (point_foundation_shape == 'circular') { 
@@ -1323,7 +1323,7 @@ module.exports.get_ef_ud_lt_l = (point_foundation_shape, length, e_total_ud_lt_l
     }
 }
 
-module.exports.get_ef_dim_l = (point_foundation_shape, length, e_dim_l, radius, v_dim_r) => {
+module.exports.get_ef_dim_l = () => {
     if (point_foundation_shape == 'rectangular') {
         return length - 2 * e_dim_l
     } else if (point_foundation_shape == 'circular') { 
@@ -1333,7 +1333,7 @@ module.exports.get_ef_dim_l = (point_foundation_shape, length, e_dim_l, radius, 
     }
 }
 
-module.exports.get_ef_dr_st_b = (point_foundation_shape, width, e_total_dr_st_b, radius, v_dr_st_r) => {
+module.exports.get_ef_dr_st_b = () => {
     if (point_foundation_shape == 'rectangular') {
         return width - 2 * e_total_dr_st_b
     } else if (point_foundation_shape == 'circular') { 
@@ -1342,7 +1342,7 @@ module.exports.get_ef_dr_st_b = (point_foundation_shape, width, e_total_dr_st_b,
     }
 }
 
-module.exports.get_ef_dr_lt_b = (point_foundation_shape, width, e_total_dr_lt_b, radius, v_dr_lt_r) => {
+module.exports.get_ef_dr_lt_b = () => {
     if (point_foundation_shape == 'rectangular') {
         return width - 2 * e_total_dr_lt_b
     } else if (point_foundation_shape == 'circular') { 
@@ -1351,7 +1351,7 @@ module.exports.get_ef_dr_lt_b = (point_foundation_shape, width, e_total_dr_lt_b,
     }
 }
 
-module.exports.get_ef_ud_st_b = (point_foundation_shape, width, e_total_ud_st_b, radius, v_ud_st_r) => {
+module.exports.get_ef_ud_st_b = () => {
     if (point_foundation_shape == 'rectangular') {
         return width - 2 * e_total_ud_st_b
     } else if (point_foundation_shape == 'circular') { 
@@ -1360,7 +1360,7 @@ module.exports.get_ef_ud_st_b = (point_foundation_shape, width, e_total_ud_st_b,
     }
 }
 
-module.exports.get_ef_ud_lt_b = (point_foundation_shape, width, e_total_ud_lt_b, radius, v_ud_lt_r) => {
+module.exports.get_ef_ud_lt_b = () => {
     if (point_foundation_shape == 'rectangular') {
         return width - 2 * e_total_ud_lt_b
     } else if (point_foundation_shape == 'circular') { 
@@ -1369,7 +1369,7 @@ module.exports.get_ef_ud_lt_b = (point_foundation_shape, width, e_total_ud_lt_b,
     }
 }
 
-module.exports.get_ef_dim_b = (point_foundation_shape, width, e_dim_b, radius, v_dim_r) => {
+module.exports.get_ef_dim_b = () => {
     if (point_foundation_shape == 'rectangular') {
         return width - 2 * e_dim_b
     } else if (point_foundation_shape == 'circular') { 
@@ -1378,7 +1378,7 @@ module.exports.get_ef_dim_b = (point_foundation_shape, width, e_dim_b, radius, v
     }
 }
 
-module.exports.get_A_eff_dr_st = (point_foundation_shape, ef_dr_st_l, ef_dr_st_b, radius, v_dr_st_r) => {
+module.exports.get_A_eff_dr_st = () => {
     if (point_foundation_shape == 'rectangular') {
         return ef_dr_st_l * ef_dr_st_b / 1000000
     } else if (point_foundation_shape == 'circular') { 
@@ -1386,7 +1386,7 @@ module.exports.get_A_eff_dr_st = (point_foundation_shape, ef_dr_st_l, ef_dr_st_b
     }
 }
 
-module.exports.get_A_eff_dr_lt = (point_foundation_shape, ef_dr_lt_l, ef_dr_lt_b, radius, v_dr_lt_r) => {
+module.exports.get_A_eff_dr_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         return ef_dr_lt_l * ef_dr_lt_b / 1000000
     } else if (point_foundation_shape == 'circular') { 
@@ -1394,7 +1394,7 @@ module.exports.get_A_eff_dr_lt = (point_foundation_shape, ef_dr_lt_l, ef_dr_lt_b
     }
 }
 
-module.exports.get_A_eff_ud_st = (point_foundation_shape, ef_ud_st_l, ef_ud_st_b, radius, v_ud_st_r) => {
+module.exports.get_A_eff_ud_st = () => {
     if (point_foundation_shape == 'rectangular') {
         return ef_ud_st_l * ef_ud_st_b / 1000000
     } else if (point_foundation_shape == 'circular') { 
@@ -1402,7 +1402,7 @@ module.exports.get_A_eff_ud_st = (point_foundation_shape, ef_ud_st_l, ef_ud_st_b
     }
 }
 
-module.exports.get_A_eff_ud_lt = (point_foundation_shape, ef_ud_lt_l, ef_ud_lt_b, radius, v_ud_lt_r) => {
+module.exports.get_A_eff_ud_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         return ef_ud_lt_l * ef_ud_lt_b / 1000000
     } else if (point_foundation_shape == 'circular') { 
@@ -1410,7 +1410,7 @@ module.exports.get_A_eff_ud_lt = (point_foundation_shape, ef_ud_lt_l, ef_ud_lt_b
     }
 }
 
-module.exports.get_A_dim_eff = (point_foundation_shape, ef_dim_l, ef_dim_b, radius, v_dim_r) => {
+module.exports.get_A_dim_eff = (ef_dim_l, ef_dim_b, v_dim_r) => {
     if (point_foundation_shape == 'rectangular') {
         return ef_dim_l * ef_dim_b / 1000000
     } else if (point_foundation_shape == 'circular') { 
@@ -1422,7 +1422,7 @@ module.exports.get_A_dim_eff = (point_foundation_shape, ef_dim_l, ef_dim_b, radi
 
 // GROUND BEARING CAPACITY
 
-module.exports.get_N_q_dr_st = (point_foundation_shape, e_total_dr_st_l, length, e_total_dr_st_b, width, dr_st_af_d, e_total_dr_st_r, radius) => {
+module.exports.get_N_q_dr_st = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_dr_st_l < 0.3 * length && e_total_dr_st_b < 0.3 * width) {
             return Math.exp(Math.PI * Math.tan(dr_st_af_d * Math.PI / 180)) * (1 + Math.sin(dr_st_af_d * Math.PI / 180)) / (1 - Math.sin(dr_st_af_d * Math.PI / 180))
@@ -1438,7 +1438,7 @@ module.exports.get_N_q_dr_st = (point_foundation_shape, e_total_dr_st_l, length,
     }
 }
 
-module.exports.get_N_c_dr_st = (point_foundation_shape, e_total_dr_st_l, length, e_total_dr_st_b, width, N_q_dr_st, dr_st_af_d, e_total_dr_st_r, radius) => {
+module.exports.get_N_c_dr_st = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_dr_st_l < 0.3 * length && e_total_dr_st_b < 0.3 * width) {
             return (N_q_dr_st - 1) / Math.tan(dr_st_af_d * Math.PI / 180)
@@ -1454,7 +1454,7 @@ module.exports.get_N_c_dr_st = (point_foundation_shape, e_total_dr_st_l, length,
     }
 }
 
-module.exports.get_N_g_dr_st = (point_foundation_shape, e_total_dr_st_l, length, e_total_dr_st_b, width, N_q_dr_st, dr_st_af_d, e_total_dr_st_r, radius) => {
+module.exports.get_N_g_dr_st = () => {
     if (point_foundation_shape == 'rectangular') {
 
         if (e_total_dr_st_l < 0.3 * length && e_total_dr_st_b < 0.3 * width) {
@@ -1471,7 +1471,7 @@ module.exports.get_N_g_dr_st = (point_foundation_shape, e_total_dr_st_l, length,
     }
 }
 
-module.exports.get_N_q_dr_lt = (point_foundation_shape, e_total_dr_lt_l, length, e_total_dr_lt_b, width, dr_lt_af_d, e_total_dr_lt_r, radius) => {
+module.exports.get_N_q_dr_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_dr_lt_l < 0.3 * length && e_total_dr_lt_b < 0.3 * width) {
             return Math.exp(Math.PI * Math.tan(dr_lt_af_d * Math.PI / 180)) * (1 + Math.sin(dr_lt_af_d * Math.PI / 180)) / (1 - Math.sin(dr_lt_af_d * Math.PI / 180))
@@ -1487,7 +1487,7 @@ module.exports.get_N_q_dr_lt = (point_foundation_shape, e_total_dr_lt_l, length,
     }
 }
 
-module.exports.get_N_c_dr_lt = (point_foundation_shape, e_total_dr_lt_l, length, e_total_dr_lt_b, width, N_q_dr_lt, dr_lt_af_d, e_total_dr_lt_r, radius) => {
+module.exports.get_N_c_dr_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_dr_lt_l < 0.3 * length && e_total_dr_lt_b < 0.3 * width) {
             return (N_q_dr_lt - 1) / Math.tan(dr_lt_af_d * Math.PI / 180)
@@ -1503,7 +1503,7 @@ module.exports.get_N_c_dr_lt = (point_foundation_shape, e_total_dr_lt_l, length,
     }
 }
 
-module.exports.get_N_g_dr_lt = (point_foundation_shape, e_total_dr_lt_l, length, e_total_dr_lt_b, width, N_q_dr_lt, dr_lt_af_d, e_total_dr_lt_r, radius) => {
+module.exports.get_N_g_dr_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_dr_lt_l < 0.3 * length && e_total_dr_lt_b < 0.3 * width) {
             return 1 / 4 * Math.pow((N_q_dr_lt - 1) * Math.cos(dr_lt_af_d * Math.PI / 180), (3 / 2))
@@ -1521,7 +1521,7 @@ module.exports.get_N_g_dr_lt = (point_foundation_shape, e_total_dr_lt_l, length,
 }
 
 
-module.exports.get_N_q_ud_st = (point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, e_total_ud_st_r, radius) => {
+module.exports.get_N_q_ud_st = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_ud_st_l < 0.3 * length && e_total_ud_st_b < 0.3 * width) {
             return 1
@@ -1537,7 +1537,7 @@ module.exports.get_N_q_ud_st = (point_foundation_shape, e_total_ud_st_l, length,
     }
 }
 
-module.exports.get_N_c_ud_st = (point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, ud_st_af_d, e_total_ud_st_r, radius) => {
+module.exports.get_N_c_ud_st = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_ud_st_l < 0.3 * length && e_total_ud_st_b < 0.3 * width) {
             return 2 + Math.PI // + (N_q_ud_st - 1) / Math.tan(ud_st_af_d * Math.PI / 180) 
@@ -1553,7 +1553,7 @@ module.exports.get_N_c_ud_st = (point_foundation_shape, e_total_ud_st_l, length,
     }
 }
 
-module.exports.get_N_g_ud_st = (point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, e_total_ud_st_r, radius) => {
+module.exports.get_N_g_ud_st = (e_total_ud_st_l, length, e_total_ud_st_b, width, e_total_ud_st_r, radius) => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_ud_st_l < 0.3 * length && e_total_ud_st_b < 0.3 * width) {    
             return 0
@@ -1569,7 +1569,7 @@ module.exports.get_N_g_ud_st = (point_foundation_shape, e_total_ud_st_l, length,
     }
 }
 
-module.exports.get_N_q_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, e_total_ud_lt_r, radius) => {
+module.exports.get_N_q_ud_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_ud_lt_l < 0.3 * length && e_total_ud_lt_b < 0.3 * width) {
             if (ud_lt_af_d == 0) {
@@ -1601,7 +1601,7 @@ module.exports.get_N_q_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length,
     }
 }
 
-module.exports.get_N_c_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, N_q_ud_lt, e_total_ud_lt_r, radius) => {
+module.exports.get_N_c_ud_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_ud_lt_l < 0.3 * length && e_total_ud_lt_b < 0.3 * width) {
             if (ud_lt_af_d == 0) {     
@@ -1633,7 +1633,7 @@ module.exports.get_N_c_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length,
     }
 }
 
-module.exports.get_N_g_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, N_q_ud_lt, e_total_ud_lt_r, radius) => {
+module.exports.get_N_g_ud_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_ud_lt_l < 0.3 * length && e_total_ud_lt_b < 0.3 * width) {
             if (ud_lt_af_d == 0) {
@@ -1665,35 +1665,35 @@ module.exports.get_N_g_ud_lt = (point_foundation_shape, e_total_ud_lt_l, length,
     }
 }
 
-module.exports.get_s_g_dr_st = (ef_dr_st_l, ef_dr_st_b) => {
+module.exports.get_s_g_dr_st = () => {
     return 1 - 0.4 * Math.min(ef_dr_st_l , ef_dr_st_b) / Math.max(ef_dr_st_l , ef_dr_st_b)
 }
 
-module.exports.get_s_g_dr_lt = (ef_dr_lt_l, ef_dr_lt_b) => {
+module.exports.get_s_g_dr_lt = () => {
     return 1 - 0.4 * Math.min(ef_dr_lt_l , ef_dr_lt_b) / Math.max(ef_dr_lt_l , ef_dr_lt_b)
 }
 
-module.exports.get_s_g_ud_st = (ef_ud_st_l, ef_ud_st_b) => {
+module.exports.get_s_g_ud_st = () => {
     return 1 - 0.4 * Math.min(ef_ud_st_l , ef_ud_st_b) / Math.max(ef_ud_st_l , ef_ud_st_b)
 }
 
-module.exports.get_s_g_ud_lt = (ef_ud_lt_l, ef_ud_lt_b) => {
+module.exports.get_s_g_ud_lt = () => {
     return 1 - 0.4 * Math.min(ef_ud_lt_l , ef_ud_lt_b) / Math.max(ef_ud_lt_l , ef_ud_lt_b)
 }
 
-module.exports.get_s_q_dr_st = (ef_dr_st_l, ef_dr_st_b) => {
+module.exports.get_s_q_dr_st = () => {
     return 1 + 0.2 * Math.min(ef_dr_st_l , ef_dr_st_b) / Math.max(ef_dr_st_l , ef_dr_st_b)
 }
 
-module.exports.get_s_q_dr_lt = (ef_dr_lt_l, ef_dr_lt_b) => {
+module.exports.get_s_q_dr_lt = () => {
     return 1 + 0.2 * Math.min(ef_dr_lt_l , ef_dr_lt_b) / Math.max(ef_dr_lt_l , ef_dr_lt_b)
 }
 
-module.exports.get_s_q_ud_st = (ef_ud_st_l, ef_ud_st_b) => {
+module.exports.get_s_q_ud_st = () => {
     return 1 + 0.2 * Math.min(ef_ud_st_l , ef_ud_st_b) / Math.max(ef_ud_st_l , ef_ud_st_b)
 }
 
-module.exports.get_s_q_ud_lt = (ef_ud_lt_l, ef_ud_lt_b) => {
+module.exports.get_s_q_ud_lt = () => {
     return 1 + 0.2 * Math.min(ef_ud_lt_l , ef_ud_lt_b) / Math.max(ef_ud_lt_l , ef_ud_lt_b)
 }
 
@@ -1713,7 +1713,7 @@ module.exports.get_s_c_ud_lt = (s_q_ud_lt) => {
     return s_q_ud_lt
 }
 
-module.exports.get_i_q_dr_st = (H_res_dr_st, vl_total_dr_st, A_eff_dr_st, dr_st_cohesion_d, dr_st_af_d) => {
+module.exports.get_i_q_dr_st = () => {
     if (H_res_dr_st == 0) {
         return 1
     } else if (H_res_dr_st != 0) {
@@ -1721,7 +1721,7 @@ module.exports.get_i_q_dr_st = (H_res_dr_st, vl_total_dr_st, A_eff_dr_st, dr_st_
     }
 }
 
-module.exports.get_i_g_dr_st = (H_res_dr_st, vl_total_dr_st, point_foundation_shape, e_total_dr_st_l, length, e_total_dr_st_b, width, e_total_dr_st_r, radius) => {
+module.exports.get_i_g_dr_st = () => {
     if (H_res_dr_st == 0) {
         return 1
     } else if (H_res_dr_st != 0) {
@@ -1742,7 +1742,7 @@ module.exports.get_i_g_dr_st = (H_res_dr_st, vl_total_dr_st, point_foundation_sh
     }
 }
 
-module.exports.get_i_c_dr_st = (H_res_dr_st, point_foundation_shape, e_total_dr_st_l, length, e_total_dr_st_b, width, vl_total_dr_st, dr_st_af_d, e_total_dr_st_r, radius) => {
+module.exports.get_i_c_dr_st = () => {
     if (H_res_dr_st == 0) {
         return 1
     } else if (H_res_dr_st != 0) {
@@ -1762,7 +1762,7 @@ module.exports.get_i_c_dr_st = (H_res_dr_st, point_foundation_shape, e_total_dr_
     }
 }
 
-module.exports.get_i_q_dr_lt = (H_res_dr_lt, vl_total_dr_lt, A_eff_dr_lt, dr_lt_cohesion_d, dr_lt_af_d) => {
+module.exports.get_i_q_dr_lt = () => {
     if (H_res_dr_lt == 0) {
         return 1
     } else if (H_res_dr_lt != 0) {
@@ -1770,7 +1770,7 @@ module.exports.get_i_q_dr_lt = (H_res_dr_lt, vl_total_dr_lt, A_eff_dr_lt, dr_lt_
     }
 }
 
-module.exports.get_i_g_dr_lt = (H_res_dr_lt, vl_total_dr_lt, A_eff_dr_lt, dr_lt_cohesion_d, dr_lt_af_d, point_foundation_shape, e_total_dr_lt_l, length, e_total_dr_lt_b, width, e_total_dr_lt_r, radius) => {
+module.exports.get_i_g_dr_lt = () => {
     if (H_res_dr_lt == 0) {
         return 1
     } else if (H_res_dr_lt != 0) {
@@ -1791,7 +1791,7 @@ module.exports.get_i_g_dr_lt = (H_res_dr_lt, vl_total_dr_lt, A_eff_dr_lt, dr_lt_
     }
 }
 
-module.exports.get_i_c_dr_lt = (H_res_dr_lt, vl_total_dr_lt, A_eff_dr_lt, dr_lt_cohesion_d, dr_lt_af_d, point_foundation_shape, e_total_dr_lt_l, length, e_total_dr_lt_b, width, e_total_dr_lt_r, radius) => {
+module.exports.get_i_c_dr_lt = () => {
     if (H_res_dr_lt == 0) {
         return 1
     } else if (H_res_dr_lt != 0) {
@@ -1812,7 +1812,7 @@ module.exports.get_i_c_dr_lt = (H_res_dr_lt, vl_total_dr_lt, A_eff_dr_lt, dr_lt_
     }
 }
 
-module.exports.get_i_q_ud_st = (H_res_ud_st) => {
+module.exports.get_i_q_ud_st = () => {
     if (H_res_ud_st == 0) {
         return 1
     } else if (H_res_ud_st != 0) {
@@ -1820,7 +1820,7 @@ module.exports.get_i_q_ud_st = (H_res_ud_st) => {
     }
 }
 
-module.exports.get_i_g_ud_st = (H_res_ud_st, point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, vl_total_ud_st, e_total_ud_st_r, radius) => {
+module.exports.get_i_g_ud_st = () => {
     if (H_res_ud_st == 0) {
         return 1
     } else if (H_res_ud_st != 0) {
@@ -1840,7 +1840,7 @@ module.exports.get_i_g_ud_st = (H_res_ud_st, point_foundation_shape, e_total_ud_
     }
 }
 
-module.exports.get_i_c_ud_st = (H_res_ud_st, point_foundation_shape, e_total_ud_st_l, length, e_total_ud_st_b, width, A_eff_ud_st, ud_st_cohesion_d, ud_st_af_d, e_total_ud_st_r, radius, vl_total_ud_st) => {
+module.exports.get_i_c_ud_st = () => {
     if (H_res_ud_st == 0) {
         return 1
     } else if (H_res_ud_st != 0) {
@@ -1868,7 +1868,7 @@ module.exports.get_i_c_ud_st = (H_res_ud_st, point_foundation_shape, e_total_ud_
     }
 }
 
-module.exports.get_i_q_ud_lt = (H_res_ud_lt, ud_lt_af_d, vl_total_ud_lt, A_eff_ud_lt, ud_lt_cohesion_d) => {
+module.exports.get_i_q_ud_lt = () => {
     if (H_res_ud_lt == 0) {
         return 1
     } else if (H_res_ud_lt != 0) {
@@ -1880,7 +1880,7 @@ module.exports.get_i_q_ud_lt = (H_res_ud_lt, ud_lt_af_d, vl_total_ud_lt, A_eff_u
     }
 }
 
-module.exports.get_i_g_ud_lt = (H_res_ud_lt, point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, i_q_ud_lt, e_total_ud_lt_r, radius, vl_total_ud_lt) => {
+module.exports.get_i_g_ud_lt = () => {
     if (H_res_ud_lt == 0) {
         return 1
     } else if (H_res_ud_lt != 0) {
@@ -1909,7 +1909,7 @@ module.exports.get_i_g_ud_lt = (H_res_ud_lt, point_foundation_shape, e_total_ud_
     }
 }
 
-module.exports.get_i_c_ud_lt = (H_res_ud_lt, point_foundation_shape, e_total_ud_lt_l, length, e_total_ud_lt_b, width, ud_lt_af_d, A_eff_ud_lt, ud_lt_cohesion_d, i_q_ud_lt, vl_total_ud_lt, e_total_ud_lt_r, radius) => {
+module.exports.get_i_c_ud_lt = () => {
     if (H_res_ud_lt == 0) {
         return 1
     } else if (H_res_ud_lt != 0) {
@@ -1937,19 +1937,19 @@ module.exports.get_i_c_ud_lt = (H_res_ud_lt, point_foundation_shape, e_total_ud_
     }
 }
 
-module.exports.get_R_q_dr_st = (q, N_q_dr_st, s_q_dr_st, i_q_dr_st, d_q) => {
+module.exports.get_R_q_dr_st = () => {
     return q * N_q_dr_st * s_q_dr_st * i_q_dr_st * d_q
 }
 
-module.exports.get_R_q_dr_lt = (q, N_q_dr_lt, s_q_dr_lt, i_q_dr_lt, d_q) => {
+module.exports.get_R_q_dr_lt = () => {
     return q * N_q_dr_lt * s_q_dr_lt * i_q_dr_lt * d_q
 }
 
-module.exports.get_R_q_ud_st = (q) => {
+module.exports.get_R_q_ud_st = () => {
     return q
 }
 
-module.exports.get_R_q_ud_lt = (ud_lt_af_d, q, N_q_ud_lt, s_q_ud_lt, i_q_ud_lt, d_q) => {
+module.exports.get_R_q_ud_lt = () => {
     if (ud_lt_af_d == 0) {
         return q
     } else {
@@ -1957,19 +1957,19 @@ module.exports.get_R_q_ud_lt = (ud_lt_af_d, q, N_q_ud_lt, s_q_ud_lt, i_q_ud_lt, 
     }
 }
 
-module.exports.get_R_c_dr_st = (dr_st_cohesion_d, N_c_dr_st, s_c_dr_st, i_c_dr_st, d_c) => {
+module.exports.get_R_c_dr_st = () => {
     return dr_st_cohesion_d * N_c_dr_st * s_c_dr_st * i_c_dr_st * d_c
 }
 
-module.exports.get_R_c_dr_lt = (dr_lt_cohesion_d, N_c_dr_lt, s_c_dr_lt, i_c_dr_lt, d_c) => {
+module.exports.get_R_c_dr_lt = () => {
     return dr_lt_cohesion_d * N_c_dr_lt * s_c_dr_lt * i_c_dr_lt * d_c
 }
 
-module.exports.get_R_c_ud_st = (ud_st_cohesion_d, N_c_ud_st, s_c_ud_st, i_c_ud_st) => {
+module.exports.get_R_c_ud_st = () => {
     return ud_st_cohesion_d * N_c_ud_st * s_c_ud_st * i_c_ud_st
 }
 
-module.exports.get_R_c_ud_lt = (ud_lt_af_d, ud_lt_cohesion_d, N_c_ud_lt, s_c_ud_lt, i_c_ud_lt, d_c) => {
+module.exports.get_R_c_ud_lt = () => {
     if (ud_lt_af_d == 0) {
         return ud_lt_cohesion_d * N_c_ud_lt * s_c_ud_lt * i_c_ud_lt
     } else {
@@ -1977,11 +1977,11 @@ module.exports.get_R_c_ud_lt = (ud_lt_af_d, ud_lt_cohesion_d, N_c_ud_lt, s_c_ud_
     }
 }
 
-module.exports.get_R_g_dr_st = (ground_density, ef_dr_st_l, ef_dr_st_b, N_g_dr_st, s_g_dr_st, i_g_dr_st) => {
+module.exports.get_R_g_dr_st = () => {
     return 1 / 2 * ground_density * Math.min(ef_dr_st_l, ef_dr_st_b) / 1000 * N_g_dr_st * s_g_dr_st * i_g_dr_st
 }
 
-module.exports.get_R_g_dr_lt = (ground_density, ef_dr_lt_l, ef_dr_lt_b, N_g_dr_lt, s_g_dr_lt, i_g_dr_lt) => {
+module.exports.get_R_g_dr_lt = () => {
     return 1 / 2 * ground_density * Math.min(ef_dr_lt_l, ef_dr_lt_b) / 1000 * N_g_dr_lt * s_g_dr_lt * i_g_dr_lt
 }
 
@@ -1989,7 +1989,7 @@ module.exports.get_R_g_ud_st = () => {
     return 0
 }
 
-module.exports.get_R_g_ud_lt = (ud_lt_af_d, ground_density, ef_ud_lt_l, ef_ud_lt_b, N_g_ud_lt, s_g_ud_lt, i_g_ud_lt) => {
+module.exports.get_R_g_ud_lt = () => {
     if (ud_lt_af_d == 0) {
         return 0
     } else {
@@ -1997,39 +1997,39 @@ module.exports.get_R_g_ud_lt = (ud_lt_af_d, ground_density, ef_ud_lt_l, ef_ud_lt
     }
 }
 
-module.exports.get_R_total_dr_st = (R_q_dr_st, R_c_dr_st, R_g_dr_st, A_eff_dr_st) => {
+module.exports.get_R_total_dr_st = () => {
     return (R_q_dr_st + R_c_dr_st + R_g_dr_st) * A_eff_dr_st
 }
 
-module.exports.get_R_total_dr_lt = (R_q_dr_lt, R_c_dr_lt, R_g_dr_lt, A_eff_dr_lt) => {
+module.exports.get_R_total_dr_lt = () => {
     return (R_q_dr_lt + R_c_dr_lt + R_g_dr_lt) * A_eff_dr_lt
 }
 
-module.exports.get_R_total_ud_st = (R_q_ud_st, R_c_ud_st, R_g_ud_st, A_eff_ud_st) => {
+module.exports.get_R_total_ud_st = () => {
     return (R_q_ud_st + R_c_ud_st + R_g_ud_st) * A_eff_ud_st
 }
 
-module.exports.get_R_total_ud_lt = (R_q_ud_lt, R_c_ud_lt, R_g_ud_lt, A_eff_ud_lt) => {
+module.exports.get_R_total_ud_lt = () => {
     return (R_q_ud_lt + R_c_ud_lt + R_g_ud_lt) * A_eff_ud_lt
 }
 
-module.exports.get_R_total = (R_total_dr_st, R_total_dr_lt, R_total_ud_st, R_total_ud_lt) => {
+module.exports.get_R_total = () => {
     return Math.min(R_total_dr_st, R_total_dr_lt, R_total_ud_st, R_total_ud_lt)
 }
 
-module.exports.get_H_dr_st = (vl_total_dr_st, dr_st_af_d, A_eff_dr_st, a_d_dr_st) => {
+module.exports.get_H_dr_st = () => {
     return vl_total_dr_st * Math.tan(dr_st_af_d * Math.PI / 180) + A_eff_dr_st * a_d_dr_st
 }
 
-module.exports.get_H_dr_lt = (vl_total_dr_lt, dr_lt_af_d, A_eff_dr_lt, a_d_dr_lt) => {
+module.exports.get_H_dr_lt = () => {
     return vl_total_dr_lt * Math.tan(dr_lt_af_d * Math.PI / 180) + A_eff_dr_lt * a_d_dr_lt
 }
 
-module.exports.get_H_ud_st = (A_eff_ud_st, ud_st_cohesion_d, vl_total_ud_st) => {
+module.exports.get_H_ud_st = () => {
     return Math.min(A_eff_ud_st * ud_st_cohesion_d, 0.4 * vl_total_ud_st)
 }
 
-module.exports.get_H_ud_lt = (ud_lt_af_d, A_eff_ud_lt, ud_lt_cohesion_d, vl_total_ud_lt) => {
+module.exports.get_H_ud_lt = () => {
     if (ud_lt_af_d == 0) {
         return Math.min(A_eff_ud_lt * ud_lt_cohesion_d, 0.4 * vl_total_ud_lt)
     } else {
@@ -2037,33 +2037,32 @@ module.exports.get_H_ud_lt = (ud_lt_af_d, A_eff_ud_lt, ud_lt_cohesion_d, vl_tota
     }
 }
 
-module.exports.get_H_total = (H_dr_st, H_dr_lt, H_ud_st, H_ud_lt) => {
+module.exports.get_H_total = () => {
     return Math.min(H_dr_st, H_dr_lt, H_ud_st, H_ud_lt);
 }
 
 // MOMENT CAPACITY
-
-module.exports.get_f_cd = (f_ck, gamma_c) => {
+module.exports.get_f_cd = () => {
     return f_ck / gamma_c
 }
 
-module.exports.get_f_cm = (f_ck) => {
+module.exports.get_f_cm = () => {
     return f_ck + 8
 }
 
-module.exports.get_f_ctm = (f_ck) => {
+module.exports.get_f_ctm = () => {
     return 0.393 * Math.pow(f_ck, (2 / 3));
 }
 
-module.exports.get_E_cm = (f_cm) => {
+module.exports.get_E_cm = () => {
     return 22 * Math.pow(f_cm / 10, (0.3));
 }
 
-module.exports.get_sigma_r1 = (f_R_1) => {
+module.exports.get_sigma_r1 = () => {
     return 0.45 * f_R_1
 }
 
-module.exports.get_sigma_r4 = (f_R_4) => {
+module.exports.get_sigma_r4 = () => {
     return 0.37 * f_R_4;
 }
 
@@ -2071,7 +2070,7 @@ module.exports.get_gamma_m = () => {
     return 1.5
 }
 
-module.exports.get_f_ctd_fl = (height, f_ctm, gamma_m) => {
+module.exports.get_f_ctd_fl = () => {
     if (height < 600) {
         return 1.1 * f_ctm / gamma_m * (1.6 - height / 1000);
     } else {
@@ -2079,20 +2078,20 @@ module.exports.get_f_ctd_fl = (height, f_ctm, gamma_m) => {
     }
 }
 
-module.exports.get_M_n = (f_ctd_fl, height) => {
+module.exports.get_M_n = () => {
     return f_ctd_fl * 1000 * (Math.pow(height / 1000, 2) / 6);
 
 }
 
-module.exports.get_f_yd = (f_yk, gamma_s) => {
+module.exports.get_f_yd = () => {
     return f_yk / gamma_s;
 }
 
-module.exports.get_A_c = (height) => {
+module.exports.get_A_c = () => {
     return height / 1000;
 }
 
-module.exports.get_rho = (include_steel, A_s, A_c) => {
+module.exports.get_rho = () => {
     if (include_steel != 'on') {
         return 0;
     } else  {
@@ -2100,7 +2099,7 @@ module.exports.get_rho = (include_steel, A_s, A_c) => {
     }
 }
 
-module.exports.get_h_ux = (rho, height, sigma_r1, sigma_r4, A_s, f_yk, f_ck) => {
+module.exports.get_h_ux = () => {
     var temp_h_ux;
     if (rho < 0.15) {
         temp_h_ux = 0.123 * height
@@ -2114,7 +2113,7 @@ module.exports.get_h_ux = (rho, height, sigma_r1, sigma_r4, A_s, f_yk, f_ck) => 
     }
 }
 
-module.exports.get_ef_height = (rho, height, cover_layer) => {
+module.exports.get_ef_height = () => {
     if (rho == 0) {
         return 0.75 * height
     } else if (rho > 0) {
@@ -2122,7 +2121,7 @@ module.exports.get_ef_height = (rho, height, cover_layer) => {
     }
 }
 
-module.exports.get_lambda = (f_ck) => {
+module.exports.get_lambda = () => {
     if (f_ck <= 50) {
         return 0.8 
     } else if (f_ck > 50) {
@@ -2130,7 +2129,7 @@ module.exports.get_lambda = (f_ck) => {
     }
 }
 
-module.exports.get_eta = (f_ck) => {
+module.exports.get_eta = () => {
     if (f_ck <= 50) {
         return 1 
     } else if (f_ck > 50) {
@@ -2138,15 +2137,15 @@ module.exports.get_eta = (f_ck) => {
     }
 }
 
-module.exports.get_omega = (A_s, f_yd, ef_height, eta, f_cd) => {
+module.exports.get_omega = () => {
     return A_s * f_yd / (ef_height * eta * f_cd * 1000)
 }
 
-module.exports.get_mu = (omega) => {
+module.exports.get_mu = () => {
     return omega*(1 - 1/2 * omega)
 }
 
-module.exports.get_M_p = (include_fiber, mu, ef_height, eta, f_cd, height, gamma_m, gamma_s, sigma_r4, sigma_r1, A_s, f_yk, h_ux) => {
+module.exports.get_M_p = () => {
     if (include_fiber != "on"){
         return mu * Math.pow(ef_height , 2) * eta * f_cd / 1000
     } else if (include_fiber == "on") {
@@ -2160,7 +2159,7 @@ module.exports.get_M_p = (include_fiber, mu, ef_height, eta, f_cd, height, gamma
     }
 }
 
-module.exports.get_M_p_l = (include_fiber, M_p, width, rho) => {
+module.exports.get_M_p_l = () => {
     if (include_fiber != "on"){
         return M_p * width / 1000
     } else if (include_fiber == "on") {
@@ -2175,7 +2174,7 @@ module.exports.get_M_p_l = (include_fiber, M_p, width, rho) => {
     }
 }
 
-module.exports.get_ = (include_fiber, M_p, length, rho) => {
+module.exports.get_M_p_b = () => {
     if (include_fiber != "on"){
         return M_p * length / 1000
     } else if (include_fiber == "on") {
@@ -2189,51 +2188,51 @@ module.exports.get_ = (include_fiber, M_p, length, rho) => {
     }
 }
 
-module.exports.get_M_p_internal = (M_p_l, M_p_b) => {
+module.exports.get_M_p_internal = () => {
     return Math.min(M_p_l, M_p_b)
 }
 
-module.exports.get_w_dr_st_l = (vl_total, A_eff_dr_st, ef_dr_st_b) => {
+module.exports.get_w_dr_st_l = () => {
     return vl_total / A_eff_dr_st * ef_dr_st_b / 1000
 }
 
-module.exports.get_w_dr_lt_l = (vl_total, A_eff_dr_lt, ef_dr_lt_b) => {
+module.exports.get_w_dr_lt_l = () => {
     return vl_total / A_eff_dr_lt * ef_dr_lt_b / 1000
 }
 
-module.exports.get_w_ud_st_l = (vl_total, A_eff_ud_st, ef_ud_st_b) => {
+module.exports.get_w_ud_st_l = () => {
     return vl_total / A_eff_ud_st * ef_ud_st_b / 1000
 }
 
-module.exports.get_w_ud_lt_l = (vl_total, A_eff_ud_lt, ef_ud_lt_b) => {
+module.exports.get_w_ud_lt_l = () => {
     return vl_total / A_eff_ud_lt * ef_ud_lt_b / 1000
 }
 
-module.exports.get_w_dr_st_b = (vl_total, A_eff_dr_st, ef_dr_st_l) => {
+module.exports.get_w_dr_st_b = () => {
     return vl_total / A_eff_dr_st * ef_dr_st_l / 1000
 }
 
-module.exports.get_w_dr_lt_b = (vl_total, A_eff_dr_lt, ef_dr_lt_l) => {
+module.exports.get_w_dr_lt_b = () => {
     return vl_total / A_eff_dr_lt * ef_dr_lt_l / 1000
 }
 
-module.exports.get_w_ud_st_b = (vl_total, A_eff_ud_st, ef_ud_st_l) => {
+module.exports.get_w_ud_st_b = () => {
     return vl_total / A_eff_ud_st * ef_ud_st_l / 1000
 }
 
-module.exports.get_w_ud_lt_b = (vl_total, A_eff_ud_lt, ef_ud_lt_l) => {
+module.exports.get_w_ud_lt_b = () => {
     return vl_total / A_eff_ud_lt * ef_ud_lt_l / 1000
 }
 
-module.exports.get_w_dim_l = (vl_dim_total, A_dim_eff, ef_dim_b) => {
+module.exports.get_w_dim_l = () => {
     return vl_dim_total / A_dim_eff * ef_dim_b / 1000
 }
 
-module.exports.get_w_dim_b = (vl_dim_total, A_dim_eff, ef_dim_l) => {
+module.exports.get_w_dim_b = () => {
     return vl_dim_total / A_dim_eff * ef_dim_l / 1000
 }
 
-module.exports.get_w_sw_l = (dimensions_known, self_weight, length, ground_weight) => {
+module.exports.get_w_sw_l = () => {
     if (dimensions_known == 'on') {
         return self_weight / (length / 1000)
     } else {
@@ -2241,7 +2240,7 @@ module.exports.get_w_sw_l = (dimensions_known, self_weight, length, ground_weigh
     }
 }
 
-module.exports.get_w_sw_b = (dimensions_known, self_weight, width, ground_weight) => {
+module.exports.get_w_sw_b = () => {
     if (dimensions_known == 'on') {
         return self_weight / (width / 1000)
     } else {
@@ -2289,7 +2288,7 @@ module.exports.get_a_dim_l_2 = () => {
     return 0
 }
 
-module.exports.get_a_dr_st_l_1 = (m_total_dr_st_l, point_foundation_shape, ef_dr_st_l, length, ec_vl_length, radius) => {
+module.exports.get_a_dr_st_l_1 = () => {
     if (m_total_dr_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_dr_st_l < length / 2 - ec_vl_length) {
@@ -2321,7 +2320,7 @@ module.exports.get_a_dr_st_l_1 = (m_total_dr_st_l, point_foundation_shape, ef_dr
     }
 }
 
-module.exports.get_b_dr_st_l_2 = (m_total_dr_st_l, point_foundation_shape, ef_dr_st_l, length, ec_vl_length, radius) => {
+module.exports.get_b_dr_st_l_2 = () => {
     if (m_total_dr_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_dr_st_l < length / 2 - ec_vl_length) {
@@ -2353,7 +2352,7 @@ module.exports.get_b_dr_st_l_2 = (m_total_dr_st_l, point_foundation_shape, ef_dr
     }
 }
 
-module.exports.get_L_w_dr_st_l_1 = (m_total_dr_st_l, point_foundation_shape, ef_dr_st_l, length, ec_vl_length, radius) => {
+module.exports.get_L_w_dr_st_l_1 = () => {
     if (m_total_dr_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_dr_st_l < length / 2 - ec_vl_length) {
@@ -2385,7 +2384,7 @@ module.exports.get_L_w_dr_st_l_1 = (m_total_dr_st_l, point_foundation_shape, ef_
     }
 }
 
-module.exports.get_L_w_dr_st_l_2 = (m_total_dr_st_l, point_foundation_shape, length, ec_vl_length, b_dr_st_l_2, radius) => {
+module.exports.get_L_w_dr_st_l_2 = () => {
     if (m_total_dr_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return (length / 2 + ec_vl_length) / 1000 - b_dr_st_l_2
@@ -2401,7 +2400,7 @@ module.exports.get_L_w_dr_st_l_2 = (m_total_dr_st_l, point_foundation_shape, len
     }
 }
 
-module.exports.get_a_dr_lt_l_1 = (m_total_dr_lt_l, point_foundation_shape, ef_dr_lt_l, length, ec_vl_length, radius) => {
+module.exports.get_a_dr_lt_l_1 = () => {
     if (m_total_dr_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_dr_lt_l < length / 2 - ec_vl_length) {
@@ -2433,7 +2432,7 @@ module.exports.get_a_dr_lt_l_1 = (m_total_dr_lt_l, point_foundation_shape, ef_dr
     }
 }
 
-module.exports.get_b_dr_lt_l_2 = (m_total_dr_lt_l, point_foundation_shape, ef_dr_lt_l, length, ec_vl_length, radius) => {
+module.exports.get_b_dr_lt_l_2 = () => {
     if (m_total_dr_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_dr_lt_l < length / 2 - ec_vl_length) {
@@ -2465,7 +2464,7 @@ module.exports.get_b_dr_lt_l_2 = (m_total_dr_lt_l, point_foundation_shape, ef_dr
     }
 }
 
-module.exports.get_L_w_dr_lt_l_1 = (m_total_dr_lt_l, point_foundation_shape, ef_dr_lt_l, length, ec_vl_length, radius) => {
+module.exports.get_L_w_dr_lt_l_1 = () => {
     if (m_total_dr_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_dr_lt_l < length / 2 - ec_vl_length) {
@@ -2497,7 +2496,7 @@ module.exports.get_L_w_dr_lt_l_1 = (m_total_dr_lt_l, point_foundation_shape, ef_
     }
 }
 
-module.exports.get_L_w_dr_lt_l_2 = (m_total_dr_lt_l, point_foundation_shape, length, ec_vl_length, b_dr_lt_l_2, radius) => {
+module.exports.get_L_w_dr_lt_l_2 = () => {
     if (m_total_dr_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return (length / 2 + ec_vl_length) / 1000 - b_dr_lt_l_2
@@ -2513,7 +2512,7 @@ module.exports.get_L_w_dr_lt_l_2 = (m_total_dr_lt_l, point_foundation_shape, len
     }
 }
 
-module.exports.get_a_ud_st_l_1 = (m_total_ud_st_l, point_foundation_shape, ef_ud_st_l, length, ec_vl_length, radius) => {
+module.exports.get_a_ud_st_l_1 = () => {
     if (m_total_ud_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_ud_st_l < length / 2 - ec_vl_length) {
@@ -2545,7 +2544,7 @@ module.exports.get_a_ud_st_l_1 = (m_total_ud_st_l, point_foundation_shape, ef_ud
     }
 }
 
-module.exports.get_b_ud_st_l_2 = (m_total_ud_st_l, point_foundation_shape, ef_ud_st_l, length, ec_vl_length, radius) => {
+module.exports.get_b_ud_st_l_2 = () => {
     if (m_total_ud_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_ud_st_l < length / 2 - ec_vl_length) {
@@ -2577,7 +2576,7 @@ module.exports.get_b_ud_st_l_2 = (m_total_ud_st_l, point_foundation_shape, ef_ud
     }
 }
 
-module.exports.get_ = (m_total_ud_st_l, point_foundation_shape, ef_ud_st_l, length, ec_vl_length, radius) => {
+module.exports.get_L_w_ud_st_l_1 = () => {
     if (m_total_ud_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_ud_st_l < length / 2 - ec_vl_length) {
@@ -2609,7 +2608,7 @@ module.exports.get_ = (m_total_ud_st_l, point_foundation_shape, ef_ud_st_l, leng
     }
 }
 
-module.exports.get_L_w_ud_st_l_2 = (m_total_ud_st_l, point_foundation_shape, length, ec_vl_length, b_ud_st_l_2, radius) => {
+module.exports.get_L_w_ud_st_l_2 = () => {
     if (m_total_ud_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return (length / 2 + ec_vl_length) / 1000 - b_ud_st_l_2
@@ -2625,7 +2624,7 @@ module.exports.get_L_w_ud_st_l_2 = (m_total_ud_st_l, point_foundation_shape, len
     }
 }
 
-module.exports.get_a_ud_lt_l_1 = (m_total_ud_lt_l, point_foundation_shape, ef_ud_lt_l, length, ec_vl_length, radius) => {
+module.exports.get_a_ud_lt_l_1 = () => {
     if (m_total_ud_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_ud_lt_l < length / 2 - ec_vl_length) {
@@ -2657,7 +2656,7 @@ module.exports.get_a_ud_lt_l_1 = (m_total_ud_lt_l, point_foundation_shape, ef_ud
     }
 }
 
-module.exports.get_b_ud_lt_l_2 = (m_total_ud_lt_l, point_foundation_shape, ef_ud_lt_l, length, ec_vl_length, radius) => {
+module.exports.get_b_ud_lt_l_2 = () => {
     if (m_total_ud_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_ud_lt_l < length / 2 - ec_vl_length) {
@@ -2689,7 +2688,7 @@ module.exports.get_b_ud_lt_l_2 = (m_total_ud_lt_l, point_foundation_shape, ef_ud
     }
 }
 
-module.exports.get_L_w_ud_lt_l_1 = (m_total_ud_lt_l, point_foundation_shape, ef_ud_lt_l, length, ec_vl_length, radius) => {
+module.exports.get_L_w_ud_lt_l_1 = () => {
     if (m_total_ud_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_ud_lt_l < length / 2 - ec_vl_length) {
@@ -2721,7 +2720,7 @@ module.exports.get_L_w_ud_lt_l_1 = (m_total_ud_lt_l, point_foundation_shape, ef_
     }
 }
 
-module.exports.get_ = (m_total_ud_lt_l, point_foundation_shape, length, ec_vl_length, b_ud_lt_l_2, radius) => {
+module.exports.get_L_w_ud_lt_l_2 = () => {
     if (m_total_ud_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return (length / 2 + ec_vl_length) / 1000 - b_ud_lt_l_2
@@ -2737,7 +2736,7 @@ module.exports.get_ = (m_total_ud_lt_l, point_foundation_shape, length, ec_vl_le
     }
 }
 
-module.exports.get_a_dim_l_1 = (m_dim_length, point_foundation_shape, ef_dim_l, length, ec_vl_length, radius) => {
+module.exports.get_a_dim_l_1 = () => {
     if (m_dim_length > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_dim_l < length / 2 - ec_vl_length) {
@@ -2769,7 +2768,7 @@ module.exports.get_a_dim_l_1 = (m_dim_length, point_foundation_shape, ef_dim_l, 
     }
 }
 
-module.exports.get_b_dim_l_2 = (m_dim_length, point_foundation_shape, ef_dim_l, length, ec_vl_length, radius) => {
+module.exports.get_b_dim_l_2 = () => {
     if (m_dim_length > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_dim_l < length / 2 - ec_vl_length) {
@@ -2801,7 +2800,7 @@ module.exports.get_b_dim_l_2 = (m_dim_length, point_foundation_shape, ef_dim_l, 
     }
 }
 
-module.exports.get_L_w_dim_l_1 = (m_dim_length, point_foundation_shape, ef_dim_l, length, ec_vl_length, radius) => {
+module.exports.get_L_w_dim_l_1 = () => {
     if (m_dim_length > 0) {
         if (point_foundation_shape == 'rectangular') {
             if (ef_dim_l < length / 2 - ec_vl_length) {
@@ -2833,7 +2832,7 @@ module.exports.get_L_w_dim_l_1 = (m_dim_length, point_foundation_shape, ef_dim_l
     }
 }
 
-module.exports.get_ = (m_dim_length, point_foundation_shape, ec_vl_length, b_dim_l_2, radius) => {
+module.exports.get_L_w_dim_l_2 = () => {
     if (m_dim_length > 0) {
         if (point_foundation_shape == 'rectangular') {
             return (length / 2 + ec_vl_length) / 1000 - b_dim_l_2
@@ -2849,167 +2848,177 @@ module.exports.get_ = (m_dim_length, point_foundation_shape, ec_vl_length, b_dim
     }
 }
 
-module.exports.get_R_A_dr_st_l_1 = (w_dr_st_l, L_w_dr_st_l_1) => {
+module.exports.get_R_A_dr_st_l_1 = () => {
     return w_dr_st_l * L_w_dr_st_l_1
 }
 
-module.exports.get_R_A_dr_lt_l_1 = (w_dr_lt_l, L_w_dr_lt_l_1) => {
+module.exports.get_R_A_dr_lt_l_1 = () => {
     return w_dr_lt_l * L_w_dr_lt_l_1
 }
 
-module.exports.get_R_A_ud_st_l_1 = (w_ud_st_l, L_w_ud_st_l_1) => {
+module.exports.get_R_A_ud_st_l_1 = () => {
     return w_ud_st_l * L_w_ud_st_l_1
 }
 
-module.exports.get_R_A_ud_lt_l_1 = (w_ud_lt_l, L_w_ud_lt_l_1) => {
+module.exports.get_R_A_ud_lt_l_1 = () => {
     return w_ud_lt_l * L_w_ud_lt_l_1
 }
 
-module.exports.get_R_A_dim_l_1 = (w_dim_l, L_w_dim_l_1) => {
+module.exports.get_R_A_dim_l_1 = () => {
     return w_dim_l * L_w_dim_l_1
 }
 
-module.exports.get_R_A_dr_st_l_2 = (w_dr_st_l, L_w_dr_st_l_2) => {
+module.exports.get_R_A_dr_st_l_2 = () => {
     return w_dr_st_l * L_w_dr_st_l_2
 }
 
-module.exports.get_R_A_dr_lt_l_2 = (w_dr_lt_l, L_w_dr_lt_l_2) => {
+module.exports.get_R_A_dr_lt_l_2 = () => {
     return w_dr_lt_l * L_w_dr_lt_l_2
 }
 
-module.exports.get_R_A_ud_st_l_2 = (w_ud_st_l, L_w_ud_st_l_2) => {
+module.exports.get_R_A_ud_st_l_2 = () => {
     return w_ud_st_l * L_w_ud_st_l_2
 }
 
-module.exports.get_R_A_ud_lt_l_2 = (w_ud_lt_l, L_w_ud_lt_l_2) => {
+module.exports.get_R_A_ud_lt_l_2 = () => {
     return w_ud_lt_l * L_w_ud_lt_l_2
 }
 
-module.exports.get_R_A_dim_l_2 = (w_dim_l, L_w_dim_l_2) => {
+module.exports.get_R_A_dim_l_2 = () => {
     return w_dim_l * L_w_dim_l_2
 }
 
-module.exports.get_M_A_dr_st_l_1 = (w_dr_st_l, L_w_dr_st_l_1, a_dr_st_l_1) => {
+module.exports.get_M_A_dr_st_l_1 = () => {
     return -w_dr_st_l * L_w_dr_st_l_1 * (a_dr_st_l_1 + L_w_dr_st_l_1 / 2)
 }
 
-module.exports.get_M_A_dr_lt_l_1 = (w_dr_lt_l, L_w_dr_lt_l_1, a_dr_lt_l_1) => {
+module.exports.get_M_A_dr_lt_l_1 = () => {
     return -w_dr_lt_l * L_w_dr_lt_l_1 * (a_dr_lt_l_1 + L_w_dr_lt_l_1 / 2)
 }
 
-module.exports.get_M_A_ud_st_l_1 = (w_ud_st_l, L_w_ud_st_l_1, a_ud_st_l_1) => {
+module.exports.get_M_A_ud_st_l_1 = () => {
     return -w_ud_st_l * L_w_ud_st_l_1 * (a_ud_st_l_1 + L_w_ud_st_l_1 / 2)
 }
 
-module.exports.get_M_A_ud_lt_l_1 = (w_ud_lt_l, L_w_ud_lt_l_1, a_ud_lt_l_1) => {
+module.exports.get_M_A_ud_lt_l_1 = () => {
     return -w_ud_lt_l * L_w_ud_lt_l_1 * (a_ud_lt_l_1 + L_w_ud_lt_l_1 / 2)
 }
 
-module.exports.get_M_A_dim_l_1 = (w_dim_l, L_w_dim_l_1, a_dim_l_1) => {
+module.exports.get_M_A_dim_l_1 = () => {
     return -w_dim_l * L_w_dim_l_1 * (a_dim_l_1 + L_w_dim_l_1 / 2)
 }
 
-module.exports.get_M_A_dr_st_l_2 = (w_dr_st_l, L_w_dr_st_l_2, a_dr_st_l_2) => {
+module.exports.get_M_A_dr_st_l_2 = () => {
     return -w_dr_st_l * L_w_dr_st_l_2 * (a_dr_st_l_2 + L_w_dr_st_l_2 / 2)
 }
 
-module.exports.get_M_A_dr_lt_l_2 = (w_dr_lt_l, L_w_dr_lt_l_2, a_dr_lt_l_2) => {
+module.exports.get_M_A_dr_lt_l_2 = () => {
     return -w_dr_lt_l * L_w_dr_lt_l_2 * (a_dr_lt_l_2 + L_w_dr_lt_l_2 / 2)
 }
 
-module.exports.get_M_A_ud_st_l_2 = (w_ud_st_l, L_w_ud_st_l_2, a_ud_st_l_2) => {
+module.exports.get_M_A_ud_st_l_2 = () => {
     return -w_ud_st_l * L_w_ud_st_l_2 * (a_ud_st_l_2 + L_w_ud_st_l_2 / 2)
 }
 
-module.exports.get_M_A_ud_lt_l_2 = (w_ud_lt_l, L_w_ud_lt_l_2, a_ud_lt_l_2) => {
+module.exports.get_M_A_ud_lt_l_2 = () => {
     return -w_ud_lt_l * L_w_ud_lt_l_2 * (a_ud_lt_l_2 + L_w_ud_lt_l_2 / 2)
 }
 
-module.exports.get_M_A_dim_l_2 = (w_dim_l, L_w_dim_l_2, a_dim_l_2) => {
+module.exports.get_M_A_dim_l_2 = () => {
     return -w_dim_l * L_w_dim_l_2 * (a_dim_l_2 + L_w_dim_l_2 / 2)
 }
 
-module.exports.get_M_r_dr_st_l_1 = (x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l) => {
+get_M_r_dr_st_l_1 = (x) => {
     if (x <= a_dr_st_l_1) {
         return R_A_dr_st_l_1 * x + M_A_dr_st_l_1
     } else if (x > a_dr_st_l_1) {
         return R_A_dr_st_l_1 * x + M_A_dr_st_l_1 - w_dr_st_l * Math.pow(x - a_dr_st_l_1, 2) / 2
     }
 }
+module.exports.get_M_r_dr_st_l_1 = get_M_r_dr_st_l_1
 
-module.exports.get_M_r_dr_lt_l_1 = (x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l) => {
+get_M_r_dr_lt_l_1 = (x) => {
     if (x <= a_dr_lt_l_1) {
         return R_A_dr_lt_l_1 * x + M_A_dr_lt_l_1
     } else if (x > a_dr_lt_l_1) {
         return R_A_dr_lt_l_1 * x + M_A_dr_lt_l_1 - w_dr_lt_l * Math.pow(x - a_dr_lt_l_1, 2) / 2
     }
 }
+module.exports.get_M_r_dr_lt_l_1 = get_M_r_dr_lt_l_1
 
-module.exports.get_M_r_ud_st_l_1 = (x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l) => {
+get_M_r_ud_st_l_1 = (x) => {
     if (x <= a_ud_st_l_1) {
         return R_A_ud_st_l_1 * x + M_A_ud_st_l_1
     } else if (x > a_ud_st_l_1) {
         return R_A_ud_st_l_1 * x + M_A_ud_st_l_1 - w_ud_st_l * Math.pow(x - a_ud_st_l_1, 2) / 2
     }
 }
+module.exports.get_M_r_ud_st_l_1 = get_M_r_ud_st_l_1
 
-module.exports.get_M_r_ud_lt_l_1 = (x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l) => {
+get_M_r_ud_lt_l_1 = (x) => {
     if (x <= a_ud_lt_l_1) {
         return R_A_ud_lt_l_1 * x + M_A_ud_lt_l_1
     } else if (x > a_ud_lt_l_1) {
         return R_A_ud_lt_l_1 * x + M_A_ud_lt_l_1 - w_ud_lt_l * Math.pow(x - a_ud_lt_l_1, 2) / 2
     }
 }
+module.exports.get_M_r_ud_lt_l_1 = get_M_r_ud_lt_l_1
 
-module.exports.get_M_r_dim_l_1 = (x, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l) => {
+get_M_r_dim_l_1 = (x) => {
     if (x <= a_dim_l_1) {
         return R_A_dim_l_1 * x + M_A_dim_l_1
     } else if (x > a_dim_l_1) {
         return R_A_dim_l_1 * x + M_A_dim_l_1 - w_dim_l * Math.pow(x - a_dim_l_1, 2) / 2
     }
 }
+module.exports.get_M_r_dim_l_1 = get_M_r_dim_l_1
 
-module.exports.get_M_r_dr_st_l_2 = (x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2) => {
+get_M_r_dr_st_l_2 = (x) => {
     if (x < L_w_dr_st_l_2) {
         return R_A_dr_st_l_2 * x + M_A_dr_st_l_2 - w_dr_st_l * Math.pow(x - a_dr_st_l_2, 2) / 2
     } else if (x >= L_w_dr_st_l_2) {
         return 0
     }
 }
+module.exports.get_M_r_dr_st_l_2 = get_M_r_dr_st_l_2
 
-module.exports.get_M_r_dr_lt_l_2 = (x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2) => {
+get_M_r_dr_lt_l_2 = (x) => {
     if (x < L_w_dr_lt_l_2) {
         return R_A_dr_lt_l_2 * x + M_A_dr_lt_l_2 - w_dr_lt_l * Math.pow(x - a_dr_lt_l_2, 2) / 2
     } else if (x >= L_w_dr_lt_l_2) {
         return 0
     }
 }
+module.exports.get_M_r_dr_lt_l_2 = get_M_r_dr_lt_l_2
 
-module.exports.get_M_r_ud_st_l_2 = (x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2) => {
+get_M_r_ud_st_l_2 = (x) => {
     if (x < L_w_ud_st_l_2) {
         return R_A_ud_st_l_2 * x + M_A_ud_st_l_2 - w_ud_st_l * Math.pow(x - a_ud_st_l_2, 2) / 2
     } else if (x >= L_w_ud_st_l_2) {
         return 0
     }
 }
+module.exports.get_M_r_ud_st_l_2 = get_M_r_ud_st_l_2
 
-module.exports.get_M_r_ud_lt_l_2 = (x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2) => {
+get_M_r_ud_lt_l_2 = (x) => {
     if (x < L_w_ud_lt_l_2) {
         return R_A_ud_lt_l_2 * x + M_A_ud_lt_l_2 - w_ud_lt_l * Math.pow(x - a_ud_lt_l_2, 2) / 2
     } else if (x >= L_w_ud_lt_l_2) {
         return 0
     }
 }
+module.exports.get_M_r_ud_lt_l_2 = get_M_r_ud_lt_l_2
 
-module.exports.get_M_r_dim_l_2 = (x, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, w_dim_l, a_dim_l_2) => {
+get_M_r_dim_l_2 = (x) => {
     if (x < L_w_dim_l_2) {
         return R_A_dim_l_2 * x + M_A_dim_l_2 - w_dim_l * Math.pow(x - a_dim_l_2, 2) / 2
     } else if (x >= L_w_dim_l_2) {
         return 0
     }
 }
+module.exports.get_M_r_dim_l_2 = get_M_r_dim_l_2
 
-module.exports.get_M_g_dr_st_l_1 = (x, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_M_g_dr_st_l_1 = (x) => {
     if (m_total_dr_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return 1 / 2 * w_sw_l * Math.pow(length / 1000 / 2 - ec_vl_length / 1000 - x, 2)
@@ -3024,8 +3033,9 @@ module.exports.get_M_g_dr_st_l_1 = (x, m_total_dr_st_l, point_foundation_shape, 
         }
     }
 }
+module.exports.get_M_g_dr_st_l_1 = get_M_g_dr_st_l_1
 
-module.exports.get_M_g_dr_lt_l_1 = (x, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_M_g_dr_lt_l_1 = (x) => {
     if (m_total_dr_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return 1 / 2 * w_sw_l * Math.pow(length / 1000 / 2 - ec_vl_length / 1000 - x, 2)
@@ -3040,8 +3050,9 @@ module.exports.get_M_g_dr_lt_l_1 = (x, m_total_dr_lt_l, point_foundation_shape, 
         }
     }
 }
+module.exports.get_M_g_dr_lt_l_1 = get_M_g_dr_lt_l_1
 
-module.exports.get_M_g_ud_st_l_1 = (x, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_M_g_ud_st_l_1 = (x) => {
     if (m_total_ud_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return 1 / 2 * w_sw_l * Math.pow(length / 1000 / 2 - ec_vl_length / 1000 - x, 2)
@@ -3056,8 +3067,9 @@ module.exports.get_M_g_ud_st_l_1 = (x, m_total_ud_st_l, point_foundation_shape, 
         }
     }
 }
+module.exports.get_M_g_ud_st_l_1 = get_M_g_ud_st_l_1
 
-module.exports.get_M_g_ud_lt_l_1 = (x, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_M_g_ud_lt_l_1 = (x) => {
     if (m_total_ud_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return 1 / 2 * w_sw_l * Math.pow(length / 1000 / 2 - ec_vl_length / 1000 - x, 2)
@@ -3072,8 +3084,9 @@ module.exports.get_M_g_ud_lt_l_1 = (x, m_total_ud_lt_l, point_foundation_shape, 
         }
     }
 }
+module.exports.get_M_g_ud_lt_l_1 = get_M_g_ud_lt_l_1
 
-module.exports.get_M_g_dim_l_1 = (x, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_M_g_dim_l_1 = (x) => {
     if (m_dim_length > 0) {
         if (point_foundation_shape == 'rectangular') {
             return 1 / 2 * w_sw_l * Math.pow(length / 1000 / 2 - ec_vl_length / 1000 - x, 2)
@@ -3088,8 +3101,9 @@ module.exports.get_M_g_dim_l_1 = (x, m_dim_length, point_foundation_shape, w_sw_
         }
     }
 }
+module.exports.get_M_g_dim_l_1 = get_M_g_dim_l_1
 
-module.exports.get_M_g_dr_st_l_2 = (x, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_M_g_dr_st_l_2 = (x) => {
     if (m_total_dr_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return 1 / 2 * w_sw_l * Math.pow(length / 1000 / 2 + ec_vl_length / 1000 - x, 2)
@@ -3104,8 +3118,9 @@ module.exports.get_M_g_dr_st_l_2 = (x, m_total_dr_st_l, point_foundation_shape, 
         }
     }
 }
+module.exports.get_M_g_dr_st_l_2 = get_M_g_dr_st_l_2
 
-module.exports.get_M_g_dr_lt_l_2 = (x, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_M_g_dr_lt_l_2 = (x) => {
     if (m_total_dr_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return 1 / 2 * w_sw_l * Math.pow(length / 1000 / 2 + ec_vl_length / 1000 - x, 2)
@@ -3120,8 +3135,9 @@ module.exports.get_M_g_dr_lt_l_2 = (x, m_total_dr_lt_l, point_foundation_shape, 
         }
     }
 }
+module.exports.get_M_g_dr_lt_l_2 = get_M_g_dr_lt_l_2
 
-module.exports.get_M_g_ud_st_l_2 = (x, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_M_g_ud_st_l_2 = (x) => {
     if (m_total_ud_st_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return 1 / 2 * w_sw_l * Math.pow(length / 1000 / 2 + ec_vl_length / 1000 - x, 2)
@@ -3136,8 +3152,9 @@ module.exports.get_M_g_ud_st_l_2 = (x, m_total_ud_st_l, point_foundation_shape, 
         }
     }
 }
+module.exports.get_M_g_ud_st_l_2 = get_M_g_ud_st_l_2
 
-module.exports.get_M_g_ud_lt_l_2 = (x, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_M_g_ud_lt_l_2 = (x) => {
     if (m_total_ud_lt_l > 0) {
         if (point_foundation_shape == 'rectangular') {
             return 1 / 2 * w_sw_l * Math.pow(length / 1000 / 2 + ec_vl_length / 1000 - x, 2)
@@ -3152,8 +3169,9 @@ module.exports.get_M_g_ud_lt_l_2 = (x, m_total_ud_lt_l, point_foundation_shape, 
         }
     }
 }
+module.exports.get_M_g_ud_lt_l_2 = get_M_g_ud_lt_l_2
 
-module.exports.get_M_g_dim_l_2 = (x, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_M_g_dim_l_2 = (x) => {
     if (m_dim_length > 0) {
         if (point_foundation_shape == 'rectangular') {
             return 1 / 2 * w_sw_l * Math.pow(length / 1000 / 2 + ec_vl_length / 1000 - x, 2)
@@ -3168,112 +3186,129 @@ module.exports.get_M_g_dim_l_2 = (x, m_dim_length, point_foundation_shape, w_sw_
         }
     }
 }
+module.exports.get_M_g_dim_l_2 = get_M_g_dim_l_2
 
-module.exports.get_M_c_dr_st_l_1 = (x) => {
+
+get_M_c_dr_st_l_1 = (x) => {
     return get_M_r_dr_st_l_1(x) + get_M_g_dr_st_l_1(x)
 }
+module.exports.get_M_c_dr_st_l_1 = get_M_c_dr_st_l_1
 
-module.exports.get_M_c_dr_lt_l_1 = (x) => {
+
+get_M_c_dr_lt_l_1 = (x) => {
     return get_M_r_dr_lt_l_1(x) + get_M_g_dr_lt_l_1(x)
 }
+module.exports.get_M_c_dr_lt_l_1 = get_M_c_dr_lt_l_1
 
-module.exports.get_M_c_ud_st_l_1 = (x) => {
+get_M_c_ud_st_l_1 = (x) => {
     return get_M_r_ud_st_l_1(x) + get_M_g_ud_st_l_1(x)
 }
+module.exports.get_M_c_ud_st_l_1 = get_M_c_ud_st_l_1
 
-module.exports.get_M_c_ud_lt_l_1 = (x) => {
+get_M_c_ud_lt_l_1 = (x) => {
     return get_M_r_ud_lt_l_1(x) + get_M_g_ud_lt_l_1(x)
 }
+module.exports.get_M_c_ud_lt_l_1 = get_M_c_ud_lt_l_1
 
-module.exports.get_M_c_dim_l_1 = (x) => {
+get_M_c_dim_l_1 = (x) => {
     return get_M_r_dim_l_1(x) + get_M_g_dim_l_1(x)
 }
+module.exports.get_M_c_dim_l_1 = get_M_c_dim_l_1
 
-module.exports.get_M_c_dr_st_l_2 = (x) => {
+get_M_c_dr_st_l_2 = (x) => {
     return get_M_r_dr_st_l_2(x) + get_M_g_dr_st_l_2(x)
 }
+module.exports.get_M_c_dr_st_l_2 = get_M_c_dr_st_l_2
 
-module.exports.get_M_c_dr_lt_l_2 = (x) => {
+get_M_c_dr_lt_l_2 = (x) => {
     return get_M_r_dr_lt_l_2(x) + get_M_g_dr_lt_l_2(x)
 }
+module.exports.get_M_c_dr_lt_l_2 = get_M_c_dr_lt_l_2
 
-module.exports.get_M_c_ud_st_l_2 = (x) => {
+get_M_c_ud_st_l_2 = (x) => {
     return get_M_r_ud_st_l_2(x) + get_M_g_ud_st_l_2(x)
 }
+module.exports.get_M_c_ud_st_l_2 = get_M_c_ud_st_l_2
 
-module.exports.get_M_c_ud_lt_l_2 = (x) => {
+get_M_c_ud_lt_l_2 = (x) => {
     return get_M_r_ud_lt_l_2(x) + get_M_g_ud_lt_l_2(x)
 }
+module.exports.get_M_c_ud_lt_l_2 = get_M_c_ud_lt_l_2
 
-module.exports.get_M_c_dim_l_2 = (x) => {
+get_M_c_dim_l_2 = (x) => {
     return get_M_r_dim_l_2(x) + get_M_g_dim_l_2(x)
 }
+module.exports.get_M_c_dim_l_2 = get_M_c_dim_l_2
 
-module.exports.get_fn_M_dr_st_l = (x, m_total_dr_st_l) => {
+get_fn_M_dr_st_l = (x) => {
     if (m_total_dr_st_l > 0) {
         if (x >= 0) {
-            return get_M_c_dr_st_l_1(x)
+            return get_M_c_dr_st_l_1(x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, a_dr_st_l_2)
         } else {
-            return get_M_c_dr_st_l_2(-x)
+            return get_M_c_dr_st_l_2(-x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         }
     } else {
         if (x < 0) {
-            return get_M_c_dr_st_l_1(-x)
+            return get_M_c_dr_st_l_1(-x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         } else {
-            return get_M_c_dr_st_l_2(x)
+            return get_M_c_dr_st_l_2(x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         }
     }
 }
+module.exports.get_fn_M_dr_st_l = get_fn_M_dr_st_l
 
-module.exports.get_fn_M_dr_lt_l = (x, m_total_dr_lt_l) => {
+get_fn_M_dr_lt_l = (x, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2) => {
     if (m_total_dr_lt_l > 0) {
         if (x >= 0) {
-            return get_M_c_dr_lt_l_1(x)
+            return get_M_c_dr_lt_l_1(x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         } else {
-            return get_M_c_dr_lt_l_2(-x)
+            return get_M_c_dr_lt_l_2(-x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         }
     } else {
         if (x < 0) {
-            return get_M_c_dr_lt_l_1(-x)
+            return get_M_c_dr_lt_l_1(-x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         } else {
-            return get_M_c_dr_lt_l_2(x)
+            return get_M_c_dr_lt_l_2(x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         }
     }
 }
+module.exports.get_fn_M_dr_lt_l = get_fn_M_dr_lt_l
 
-module.exports.get_fn_M_ud_st_l = (x, m_total_ud_st_l) => {
+get_fn_M_ud_st_l = (x, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2) => {
     if (m_total_ud_st_l > 0) {
         if (x >= 0) {
-            return get_M_c_ud_st_l_1(x)
+            return get_M_c_ud_st_l_1(x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         } else {
-            return get_M_c_ud_st_l_2(-x)
+            return get_M_c_ud_st_l_2(-x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         }
     } else {
         if (x < 0) {
-            return get_M_c_ud_st_l_1(-x)
+            return get_M_c_ud_st_l_1(-x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         } else {
-            return get_M_c_ud_st_l_2(x)
+            return get_M_c_ud_st_l_2(x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         }
     }
 }
+module.exports.get_fn_M_ud_st_l = get_fn_M_ud_st_l
 
-module.exports.get_fn_M_ud_lt_l = (x, m_total_ud_lt_l) => {
+get_fn_M_ud_lt_l = (x, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
     if (m_total_ud_lt_l > 0) {
         if (x >= 0) {
-            return get_M_c_ud_lt_l_1(x)
+            return get_M_c_ud_lt_l_1(x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, a_ud_lt_l_2)
         } else {
-            return get_M_c_ud_lt_l_2(-x)
+            return get_M_c_ud_lt_l_2(-x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         }
     } else {
         if (x < 0) {
-            return get_M_c_ud_lt_l_1(-x)
+            return get_M_c_ud_lt_l_1(-x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         } else {
-            return get_M_c_ud_lt_l_2(x)
+            return get_M_c_ud_lt_l_2(x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
         }
     }
 }
+module.exports.get_fn_M_ud_lt_l = get_fn_M_ud_lt_l
 
-module.exports.get_fn_M_dim_l = (x, m_dim_length) => {
+get_fn_M_dim_l = (x) => {
     if (m_dim_length > 0) {
         if (x >= 0) {
             return get_M_c_dim_l_1(x)
@@ -3288,37 +3323,387 @@ module.exports.get_fn_M_dim_l = (x, m_dim_length) => {
         }
     }
 }
+module.exports.get_fn_M_dim_l = get_fn_M_dim_l
 
-module.exports.get_fn_t_bez_l = (column_shape, column_length, column_radius) => {
+get_fn_t_bez_l = () => {
     if (column_shape == "rectangular") {
         return Math.abs(-column_length / 2 / 1000 - x) / (column_length / 1000)
     } else {
         return Math.abs(-column_radius / 1000 - x) / (2 * column_radius / 1000)
     }
 }
+module.exports.get_fn_t_bez_l = get_fn_t_bez_l
 
-module.exports.get_P_bez_0_dr_st_l = (column_shape, column_length) => {
+module.exports.get_P_bez_0_dr_st_l = (column_shape, column_length, column_radius, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
     if (column_shape == "rectangular") {
-        return get_fn_M_dr_st_l(-column_length / 2 / 1000)
+        return get_fn_M_dr_st_l(-column_length / 2 / 1000, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
     } else {
-        return get_fn_M_dr_st_l(-column_radius / 1000)
+        return get_fn_M_dr_st_l(-column_radius / 1000, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
     }
 }
 
-module.exports.get_P_bez_3_dr_st_l = (column_shape, column_length) => {
+module.exports.get_P_bez_3_dr_st_l = (column_shape, column_length, column_radius, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
     if (column_shape == "rectangular") {
-        return get_fn_M_dr_st_l(column_length / 2 / 1000)
+        return get_fn_M_dr_st_l(column_length / 2 / 1000, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+        
     } else {
-        return get_fn_M_dr_st_l(column_radius / 1000)
+        return get_fn_M_dr_st_l(column_radius / 1000, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
     }
 }
 
-module.exports.get_P_bez_1_dr_st_l = () => {
-    return get_fn_M_dr_st_l(-0.001)
+module.exports.get_P_bez_1_dr_st_l = (m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+    return get_fn_M_dr_st_l(-0.001, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
 }
 
-module.exports.get_P_bez_2_dr_st_l = () => {
-    return get_fn_M_dr_st_l(0.001)
+module.exports.get_P_bez_2_dr_st_l = (m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+    return get_fn_M_dr_st_l(0.001, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+}
+
+
+module.exports.get_P_bez_0_dr_lt_l = (column_shape, column_length, column_radius, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2) => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_dr_lt_l(-column_length / 2 / 1000, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+    } else {
+        return get_fn_M_dr_lt_l(-column_radius / 1000, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+    }
+}
+
+module.exports.get_P_bez_3_dr_lt_l = (column_shape, column_length, column_radius, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2) => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_dr_lt_l(column_length / 2 / 1000, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+    } else {
+        return get_fn_M_dr_lt_l(column_radius / 1000, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+    }
+}
+
+module.exports.get_P_bez_1_dr_lt_l = (m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2) => {
+    return get_fn_M_dr_lt_l(-0.001, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+}
+
+module.exports.get_P_bez_2_dr_lt_l = (m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2) => {
+    return get_fn_M_dr_lt_l(0.001, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+}
+
+module.exports.get_P_bez_0_ud_st_l = (column_shape, column_length, column_radius, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2) => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_ud_st_l(-column_length / 2 / 1000, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+    } else {
+        return get_fn_M_ud_st_l(-column_radius / 1000, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+    }
+}
+
+module.exports.get_P_bez_3_ud_st_l = (column_shape, column_length, column_radius, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2) => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_ud_st_l(column_length / 2 / 1000, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+    } else {
+        return get_fn_M_ud_st_l(column_radius / 1000, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+    }
+}
+
+module.exports.get_P_bez_1_ud_st_l = (m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2) => {
+    return get_fn_M_ud_st_l(-0.001, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+}
+
+module.exports.get_P_bez_2_ud_st_l = (m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2) => {
+    return get_fn_M_ud_st_l(0.001, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+}
+
+module.exports.get_P_bez_0_ud_lt_l = (column_shape, column_length, column_radius, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_ud_lt_l(-column_length / 2 / 1000, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+    } else {
+        return get_fn_M_ud_lt_l(-column_radius / 1000, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+    }
+}
+
+module.exports.get_P_bez_3_ud_lt_l = (column_shape, column_length, column_radius, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_ud_lt_l(column_length / 2 / 1000, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+    } else {
+        return get_fn_M_ud_lt_l(column_radius / 1000, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+    }
+}
+
+module.exports.get_P_bez_1_ud_lt_l = (m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+    return get_fn_M_ud_lt_l(-0.001, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+}
+
+module.exports.get_P_bez_2_ud_lt_l = (m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+    return get_fn_M_ud_lt_l(0.001, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+}
+
+module.exports.get_P_bez_0_dim_l = (column_shape, column_length, column_radius, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2) => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_dim_l(-column_length / 2 / 1000, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+    } else {
+        return get_fn_M_dim_l(-column_radius / 1000, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+    }
+}
+
+module.exports.get_P_bez_3_dim_l = (column_shape, column_length, column_radius, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2) => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_dim_l(column_length / 2 / 1000, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+    } else {
+        return get_fn_M_dim_l(column_radius / 1000, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+    }
+}
+
+module.exports.get_P_bez_1_dim_l = (m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2) => {
+    return get_fn_M_dim_l(-0.001, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+}
+
+module.exports.get_P_bez_2_dim_l = (m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2) => {
+    return get_fn_M_dim_l(0.001, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+}
+
+module.exports.get_fn_B_dr_st_l = (P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l, column_shape, column_length, column_radius) => {
+    if (Math.abs(P_bez_1_dr_st_l - P_bez_2_dr_st_l) < 0.1) {
+        //Quadratic Bezier
+        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_0_dr_st_l + 2 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_2_dr_st_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_3_dr_st_l
+    } else {
+        //Cubic Bezier
+        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_0_dr_st_l + 3 * Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_1_dr_st_l + 3 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_2_dr_st_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_3_dr_st_l
+    }
+}
+
+module.exports.get_fn_B_dr_lt_l = (P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l, column_shape, column_length, column_radius) => {
+    if (Math.abs(P_bez_1_dr_lt_l - P_bez_2_dr_lt_l) < 0.1) {
+        //Quadratic Bezier
+        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_0_dr_lt_l + 2 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_2_dr_lt_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_3_dr_lt_l
+    } else {
+        //Cubic Bezier
+        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_0_dr_lt_l + 3 * Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_1_dr_lt_l + 3 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_2_dr_lt_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_3_dr_lt_l
+    }
+}
+
+module.exports.get_fn_B_ud_st_l = (P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l, column_shape, column_length, column_radius) => {
+    if (Math.abs(P_bez_1_ud_st_l - P_bez_2_ud_st_l) < 0.1) {
+        //Quaudatic Bezier
+        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_0_ud_st_l + 2 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_2_ud_st_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_3_ud_st_l
+    } else {
+        //Cubic Bezier
+        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_0_ud_st_l + 3 * Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_1_ud_st_l + 3 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_2_ud_st_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_3_ud_st_l
+    }
+}
+
+module.exports.get_fn_B_ud_lt_l = (P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l, column_shape, column_length, column_radius) => {
+    if (Math.abs(P_bez_1_ud_lt_l - P_bez_2_ud_lt_l) < 0.1) {
+        //Quaudatic Bezier
+        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_0_ud_lt_l + 2 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_2_ud_lt_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_3_ud_lt_l
+    } else {
+        //Cubic Bezier
+        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_0_ud_lt_l + 3 * Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_1_ud_lt_l + 3 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_2_ud_lt_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_3_ud_lt_l
+    }
+}
+
+module.exports.get_fn_B_dim_l = () => {
+    if (Math.abs(P_bez_1_dim_l - P_bez_2_dim_l) < 0.1) {
+        //Quaudatic Bezier
+        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_0_dim_l + 2 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_2_dim_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_3_dim_l
+    } else {
+        //Cubic Bezier
+        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_0_dim_l + 3 * Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_1_dim_l + 3 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_2_dim_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_3_dim_l
+    }
+}
+
+module.exports.get_fn_M_dr_st_l_corr = (x, m_total_dr_st_l, column_shape, column_length, column_radius, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, a_dr_st_l_2, P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l) => {
+    if (m_total_dr_st_l > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_M_c_dr_st_l_1(x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_M_c_dr_st_l_2(-x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dr_st_l(x, P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l, column_shape, column_length, column_radius)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_M_c_dr_st_l_1(x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x < -column_radius / 1000) {
+                return get_M_c_dr_st_l_2(-x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dr_st_l(x, P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l, column_shape, column_length, column_radius)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x < -column_length / 2 / 1000) {
+                return get_M_c_dr_st_l_1(-x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x >= column_length / 2 / 1000) {
+                return get_M_c_dr_st_l_2(x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dr_st_l(x, P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l, column_shape, column_length, column_radius)
+            }
+        } else {
+            if (x < -column_radius / 1000) {
+                return get_M_c_dr_st_l_1(-x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x >= column_radius / 1000) {
+                return get_M_c_dr_st_l_2(x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dr_st_l(x, P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l, column_shape, column_length, column_radius)
+            }
+        }
+    }
+}
+
+module.exports.get_fn_M_dr_lt_l_corr = (x, m_total_dr_lt_l, column_shape, column_length, column_radius, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2, P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l) => {
+    if (m_total_dr_lt_l > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_M_c_dr_lt_l_1(x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_M_c_dr_lt_l_2(-x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dr_lt_l(P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l, column_shape, column_length, column_radius)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_M_c_dr_lt_l_1(x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x < -column_radius / 1000) {
+                return get_M_c_dr_lt_l_2(-x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dr_lt_l(P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l, column_shape, column_length, column_radius)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x < -column_length / 2 / 1000) {
+                return get_M_c_dr_lt_l_1(-x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x >= column_length / 2 / 1000) {
+                return get_M_c_dr_lt_l_2(x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dr_lt_l(P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l, column_shape, column_length, column_radius)
+            }
+        } else {
+            if (x < -column_radius / 1000) {
+                return get_M_c_dr_lt_l_1(-x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x >= column_radius / 1000) {
+                return get_M_c_dr_lt_l_2(x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dr_lt_l(P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l, column_shape, column_length, column_radius)
+            }
+        }
+    }
+}
+
+module.exports.get_fn_M_ud_st_l_corr = (x, m_total_ud_st_l, column_shape, column_length, column_radius, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2, P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l) => {
+    if (m_total_ud_st_l > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_M_c_ud_st_l_1(x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_M_c_ud_st_l_2(-x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_ud_st_l(P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l, column_shape, column_length, column_radius)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_M_c_ud_st_l_1(x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x < -column_radius / 1000) {
+                return get_M_c_ud_st_l_2(-x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_ud_st_l(P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l, column_shape, column_length, column_radius)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x < -column_length / 2 / 1000) {
+                return get_M_c_ud_st_l_1(-x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x >= column_length / 2 / 1000) {
+                return get_M_c_ud_st_l_2(x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_ud_st_l(P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l, column_shape, column_length, column_radius)
+            }
+        } else {
+            if (x < -column_radius / 1000) {
+                return get_M_c_ud_st_l_1(-x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x >= column_radius / 1000) {
+                return get_M_c_ud_st_l_2(x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_ud_st_l(P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l, column_shape, column_length, column_radius)
+            }
+        }
+    }
+}
+
+module.exports.get_fn_M_ud_lt_l_corr = (x, m_total_ud_lt_l, column_shape, column_length, column_radius, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, a_ud_lt_l_2, P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l) => {
+    if (m_total_ud_lt_l > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_M_c_ud_lt_l_1(x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_M_c_ud_lt_l_2(-x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_ud_lt_l(P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l, column_shape, column_length, column_radius)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_M_c_ud_lt_l_1(x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x < -column_radius / 1000) {
+                return get_M_c_ud_lt_l_2(-x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_ud_lt_l(P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l, column_shape, column_length, column_radius)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x < -column_length / 2 / 1000) {
+                return get_M_c_ud_lt_l_1(-x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x >= column_length / 2 / 1000) {
+                return get_M_c_ud_lt_l_2(x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_ud_lt_l(P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l, column_shape, column_length, column_radius)
+            }
+        } else {
+            if (x < -column_radius / 1000) {
+                return get_M_c_ud_lt_l_1(-x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x >= column_radius / 1000) {
+                return get_M_c_ud_lt_l_2(x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_ud_lt_l(P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l, column_shape, column_length, column_radius)
+            }
+        }
+    }
+}
+
+module.exports.get_fn_M_dim_l_corr = (x) => {
+    if (m_dim_length > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_M_c_dim_l_1(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_M_c_dim_l_2(-x)
+            } else {
+                return get_fn_B_dim_l()
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_M_c_dim_l_1(x, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x < -column_radius / 1000) {
+                return get_M_c_dim_l_2(-x, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, w_dim_l, a_dim_l_2, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dim_l(P_bez_1_dim_l, P_bez_2_dim_l, P_bez_0_dim_l, P_bez_3_dim_l, column_shape, column_length, column_radius)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x < -column_length / 2 / 1000) {
+                return get_M_c_dim_l_1(-x, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x >= column_length / 2 / 1000) {
+                return get_M_c_dim_l_2(x, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, w_dim_l, a_dim_l_2, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dim_l(P_bez_1_dim_l, P_bez_2_dim_l, P_bez_0_dim_l, P_bez_3_dim_l, column_shape, column_length, column_radius)
+            }
+        } else {
+            if (x < -column_radius / 1000) {
+                return get_M_c_dim_l_1(-x, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else if (x >= column_radius / 1000) {
+                return get_M_c_dim_l_2(x, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, w_dim_l, a_dim_l_2, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            } else {
+                return get_fn_B_dim_l(P_bez_1_dim_l, P_bez_2_dim_l, P_bez_0_dim_l, P_bez_3_dim_l, column_shape, column_length, column_radius)
+            }
+        }
+    }
 }
 
 module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
@@ -3336,103 +3721,6 @@ module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
 module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
 
 }
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
-}
-
 
 
 
