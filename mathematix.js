@@ -6662,13 +6662,60 @@ get_fn_V_dim_b_corr = (x) => {
 }
 module.exports.get_fn_V_dim_b_corr = get_fn_V_dim_b_corr
 
+get_x_length_value_start = () => {
+    if (point_foundation_shape == 'rectangular') {
+        return -(length / 2 + ec_vl_length)
 
+    } else if (point_foundation_shape == 'circular') {
+        return -(radius + ec_vl_length)
+    }
+}
+module.exports.get_x_length_value_start = get_x_length_value_start
 
+get_x_length_value_end = () => {
+    if (point_foundation_shape == 'rectangular') {
+        return (length / 2 - ec_vl_length)
+    } else if (point_foundation_shape == 'circular') {
+        return (radius - ec_vl_length)
+    }
+}
+module.exports.get_x_length_value_end = get_x_length_value_end
 
+get_x_length_value_interval = () => {
+    if (point_foundation_shape == 'rectangular') {
+        return length / delta
+    } else if (point_foundation_shape == 'circular') {
+        return 2 * radius / delta
+    }
+}
+module.exports.get_x_length_value_interval = get_x_length_value_interval
 
+get_x_width_value_start = () => {
+    if (point_foundation_shape == 'rectangular') {
+        return -(width / 2 + ec_vl_width)
+    } else if (point_foundation_shape == 'circular') {
+        return -(radius + ec_vl_width)
+    }
+}
+module.exports.get_x_width_value_start = get_x_width_value_start
 
+get_x_width_value_end = () => {
+    if (point_foundation_shape == 'rectangular') {
+        return (width / 2 - ec_vl_width)
+    } else if (point_foundation_shape == 'circular') {
+        return (radius - ec_vl_width)
+    }
+}
+module.exports.get_x_width_value_end = get_x_width_value_end
 
-
+get_x_width_value_interval = () => {
+    if (point_foundation_shape == 'rectangular') {
+        return width / delta
+    } else if (point_foundation_shape == 'circular') {
+        return 2 * radius / delta
+    }
+}
+module.exports.get_x_width_value_interval = get_x_width_value_interval
 
 
 

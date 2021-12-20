@@ -418,6 +418,57 @@ M_A_dim_l_2 = matix.get_M_A_dim_l_2()
 
 // TEST X VALUES (represents length or width)
 lengths = [200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100]
+delta = 500
+x_length_value_start = matix.get_x_length_value_start()
+x_length_value_end = matix.get_x_length_value_end()
+x_length_value_interval = matix.get_x_length_value_interval()
+x_width_value_start = matix.get_x_width_value_start()
+x_width_value_end = matix.get_x_width_value_end()
+x_width_value_interval = matix.get_x_width_value_interval()
+
+console.log(x_length_value_start)
+console.log(x_length_value_end)
+console.log(x_length_value_interval)
+console.log("-------------------------")
+console.log(x_width_value_start)
+console.log(x_width_value_end)
+console.log(x_width_value_interval)
+
+
+//dimensions_known = No
+// Y Values Chart 1
+fn_M_dr_st_l_arr = []
+fn_M_dr_lt_l_arr = []
+fn_M_ud_st_l_arr = []
+fn_M_ud_lt_l_arr = []
+// Y Values Chart 2
+fn_M_dr_st_b_arr = []
+fn_M_dr_lt_b_arr = []
+fn_M_ud_st_b_arr = []
+fn_M_ud_lt_b_arr = []
+// Y Values Chart 3
+fn_V_dr_st_l_arr = []
+fn_V_dr_lt_l_arr = []
+fn_V_ud_st_l_arr = []
+fn_V_ud_lt_l_arr = []
+// Y Values Chart 4
+fn_V_dr_st_b_arr = []
+fn_V_dr_lt_b_arr = []
+fn_V_ud_st_b_arr = []
+fn_V_ud_lt_b_arr = []
+
+// dimensions_known = Yes
+// Y Values Chart 1
+// fn_M_dim_l_arr = []
+// // Y Values Chart 2
+// fn_M_dim_b_arr = []
+// // Y Values Chart 3
+// fn_V_dim_l_arr = []
+// // Y Values Chart 4
+// fn_V_dim_b_arr = []
+
+
+
 for(x=0; x<lengths.length;x++) {
 
     
@@ -719,7 +770,7 @@ for(x=0; x<lengths.length;x++) {
     fn_V_ud_lt_b_corr = matix.get_fn_V_ud_lt_b_corr(x)
     fn_V_dim_b_corr = matix.get_fn_V_dim_b_corr(x)
 
-    console.log(fn_V_dim_b_corr)
+    
 
 }
 
