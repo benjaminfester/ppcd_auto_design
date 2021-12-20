@@ -1255,7 +1255,7 @@ module.exports.get_e_dim_rl = () => {
     return Math.abs(m_dim_r_length) / vl_dim_total * 1000
 }
 
-module.exports.get_e_dim_rb = (m_dim_r_width, vl_dim_total) => {
+module.exports.get_e_dim_rb = () => {
     return Math.abs(m_dim_r_width) / vl_dim_total * 1000
 }
 
@@ -1410,7 +1410,7 @@ module.exports.get_A_eff_ud_lt = () => {
     }
 }
 
-module.exports.get_A_dim_eff = (ef_dim_l, ef_dim_b, v_dim_r) => {
+module.exports.get_A_dim_eff = () => {
     if (point_foundation_shape == 'rectangular') {
         return ef_dim_l * ef_dim_b / 1000000
     } else if (point_foundation_shape == 'circular') { 
@@ -3243,66 +3243,66 @@ module.exports.get_M_c_dim_l_2 = get_M_c_dim_l_2
 get_fn_M_dr_st_l = (x) => {
     if (m_total_dr_st_l > 0) {
         if (x >= 0) {
-            return get_M_c_dr_st_l_1(x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, a_dr_st_l_2)
+            return get_M_c_dr_st_l_1(x)
         } else {
-            return get_M_c_dr_st_l_2(-x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_dr_st_l_2(-x)
         }
     } else {
         if (x < 0) {
-            return get_M_c_dr_st_l_1(-x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_dr_st_l_1(-x)
         } else {
-            return get_M_c_dr_st_l_2(x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_dr_st_l_2(x)
         }
     }
 }
 module.exports.get_fn_M_dr_st_l = get_fn_M_dr_st_l
 
-get_fn_M_dr_lt_l = (x, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2) => {
+get_fn_M_dr_lt_l = (x) => {
     if (m_total_dr_lt_l > 0) {
         if (x >= 0) {
-            return get_M_c_dr_lt_l_1(x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_dr_lt_l_1(x)
         } else {
-            return get_M_c_dr_lt_l_2(-x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_dr_lt_l_2(-x)
         }
     } else {
         if (x < 0) {
-            return get_M_c_dr_lt_l_1(-x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_dr_lt_l_1(-x)
         } else {
-            return get_M_c_dr_lt_l_2(x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_dr_lt_l_2(x)
         }
     }
 }
 module.exports.get_fn_M_dr_lt_l = get_fn_M_dr_lt_l
 
-get_fn_M_ud_st_l = (x, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2) => {
+get_fn_M_ud_st_l = (x) => {
     if (m_total_ud_st_l > 0) {
         if (x >= 0) {
-            return get_M_c_ud_st_l_1(x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_ud_st_l_1(x)
         } else {
-            return get_M_c_ud_st_l_2(-x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_ud_st_l_2(-x)
         }
     } else {
         if (x < 0) {
-            return get_M_c_ud_st_l_1(-x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_ud_st_l_1(-x)
         } else {
-            return get_M_c_ud_st_l_2(x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_ud_st_l_2(x)
         }
     }
 }
 module.exports.get_fn_M_ud_st_l = get_fn_M_ud_st_l
 
-get_fn_M_ud_lt_l = (x, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+get_fn_M_ud_lt_l = (x) => {
     if (m_total_ud_lt_l > 0) {
         if (x >= 0) {
-            return get_M_c_ud_lt_l_1(x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, a_ud_lt_l_2)
+            return get_M_c_ud_lt_l_1(x)
         } else {
-            return get_M_c_ud_lt_l_2(-x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_ud_lt_l_2(-x)
         }
     } else {
         if (x < 0) {
-            return get_M_c_ud_lt_l_1(-x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_ud_lt_l_1(-x)
         } else {
-            return get_M_c_ud_lt_l_2(x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+            return get_M_c_ud_lt_l_2(x)
         }
     }
 }
@@ -3334,333 +3334,338 @@ get_fn_t_bez_l = () => {
 }
 module.exports.get_fn_t_bez_l = get_fn_t_bez_l
 
-module.exports.get_P_bez_0_dr_st_l = (column_shape, column_length, column_radius, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+module.exports.get_P_bez_0_dr_st_l = () => {
     if (column_shape == "rectangular") {
-        return get_fn_M_dr_st_l(-column_length / 2 / 1000, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+        return get_fn_M_dr_st_l(-column_length / 2 / 1000)
     } else {
-        return get_fn_M_dr_st_l(-column_radius / 1000, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+        return get_fn_M_dr_st_l(-column_radius / 1000)
     }
 }
 
-module.exports.get_P_bez_3_dr_st_l = (column_shape, column_length, column_radius, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+module.exports.get_P_bez_3_dr_st_l = () => {
     if (column_shape == "rectangular") {
-        return get_fn_M_dr_st_l(column_length / 2 / 1000, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+        return get_fn_M_dr_st_l(column_length / 2 / 1000)
         
     } else {
-        return get_fn_M_dr_st_l(column_radius / 1000, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+        return get_fn_M_dr_st_l(column_radius / 1000)
     }
 }
 
-module.exports.get_P_bez_1_dr_st_l = (m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
-    return get_fn_M_dr_st_l(-0.001, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+module.exports.get_P_bez_1_dr_st_l = () => {
+    return get_fn_M_dr_st_l(-0.001)
 }
 
-module.exports.get_P_bez_2_dr_st_l = (m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
-    return get_fn_M_dr_st_l(0.001, m_total_dr_st_l, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+module.exports.get_P_bez_2_dr_st_l = () => {
+    return get_fn_M_dr_st_l(0.001)
 }
 
 
-module.exports.get_P_bez_0_dr_lt_l = (column_shape, column_length, column_radius, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2) => {
+module.exports.get_P_bez_0_dr_lt_l = () => {
     if (column_shape == "rectangular") {
-        return get_fn_M_dr_lt_l(-column_length / 2 / 1000, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+        return get_fn_M_dr_lt_l(-column_length / 2 / 1000)
     } else {
-        return get_fn_M_dr_lt_l(-column_radius / 1000, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+        return get_fn_M_dr_lt_l(-column_radius / 1000)
     }
 }
 
-module.exports.get_P_bez_3_dr_lt_l = (column_shape, column_length, column_radius, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2) => {
+module.exports.get_P_bez_3_dr_lt_l = () => {
     if (column_shape == "rectangular") {
-        return get_fn_M_dr_lt_l(column_length / 2 / 1000, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+        return get_fn_M_dr_lt_l(column_length / 2 / 1000)
     } else {
-        return get_fn_M_dr_lt_l(column_radius / 1000, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+        return get_fn_M_dr_lt_l(column_radius / 1000)
     }
 }
 
-module.exports.get_P_bez_1_dr_lt_l = (m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2) => {
-    return get_fn_M_dr_lt_l(-0.001, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+module.exports.get_P_bez_1_dr_lt_l = () => {
+    return get_fn_M_dr_lt_l(-0.001)
 }
 
-module.exports.get_P_bez_2_dr_lt_l = (m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2) => {
-    return get_fn_M_dr_lt_l(0.001, m_total_dr_lt_l, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2)
+module.exports.get_P_bez_2_dr_lt_l = () => {
+    return get_fn_M_dr_lt_l(0.001)
 }
 
-module.exports.get_P_bez_0_ud_st_l = (column_shape, column_length, column_radius, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2) => {
+module.exports.get_P_bez_0_ud_st_l = () => {
     if (column_shape == "rectangular") {
-        return get_fn_M_ud_st_l(-column_length / 2 / 1000, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+        return get_fn_M_ud_st_l(-column_length / 2 / 1000)
     } else {
-        return get_fn_M_ud_st_l(-column_radius / 1000, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+        return get_fn_M_ud_st_l(-column_radius / 1000)
     }
 }
 
-module.exports.get_P_bez_3_ud_st_l = (column_shape, column_length, column_radius, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2) => {
+module.exports.get_P_bez_3_ud_st_l = () => {
     if (column_shape == "rectangular") {
-        return get_fn_M_ud_st_l(column_length / 2 / 1000, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+        return get_fn_M_ud_st_l(column_length / 2 / 1000)
     } else {
-        return get_fn_M_ud_st_l(column_radius / 1000, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+        return get_fn_M_ud_st_l(column_radius / 1000)
     }
 }
 
-module.exports.get_P_bez_1_ud_st_l = (m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2) => {
-    return get_fn_M_ud_st_l(-0.001, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+module.exports.get_P_bez_1_ud_st_l = () => {
+    return get_fn_M_ud_st_l(-0.001)
 }
 
-module.exports.get_P_bez_2_ud_st_l = (m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2) => {
-    return get_fn_M_ud_st_l(0.001, m_total_ud_st_l, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2)
+module.exports.get_P_bez_2_ud_st_l = () => {
+    return get_fn_M_ud_st_l(0.001)
 }
 
-module.exports.get_P_bez_0_ud_lt_l = (column_shape, column_length, column_radius, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+module.exports.get_P_bez_0_ud_lt_l = () => {
     if (column_shape == "rectangular") {
-        return get_fn_M_ud_lt_l(-column_length / 2 / 1000, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+        return get_fn_M_ud_lt_l(-column_length / 2 / 1000)
     } else {
-        return get_fn_M_ud_lt_l(-column_radius / 1000, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+        return get_fn_M_ud_lt_l(-column_radius / 1000)
     }
 }
 
-module.exports.get_P_bez_3_ud_lt_l = (column_shape, column_length, column_radius, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
+module.exports.get_P_bez_3_ud_lt_l = () => {
     if (column_shape == "rectangular") {
-        return get_fn_M_ud_lt_l(column_length / 2 / 1000, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+        return get_fn_M_ud_lt_l(column_length / 2 / 1000)
     } else {
-        return get_fn_M_ud_lt_l(column_radius / 1000, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+        return get_fn_M_ud_lt_l(column_radius / 1000)
     }
 }
 
-module.exports.get_P_bez_1_ud_lt_l = (m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
-    return get_fn_M_ud_lt_l(-0.001, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+module.exports.get_P_bez_1_ud_lt_l = () => {
+    return get_fn_M_ud_lt_l(-0.001, m_total_ud_lt_l)
 }
 
-module.exports.get_P_bez_2_ud_lt_l = (m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius) => {
-    return get_fn_M_ud_lt_l(0.001, m_total_ud_lt_l, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+module.exports.get_P_bez_2_ud_lt_l = () => {
+    return get_fn_M_ud_lt_l(0.001, m_total_ud_lt_l)
 }
 
-module.exports.get_P_bez_0_dim_l = (column_shape, column_length, column_radius, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2) => {
+module.exports.get_P_bez_0_dim_l = () => {
     if (column_shape == "rectangular") {
-        return get_fn_M_dim_l(-column_length / 2 / 1000, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+        return get_fn_M_dim_l(-column_length / 2 / 1000)
     } else {
-        return get_fn_M_dim_l(-column_radius / 1000, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+        return get_fn_M_dim_l(-column_radius / 1000)
     }
 }
 
-module.exports.get_P_bez_3_dim_l = (column_shape, column_length, column_radius, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2) => {
+module.exports.get_P_bez_3_dim_l = () => {
     if (column_shape == "rectangular") {
-        return get_fn_M_dim_l(column_length / 2 / 1000, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+        return get_fn_M_dim_l(column_length / 2 / 1000)
     } else {
-        return get_fn_M_dim_l(column_radius / 1000, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+        return get_fn_M_dim_l(column_radius / 1000)
     }
 }
 
-module.exports.get_P_bez_1_dim_l = (m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2) => {
-    return get_fn_M_dim_l(-0.001, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+module.exports.get_P_bez_1_dim_l = () => {
+    return get_fn_M_dim_l(-0.001)
 }
 
-module.exports.get_P_bez_2_dim_l = (m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2) => {
-    return get_fn_M_dim_l(0.001, m_dim_length, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, a_dim_l_2)
+module.exports.get_P_bez_2_dim_l = () => {
+    return get_fn_M_dim_l(0.001)
 }
 
-module.exports.get_fn_B_dr_st_l = (P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l, column_shape, column_length, column_radius) => {
+get_fn_B_dr_st_l = () => {
     if (Math.abs(P_bez_1_dr_st_l - P_bez_2_dr_st_l) < 0.1) {
         //Quadratic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_0_dr_st_l + 2 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_2_dr_st_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_3_dr_st_l
+        return Math.pow(1 - get_fn_t_bez_l(), 2) * P_bez_0_dr_st_l + 2 * (1 - get_fn_t_bez_l()) * get_fn_t_bez_l() * P_bez_2_dr_st_l + Math.pow(get_fn_t_bez_l(), 2) * P_bez_3_dr_st_l
     } else {
         //Cubic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_0_dr_st_l + 3 * Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_1_dr_st_l + 3 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_2_dr_st_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_3_dr_st_l
+        return Math.pow(1 - get_fn_t_bez_l(), 3) * P_bez_0_dr_st_l + 3 * Math.pow(1 - get_fn_t_bez_l(), 2) * get_fn_t_bez_l() * P_bez_1_dr_st_l + 3 * (1 - get_fn_t_bez_l()) * Math.pow(get_fn_t_bez_l(), 2) * P_bez_2_dr_st_l + Math.pow(get_fn_t_bez_l(), 3) * P_bez_3_dr_st_l
     }
 }
+module.exports.get_fn_B_dr_st_l = get_fn_B_dr_st_l
 
-module.exports.get_fn_B_dr_lt_l = (P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l, column_shape, column_length, column_radius) => {
+get_fn_B_dr_lt_l = () => {
     if (Math.abs(P_bez_1_dr_lt_l - P_bez_2_dr_lt_l) < 0.1) {
         //Quadratic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_0_dr_lt_l + 2 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_2_dr_lt_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_3_dr_lt_l
+        return Math.pow(1 - get_fn_t_bez_l(), 2) * P_bez_0_dr_lt_l + 2 * (1 - get_fn_t_bez_l()) * get_fn_t_bez_l() * P_bez_2_dr_lt_l + Math.pow(get_fn_t_bez_l(), 2) * P_bez_3_dr_lt_l
     } else {
         //Cubic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_0_dr_lt_l + 3 * Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_1_dr_lt_l + 3 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_2_dr_lt_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_3_dr_lt_l
+        return Math.pow(1 - get_fn_t_bez_l(), 3) * P_bez_0_dr_lt_l + 3 * Math.pow(1 - get_fn_t_bez_l(), 2) * get_fn_t_bez_l() * P_bez_1_dr_lt_l + 3 * (1 - get_fn_t_bez_l()) * Math.pow(get_fn_t_bez_l(), 2) * P_bez_2_dr_lt_l + Math.pow(get_fn_t_bez_l(), 3) * P_bez_3_dr_lt_l
     }
 }
+module.exports.get_fn_B_dr_lt_l = get_fn_B_dr_lt_l
 
-module.exports.get_fn_B_ud_st_l = (P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l, column_shape, column_length, column_radius) => {
+get_fn_B_ud_st_l = () => {
     if (Math.abs(P_bez_1_ud_st_l - P_bez_2_ud_st_l) < 0.1) {
         //Quaudatic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_0_ud_st_l + 2 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_2_ud_st_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_3_ud_st_l
+        return Math.pow(1 - get_fn_t_bez_l(), 2) * P_bez_0_ud_st_l + 2 * (1 - get_fn_t_bez_l()) * get_fn_t_bez_l() * P_bez_2_ud_st_l + Math.pow(get_fn_t_bez_l(), 2) * P_bez_3_ud_st_l
     } else {
         //Cubic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_0_ud_st_l + 3 * Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_1_ud_st_l + 3 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_2_ud_st_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_3_ud_st_l
+        return Math.pow(1 - get_fn_t_bez_l(), 3) * P_bez_0_ud_st_l + 3 * Math.pow(1 - get_fn_t_bez_l(), 2) * get_fn_t_bez_l() * P_bez_1_ud_st_l + 3 * (1 - get_fn_t_bez_l()) * Math.pow(get_fn_t_bez_l(), 2) * P_bez_2_ud_st_l + Math.pow(get_fn_t_bez_l(), 3) * P_bez_3_ud_st_l
     }
 }
+module.exports.get_fn_B_ud_st_l = get_fn_B_ud_st_l
 
-module.exports.get_fn_B_ud_lt_l = (P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l, column_shape, column_length, column_radius) => {
+get_fn_B_ud_lt_l = () => {
     if (Math.abs(P_bez_1_ud_lt_l - P_bez_2_ud_lt_l) < 0.1) {
         //Quaudatic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_0_ud_lt_l + 2 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_2_ud_lt_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_3_ud_lt_l
+        return Math.pow(1 - get_fn_t_bez_l(), 2) * P_bez_0_ud_lt_l + 2 * (1 - get_fn_t_bez_l()) * get_fn_t_bez_l() * P_bez_2_ud_lt_l + Math.pow(get_fn_t_bez_l(), 2) * P_bez_3_ud_lt_l
     } else {
         //Cubic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_0_ud_lt_l + 3 * Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_1_ud_lt_l + 3 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_2_ud_lt_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_3_ud_lt_l
+        return Math.pow(1 - get_fn_t_bez_l(), 3) * P_bez_0_ud_lt_l + 3 * Math.pow(1 - get_fn_t_bez_l(), 2) * get_fn_t_bez_l() * P_bez_1_ud_lt_l + 3 * (1 - get_fn_t_bez_l()) * Math.pow(get_fn_t_bez_l(), 2) * P_bez_2_ud_lt_l + Math.pow(get_fn_t_bez_l(), 3) * P_bez_3_ud_lt_l
     }
 }
+module.exports.get_fn_B_ud_lt_l = get_fn_B_ud_lt_l
 
-module.exports.get_fn_B_dim_l = () => {
+get_fn_B_dim_l = () => {
     if (Math.abs(P_bez_1_dim_l - P_bez_2_dim_l) < 0.1) {
         //Quaudatic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_0_dim_l + 2 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_2_dim_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_3_dim_l
+        return Math.pow(1 - get_fn_t_bez_l(), 2) * P_bez_0_dim_l + 2 * (1 - get_fn_t_bez_l()) * get_fn_t_bez_l() * P_bez_2_dim_l + Math.pow(get_fn_t_bez_l(), 2) * P_bez_3_dim_l
     } else {
         //Cubic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_0_dim_l + 3 * Math.pow(1 - get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * get_fn_t_bez_l(column_shape, column_length, column_radius) * P_bez_1_dim_l + 3 * (1 - get_fn_t_bez_l(column_shape, column_length, column_radius)) * Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 2) * P_bez_2_dim_l + Math.pow(get_fn_t_bez_l(column_shape, column_length, column_radius), 3) * P_bez_3_dim_l
+        return Math.pow(1 - get_fn_t_bez_l(), 3) * P_bez_0_dim_l + 3 * Math.pow(1 - get_fn_t_bez_l(), 2) * get_fn_t_bez_l() * P_bez_1_dim_l + 3 * (1 - get_fn_t_bez_l()) * Math.pow(get_fn_t_bez_l(), 2) * P_bez_2_dim_l + Math.pow(get_fn_t_bez_l(), 3) * P_bez_3_dim_l
     }
 }
+module.exports.get_fn_B_dim_l = get_fn_B_dim_l
 
-module.exports.get_fn_M_dr_st_l_corr = (x, m_total_dr_st_l, column_shape, column_length, column_radius, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, a_dr_st_l_2, P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l) => {
+module.exports.get_fn_M_dr_st_l_corr = (x) => {
     if (m_total_dr_st_l > 0) {
         if (column_shape == "rectangular") {
             if (x >= column_length / 2 / 1000) {
-                return get_M_c_dr_st_l_1(x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_st_l_1(x)
             } else if (x < -column_length / 2 / 1000) {
-                return get_M_c_dr_st_l_2(-x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_st_l_2(-x)
             } else {
-                return get_fn_B_dr_st_l(x, P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l, column_shape, column_length, column_radius)
+                return get_fn_B_dr_st_l()
             }
         } else {
             if (x >= column_radius / 1000) {
-                return get_M_c_dr_st_l_1(x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_st_l_1(x)
             } else if (x < -column_radius / 1000) {
-                return get_M_c_dr_st_l_2(-x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_st_l_2(-x)
             } else {
-                return get_fn_B_dr_st_l(x, P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l, column_shape, column_length, column_radius)
+                return get_fn_B_dr_st_l()
             }
         }
     } else {
         if (column_shape == "rectangular") {
             if (x < -column_length / 2 / 1000) {
-                return get_M_c_dr_st_l_1(-x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_st_l_1(-x)
             } else if (x >= column_length / 2 / 1000) {
-                return get_M_c_dr_st_l_2(x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_st_l_2(x)
             } else {
-                return get_fn_B_dr_st_l(x, P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l, column_shape, column_length, column_radius)
+                return get_fn_B_dr_st_l()
             }
         } else {
             if (x < -column_radius / 1000) {
-                return get_M_c_dr_st_l_1(-x, a_dr_st_l_1, R_A_dr_st_l_1, M_A_dr_st_l_1, w_dr_st_l, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_st_l_1(-x)
             } else if (x >= column_radius / 1000) {
-                return get_M_c_dr_st_l_2(x, L_w_dr_st_l_2, R_A_dr_st_l_2, M_A_dr_st_l_2, w_dr_st_l, a_dr_st_l_2, m_total_dr_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_st_l_2(x)
             } else {
-                return get_fn_B_dr_st_l(x, P_bez_1_dr_st_l, P_bez_2_dr_st_l, P_bez_0_dr_st_l, P_bez_3_dr_st_l, column_shape, column_length, column_radius)
+                return get_fn_B_dr_st_l()
             }
         }
     }
 }
 
-module.exports.get_fn_M_dr_lt_l_corr = (x, m_total_dr_lt_l, column_shape, column_length, column_radius, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, a_dr_lt_l_2, P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l) => {
+module.exports.get_fn_M_dr_lt_l_corr = (x) => {
     if (m_total_dr_lt_l > 0) {
         if (column_shape == "rectangular") {
             if (x >= column_length / 2 / 1000) {
-                return get_M_c_dr_lt_l_1(x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_lt_l_1(x)
             } else if (x < -column_length / 2 / 1000) {
-                return get_M_c_dr_lt_l_2(-x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_lt_l_2(-x)
             } else {
-                return get_fn_B_dr_lt_l(P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l, column_shape, column_length, column_radius)
+                return get_fn_B_dr_lt_l()
             }
         } else {
             if (x >= column_radius / 1000) {
-                return get_M_c_dr_lt_l_1(x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_lt_l_1(x)
             } else if (x < -column_radius / 1000) {
-                return get_M_c_dr_lt_l_2(-x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_lt_l_2(-x)
             } else {
-                return get_fn_B_dr_lt_l(P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l, column_shape, column_length, column_radius)
+                return get_fn_B_dr_lt_l()
             }
         }
     } else {
         if (column_shape == "rectangular") {
             if (x < -column_length / 2 / 1000) {
-                return get_M_c_dr_lt_l_1(-x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_lt_l_1(-x)
             } else if (x >= column_length / 2 / 1000) {
-                return get_M_c_dr_lt_l_2(x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_lt_l_2(x)
             } else {
-                return get_fn_B_dr_lt_l(P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l, column_shape, column_length, column_radius)
+                return get_fn_B_dr_lt_l()
             }
         } else {
             if (x < -column_radius / 1000) {
-                return get_M_c_dr_lt_l_1(-x, a_dr_lt_l_1, R_A_dr_lt_l_1, M_A_dr_lt_l_1, w_dr_lt_l, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_lt_l_1(-x)
             } else if (x >= column_radius / 1000) {
-                return get_M_c_dr_lt_l_2(x, L_w_dr_lt_l_2, R_A_dr_lt_l_2, M_A_dr_lt_l_2, w_dr_lt_l, a_dr_lt_l_2, m_total_dr_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dr_lt_l_2(x)
             } else {
-                return get_fn_B_dr_lt_l(P_bez_1_dr_lt_l, P_bez_2_dr_lt_l, P_bez_0_dr_lt_l, P_bez_3_dr_lt_l, column_shape, column_length, column_radius)
+                return get_fn_B_dr_lt_l()
             }
         }
     }
 }
 
-module.exports.get_fn_M_ud_st_l_corr = (x, m_total_ud_st_l, column_shape, column_length, column_radius, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, a_ud_st_l_2, P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l) => {
+module.exports.get_fn_M_ud_st_l_corr = (x) => {
     if (m_total_ud_st_l > 0) {
         if (column_shape == "rectangular") {
             if (x >= column_length / 2 / 1000) {
-                return get_M_c_ud_st_l_1(x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_st_l_1(x)
             } else if (x < -column_length / 2 / 1000) {
-                return get_M_c_ud_st_l_2(-x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_st_l_2(-x)
             } else {
-                return get_fn_B_ud_st_l(P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l, column_shape, column_length, column_radius)
+                return get_fn_B_ud_st_l()
             }
         } else {
             if (x >= column_radius / 1000) {
-                return get_M_c_ud_st_l_1(x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_st_l_1(x)
             } else if (x < -column_radius / 1000) {
-                return get_M_c_ud_st_l_2(-x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_st_l_2(-x)
             } else {
-                return get_fn_B_ud_st_l(P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l, column_shape, column_length, column_radius)
+                return get_fn_B_ud_st_l()
             }
         }
     } else {
         if (column_shape == "rectangular") {
             if (x < -column_length / 2 / 1000) {
-                return get_M_c_ud_st_l_1(-x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_st_l_1(-x)
             } else if (x >= column_length / 2 / 1000) {
-                return get_M_c_ud_st_l_2(x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_st_l_2(x)
             } else {
-                return get_fn_B_ud_st_l(P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l, column_shape, column_length, column_radius)
+                return get_fn_B_ud_st_l()
             }
         } else {
             if (x < -column_radius / 1000) {
-                return get_M_c_ud_st_l_1(-x, a_ud_st_l_1, R_A_ud_st_l_1, M_A_ud_st_l_1, w_ud_st_l,  m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_st_l_1(-x)
             } else if (x >= column_radius / 1000) {
-                return get_M_c_ud_st_l_2(x, L_w_ud_st_l_2, R_A_ud_st_l_2, M_A_ud_st_l_2, w_ud_st_l, a_ud_st_l_2, m_total_ud_st_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_st_l_2(x)
             } else {
-                return get_fn_B_ud_st_l(P_bez_1_ud_st_l, P_bez_2_ud_st_l, P_bez_0_ud_st_l, P_bez_3_ud_st_l, column_shape, column_length, column_radius)
+                return get_fn_B_ud_st_l()
             }
         }
     }
 }
 
-module.exports.get_fn_M_ud_lt_l_corr = (x, m_total_ud_lt_l, column_shape, column_length, column_radius, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, a_ud_lt_l_2, P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l) => {
+module.exports.get_fn_M_ud_lt_l_corr = (x) => {
     if (m_total_ud_lt_l > 0) {
         if (column_shape == "rectangular") {
             if (x >= column_length / 2 / 1000) {
-                return get_M_c_ud_lt_l_1(x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_lt_l_1(x)
             } else if (x < -column_length / 2 / 1000) {
-                return get_M_c_ud_lt_l_2(-x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_lt_l_2(-x)
             } else {
-                return get_fn_B_ud_lt_l(P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l, column_shape, column_length, column_radius)
+                return get_fn_B_ud_lt_l()
             }
         } else {
             if (x >= column_radius / 1000) {
-                return get_M_c_ud_lt_l_1(x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_lt_l_1(x)
             } else if (x < -column_radius / 1000) {
-                return get_M_c_ud_lt_l_2(-x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_lt_l_2(-x)
             } else {
-                return get_fn_B_ud_lt_l(P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l, column_shape, column_length, column_radius)
+                return get_fn_B_ud_lt_l()
             }
         }
     } else {
         if (column_shape == "rectangular") {
             if (x < -column_length / 2 / 1000) {
-                return get_M_c_ud_lt_l_1(-x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_lt_l_1(-x)
             } else if (x >= column_length / 2 / 1000) {
-                return get_M_c_ud_lt_l_2(x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_lt_l_2(x)
             } else {
-                return get_fn_B_ud_lt_l(P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l, column_shape, column_length, column_radius)
+                return get_fn_B_ud_lt_l()
             }
         } else {
             if (x < -column_radius / 1000) {
-                return get_M_c_ud_lt_l_1(-x, a_ud_lt_l_1, R_A_ud_lt_l_1, M_A_ud_lt_l_1, w_ud_lt_l, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_lt_l_1(-x)
             } else if (x >= column_radius / 1000) {
-                return get_M_c_ud_lt_l_2(x, L_w_ud_lt_l_2, R_A_ud_lt_l_2, M_A_ud_lt_l_2, w_ud_lt_l, a_ud_lt_l_2, m_total_ud_lt_l, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_ud_lt_l_2(x)
             } else {
-                return get_fn_B_ud_lt_l(P_bez_1_ud_lt_l, P_bez_2_ud_lt_l, P_bez_0_ud_lt_l, P_bez_3_ud_lt_l, column_shape, column_length, column_radius)
+                return get_fn_B_ud_lt_l()
             }
         }
     }
@@ -3678,49 +3683,2984 @@ module.exports.get_fn_M_dim_l_corr = (x) => {
             }
         } else {
             if (x >= column_radius / 1000) {
-                return get_M_c_dim_l_1(x, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dim_l_1(x)
             } else if (x < -column_radius / 1000) {
-                return get_M_c_dim_l_2(-x, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, w_dim_l, a_dim_l_2, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dim_l_2(-x)
             } else {
-                return get_fn_B_dim_l(P_bez_1_dim_l, P_bez_2_dim_l, P_bez_0_dim_l, P_bez_3_dim_l, column_shape, column_length, column_radius)
+                return get_fn_B_dim_l()
             }
         }
     } else {
         if (column_shape == "rectangular") {
             if (x < -column_length / 2 / 1000) {
-                return get_M_c_dim_l_1(-x, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dim_l_1(-x)
             } else if (x >= column_length / 2 / 1000) {
-                return get_M_c_dim_l_2(x, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, w_dim_l, a_dim_l_2, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dim_l_2(x)
             } else {
-                return get_fn_B_dim_l(P_bez_1_dim_l, P_bez_2_dim_l, P_bez_0_dim_l, P_bez_3_dim_l, column_shape, column_length, column_radius)
+                return get_fn_B_dim_l()
             }
         } else {
             if (x < -column_radius / 1000) {
-                return get_M_c_dim_l_1(-x, a_dim_l_1, R_A_dim_l_1, M_A_dim_l_1, w_dim_l, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dim_l_1(-x)
             } else if (x >= column_radius / 1000) {
-                return get_M_c_dim_l_2(x, L_w_dim_l_2, R_A_dim_l_2, M_A_dim_l_2, w_dim_l, a_dim_l_2, m_dim_length, point_foundation_shape, w_sw_l, length, ec_vl_length, radius)
+                return get_M_c_dim_l_2(x)
             } else {
-                return get_fn_B_dim_l(P_bez_1_dim_l, P_bez_2_dim_l, P_bez_0_dim_l, P_bez_3_dim_l, column_shape, column_length, column_radius)
+                return get_fn_B_dim_l()
             }
         }
     }
 }
 
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
+get_V_r_dr_st_l_1 = (x) => {
+    if (x <= a_dr_st_l_1) {
+        return R_A_dr_st_l_1
+    } else {
+        return R_A_dr_st_l_1 - w_dr_st_l * (x - a_dr_st_l_1)
+    }
+}
+module.exports.get_V_r_dr_st_l_1 = get_V_r_dr_st_l_1
 
+get_V_r_dr_lt_l_1 = (x) => {
+    if (x <= a_dr_lt_l_1) {
+        return R_A_dr_lt_l_1
+    } else {
+        return R_A_dr_lt_l_1 - w_dr_lt_l * (x - a_dr_lt_l_1)
+    }
+} 
+module.exports.get_V_r_dr_lt_l_1 = get_V_r_dr_lt_l_1
+
+get_V_r_ud_st_l_1 = (x) => {
+    if (x <= a_ud_st_l_1) {
+        return R_A_ud_st_l_1
+    } else {
+        return R_A_ud_st_l_1 - w_ud_st_l * (x - a_ud_st_l_1)
+    }
+} 
+module.exports.get_V_r_ud_st_l_1 = get_V_r_ud_st_l_1
+
+
+get_V_r_ud_lt_l_1 = (x) => {
+    if (x <= a_ud_lt_l_1) {
+        return R_A_ud_lt_l_1
+    } else {
+        return R_A_ud_lt_l_1 - w_ud_lt_l * (x - a_ud_lt_l_1)
+    }
+}
+module.exports.get_V_r_ud_lt_l_1 = get_V_r_ud_lt_l_1
+
+get_V_r_dim_l_1 = (x) => {
+    if (x <= a_dim_l_1) {
+        return R_A_dim_l_1
+    } else {
+        return R_A_dim_l_1 - w_dim_l * (x - a_dim_l_1)
+    }
+}
+module.exports.get_V_r_dim_l_1 = get_V_r_dim_l_1
+
+get_V_r_dr_st_l_2 = (x) => {
+    if (x < L_w_dr_st_l_2) {
+        return -(R_A_dr_st_l_2 - w_dr_st_l * (x - a_dr_st_l_2))
+    } else {
+        return 0
+    }
+}
+module.exports.get_V_r_dr_st_l_2 = get_V_r_dr_st_l_2
+
+get_V_r_dr_lt_l_2 = (x) => {
+    if (x < L_w_dr_lt_l_2) {
+        return -(R_A_dr_lt_l_2 - w_dr_lt_l * (x - a_dr_lt_l_2))
+    } else {
+        return 0
+    }
+}
+module.exports.get_V_r_dr_lt_l_2 = get_V_r_dr_lt_l_2
+
+get_V_r_ud_st_l_2 = (x) => {
+    if (x < L_w_ud_st_l_2) {
+        return -(R_A_ud_st_l_2 - w_ud_st_l * (x - a_ud_st_l_2))
+    } else {
+        return 0
+    }
+}
+module.exports.get_V_r_ud_st_l_2 = get_V_r_ud_st_l_2
+
+get_V_r_ud_lt_l_2 = (x) => {
+    if (x < L_w_ud_lt_l_2) {
+        return -(R_A_ud_lt_l_2 - w_ud_lt_l * (x - a_ud_lt_l_2))
+    } else {
+        return 0
+    }
+}
+module.exports.get_V_r_ud_lt_l_2 = get_V_r_ud_lt_l_2
+
+get_V_r_dim_l_2 = (x) => {
+    if (x < L_w_dim_l_2) {
+        return -(R_A_dim_l_2 - w_dim_l * (x - a_dim_l_2))
+    } else {
+        return 0
+    }
+}
+module.exports.get_V_r_dim_l_2 = get_V_r_dim_l_2
+
+get_V_g_dr_st_l_1 = (x) => {
+    if (m_total_dr_st_l > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_l * (length / 1000 / 2 - ec_vl_length / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_l * (radius / 1000 - ec_vl_length / 1000 - x))
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_l * (length / 1000 / 2 + ec_vl_length / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_l * (radius / 1000 + ec_vl_length / 1000 - x))
+        }
+    }
+}
+module.exports.get_V_g_dr_st_l_1 = get_V_g_dr_st_l_1
+
+get_V_g_dr_lt_l_1 = (x) => {
+    if (m_total_dr_lt_l > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_l * (length / 1000 / 2 - ec_vl_length / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_l * (radius / 1000 - ec_vl_length / 1000 - x))
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_l * (length / 1000 / 2 + ec_vl_length / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_l * (radius / 1000 + ec_vl_length / 1000 - x))
+        }
+    }
+} 
+module.exports.get_V_g_dr_lt_l_1 = get_V_g_dr_lt_l_1
+
+get_V_g_ud_st_l_1 = (x) => {
+    if (m_total_ud_st_l > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_l * (length / 1000 / 2 - ec_vl_length / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_l * (radius / 1000 - ec_vl_length / 1000 - x))
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_l * (length / 1000 / 2 + ec_vl_length / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_l * (radius / 1000 + ec_vl_length / 1000 - x))
+        }
+    }
+}
+module.exports.get_V_g_ud_st_l_1 = get_V_g_ud_st_l_1
+
+get_V_g_ud_lt_l_1 = (x) => {
+    if (m_total_ud_lt_l > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_l * (length / 1000 / 2 - ec_vl_length / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_l * (radius / 1000 - ec_vl_length / 1000 - x))
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_l * (length / 1000 / 2 + ec_vl_length / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_l * (radius / 1000 + ec_vl_length / 1000 - x))
+        }
+    }
+}
+module.exports.get_V_g_ud_lt_l_1 = get_V_g_ud_lt_l_1
+
+get_V_g_dim_l_1 = (x) => {
+    if (m_dim_length > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_l * (length / 1000 / 2 - ec_vl_length / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_l * (radius / 1000 - ec_vl_length / 1000 - x))
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_l * (length / 1000 / 2 + ec_vl_length / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_l * (radius / 1000 + ec_vl_length / 1000 - x))
+        }
+    }
+}
+module.exports.get_V_g_dim_l_1 = get_V_g_dim_l_1
+
+get_V_g_dr_st_l_2 = (x) => {
+    if (m_total_dr_st_l > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_l * (length / 1000 / 2 + ec_vl_length / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_l * (radius / 1000 + ec_vl_length / 1000 - x)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_l * (length / 1000 / 2 - ec_vl_length / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_l * (radius / 1000 - ec_vl_length / 1000 - x)
+        }
+    }
+}
+module.exports.get_V_g_dr_st_l_2 = get_V_g_dr_st_l_2
+
+get_V_g_dr_lt_l_2 = (x) => {
+    if (m_total_dr_lt_l > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_l * (length / 1000 / 2 + ec_vl_length / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_l * (radius / 1000 + ec_vl_length / 1000 - x)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_l * (length / 1000 / 2 - ec_vl_length / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_l * (radius / 1000 - ec_vl_length / 1000 - x)
+        }
+    }
+}
+module.exports.get_V_g_dr_lt_l_2 = get_V_g_dr_lt_l_2
+
+get_V_g_ud_st_l_2 = (x) => {
+    if (m_total_ud_st_l > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_l * (length / 1000 / 2 + ec_vl_length / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_l * (radius / 1000 + ec_vl_length / 1000 - x)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_l * (length / 1000 / 2 - ec_vl_length / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_l * (radius / 1000 - ec_vl_length / 1000 - x)
+        }
+    }
+}
+module.exports.get_V_g_ud_st_l_2 = get_V_g_ud_st_l_2
+
+get_V_g_ud_lt_l_2 = (x) => {
+    if (m_total_ud_lt_l > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_l * (length / 1000 / 2 + ec_vl_length / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_l * (radius / 1000 + ec_vl_length / 1000 - x)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_l * (length / 1000 / 2 - ec_vl_length / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_l * (radius / 1000 - ec_vl_length / 1000 - x)
+        }
+    }
+} 
+module.exports.get_V_g_ud_lt_l_2 = get_V_g_ud_lt_l_2
+
+get_V_g_dim_l_2 = (x) => {
+    if (m_dim_length > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_l * (length / 1000 / 2 + ec_vl_length / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_l * (radius / 1000 + ec_vl_length / 1000 - x)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_l * (length / 1000 / 2 - ec_vl_length / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_l * (radius / 1000 - ec_vl_length / 1000 - x)
+        }
+    }
+}
+module.exports.get_V_g_dim_l_2 = get_V_g_dim_l_2
+
+
+get_V_c_dr_st_l_1 = (x) => {
+    return get_V_r_dr_st_l_1(x) + get_V_g_dr_st_l_1(x)
+}
+module.exports.get_V_c_dr_st_l_1 = get_V_c_dr_st_l_1
+
+get_V_c_dr_lt_l_1 = (x) => {
+    return get_V_r_dr_lt_l_1(x) + get_V_g_dr_lt_l_1(x)
+}
+module.exports.get_V_c_dr_lt_l_1 = get_V_c_dr_lt_l_1
+
+get_V_c_ud_st_l_1 = (x) => {
+    return get_V_r_ud_st_l_1(x) + get_V_g_ud_st_l_1(x)
+}
+module.exports.get_V_c_ud_st_l_1 = get_V_c_ud_st_l_1
+
+get_V_c_ud_lt_l_1 = (x) => {
+    return get_V_r_ud_lt_l_1(x) + get_V_g_ud_lt_l_1(x)
+}
+module.exports.get_V_c_ud_lt_l_1 = get_V_c_ud_lt_l_1
+
+get_V_c_dim_l_1 = (x) => {
+    return get_V_r_dim_l_1(x) + get_V_g_dim_l_1(x)
+}
+module.exports.get_V_c_dim_l_1 = get_V_c_dim_l_1
+
+get_V_c_dr_st_l_2 = (x) => {
+    return get_V_r_dr_st_l_2(x) + get_V_g_dr_st_l_2(x)
+}
+module.exports.get_V_c_dr_st_l_2 =
+
+get_V_c_dr_lt_l_2 = (x) => {
+    return get_V_r_dr_lt_l_2(x) + get_V_g_dr_lt_l_2(x)
+}
+module.exports.get_V_c_dr_lt_l_2 = get_V_c_dr_lt_l_2
+
+get_V_c_ud_st_l_2 = (x) => {
+    return get_V_r_ud_st_l_2(x) + get_V_g_ud_st_l_2(x)
+}
+module.exports.get_V_c_ud_st_l_2 = get_V_c_ud_st_l_2
+
+get_V_c_ud_lt_l_2 = (x) => {
+    return get_V_r_ud_lt_l_2(x) + get_V_g_ud_lt_l_2(x)
+}
+module.exports.get_V_c_ud_lt_l_2 = get_V_c_ud_lt_l_2
+
+get_V_c_dim_l_2 = (x) => {
+    return get_V_r_dim_l_2(x) + get_V_g_dim_l_2(x)
+}
+module.exports.get_V_c_dim_l_2 = get_V_c_dim_l_2
+
+get_fn_V_dr_st_l = (x) => {
+    if (m_total_dr_st_l > 0) {
+        if (x >= 0) {
+            return get_V_c_dr_st_l_1(x)
+        } else {
+            return get_V_c_dr_st_l_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_V_c_dr_st_l_1(-x)
+        } else {
+            return get_V_c_dr_st_l_2(x)
+        }
+    }
+}
+module.exports.get_fn_V_dr_st_l = get_fn_V_dr_st_l
+
+get_fn_V_dr_lt_l = (x) => {
+    if (m_total_dr_lt_l > 0) {
+        if (x >= 0) {
+            return get_V_c_dr_lt_l_1(x)
+        } else {
+            return get_V_c_dr_lt_l_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_V_c_dr_lt_l_1(-x)
+        } else {
+            return get_V_c_dr_lt_l_2(x)
+        }
+    }
+}
+module.exports.get_fn_V_dr_lt_l = get_fn_V_dr_lt_l
+
+get_fn_V_ud_st_l = (x) => {
+    if (m_total_ud_st_l > 0) {
+        if (x >= 0) {
+            return get_V_c_ud_st_l_1(x)
+        } else {
+            return get_V_c_ud_st_l_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_V_c_ud_st_l_1(-x)
+        } else {
+            return get_V_c_ud_st_l_2(x)
+        }
+    }
+}
+module.exports.get_fn_V_ud_st_l = get_fn_V_ud_st_l
+
+get_fn_V_ud_lt_l = (x) => {
+    if (m_total_ud_lt_l > 0) {
+        if (x >= 0) {
+            return get_V_c_ud_lt_l_1(x)
+        } else {
+            return get_V_c_ud_lt_l_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_V_c_ud_lt_l_1(-x)
+        } else {
+            return get_V_c_ud_lt_l_2(x)
+        }
+    }
+}
+module.exports.get_fn_V_ud_lt_l = get_fn_V_ud_lt_l
+
+get_fn_V_dim_l = (x) => {
+    if (m_dim_length > 0) {
+        if (x >= 0) {
+            return get_V_c_dim_l_1(x)
+        } else {
+            return get_V_c_dim_l_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_V_c_dim_l_1(-x)
+        } else {
+            return get_V_c_dim_l_2(x)
+        }
+    }
+}
+module.exports.get_fn_V_dim_l = get_fn_V_dim_l
+
+module.exports.get_a_V_dr_st_l = () => {
+    if (column_shape == "rectangular") {
+        return (get_fn_V_dr_st_l(column_length / 2 / 1000) - get_fn_V_dr_st_l(-column_length / 2 / 1000)) / (column_length / 1000)
+    } else {
+        return (get_fn_V_dr_st_l(column_radius / 1000) - get_fn_V_dr_st_l(-column_radius / 1000)) / (2 * column_radius / 1000)
+    }
 }
 
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
+module.exports.get_b_V_dr_st_l = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_V_dr_st_l(column_length / 2 / 1000) - a_V_dr_st_l * (column_length / 2 / 1000)
+    } else {
+        return get_fn_V_dr_st_l(column_radius / 1000) - a_V_dr_st_l * (column_radius / 1000)
+    }
 }
 
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
+module.exports.get_a_V_dr_lt_l = () => {
+if (column_shape == "rectangular") {
+        return (get_fn_V_dr_lt_l(column_length / 2 / 1000) - get_fn_V_dr_lt_l(-column_length / 2 / 1000)) / (column_length / 1000)
+    } else {
+        return (get_fn_V_dr_lt_l(column_radius / 1000) - get_fn_V_dr_lt_l(-column_radius / 1000)) / (2 * column_radius / 1000)
+    }
 }
 
-module.exports.get_ = (arg1, arg2, arg3, arg4, arg5) => {
-
+module.exports.get_b_V_dr_lt_l = () => {
+if (column_shape == "rectangular") {
+        return get_fn_V_dr_lt_l(column_length / 2 / 1000) - a_V_dr_lt_l * (column_length / 2 / 1000)
+    } else {
+        return get_fn_V_dr_lt_l(column_radius / 1000) - a_V_dr_lt_l * (column_radius / 1000)
+    }
 }
+
+module.exports.get_a_V_ud_st_l = () => {
+    if (column_shape == "rectangular") {
+        return (get_fn_V_ud_st_l(column_length / 2 / 1000) - get_fn_V_ud_st_l(-column_length / 2 / 1000)) / (column_length / 1000)
+    } else {
+        return (get_fn_V_ud_st_l(column_radius / 1000) - get_fn_V_ud_st_l(-column_radius / 1000)) / (2 * column_radius / 1000)
+    }
+}
+
+module.exports.get_b_V_ud_st_l = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_V_ud_st_l(column_length / 2 / 1000) - a_V_ud_st_l * (column_length / 2 / 1000)
+    } else {
+        return get_fn_V_ud_st_l(column_radius / 1000) - a_V_ud_st_l * (column_radius / 1000)
+    }
+}
+
+module.exports.get_a_V_ud_lt_l = () => {
+    if (column_shape == "rectangular") {
+        return (get_fn_V_ud_lt_l(column_length / 2 / 1000) - get_fn_V_ud_lt_l(-column_length / 2 / 1000)) / (column_length / 1000)
+    } else {
+        return (get_fn_V_ud_lt_l(column_radius / 1000) - get_fn_V_ud_lt_l(-column_radius / 1000)) / (2 * column_radius / 1000)
+    }
+}
+
+module.exports.get_b_V_ud_lt_l = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_V_ud_lt_l(column_length / 2 / 1000) - a_V_ud_lt_l * (column_length / 2 / 1000)
+    } else {
+        return get_fn_V_ud_lt_l(column_radius / 1000) - a_V_ud_lt_l * (column_radius / 1000)
+    }
+}
+
+module.exports.get_a_V_dim_l = () => {
+    if (column_shape == "rectangular") {
+        return (get_fn_V_dim_l(column_length / 2 / 1000) - get_fn_V_dim_l(-column_length / 2 / 1000)) / (column_length / 1000)
+    } else {
+        return (get_fn_V_dim_l(column_radius / 1000) - get_fn_V_dim_l(-column_radius / 1000)) / (2 * column_radius / 1000)
+    }
+}
+
+module.exports.get_b_V_dim_l = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_V_dim_l(column_length / 2 / 1000) - a_V_dim_l * (column_length / 2 / 1000)
+    } else {
+        return get_fn_V_dim_l(column_radius / 1000) - a_V_dim_l * (column_radius / 1000)
+    }
+}
+
+get_y_V_dr_st_l = (x) => {
+    return a_V_dr_st_l * x + b_V_dr_st_l
+}
+module.exports.get_y_V_dr_st_l = get_y_V_dr_st_l
+
+get_y_V_dr_lt_l = (x) => {
+    return a_V_dr_lt_l * x + b_V_dr_lt_l
+}
+module.exports.get_y_V_dr_lt_l = get_y_V_dr_lt_l
+
+get_y_V_ud_st_l = (x) => {
+    return a_V_ud_st_l * x + b_V_ud_st_l
+}
+module.exports.get_y_V_ud_st_l = get_y_V_ud_st_l
+
+get_y_V_ud_lt_l = (x) => {
+    return a_V_ud_lt_l * x + b_V_ud_lt_l
+}
+module.exports.get_y_V_ud_lt_l = get_y_V_ud_lt_l
+
+get_y_V_dim_l = (x) => {
+    return a_V_dim_l * x + b_V_dim_l
+}
+module.exports.get_y_V_dim_l = get_y_V_dim_l
+
+get_fn_V_dr_st_l_corr = (x) => {
+    if (m_total_dr_st_l > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_dr_st_l_1(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_dr_st_l_2(-x)
+            } else {
+                return get_y_V_dr_st_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dr_st_l_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dr_st_l_2(-x)
+            } else {
+                return get_y_V_dr_st_l(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_dr_st_l_2(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_dr_st_l_1(-x)
+            } else {
+                return get_y_V_dr_st_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dr_st_l_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dr_st_l_1(-x)
+            } else {
+                return get_y_V_dr_st_l(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_dr_st_l_corr = get_fn_V_dr_st_l_corr
+
+get_fn_V_dr_lt_l_corr = (x) => {
+    if (m_total_dr_lt_l > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_dr_lt_l_1(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_dr_lt_l_2(-x)
+            } else {
+                return get_y_V_dr_lt_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dr_lt_l_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dr_lt_l_2(-x)
+            } else {
+                return get_y_V_dr_lt_l(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_dr_lt_l_2(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_dr_lt_l_1(-x)
+            } else {
+                return get_y_V_dr_lt_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dr_lt_l_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dr_lt_l_1(-x)
+            } else {
+                return get_y_V_dr_lt_l(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_dr_lt_l_corr = get_fn_V_dr_lt_l_corr
+
+get_fn_V_ud_st_l_corr = (x) => {
+    if (m_total_ud_st_l > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_ud_st_l_1(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_ud_st_l_2(-x)
+            } else {
+                return get_y_V_ud_st_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_ud_st_l_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_ud_st_l_2(-x)
+            } else {
+                return get_y_V_ud_st_l(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_ud_st_l_2(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_ud_st_l_1(-x)
+            } else {
+                return get_y_V_ud_st_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_ud_st_l_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_ud_st_l_1(-x)
+            } else {
+                return get_y_V_ud_st_l(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_ud_st_l_corr = get_fn_V_ud_st_l_corr
+
+get_fn_V_ud_lt_l_corr = (x) => {
+    if (m_total_ud_lt_l > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_ud_lt_l_1(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_ud_lt_l_2(-x)
+            } else {
+                return get_y_V_ud_lt_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_ud_lt_l_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_ud_lt_l_2(-x)
+            } else {
+                return get_y_V_ud_lt_l(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_ud_lt_l_2(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_ud_lt_l_1(-x)
+            } else {
+                return get_y_V_ud_lt_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_ud_lt_l_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_ud_lt_l_1(-x)
+            } else {
+                return get_y_V_ud_lt_l(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_ud_lt_l_corr = get_fn_V_ud_lt_l_corr
+
+get_fn_V_dim_l_corr = (x) => {
+    if (m_dim_length > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_dim_l_1(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_dim_l_2(-x)
+            } else {
+                return get_y_V_dim_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dim_l_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dim_l_2(-x)
+            } else {
+                return get_y_V_dim_l(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_dim_l_2(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_dim_l_1(-x)
+            } else {
+                return get_y_V_dim_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dim_l_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dim_l_1(-x)
+            } else {
+                return get_y_V_dim_l(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_dim_l_corr = get_fn_V_dim_l_corr
+
+get_fn_V_dim_l_corr = (x) => {
+    if (m_dim_length > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_dim_l_1(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_dim_l_2(-x)
+            } else {
+                return get_y_V_dim_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dim_l_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dim_l_2(-x)
+            } else {
+                return get_y_V_dim_l(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_length / 2 / 1000) {
+                return get_V_c_dim_l_2(x)
+            } else if (x < -column_length / 2 / 1000) {
+                return get_V_c_dim_l_1(-x)
+            } else {
+                return get_y_V_dim_l(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dim_l_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dim_l_1(-x)
+            } else {
+                return get_y_V_dim_l(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_dim_l_corr = get_fn_V_dim_l_corr
+
+get_a_dr_st_b_1 = () => {
+    if (m_total_dr_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_st_b < width / 2 - ec_vl_width) {
+                return (width / 2 - ec_vl_width - ef_dr_st_b) / 1000
+            } else {
+                return 0
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_st_b < radius - ec_vl_width) {
+                return (radius - ec_vl_width - ef_dr_st_b) / 1000
+            } else {
+                return 0
+            }
+        }
+    } else if (m_total_dr_st_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_st_b < width / 2 + ec_vl_width) {
+                return (width / 2 + ec_vl_width - ef_dr_st_b) / 1000
+            } else {
+                return 0
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_st_b < radius + ec_vl_width) {
+            } else {
+                return 0
+            }
+        }
+    }
+}
+module.exports.get_a_dr_st_b_1 = get_a_dr_st_b_1
+
+get_b_dr_st_b_2 = () => {
+    if (m_total_dr_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_st_b < width / 2 - ec_vl_width) {
+                return (width / 2 + ec_vl_width) / 1000
+            } else {
+                return (width - ef_dr_st_b) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_st_b < radius - ec_vl_width) {
+                return (radius + ec_vl_width) / 1000
+            } else {
+                return (2 * radius - ef_dr_st_b) / 1000
+            }
+        }
+    } else if (m_total_dr_st_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_st_b < width / 2 + ec_vl_width) {
+                return (width / 2 - ec_vl_width) / 1000
+            } else {
+                return (width - ef_dr_st_b) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_st_b < radius + ec_vl_width) {
+                return (radius - ec_vl_width) / 1000
+            } else {
+                return (2 * radius - ef_dr_st_b) / 1000
+            }
+        }
+    }
+}
+module.exports.get_b_dr_st_b_2 = get_b_dr_st_b_2
+
+get_L_w_dr_st_b_1 = () => {
+    if (m_total_dr_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_st_b < width / 2 - ec_vl_width) {
+                return ef_dr_st_b / 1000
+            } else {
+                return (width / 2 - ec_vl_width) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_st_b < radius - ec_vl_width) {
+                return ef_dr_st_b / 1000
+            } else {
+                return (radius - ec_vl_width) / 1000
+            }
+        }
+    } else if (m_total_dr_st_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_st_b < width / 2 + ec_vl_width) {
+                return ef_dr_st_b / 1000
+            } else {
+                return (width / 2 + ec_vl_width) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_st_b < radius + ec_vl_width) {
+                return ef_dr_st_b / 1000
+            } else {
+                return (radius + ec_vl_width) / 1000
+            }
+        }
+    }
+}
+module.exports.get_L_w_dr_st_b_1 = get_L_w_dr_st_b_1
+
+get_L_w_dr_st_b_2 = () => {
+    if (m_total_dr_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return (width / 2 + ec_vl_width) / 1000 - b_dr_st_b_2
+        } else if (point_foundation_shape == 'circular') {
+            return (radius + ec_vl_width) / 1000 - b_dr_st_b_2
+        }
+    } else if (m_total_dr_st_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return (width / 2 - ec_vl_width) / 1000 - b_dr_st_b_2
+        } else if (point_foundation_shape == 'circular') {
+            return (radius - ec_vl_width) / 1000 - b_dr_st_b_2
+        }
+    }
+}
+module.exports.get_L_w_dr_st_b_2 = get_L_w_dr_st_b_2
+
+get_a_dr_lt_b_1 = () => {
+    if (m_total_dr_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_lt_b < width / 2 - ec_vl_width) {
+                return (width / 2 - ec_vl_width - ef_dr_lt_b) / 1000
+            } else {
+                return 0
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_lt_b < radius - ec_vl_width) {
+                return (radius - ec_vl_width - ef_dr_lt_b) / 1000
+            } else {
+                return 0
+            }
+        }
+    } else if (m_total_dr_lt_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_lt_b < width / 2 + ec_vl_width) {
+                return (width / 2 + ec_vl_width - ef_dr_lt_b) / 1000
+            } else {
+                return 0
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_lt_b < radius + ec_vl_width) {
+                return (radius + ec_vl_width - ef_dr_lt_b) / 1000
+            } else {
+                return 0
+            }
+        }
+    }
+}
+module.exports.get_a_dr_lt_b_1 = get_a_dr_lt_b_1
+
+get_b_dr_lt_b_2 = () => {
+    if (m_total_dr_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_lt_b < width / 2 - ec_vl_width) {
+                return (width / 2 + ec_vl_width) / 1000
+            } else {
+                return (width - ef_dr_lt_b) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_lt_b < radius - ec_vl_width) {
+                return (radius + ec_vl_width) / 1000
+            } else {
+                return (2 * radius - ef_dr_lt_b) / 1000
+            }
+        }
+    } else if (m_total_dr_lt_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_lt_b < width / 2 + ec_vl_width) {
+                return (width / 2 - ec_vl_width) / 1000
+            } else {
+                return (width - ef_dr_lt_b) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_lt_b < radius + ec_vl_width) {
+                return (radius - ec_vl_width) / 1000
+            } else {
+                return (2 * radius - ef_dr_lt_b) / 1000
+            }
+        }
+    }
+}
+module.exports.get_b_dr_lt_b_2 = get_b_dr_lt_b_2
+
+get_L_w_dr_lt_b_1 = () => {
+    if (m_total_dr_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_lt_b < width / 2 - ec_vl_width) {
+                return ef_dr_lt_b / 1000
+            } else {
+                return (width / 2 - ec_vl_width) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_lt_b < radius - ec_vl_width) {
+                return ef_dr_lt_b / 1000
+            } else {
+                return (radius - ec_vl_width) / 1000
+            }
+        }
+    } else if (m_total_dr_lt_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dr_lt_b < width / 2 + ec_vl_width) {
+                return ef_dr_lt_b / 1000
+            } else {
+                return (width / 2 + ec_vl_width) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dr_lt_b < radius + ec_vl_width) {
+                return ef_dr_lt_b / 1000
+            } else {
+                return (radius + ec_vl_width) / 1000
+            }
+        }
+    }
+}
+module.exports.get_L_w_dr_lt_b_1 = get_L_w_dr_lt_b_1
+
+get_L_w_dr_lt_b_2 = () => {
+    if (m_total_dr_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return (width / 2 + ec_vl_width) / 1000 - b_dr_lt_b_2
+        } else if (point_foundation_shape == 'circular') {
+            return (radius + ec_vl_width) / 1000 - b_dr_lt_b_2
+        }
+    } else if (m_total_dr_lt_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return (width / 2 - ec_vl_width) / 1000 - b_dr_lt_b_2
+        } else if (point_foundation_shape == 'circular') {
+            return (radius - ec_vl_width) / 1000 - b_dr_lt_b_2
+        }
+    }
+}
+module.exports.get_L_w_dr_lt_b_2 = get_L_w_dr_lt_b_2
+
+get_a_ud_st_b_1 = () => {
+    if (m_total_ud_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_st_b < width / 2 - ec_vl_width) {
+                return (width / 2 - ec_vl_width - ef_ud_st_b) / 1000
+            } else {
+                return 0
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_st_b < radius - ec_vl_width) {
+                return (radius - ec_vl_width - ef_ud_st_b) / 1000
+            } else {
+                return 0
+            }
+        }
+    } else if (m_total_ud_st_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_st_b < width / 2 + ec_vl_width) {
+                return (width / 2 + ec_vl_width - ef_ud_st_b) / 1000
+            } else {
+                return 0
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_st_b < radius + ec_vl_width) {
+                return (radius + ec_vl_width - ef_ud_st_b) / 1000
+            } else {
+                return 0
+            }
+        }
+    }
+}
+module.exports.get_a_ud_st_b_1 = get_a_ud_st_b_1
+
+get_b_ud_st_b_2 = () => {
+    if (m_total_ud_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_st_b < width / 2 - ec_vl_width) {
+                return (width / 2 + ec_vl_width) / 1000
+            } else {
+                return (width - ef_ud_st_b) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_st_b < radius - ec_vl_width) {
+                return (radius + ec_vl_width) / 1000
+            } else {
+                return (2 * radius - ef_ud_st_b) / 1000
+            }
+        }
+    } else if (m_total_ud_st_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_st_b < width / 2 + ec_vl_width) {
+                return (width / 2 - ec_vl_width) / 1000
+            } else {
+                return (width - ef_ud_st_b) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_st_b < radius + ec_vl_width) {
+                return (radius - ec_vl_width) / 1000
+            } else {
+                return (2 * radius - ef_ud_st_b) / 1000
+            }
+        }
+    }
+}
+module.exports.get_b_ud_st_b_2 = get_b_ud_st_b_2
+
+get_L_w_ud_st_b_1 = () => {
+    if (m_total_ud_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_st_b < width / 2 - ec_vl_width) {
+                return ef_ud_st_b / 1000
+            } else {
+                return (width / 2 - ec_vl_width) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_st_b < radius - ec_vl_width) {
+                return ef_ud_st_b / 1000
+            } else {
+                return (radius - ec_vl_width) / 1000
+            }
+        }
+    } else if (m_total_ud_st_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_st_b < width / 2 + ec_vl_width) {
+                return ef_ud_st_b / 1000
+            } else {
+                return (width / 2 + ec_vl_width) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_st_b < radius + ec_vl_width) {
+                return ef_ud_st_b / 1000
+            } else {
+                return (radius + ec_vl_width) / 1000
+            }
+        }
+    }
+}
+module.exports.get_L_w_ud_st_b_1 = get_L_w_ud_st_b_1
+
+get_L_w_ud_st_b_2 = () => {
+    if (m_total_ud_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return (width / 2 + ec_vl_width) / 1000 - b_ud_st_b_2
+        } else if (point_foundation_shape == 'circular') {
+            return (radius + ec_vl_width) / 1000 - b_ud_st_b_2
+        }
+    } else if (m_total_ud_st_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return (width / 2 - ec_vl_width) / 1000 - b_ud_st_b_2
+        } else if (point_foundation_shape == 'circular') {
+            return (radius - ec_vl_width) / 1000 - b_ud_st_b_2
+        }
+    }
+}
+module.exports.get_L_w_ud_st_b_2 = get_L_w_ud_st_b_2
+
+get_a_ud_lt_b_1 = () => {
+
+    if (m_total_ud_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_lt_b < width / 2 - ec_vl_width) {
+                return (width / 2 - ec_vl_width - ef_ud_lt_b) / 1000
+            } else {
+                return 0
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_lt_b < radius - ec_vl_width) {
+                return (radius - ec_vl_width - ef_ud_lt_b) / 1000
+            } else {
+                return 0
+            }
+        }
+    } else if (m_total_ud_lt_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_lt_b < width / 2 + ec_vl_width) {
+                return (width / 2 + ec_vl_width - ef_ud_lt_b) / 1000
+            } else {
+                return 0
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_lt_b < radius + ec_vl_width) {
+                return (radius + ec_vl_width - ef_ud_lt_b) / 1000
+            } else {
+                return 0
+            }
+        }
+    }
+}
+module.exports.get_a_ud_lt_b_1 = get_a_ud_lt_b_1
+
+get_b_ud_lt_b_2 = () => {
+    if (m_total_ud_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_lt_b < width / 2 - ec_vl_width) {
+                return (width / 2 + ec_vl_width) / 1000
+            } else {
+                return (width - ef_ud_lt_b) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_lt_b < radius - ec_vl_width) {
+                return (radius + ec_vl_width) / 1000
+            } else {
+                return (2 * radius - ef_ud_lt_b) / 1000
+            }
+        }
+    } else if (m_total_ud_lt_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_lt_b < width / 2 + ec_vl_width) {
+                return (width / 2 - ec_vl_width) / 1000
+            } else {
+                return (width - ef_ud_lt_b) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_lt_b < radius + ec_vl_width) {
+                return (radius - ec_vl_width) / 1000
+            } else {
+                return (2 * radius - ef_ud_lt_b) / 1000
+            }
+        }
+    }
+}
+module.exports.get_b_ud_lt_b_2 = get_b_ud_lt_b_2
+
+get_L_w_ud_lt_b_1 = () => {
+    if (m_total_ud_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_lt_b < width / 2 - ec_vl_width) {
+                return ef_ud_lt_b / 1000
+            } else {
+                return (width / 2 - ec_vl_width) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_lt_b < radius - ec_vl_width) {
+                return ef_ud_lt_b / 1000
+            } else {
+                return (radius - ec_vl_width) / 1000
+            }
+        }
+    } else if (m_total_ud_lt_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_ud_lt_b < width / 2 + ec_vl_width) {
+                return ef_ud_lt_b / 1000
+            } else {
+                return (width / 2 + ec_vl_width) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_ud_lt_b < radius + ec_vl_width) {
+                return ef_ud_lt_b / 1000
+            } else {
+                return (radius + ec_vl_width) / 1000
+            }
+        }
+    }
+}
+module.exports.get_L_w_ud_lt_b_1 = get_L_w_ud_lt_b_1
+
+get_L_w_ud_lt_b_2 = () => {
+    if (m_total_ud_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return (width / 2 + ec_vl_width) / 1000 - b_ud_lt_b_2
+        } else if (point_foundation_shape == 'circular') {
+            return (radius + ec_vl_width) / 1000 - b_ud_lt_b_2
+        }
+    } else if (m_total_ud_lt_b <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return (width / 2 - ec_vl_width) / 1000 - b_ud_lt_b_2
+        } else if (point_foundation_shape == 'circular') {
+            return (radius - ec_vl_width) / 1000 - b_ud_lt_b_2
+        }
+    }
+}
+module.exports.get_L_w_ud_lt_b_2 = get_L_w_ud_lt_b_2
+
+get_a_dim_b_1 = () => {
+    if (m_dim_width > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dim_b < width / 2 - ec_vl_width) {
+                return (width / 2 - ec_vl_width - ef_dim_b) / 1000
+            } else {
+                return 0
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dim_b < radius - ec_vl_width) {
+                return (radius - ec_vl_width - ef_dim_b) / 1000
+            } else {
+                return 0
+            }
+        }
+    } else if (m_dim_width <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dim_b < width / 2 + ec_vl_width) {
+                return (width / 2 + ec_vl_width - ef_dim_b) / 1000
+            } else {
+                return 0
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dim_b < radius + ec_vl_width) {
+                return (radius + ec_vl_width - ef_dim_b) / 1000
+            } else {
+                return 0
+            }
+        }
+    }
+}
+module.exports.get_a_dim_b_1 = get_a_dim_b_1
+
+get_b_dim_b_2 = () => {
+    if (m_dim_width > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dim_b < width / 2 - ec_vl_width) {
+                return (width / 2 + ec_vl_width) / 1000
+            } else {
+                return (width - ef_dim_b) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dim_b < radius - ec_vl_width) {
+                return (radius + ec_vl_width) / 1000
+            } else {
+                return (2 * radius - ef_dim_b) / 1000
+            }
+        }
+    } else if (m_dim_width <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dim_b < width / 2 + ec_vl_width) {
+                return (width / 2 - ec_vl_width) / 1000
+            } else {
+                return (width - ef_dim_b) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dim_b < radius + ec_vl_width) {
+                return (radius - ec_vl_width) / 1000
+            } else {
+                return (2 * radius - ef_dim_b) / 1000
+            }
+        }
+    }
+}
+module.exports.get_b_dim_b_2 = get_b_dim_b_2
+
+get_L_w_dim_b_1 = () => {
+    if (m_dim_width > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dim_b < width / 2 - ec_vl_width) {
+                return ef_dim_b / 1000
+            } else {
+                return (width / 2 - ec_vl_width) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dim_b < radius - ec_vl_width) {
+                return ef_dim_b / 1000
+            } else {
+                return (radius - ec_vl_width) / 1000
+            }
+        }
+    } else if (m_dim_width <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            if (ef_dim_b < width / 2 + ec_vl_width) {
+                return ef_dim_b / 1000
+            } else {
+                return (width / 2 + ec_vl_width) / 1000
+            }
+        } else if (point_foundation_shape == 'circular') {
+            if (ef_dim_b < radius + ec_vl_width) {
+                return ef_dim_b / 1000
+            } else {
+                return (radius + ec_vl_width) / 1000
+            }
+        }
+    }
+}
+module.exports.get_L_w_dim_b_1 = get_L_w_dim_b_1
+
+get_L_w_dim_b_2 = () => {
+    if (m_dim_width > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return (width / 2 + ec_vl_width) / 1000 - b_dim_b_2
+        } else if (point_foundation_shape == 'circular') {
+            return (radius + ec_vl_width) / 1000 - b_dim_b_2
+        }
+    } else if (m_dim_width <= 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return (width / 2 - ec_vl_width) / 1000 - b_dim_b_2
+        } else if (point_foundation_shape == 'circular') {
+            return (radius - ec_vl_width) / 1000 - b_dim_b_2
+        }
+    }
+}
+module.exports.get_L_w_dim_b_2 = get_L_w_dim_b_2
+
+get_R_A_dr_st_b_1 = () => {
+    return w_dr_st_b * L_w_dr_st_b_1
+}
+module.exports.get_R_A_dr_st_b_1 = get_R_A_dr_st_b_1
+
+get_R_A_dr_lt_b_1 = () => {
+    return w_dr_lt_b * L_w_dr_lt_b_1
+}
+module.exports.get_R_A_dr_lt_b_1 = get_R_A_dr_lt_b_1
+
+get_R_A_ud_st_b_1 = () => {
+    return w_ud_st_b * L_w_ud_st_b_1
+}
+module.exports.get_R_A_ud_st_b_1 = get_R_A_ud_st_b_1
+
+get_R_A_ud_lt_b_1 = () => {
+    return w_ud_lt_b * L_w_ud_lt_b_1
+}
+module.exports.get_R_A_ud_lt_b_1 = get_R_A_ud_lt_b_1
+
+get_R_A_dim_b_1 = () => {
+    return w_dim_b * L_w_dim_b_1
+}
+module.exports.get_R_A_dim_b_1 = get_R_A_dim_b_1
+
+get_R_A_dr_st_b_2 = () => {
+    return w_dr_st_b * L_w_dr_st_b_2
+}
+module.exports.get_R_A_dr_st_b_2 = get_R_A_dr_st_b_2
+
+get_R_A_dr_lt_b_2 = () => {
+    return w_dr_lt_b * L_w_dr_lt_b_2
+}
+module.exports.get_R_A_dr_lt_b_2 = get_R_A_dr_lt_b_2
+
+get_R_A_ud_st_b_2 = () => {
+    return w_ud_st_b * L_w_ud_st_b_2
+}
+module.exports.get_R_A_ud_st_b_2 = get_R_A_ud_st_b_2
+
+get_R_A_ud_lt_b_2 = () => {
+    return w_ud_lt_b * L_w_ud_lt_b_2
+}
+module.exports.get_R_A_ud_lt_b_2 = get_R_A_ud_lt_b_2
+
+get_R_A_dim_b_2 = () => {
+    return w_dim_b * L_w_dim_b_2
+}
+module.exports.get_R_A_dim_b_2 = get_R_A_dim_b_2
+
+get_M_A_dr_st_b_1 = () => {
+    return -w_dr_st_b * L_w_dr_st_b_1 * (a_dr_st_b_1 + L_w_dr_st_b_1 / 2)
+}
+module.exports.get_M_A_dr_st_b_1 = get_M_A_dr_st_b_1
+
+get_M_A_dr_lt_b_1 = () => {
+    return -w_dr_lt_b * L_w_dr_lt_b_1 * (a_dr_lt_b_1 + L_w_dr_lt_b_1 / 2)
+}
+module.exports.get_M_A_dr_lt_b_1 = get_M_A_dr_lt_b_1
+
+get_M_A_ud_st_b_1 = () => {
+    return -w_ud_st_b * L_w_ud_st_b_1 * (a_ud_st_b_1 + L_w_ud_st_b_1 / 2)
+}
+module.exports.get_M_A_ud_st_b_1 = get_M_A_ud_st_b_1
+
+get_M_A_ud_lt_b_1 = () => {
+    return -w_ud_lt_b * L_w_ud_lt_b_1 * (a_ud_lt_b_1 + L_w_ud_lt_b_1 / 2)
+}
+module.exports.get_M_A_ud_lt_b_1 = get_M_A_ud_lt_b_1
+
+get_M_A_dim_b_1 = () => {
+    return -w_dim_b * L_w_dim_b_1 * (a_dim_b_1 + L_w_dim_b_1 / 2)
+}
+module.exports.get_M_A_dim_b_1 = get_M_A_dim_b_1
+
+get_M_A_dr_st_b_2 = () => {
+    return -w_dr_st_b * L_w_dr_st_b_2 * (a_dr_st_b_2 + L_w_dr_st_b_2 / 2)
+}
+module.exports.get_M_A_dr_st_b_2 = get_M_A_dr_st_b_2
+
+get_M_A_dr_lt_b_2 = () => {
+    return -w_dr_lt_b * L_w_dr_lt_b_2 * (a_dr_lt_b_2 + L_w_dr_lt_b_2 / 2)
+}
+module.exports.get_M_A_dr_lt_b_2 = get_M_A_dr_lt_b_2
+
+get_M_A_ud_st_b_2 = () => {
+    return -w_ud_st_b * L_w_ud_st_b_2 * (a_ud_st_b_2 + L_w_ud_st_b_2 / 2)
+}
+module.exports.get_M_A_ud_st_b_2 = get_M_A_ud_st_b_2
+
+get_M_A_ud_lt_b_2 = () => {
+    return -w_ud_lt_b * L_w_ud_lt_b_2 * (a_ud_lt_b_2 + L_w_ud_lt_b_2 / 2)
+}
+module.exports.get_M_A_ud_lt_b_2 = get_M_A_ud_lt_b_2
+
+get_M_A_dim_b_2 = () => {
+    return -w_dim_b * L_w_dim_b_2 * (a_dim_b_2 + L_w_dim_b_2 / 2)
+}
+module.exports.get_M_A_dim_b_2 = get_M_A_dim_b_2
+
+get_M_r_dr_st_b_1 = (x) => {
+    if (x <= a_dr_st_b_1) {
+        return R_A_dr_st_b_1 * x + M_A_dr_st_b_1
+    } else if (x > a_dr_st_b_1) {
+        return R_A_dr_st_b_1 * x + M_A_dr_st_b_1 - w_dr_st_b * Math.pow(x - a_dr_st_b_1, 2) / 2
+    }
+}
+module.exports.get_M_r_dr_st_b_1 = get_M_r_dr_st_b_1
+
+get_M_r_dr_lt_b_1 = (x) => {
+    if (x <= a_dr_lt_b_1) {
+        return R_A_dr_lt_b_1 * x + M_A_dr_lt_b_1
+    } else if (x > a_dr_lt_b_1) {
+        return R_A_dr_lt_b_1 * x + M_A_dr_lt_b_1 - w_dr_lt_b * Math.pow(x - a_dr_lt_b_1, 2) / 2
+    }
+}
+module.exports.get_M_r_dr_lt_b_1 = get_M_r_dr_lt_b_1
+
+get_M_r_ud_st_b_1 = (x) => {
+    if (x <= a_ud_st_b_1) {
+        return R_A_ud_st_b_1 * x + M_A_ud_st_b_1
+    } else if (x > a_ud_st_b_1) {
+        return R_A_ud_st_b_1 * x + M_A_ud_st_b_1 - w_ud_st_b * Math.pow(x - a_ud_st_b_1, 2) / 2
+    }
+}
+module.exports.get_M_r_ud_st_b_1 = get_M_r_ud_st_b_1
+
+get_M_r_ud_lt_b_1 = (x) => {
+    if (x <= a_ud_lt_b_1) {
+        return R_A_ud_lt_b_1 * x + M_A_ud_lt_b_1
+    } else if (x > a_ud_lt_b_1) {
+        return R_A_ud_lt_b_1 * x + M_A_ud_lt_b_1 - w_ud_lt_b * Math.pow(x - a_ud_lt_b_1, 2) / 2
+    }
+}
+module.exports.get_M_r_ud_lt_b_1 = get_M_r_ud_lt_b_1
+
+get_M_r_dim_b_1 = (x) => {
+    if (x <= a_dim_b_1) {
+        return R_A_dim_b_1 * x + M_A_dim_b_1
+    } else if (x > a_dim_b_1) {
+        return R_A_dim_b_1 * x + M_A_dim_b_1 - w_dim_b * Math.pow(x - a_dim_b_1, 2) / 2
+    }
+}
+module.exports.get_M_r_dim_b_1 = get_M_r_dim_b_1
+
+get_M_r_dr_st_b_2 = (x) => {
+    if (x < L_w_dr_st_b_2) {
+        return R_A_dr_st_b_2 * x + M_A_dr_st_b_2 - w_dr_st_b * Math.pow(x - a_dr_st_b_2, 2) / 2
+    } else if (x >= L_w_dr_st_b_2) {
+        return 0
+    }
+}
+module.exports.get_M_r_dr_st_b_2 = get_M_r_dr_st_b_2
+
+get_M_r_dr_lt_b_2 = (x) => {
+    if (x < L_w_dr_lt_b_2) {
+        return R_A_dr_lt_b_2 * x + M_A_dr_lt_b_2 - w_dr_lt_b * Math.pow(x - a_dr_lt_b_2, 2) / 2
+    } else if (x >= L_w_dr_lt_b_2) {
+        return 0
+    }
+}
+module.exports.get_M_r_dr_lt_b_2 = get_M_r_dr_lt_b_2
+
+get_M_r_ud_st_b_2 = (z) => {
+    if (x < L_w_ud_st_b_2) {
+        return R_A_ud_st_b_2 * x + M_A_ud_st_b_2 - w_ud_st_b * Math.pow(x - a_ud_st_b_2, 2) / 2
+    } else if (x >= L_w_ud_st_b_2) {
+        return 0
+    }
+}
+module.exports.get_M_r_ud_st_b_2 = get_M_r_ud_st_b_2
+
+get_M_r_ud_lt_b_2 = (x) => {
+    if (x < L_w_ud_lt_b_2) {
+        return R_A_ud_lt_b_2 * x + M_A_ud_lt_b_2 - w_ud_lt_b * Math.pow(x - a_ud_lt_b_2, 2) / 2
+    } else if (x >= L_w_ud_lt_b_2) {
+        return 0
+    }
+}
+module.exports.get_M_r_ud_lt_b_2 = get_M_r_ud_lt_b_2
+
+get_M_r_dim_b_2 = (x) => {
+    if (x < L_w_dim_b_2) {
+        return R_A_dim_b_2 * x + M_A_dim_b_2 - w_dim_b * Math.pow(x - a_dim_b_2, 2) / 2
+    } else if (x >= L_w_dim_b_2) {
+        return 0
+    }
+}
+module.exports.get_M_r_dim_b_2 = get_M_r_dim_b_2
+
+get_M_g_dr_st_b_1 = (x) => {
+    if (m_total_dr_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 - ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 - ec_vl_width / 1000 - x, 2)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 + ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 + ec_vl_width / 1000 - x, 2)
+        }
+    }
+}
+module.exports.get_M_g_dr_st_b_1 = get_M_g_dr_st_b_1
+
+get_M_g_dr_lt_b_1 = (x) => {
+    if (m_total_dr_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 - ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 - ec_vl_width / 1000 - x, 2)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 + ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 + ec_vl_width / 1000 - x, 2)
+        }
+    }
+}
+module.exports.get_M_g_dr_lt_b_1 = get_M_g_dr_lt_b_1
+
+get_M_g_ud_st_b_1 = (x) => {
+    if (m_total_ud_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 - ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 - ec_vl_width / 1000 - x, 2)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 + ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 + ec_vl_width / 1000 - x, 2)
+        }
+    }
+}
+module.exports.get_M_g_ud_st_b_1 = get_M_g_ud_st_b_1
+
+get_M_g_ud_lt_b_1 = (x) => {
+    if (m_total_ud_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 - ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 - ec_vl_width / 1000 - x, 2)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 + ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 + ec_vl_width / 1000 - x, 2)
+        }
+    }
+}
+module.exports.get_M_g_ud_lt_b_1 = get_M_g_ud_lt_b_1
+
+get_M_g_dim_b_1 = (x) => {
+    if (m_dim_width > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 - ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 - ec_vl_width / 1000 - x, 2)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 + ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 + ec_vl_width / 1000 - x, 2)
+        }
+    }
+}
+module.exports.get_M_g_dim_b_1 = get_M_g_dim_b_1
+
+get_M_g_dr_st_b_2 = (x) => {
+    if (m_total_dr_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 + ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 + ec_vl_width / 1000 - x, 2)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 - ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 - ec_vl_width / 1000 - x, 2)
+        }
+    }
+}
+module.exports.get_M_g_dr_st_b_2 = get_M_g_dr_st_b_2
+
+get_M_g_dr_lt_b_2 = (x) => {
+    if (m_total_dr_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 + ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 + ec_vl_width / 1000 - x, 2)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 - ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 - ec_vl_width / 1000 - x, 2)
+        }
+    }
+}
+module.exports.get_M_g_dr_lt_b_2 = get_M_g_dr_lt_b_2
+
+get_M_g_ud_st_b_2 = (x) => {
+    if (m_total_ud_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 + ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 + ec_vl_width / 1000 - x, 2)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 - ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 - ec_vl_width / 1000 - x, 2)
+        }
+    }
+}
+module.exports.get_M_g_ud_st_b_2 = get_M_g_ud_st_b_2
+
+get_M_g_ud_lt_b_2 = (x) => {
+    if (m_total_ud_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 + ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 + ec_vl_width / 1000 - x, 2)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 - ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 - ec_vl_width / 1000 - x, 2)
+        }
+    }
+}
+module.exports.get_M_g_ud_lt_b_2 = get_M_g_ud_lt_b_2
+
+
+get_M_g_dim_b_2 = (x) => {
+    if (m_dim_width > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 + ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 + ec_vl_width / 1000 - x, 2)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return 1 / 2 * w_sw_b * Math.pow(width / 1000 / 2 - ec_vl_width / 1000 - x, 2)
+        } else if (point_foundation_shape == 'circular') {
+            return 1 / 2 * w_sw_b * Math.pow(radius / 1000 - ec_vl_width / 1000 - x, 2)
+        }
+    }
+}
+module.exports.get_M_g_dim_b_2 = get_M_g_dim_b_2
+
+get_M_c_dr_st_b_1 = (x) => {
+    return get_M_r_dr_st_b_1(x) + get_M_g_dr_st_b_1(x)
+}
+module.exports.get_M_c_dr_st_b_1 = get_M_c_dr_st_b_1
+
+get_M_c_dr_lt_b_1 = (x) => {
+    return get_M_r_dr_lt_b_1(x) + get_M_g_dr_lt_b_1(x)
+}
+module.exports.get_M_c_dr_lt_b_1 = get_M_c_dr_lt_b_1
+
+get_M_c_ud_st_b_1 = (x) => {
+    return get_M_r_ud_st_b_1(x) + get_M_g_ud_st_b_1(x)
+}
+module.exports.get_M_c_ud_st_b_1 = get_M_c_ud_st_b_1
+
+get_M_c_ud_lt_b_1 = (x) => {
+    return get_M_r_ud_lt_b_1(x) + get_M_g_ud_lt_b_1(x)
+}
+module.exports.get_M_c_ud_lt_b_1 = get_M_c_ud_lt_b_1
+
+get_M_c_dim_b_1 = (x) => {
+    return get_M_r_dim_b_1(x) + get_M_g_dim_b_1(x)
+}
+module.exports.get_M_c_dim_b_1 = get_M_c_dim_b_1
+
+get_M_c_dr_st_b_2 = (x) => {
+    return get_M_r_dr_st_b_2(x) + get_M_g_dr_st_b_2(x)
+}
+module.exports.get_M_c_dr_st_b_2 = get_M_c_dr_st_b_2
+
+get_M_c_dr_lt_b_2 = (x) => {
+    return get_M_r_dr_lt_b_2(x) + get_M_g_dr_lt_b_2(x)
+}
+module.exports.get_M_c_dr_lt_b_2 = get_M_c_dr_lt_b_2
+
+get_M_c_ud_st_b_2 = (x) => {
+    return get_M_r_ud_st_b_2(x) + get_M_g_ud_st_b_2(x)
+}
+module.exports.get_M_c_ud_st_b_2 = get_M_c_ud_st_b_2
+
+get_M_c_ud_lt_b_2 = (x) => {
+    return get_M_r_ud_lt_b_2(x) + get_M_g_ud_lt_b_2(x)
+}
+module.exports.get_M_c_ud_lt_b_2 = get_M_c_ud_lt_b_2
+
+get_M_c_dim_b_2 = (x) => {
+    return get_M_r_dim_b_2(x) + get_M_g_dim_b_2(x)
+}
+module.exports.get_M_c_dim_b_2 = get_M_c_dim_b_2
+
+get_fn_M_dr_st_b = (x) => {
+    if (m_total_dr_st_b > 0) {
+        if (x >= 0) {
+            return get_M_c_dr_st_b_1(x)
+        } else {
+            return get_M_c_dr_st_b_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_M_c_dr_st_b_1(-x)
+        } else {
+            return get_M_c_dr_st_b_2(x)
+        }
+    }
+}
+module.exports.get_fn_M_dr_st_b = get_fn_M_dr_st_b
+
+get_fn_M_dr_lt_b = (x) => {
+    if (m_total_dr_lt_b > 0) {
+        if (x >= 0) {
+            return get_M_c_dr_lt_b_1(x)
+        } else {
+            return get_M_c_dr_lt_b_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_M_c_dr_lt_b_1(-x)
+        } else {
+            return get_M_c_dr_lt_b_2(x)
+        }
+    }
+}
+module.exports.get_fn_M_dr_lt_b = get_fn_M_dr_lt_b
+
+get_fn_M_ud_st_b = (x) => {
+    if (m_total_ud_st_b > 0) {
+        if (x >= 0) {
+            return get_M_c_ud_st_b_1(x)
+        } else {
+            return get_M_c_ud_st_b_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_M_c_ud_st_b_1(-x)
+        } else {
+            return get_M_c_ud_st_b_2(x)
+        }
+    }
+}
+module.exports.get_fn_M_ud_st_b = get_fn_M_ud_st_b
+
+get_fn_M_ud_lt_b = (x) => {
+    if (m_total_ud_lt_b > 0) {
+        if (x >= 0) {
+            return get_M_c_ud_lt_b_1(x)
+        } else {
+            return get_M_c_ud_lt_b_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_M_c_ud_lt_b_1(-x)
+        } else {
+            return get_M_c_ud_lt_b_2(x)
+        }
+    }
+}
+module.exports.get_fn_M_ud_lt_b = get_fn_M_ud_lt_b
+
+get_fn_M_dim_b = (x) => {
+    if (m_dim_width > 0) {
+        if (x >= 0) {
+            return get_M_c_dim_b_1(x)
+        } else {
+            return get_M_c_dim_b_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_M_c_dim_b_1(-x)
+        } else {
+            return get_M_c_dim_b_2(x)
+        }
+    }
+}
+module.exports.get_fn_M_dim_b = get_fn_M_dim_b
+
+get_fn_t_bez_b = (x) => {
+    if (column_shape == "rectangular") {
+        return Math.abs(-column_width / 2 / 1000 - x) / (column_width / 1000)
+    } else {
+        return Math.abs(-column_radius / 1000 - x) / (2 * column_radius / 1000)
+    }
+}
+module.exports.get_fn_t_bez_b = get_fn_t_bez_b
+
+get_P_bez_0_dr_st_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_dr_st_b(-column_width / 2 / 1000)
+    } else {
+        return get_fn_M_dr_st_b(-column_radius / 1000)
+    }
+}
+module.exports.get_P_bez_0_dr_st_b = get_P_bez_0_dr_st_b
+
+get_P_bez_3_dr_st_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_dr_st_b(column_width / 2 / 1000)
+    } else {
+        return get_fn_M_dr_st_b(column_radius / 1000)
+    }
+}
+module.exports.get_P_bez_3_dr_st_b = get_P_bez_3_dr_st_b
+
+get_P_bez_1_dr_st_b = () => {
+    return get_fn_M_dr_st_b(-0.001)
+}
+module.exports.get_P_bez_1_dr_st_b = get_P_bez_1_dr_st_b
+
+get_P_bez_2_dr_st_b = () => {
+    return get_fn_M_dr_st_b(0.001)
+}
+module.exports.get_P_bez_2_dr_st_b = get_P_bez_2_dr_st_b
+
+get_P_bez_0_dr_lt_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_dr_lt_b(-column_width / 2 / 1000)
+    } else {
+        return get_fn_M_dr_lt_b(-column_radius / 1000)
+    }
+}
+module.exports.get_P_bez_0_dr_lt_b = get_P_bez_0_dr_lt_b
+
+get_P_bez_3_dr_lt_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_dr_lt_b(column_width / 2 / 1000)
+    } else {
+        return get_fn_M_dr_lt_b(column_radius / 1000)
+    }
+}
+module.exports.get_P_bez_3_dr_lt_b = get_P_bez_3_dr_lt_b
+
+get_P_bez_1_dr_lt_b = () => {
+    return get_fn_M_dr_lt_b(-0.001)
+}
+module.exports.get_P_bez_1_dr_lt_b = get_P_bez_1_dr_lt_b
+
+get_P_bez_2_dr_lt_b = () => {
+    return get_fn_M_dr_lt_b(0.001)
+}
+module.exports.get_P_bez_2_dr_lt_b = get_P_bez_2_dr_lt_b
+
+get_P_bez_0_ud_st_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_ud_st_b(-column_width / 2 / 1000)
+    } else {
+        return get_fn_M_ud_st_b(-column_radius / 1000)
+    }
+}
+module.exports.get_P_bez_0_ud_st_b = get_P_bez_0_ud_st_b
+
+get_P_bez_3_ud_st_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_ud_st_b(column_width / 2 / 1000)
+    } else {
+        return get_fn_M_ud_st_b(column_radius / 1000)
+    }
+}
+module.exports.get_P_bez_3_ud_st_b = get_P_bez_3_ud_st_b
+
+get_P_bez_1_ud_st_b = () => {
+    return get_fn_M_ud_st_b(-0.001)
+}
+module.exports.get_P_bez_1_ud_st_b = get_P_bez_1_ud_st_b
+
+get_P_bez_2_ud_st_b = () => {
+    return get_fn_M_ud_st_b(0.001)
+}
+module.exports.get_P_bez_2_ud_st_b = get_P_bez_2_ud_st_b
+
+
+get_P_bez_0_ud_lt_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_ud_lt_b(-column_width / 2 / 1000)
+    } else {
+        return get_fn_M_ud_lt_b(-column_radius / 1000)
+    }
+}
+module.exports.get_P_bez_0_ud_lt_b = get_P_bez_0_ud_lt_b
+
+get_P_bez_3_ud_lt_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_ud_lt_b(column_width / 2 / 1000)
+    } else {
+        return get_fn_M_ud_lt_b(column_radius / 1000)
+    }
+}
+module.exports.get_P_bez_3_ud_lt_b = get_P_bez_3_ud_lt_b
+
+get_P_bez_1_ud_lt_b = () => {
+    return get_fn_M_ud_lt_b(-0.001)
+}
+module.exports.get_P_bez_1_ud_lt_b = get_P_bez_1_ud_lt_b
+
+get_P_bez_2_ud_lt_b = () => {
+    return get_fn_M_ud_lt_b(0.001)
+}
+module.exports.get_P_bez_2_ud_lt_b = get_P_bez_2_ud_lt_b
+
+get_P_bez_0_dim_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_dim_b(-column_width / 2 / 1000)
+    } else {
+        return get_fn_M_dim_b(-column_radius / 1000)
+    }
+}
+module.exports.get_P_bez_0_dim_b = get_P_bez_0_dim_b
+
+get_P_bez_3_dim_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_M_dim_b(column_width / 2 / 1000)
+    } else {
+        return get_fn_M_dim_b(column_radius / 1000)
+    }
+}
+module.exports.get_P_bez_3_dim_b = get_P_bez_3_dim_b
+
+get_P_bez_1_dim_b = () => {
+    return get_fn_M_dim_b(-0.001)
+}
+module.exports.get_P_bez_1_dim_b = get_P_bez_1_dim_b
+
+get_P_bez_2_dim_b = () => {
+    return get_fn_M_dim_b(0.001)
+}
+module.exports.get_P_bez_2_dim_b = get_P_bez_2_dim_b
+
+get_fn_B_dr_st_b = (x) => {
+    if (Math.abs(P_bez_1_dr_st_b - P_bez_2_dr_st_b) < 0.1) {
+        //Quadratic Bezier
+        return Math.pow(1 - get_fn_t_bez_b(x), 2) * P_bez_0_dr_st_b + 2 * (1 - get_fn_t_bez_b(x)) * get_fn_t_bez_b(x) * P_bez_2_dr_st_b + Math.pow(get_fn_t_bez_b(x), 2) * P_bez_3_dr_st_b
+    } else {
+        //Cubic Bezier
+        return Math.pow(1 - get_fn_t_bez_b(x), 3) * P_bez_0_dr_st_b + 3 * Math.pow(1 - get_fn_t_bez_b(x), 2) * get_fn_t_bez_b(x) * P_bez_1_dr_st_b + 3 * (1 - get_fn_t_bez_b(x)) * Math.pow(get_fn_t_bez_b(x), 2) * P_bez_2_dr_st_b + Math.pow(get_fn_t_bez_b(x), 3) * P_bez_3_dr_st_b
+    }
+}
+module.exports.get_fn_B_dr_st_b = get_fn_B_dr_st_b
+
+get_fn_B_dr_lt_b = (x) => {
+    if (Math.abs(P_bez_1_dr_lt_b - P_bez_2_dr_lt_b) < 0.1) {
+        //Quadratic Bezier
+        return Math.pow(1 - get_fn_t_bez_b(x), 2) * P_bez_0_dr_lt_b + 2 * (1 - get_fn_t_bez_b(x)) * get_fn_t_bez_b(x) * P_bez_2_dr_lt_b + Math.pow(get_fn_t_bez_b(x), 2) * P_bez_3_dr_lt_b
+    } else {
+        //Cubic Bezier
+        return Math.pow(1 - get_fn_t_bez_b(x), 3) * P_bez_0_dr_lt_b + 3 * Math.pow(1 - get_fn_t_bez_b(x), 2) * get_fn_t_bez_b(x) * P_bez_1_dr_lt_b + 3 * (1 - get_fn_t_bez_b(x)) * Math.pow(get_fn_t_bez_b(x), 2) * P_bez_2_dr_lt_b + Math.pow(get_fn_t_bez_b(x), 3) * P_bez_3_dr_lt_b
+    }
+}
+module.exports.get_fn_B_dr_lt_b = get_fn_B_dr_lt_b
+
+get_fn_B_ud_st_b = (x) => {
+    if (Math.abs(P_bez_1_ud_st_b - P_bez_2_ud_st_b) < 0.1) {
+        //Quaudatic Bezier
+        return Math.pow(1 - get_fn_t_bez_b(x), 2) * P_bez_0_ud_st_b + 2 * (1 - get_fn_t_bez_b(x)) * get_fn_t_bez_b(x) * P_bez_2_ud_st_b + Math.pow(get_fn_t_bez_b(x), 2) * P_bez_3_ud_st_b
+    } else {
+        //Cubic Bezier
+        return Math.pow(1 - get_fn_t_bez_b(x), 3) * P_bez_0_ud_st_b + 3 * Math.pow(1 - get_fn_t_bez_b(x), 2) * get_fn_t_bez_b(x) * P_bez_1_ud_st_b + 3 * (1 - get_fn_t_bez_b(x)) * Math.pow(get_fn_t_bez_b(x), 2) * P_bez_2_ud_st_b + Math.pow(get_fn_t_bez_b(x), 3) * P_bez_3_ud_st_b
+    }
+}
+module.exports.get_fn_B_ud_st_b = get_fn_B_ud_st_b
+
+get_fn_B_ud_lt_b = (x) => {
+    if (Math.abs(P_bez_1_ud_lt_b - P_bez_2_ud_lt_b) < 0.1) {
+        //Quaudatic Bezier
+        return Math.pow(1 - get_fn_t_bez_b(x), 2) * P_bez_0_ud_lt_b + 2 * (1 - get_fn_t_bez_b(x)) * get_fn_t_bez_b(x) * P_bez_2_ud_lt_b + Math.pow(get_fn_t_bez_b(x), 2) * P_bez_3_ud_lt_b
+    } else {
+        //Cubic Bezier
+        return Math.pow(1 - get_fn_t_bez_b(x), 3) * P_bez_0_ud_lt_b + 3 * Math.pow(1 - get_fn_t_bez_b(x), 2) * get_fn_t_bez_b(x) * P_bez_1_ud_lt_b + 3 * (1 - get_fn_t_bez_b(x)) * Math.pow(get_fn_t_bez_b(x), 2) * P_bez_2_ud_lt_b + Math.pow(get_fn_t_bez_b(x), 3) * P_bez_3_ud_lt_b
+    }
+}
+module.exports.get_fn_B_ud_lt_b = get_fn_B_ud_lt_b
+
+get_fn_B_dim_b = (x) => {
+    if (Math.abs(P_bez_1_dim_b - P_bez_2_dim_b) < 0.1) {
+        //Quaudatic Bezier
+        return Math.pow(1 - get_fn_t_bez_b(x), 2) * P_bez_0_dim_b + 2 * (1 - get_fn_t_bez_b(x)) * get_fn_t_bez_b(x) * P_bez_2_dim_b + Math.pow(get_fn_t_bez_b(x), 2) * P_bez_3_dim_b
+    } else {
+        //Cubic Bezier
+        return Math.pow(1 - get_fn_t_bez_b(x), 3) * P_bez_0_dim_b + 3 * Math.pow(1 - get_fn_t_bez_b(x), 2) * get_fn_t_bez_b(x) * P_bez_1_dim_b + 3 * (1 - get_fn_t_bez_b(x)) * Math.pow(get_fn_t_bez_b(x), 2) * P_bez_2_dim_b + Math.pow(get_fn_t_bez_b(x), 3) * P_bez_3_dim_b
+    }
+}
+module.exports.get_fn_B_dim_b = get_fn_B_dim_b
+
+get_fn_M_dr_st_b_corr = (x) => {
+    if (m_total_dr_st_b > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_M_c_dr_st_b_1(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_M_c_dr_st_b_2(-x)
+            } else {
+                return get_fn_B_dr_st_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_M_c_dr_st_b_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_M_c_dr_st_b_2(-x)
+            } else {
+                return get_fn_B_dr_st_b(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x < -column_width / 2 / 1000) {
+                return get_M_c_dr_st_b_1(-x)
+            } else if (x >= column_width / 2 / 1000) {
+                return get_M_c_dr_st_b_2(x)
+            } else {
+                return get_fn_B_dr_st_b(x)
+            }
+        } else {
+            if (x < -column_radius / 1000) {
+                return get_M_c_dr_st_b_1(-x)
+            } else if (x >= column_radius / 1000) {
+                return get_M_c_dr_st_b_2(x)
+            } else {
+                return get_fn_B_dr_st_b(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_M_dr_st_b_corr = get_fn_M_dr_st_b_corr
+
+get_fn_M_dr_lt_b_corr = (x) => {
+    if (m_total_dr_st_b > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_M_c_dr_lt_b_1(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_M_c_dr_lt_b_2(-x)
+            } else {
+                return get_fn_B_dr_lt_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_M_c_dr_lt_b_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_M_c_dr_lt_b_2(-x)
+            } else {
+                return get_fn_B_dr_lt_b(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x < -column_width / 2 / 1000) {
+                return get_M_c_dr_lt_b_1(-x)
+            } else if (x >= column_width / 2 / 1000) {
+                return get_M_c_dr_lt_b_2(x)
+            } else {
+                return get_fn_B_dr_lt_b(x)
+            }
+        } else {
+            if (x < -column_radius / 1000) {
+                return get_M_c_dr_lt_b_1(-x)
+            } else if (x >= column_radius / 1000) {
+                return get_M_c_dr_lt_b_2(x)
+            } else {
+                return get_fn_B_dr_lt_b(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_M_dr_lt_b_corr = get_fn_M_dr_lt_b_corr
+
+get_fn_M_ud_st_b_corr = (x) => {
+    if (m_total_ud_st_b > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_M_c_ud_st_b_1(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_M_c_ud_st_b_2(-x)
+            } else {
+                return get_fn_B_ud_st_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_M_c_ud_st_b_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_M_c_ud_st_b_2(-x)
+            } else {
+                return get_fn_B_ud_st_b(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x < -column_width / 2 / 1000) {
+                return get_M_c_ud_st_b_1(-x)
+            } else if (x >= column_width / 2 / 1000) {
+                return get_M_c_ud_st_b_2(x)
+            } else {
+                return get_fn_B_ud_st_b(x)
+            }
+        } else {
+            if (x < -column_radius / 1000) {
+                return get_M_c_ud_st_b_1(-x)
+            } else if (x >= column_radius / 1000) {
+                return get_M_c_ud_st_b_2(x)
+            } else {
+                return get_fn_B_ud_st_b(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_M_ud_st_b_corr = get_fn_M_ud_st_b_corr
+
+get_fn_M_ud_lt_b_corr = (x) => {
+    if (m_total_ud_lt_b > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_M_c_ud_lt_b_1(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_M_c_ud_lt_b_2(-x)
+            } else {
+                return get_fn_B_ud_lt_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_M_c_ud_lt_b_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_M_c_ud_lt_b_2(-x)
+            } else {
+                return get_fn_B_ud_lt_b(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x < -column_width / 2 / 1000) {
+                return get_M_c_ud_lt_b_1(-x)
+            } else if (x >= column_width / 2 / 1000) {
+                return get_M_c_ud_lt_b_2(x)
+            } else {
+                return get_fn_B_ud_lt_b(x)
+            }
+        } else {
+            if (x < -column_radius / 1000) {
+                return get_M_c_ud_lt_b_1(-x)
+            } else if (x >= column_radius / 1000) {
+                return get_M_c_ud_lt_b_2(x)
+            } else {
+                return get_fn_B_ud_lt_b(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_M_ud_lt_b_corr = get_fn_M_ud_lt_b_corr
+
+get_fn_M_dim_b_corr = (x) => {
+    if (m_dim_width > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_M_c_dim_b_1(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_M_c_dim_b_2(-x)
+            } else {
+                return get_fn_B_dim_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_M_c_dim_b_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_M_c_dim_b_2(-x)
+            } else {
+                return get_fn_B_dim_b(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x < -column_width / 2 / 1000) {
+                return get_M_c_dim_b_1(-x)
+            } else if (x >= column_width / 2 / 1000) {
+                return get_M_c_dim_b_2(x)
+            } else {
+                return get_fn_B_dim_b(x)
+            }
+        } else {
+            if (x < -column_radius / 1000) {
+                return get_M_c_dim_b_1(-x)
+            } else if (x >= column_radius / 1000) {
+                return get_M_c_dim_b_2(x)
+            } else {
+                return get_fn_B_dim_b(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_M_dim_b_corr = get_fn_M_dim_b_corr
+
+get_V_r_dr_st_b_1 = (x) => {
+    if (x < a_dr_st_b_1) {
+        return R_A_dr_st_b_1
+    } else {
+        return R_A_dr_st_b_1 - w_dr_st_b * (x - a_dr_st_b_1)
+    }
+}
+module.exports.get_V_r_dr_st_b_1 = get_V_r_dr_st_b_1
+
+get_V_r_dr_lt_b_1 = (x) => {
+    if (x < a_dr_lt_b_1) {
+        return R_A_dr_lt_b_1
+    } else {
+        return R_A_dr_lt_b_1 - w_dr_lt_b * (x - a_dr_lt_b_1)
+    }
+}
+module.exports.get_V_r_dr_lt_b_1 = get_V_r_dr_lt_b_1
+
+get_V_r_ud_st_b_1 = (x) => {
+    if (x < a_ud_st_b_1) {
+        return R_A_ud_st_b_1
+    } else {
+        return R_A_ud_st_b_1 - w_ud_st_b * (x - a_ud_st_b_1)
+    }
+}
+module.exports.get_V_r_ud_st_b_1 = get_V_r_ud_st_b_1
+
+get_V_r_ud_lt_b_1 = (x) => {
+    if (x < a_ud_lt_b_1) {
+        return R_A_ud_lt_b_1
+    } else {
+        return R_A_ud_lt_b_1 - w_ud_lt_b * (x - a_ud_lt_b_1)
+    }
+}
+module.exports.get_V_r_ud_lt_b_1 = get_V_r_ud_lt_b_1
+
+get_V_r_dim_b_1 = (x) => {
+    if (x < a_dim_b_1) {
+        return R_A_dim_b_1
+    } else {
+        return R_A_dim_b_1 - w_dim_b * (x - a_dim_b_1)
+    }
+}
+module.exports.get_V_r_dim_b_1 = get_V_r_dim_b_1
+
+get_V_r_dr_st_b_2 = (x) => {
+    if (x < L_w_dr_st_b_2) {
+        return -(R_A_dr_st_b_2 - w_dr_st_b * (x - a_dr_st_b_2))
+    } else {
+        return 0
+    }
+}
+module.exports.get_V_r_dr_st_b_2 = get_V_r_dr_st_b_2
+
+get_V_r_dr_lt_b_2 = (x) => {
+    if (x < L_w_dr_lt_b_2) {
+        return -(R_A_dr_lt_b_2 - w_dr_lt_b * (x - a_dr_lt_b_2))
+    } else {
+        return 0
+    }
+}
+module.exports.get_V_r_dr_lt_b_2 = get_V_r_dr_lt_b_2
+
+get_V_r_ud_st_b_2 = (x) => {
+    if (x < L_w_ud_st_b_2) {
+        return -(R_A_ud_st_b_2 - w_ud_st_b * (x - a_ud_st_b_2))
+    } else {
+        return 0
+    }
+}
+module.exports.get_V_r_ud_st_b_2 = get_V_r_ud_st_b_2
+
+get_V_r_ud_lt_b_2 = (x) => {
+    if (x < L_w_ud_lt_b_2) {
+        return -(R_A_ud_lt_b_2 - w_ud_lt_b * (x - a_ud_lt_b_2))
+    } else {
+        return 0
+    }
+}
+module.exports.get_V_r_ud_lt_b_2 = get_V_r_ud_lt_b_2
+
+get_V_r_dim_b_2 = (x) => {
+    if (x < L_w_dim_b_2) {
+        return -(R_A_dim_b_2 - w_dim_b * (x - a_dim_b_2))
+    } else {
+        return 0
+    }
+}
+module.exports.get_V_r_dim_b_2 = get_V_r_dim_b_2
+
+get_V_g_dr_st_b_1 = (x) => {
+    if (m_total_dr_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_b * (width / 1000 / 2 - ec_vl_width / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_b * (radius / 1000 - ec_vl_width / 1000 - x))
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_b * (width / 1000 / 2 + ec_vl_width / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_b * (radius / 1000 + ec_vl_width / 1000 - x))
+        }
+    }
+}
+module.exports.get_V_g_dr_st_b_1 = get_V_g_dr_st_b_1
+
+get_V_g_dr_lt_b_1 = (x) => {
+    if (m_total_dr_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_b * (width / 1000 / 2 - ec_vl_width / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_b * (radius / 1000 - ec_vl_width / 1000 - x))
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_b * (width / 1000 / 2 + ec_vl_width / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_b * (radius / 1000 + ec_vl_width / 1000 - x))
+        }
+    }
+}
+module.exports.get_V_g_dr_lt_b_1 = get_V_g_dr_lt_b_1
+
+get_V_g_ud_st_b_1 = (x) => {
+    if (m_total_ud_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_b * (width / 1000 / 2 - ec_vl_width / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_b * (radius / 1000 - ec_vl_width / 1000 - x))
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_b * (width / 1000 / 2 + ec_vl_width / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_b * (radius / 1000 + ec_vl_width / 1000 - x))
+        }
+    }
+}
+module.exports.get_V_g_ud_st_b_1 = get_V_g_ud_st_b_1
+
+get_V_g_ud_lt_b_1 = (x) => {
+    if (m_total_ud_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_b * (width / 1000 / 2 - ec_vl_width / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_b * (radius / 1000 - ec_vl_width / 1000 - x))
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_b * (width / 1000 / 2 + ec_vl_width / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_b * (radius / 1000 + ec_vl_width / 1000 - x))
+        }
+    }
+}
+module.exports.get_V_g_ud_lt_b_1 = get_V_g_ud_lt_b_1
+
+get_V_g_dim_b_1 = (x) => {
+    if (m_dim_width > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_b * (width / 1000 / 2 - ec_vl_width / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_b * (radius / 1000 - ec_vl_width / 1000 - x))
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return -(w_sw_b * (width / 1000 / 2 + ec_vl_width / 1000 - x))
+        } else if (point_foundation_shape == 'circular') {
+            return -(w_sw_b * (radius / 1000 + ec_vl_width / 1000 - x))
+        }
+    }
+}
+module.exports.get_V_g_dim_b_1 = get_V_g_dim_b_1
+
+get_V_g_dr_st_b_2 = (x) => {
+    if (m_total_dr_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_b * (width / 1000 / 2 + ec_vl_width / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_b * (radius / 1000 + ec_vl_width / 1000 - x)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_b * (width / 1000 / 2 - ec_vl_width / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_b * (radius / 1000 - ec_vl_width / 1000 - x)
+        }
+    }
+}
+module.exports.get_V_g_dr_st_b_2 = get_V_g_dr_st_b_2
+
+get_V_g_dr_lt_b_2 = (x) => {
+    if (m_total_dr_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_b * (width / 1000 / 2 + ec_vl_width / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_b * (radius / 1000 + ec_vl_width / 1000 - x)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_b * (width / 1000 / 2 - ec_vl_width / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_b * (radius / 1000 - ec_vl_width / 1000 - x)
+        }
+    }
+}
+module.exports.get_V_g_dr_lt_b_2 = get_V_g_dr_lt_b_2
+
+get_V_g_ud_st_b_2 = (x) => {
+    if (m_total_ud_st_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_b * (width / 1000 / 2 + ec_vl_width / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_b * (radius / 1000 + ec_vl_width / 1000 - x)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_b * (width / 1000 / 2 - ec_vl_width / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_b * (radius / 1000 - ec_vl_width / 1000 - x)
+        }
+    }
+}
+module.exports.get_V_g_ud_st_b_2 = get_V_g_ud_st_b_2
+
+get_V_g_ud_lt_b_2 = (x) => {
+    if (m_total_ud_lt_b > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_b * (width / 1000 / 2 + ec_vl_width / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_b * (radius / 1000 + ec_vl_width / 1000 - x)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_b * (width / 1000 / 2 - ec_vl_width / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_b * (radius / 1000 - ec_vl_width / 1000 - x)
+        }
+    }
+}
+module.exports.get_V_g_ud_lt_b_2 = get_V_g_ud_lt_b_2
+
+get_V_g_dim_b_2 = (x) => {
+    if (m_dim_width > 0) {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_b * (width / 1000 / 2 + ec_vl_width / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_b * (radius / 1000 + ec_vl_width / 1000 - x)
+        }
+    } else {
+        if (point_foundation_shape == 'rectangular') {
+            return w_sw_b * (width / 1000 / 2 - ec_vl_width / 1000 - x)
+        } else if (point_foundation_shape == 'circular') {
+            return w_sw_b * (radius / 1000 - ec_vl_width / 1000 - x)
+        }
+    }
+}
+module.exports.get_V_g_dim_b_2 = get_V_g_dim_b_2
+
+get_V_c_dr_st_b_1 = (x) => {
+    return get_V_r_dr_st_b_1(x) + get_V_g_dr_st_b_1(x)
+}
+module.exports.get_V_c_dr_st_b_1 = get_V_c_dr_st_b_1
+
+get_V_c_dr_lt_b_1 = (x) => {
+    return get_V_r_dr_lt_b_1(x) + get_V_g_dr_lt_b_1(x)
+}
+module.exports.get_V_c_dr_lt_b_1 = get_V_c_dr_lt_b_1
+
+get_V_c_ud_st_b_1 = (x) => {
+    return get_V_r_ud_st_b_1(x) + get_V_g_ud_st_b_1(x)
+}
+module.exports.get_V_c_ud_st_b_1 = get_V_c_ud_st_b_1
+
+get_V_c_ud_lt_b_1 = (x) => {
+    return get_V_r_ud_lt_b_1(x) + get_V_g_ud_lt_b_1(x)
+}
+module.exports.get_V_c_ud_lt_b_1 = get_V_c_ud_lt_b_1
+
+get_V_c_dim_b_1 = (x) => {
+    return get_V_r_dim_b_1(x) + get_V_g_dim_b_1(x)
+}
+module.exports.get_V_c_dim_b_1 = get_V_c_dim_b_1
+
+
+get_V_c_dr_st_b_2 = (x) => {
+    return get_V_r_dr_st_b_2(x) + get_V_g_dr_st_b_2(x)
+}
+module.exports.get_V_c_dr_st_b_2 = get_V_c_dr_st_b_2
+
+get_V_c_dr_lt_b_2 = (x) => {
+    return get_V_r_dr_lt_b_2(x) + get_V_g_dr_lt_b_2(x)
+}
+module.exports.get_V_c_dr_lt_b_2 = get_V_c_dr_lt_b_2
+
+get_V_c_ud_st_b_2 = (x) => {
+    return get_V_r_ud_st_b_2(x) + get_V_g_ud_st_b_2(x)
+}
+module.exports.get_V_c_ud_st_b_2 = get_V_c_ud_st_b_2
+
+get_V_c_ud_lt_b_2 = (x) => {
+    return get_V_r_ud_lt_b_2(x) + get_V_g_ud_lt_b_2(x)
+}
+module.exports.get_V_c_ud_lt_b_2 = get_V_c_ud_lt_b_2
+
+get_V_c_dim_b_2 = (x) => {
+    return get_V_r_dim_b_2(x) + get_V_g_dim_b_2(x)
+}
+module.exports.get_V_c_dim_b_2 = get_V_c_dim_b_2
+
+get_fn_V_dr_st_b = (x) => {
+    if (m_total_dr_st_b > 0) {
+        if (x >= 0) {
+            return get_V_c_dr_st_b_1(x)
+        } else {
+            return get_V_c_dr_st_b_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_V_c_dr_st_b_1(-x)
+        } else {
+            return get_V_c_dr_st_b_2(x)
+        }
+    }
+}
+module.exports.get_fn_V_dr_st_b = get_fn_V_dr_st_b
+
+get_fn_V_dr_lt_b = (x) => {
+    if (m_total_dr_lt_b > 0) {
+        if (x >= 0) {
+            return get_V_c_dr_lt_b_1(x)
+        } else {
+            return get_V_c_dr_lt_b_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_V_c_dr_lt_b_1(-x)
+        } else {
+            return get_V_c_dr_lt_b_2(x)
+        }
+    }
+}
+module.exports.get_fn_V_dr_lt_b = get_fn_V_dr_lt_b
+
+get_fn_V_ud_st_b = (x) => {
+    if (m_total_ud_st_b > 0) {
+        if (x >= 0) {
+            return get_V_c_ud_st_b_1(x)
+        } else {
+            return get_V_c_ud_st_b_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_V_c_ud_st_b_1(-x)
+        } else {
+            return get_V_c_ud_st_b_2(x)
+        }
+    }
+}
+module.exports.get_fn_V_ud_st_b = get_fn_V_ud_st_b
+
+get_fn_V_ud_lt_b = (x) => {
+    if (m_total_ud_lt_b > 0) {
+        if (x >= 0) {
+            return get_V_c_ud_lt_b_1(x)
+        } else {
+            return get_V_c_ud_lt_b_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_V_c_ud_lt_b_1(-x)
+        } else {
+            return get_V_c_ud_lt_b_2(x)
+        }
+    }
+}
+module.exports.get_fn_V_ud_lt_b = get_fn_V_ud_lt_b
+
+get_fn_V_dim_b = (x) => {
+    if (m_dim_width > 0) {
+        if (x >= 0) {
+            return get_V_c_dim_b_1(x)
+        } else {
+            return get_V_c_dim_b_2(-x)
+        }
+    } else {
+        if (x < 0) {
+            return get_V_c_dim_b_1(-x)
+        } else {
+            return get_V_c_dim_b_2(x)
+        }
+    }
+}
+module.exports.get_fn_V_dim_b = get_fn_V_dim_b
+
+
+get_a_V_dr_st_b = () => {
+    if (column_shape == "rectangular") {
+        return (get_fn_V_dr_st_b(column_width / 2 / 1000) - get_fn_V_dr_st_b(-column_width / 2 / 1000)) / (column_width / 1000)
+    } else {
+        return (get_fn_V_dr_st_b(column_radius / 1000) - get_fn_V_dr_st_b(-column_radius / 1000)) / (2 * column_radius / 1000)
+    }
+}
+module.exports.get_a_V_dr_st_b = get_a_V_dr_st_b
+
+get_b_V_dr_st_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_V_dr_st_b(column_width / 2 / 1000) - a_V_dr_st_b * (column_width / 2 / 1000)
+    } else {
+        return get_fn_V_dr_st_b(column_radius / 1000) - a_V_dr_st_b * (column_radius / 1000)
+    }
+}
+module.exports.get_b_V_dr_st_b = get_b_V_dr_st_b
+
+get_a_V_dr_lt_b = () => {
+    if (column_shape == "rectangular") {
+        return (get_fn_V_dr_lt_b(column_width / 2 / 1000) - get_fn_V_dr_lt_b(-column_width / 2 / 1000)) / (column_width / 1000)
+    } else {
+        return (get_fn_V_dr_lt_b(column_radius / 1000) - get_fn_V_dr_lt_b(-column_radius / 1000)) / (2 * column_radius / 1000)
+    }
+}
+module.exports.get_a_V_dr_lt_b = get_a_V_dr_lt_b
+
+get_b_V_dr_lt_b = () => {
+    if (column_shape == "rectangular") {
+        return get_fn_V_dr_lt_b(column_width / 2 / 1000) - a_V_dr_lt_b * (column_width / 2 / 1000)
+    } else {
+        return get_fn_V_dr_lt_b(column_radius / 1000) - a_V_dr_lt_b * (column_radius / 1000)
+    }
+}
+module.exports.get_b_V_dr_lt_b = get_b_V_dr_lt_b
+
+get_a_V_ud_st_b = () => {
+if (column_shape == "rectangular") {
+        return(get_fn_V_ud_st_b(column_width / 2 / 1000) - get_fn_V_ud_st_b(-column_width / 2 / 1000)) / (column_width / 1000)
+    } else {
+        return(get_fn_V_ud_st_b(column_radius / 1000) - get_fn_V_ud_st_b(-column_radius / 1000)) / (2 * column_radius / 1000)
+    }
+}
+module.exports.get_a_V_ud_st_b = get_a_V_ud_st_b
+
+get_b_V_ud_st_b = () => {
+if (column_shape == "rectangular") {
+        return get_fn_V_ud_st_b(column_width / 2 / 1000) - a_V_ud_st_b * (column_width / 2 / 1000)
+    } else {
+        return get_fn_V_ud_st_b(column_radius / 1000) - a_V_ud_st_b * (column_radius / 1000)
+    }
+}
+module.exports.get_b_V_ud_st_b = get_b_V_ud_st_b
+
+get_a_V_ud_lt_b = () => {
+if (column_shape == "rectangular") {
+        return (get_fn_V_ud_lt_b(column_width / 2 / 1000) - get_fn_V_ud_lt_b(-column_width / 2 / 1000)) / (column_width / 1000)
+    } else {
+        return (get_fn_V_ud_lt_b(column_radius / 1000) - get_fn_V_ud_lt_b(-column_radius / 1000)) / (2 * column_radius / 1000)
+    }
+}
+module.exports.get_a_V_ud_lt_b = get_a_V_ud_lt_b
+
+get_b_V_ud_lt_b = () => {
+if (column_shape == "rectangular") {
+        return get_fn_V_ud_lt_b(column_width / 2 / 1000) - a_V_ud_lt_b * (column_width / 2 / 1000)
+    } else {
+        return get_fn_V_ud_lt_b(column_radius / 1000) - a_V_ud_lt_b * (column_radius / 1000)
+    }
+}
+module.exports.get_b_V_ud_lt_b = get_b_V_ud_lt_b
+
+get_a_V_dim_b = () => {
+if (column_shape == "rectangular") {
+        return (get_fn_V_dim_b(column_width / 2 / 1000) - get_fn_V_dim_b(-column_width / 2 / 1000)) / (column_width / 1000)
+    } else {
+        return (get_fn_V_dim_b(column_radius / 1000) - get_fn_V_dim_b(-column_radius / 1000)) / (2 * column_radius / 1000)
+    }
+}
+module.exports.get_a_V_dim_b = get_a_V_dim_b
+
+get_b_V_dim_b = () => {
+if (column_shape == "rectangular") {
+        return get_fn_V_dim_b(column_width / 2 / 1000) - a_V_dim_b * (column_width / 2 / 1000)
+    } else {
+        return get_fn_V_dim_b(column_radius / 1000) - a_V_dim_b * (column_radius / 1000)
+    }
+}
+module.exports.get_b_V_dim_b = get_b_V_dim_b
+
+get_y_V_dr_st_b = (x) => {
+    return a_V_dr_st_b * x + b_V_dr_st_b
+}
+module.exports.get_y_V_dr_st_b = get_y_V_dr_st_b
+
+get_y_V_dr_lt_b = (x) => {
+    return a_V_dr_lt_b * x + b_V_dr_lt_b
+}
+module.exports.get_y_V_dr_lt_b = get_y_V_dr_lt_b
+
+get_y_V_ud_st_b = (x) => {
+    return a_V_ud_st_b * x + b_V_ud_st_b
+}
+module.exports.get_y_V_ud_st_b = get_y_V_ud_st_b
+
+get_y_V_ud_lt_b = (x) => {
+    return a_V_ud_lt_b * x + b_V_ud_lt_b
+}
+module.exports.get_y_V_ud_lt_b = get_y_V_ud_lt_b
+
+get_y_V_dim_b = (x) => {
+    return a_V_dim_b * x + b_V_dim_b
+}
+module.exports.get_y_V_dim_b = get_y_V_dim_b
+
+get_fn_V_dr_st_b_corr = (x) => {
+    if (m_total_dr_st_b > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_V_c_dr_st_b_1(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_V_c_dr_st_b_2(-x)
+            } else {
+                return get_y_V_dr_st_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dr_st_b_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dr_st_b_2(-x)
+            } else {
+                return get_y_V_dr_st_b(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_V_c_dr_st_b_2(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_V_c_dr_st_b_1(-x)
+            } else {
+                return get_y_V_dr_st_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dr_st_b_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dr_st_b_1(-x)
+            } else {
+                return get_y_V_dr_st_b(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_dr_st_b_corr = get_fn_V_dr_st_b_corr
+
+get_fn_V_dr_lt_b_corr = (x) => {
+    if (m_total_dr_lt_b > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_V_c_dr_lt_b_1(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_V_c_dr_lt_b_2(-x)
+            } else {
+                return get_y_V_dr_lt_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dr_lt_b_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dr_lt_b_2(-x)
+            } else {
+                return get_y_V_dr_lt_b(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_V_c_dr_lt_b_2(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_V_c_dr_lt_b_1(-x)
+            } else {
+                return get_y_V_dr_lt_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dr_lt_b_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dr_lt_b_1(-x)
+            } else {
+                return get_y_V_dr_lt_b(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_dr_lt_b_corr = get_fn_V_dr_lt_b_corr
+
+get_fn_V_ud_st_b_corr = (x) => {
+    if (m_total_ud_st_b > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_V_c_ud_st_b_1(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_V_c_ud_st_b_2(-x)
+            } else {
+                return get_y_V_ud_st_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_ud_st_b_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_ud_st_b_2(-x)
+            } else {
+                return get_y_V_ud_st_b(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_V_c_ud_st_b_2(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_V_c_ud_st_b_1(-x)
+            } else {
+                return get_y_V_ud_st_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_ud_st_b_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_ud_st_b_1(-x)
+            } else {
+                return get_y_V_ud_st_b(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_ud_st_b_corr = get_fn_V_ud_st_b_corr
+
+get_fn_V_ud_lt_b_corr = (x) => {
+    if (m_total_ud_lt_b > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_V_c_ud_lt_b_1(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_V_c_ud_lt_b_2(-x)
+            } else {
+                return get_y_V_ud_lt_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_ud_lt_b_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_ud_lt_b_2(-x)
+            } else {
+                return get_y_V_ud_lt_b(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_V_c_ud_lt_b_2(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_V_c_ud_lt_b_1(-x)
+            } else {
+                return get_y_V_ud_lt_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_ud_lt_b_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_ud_lt_b_1(-x)
+            } else {
+                return get_y_V_ud_lt_b(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_ud_lt_b_corr = get_fn_V_ud_lt_b_corr
+
+get_fn_V_dim_b_corr = (x) => {
+    if (m_dim_width > 0) {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_V_c_dim_b_1(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_V_c_dim_b_2(-x)
+            } else {
+                return get_y_V_dim_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dim_b_1(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dim_b_2(-x)
+            } else {
+                return get_y_V_dim_b(x)
+            }
+        }
+    } else {
+        if (column_shape == "rectangular") {
+            if (x >= column_width / 2 / 1000) {
+                return get_V_c_dim_b_2(x)
+            } else if (x < -column_width / 2 / 1000) {
+                return get_V_c_dim_b_1(-x)
+            } else {
+                return get_y_V_dim_b(x)
+            }
+        } else {
+            if (x >= column_radius / 1000) {
+                return get_V_c_dim_b_2(x)
+            } else if (x < -column_radius / 1000) {
+                return get_V_c_dim_b_1(-x)
+            } else {
+                return get_y_V_dim_b(x)
+            }
+        }
+    }
+}
+module.exports.get_fn_V_dim_b_corr = get_fn_V_dim_b_corr
 
 
 
