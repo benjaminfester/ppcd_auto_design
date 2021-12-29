@@ -5255,7 +5255,6 @@ function calc() {
        fn_V_ud_lt_b_arr = [];
    
    
-   
        // Length Data Points
    
        for (var x = x_length_value_start / 1000; x <= x_length_value_end / 1000; x = x + x_length_value_interval / 1000) {

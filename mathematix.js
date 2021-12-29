@@ -38,7 +38,7 @@ module.exports.get_ud_st_cohesion_d = () =>  ud_st_cohesion_k / ud_cohesion_pc
 
 module.exports.get_ud_lt_cohesion_d = () => ud_lt_cohesion_k / ud_cohesion_pc
 
-module.exports.get_a_d_dr_st = (fabrication_method, dr_st_cohesion_d) => {
+module.exports.get_a_d_dr_st = () => {
     if (fabrication_method == 'in_situ') {
         return a_d_dr_st = dr_st_cohesion_d
     } else if (fabrication_method == 'prefab') {
@@ -46,7 +46,7 @@ module.exports.get_a_d_dr_st = (fabrication_method, dr_st_cohesion_d) => {
     }
 }
 
-module.exports.get_a_d_dr_lt = (fabrication_method, dr_lt_cohesion_d) => {
+module.exports.get_a_d_dr_lt = () => {
     if (fabrication_method == 'in_situ') {
         return a_d_dr_lt = dr_lt_cohesion_d
     } else if (fabrication_method == 'prefab') {
@@ -1697,19 +1697,19 @@ module.exports.get_s_q_ud_lt = () => {
     return 1 + 0.2 * Math.min(ef_ud_lt_l , ef_ud_lt_b) / Math.max(ef_ud_lt_l , ef_ud_lt_b)
 }
 
-module.exports.get_s_c_dr_st = (s_q_dr_st) => {
+module.exports.get_s_c_dr_st = () => {
     return s_q_dr_st
 }
 
-module.exports.get_s_c_dr_lt = (s_q_dr_lt) => {
+module.exports.get_s_c_dr_lt = () => {
     return s_q_dr_lt
 }
 
-module.exports.get_s_c_ud_st = (s_q_ud_st) => {
+module.exports.get_s_c_ud_st = () => {
     return s_q_ud_st
 }
 
-module.exports.get_s_c_ud_lt = (s_q_ud_lt) => {
+module.exports.get_s_c_ud_lt = () => {
     return s_q_ud_lt
 }
 
@@ -2066,6 +2066,50 @@ module.exports.get_sigma_r4 = () => {
     return 0.37 * f_R_4;
 }
 
+module.exports.get_v = () => {
+    return 0.6 * (1 - f_ck / 250)
+}
+
+module.exports.get_u_0 = () => {
+    if (column_shape == 'rectangular') {
+        return 2 * (column_length + column_width)
+    } else if (column_shape == 'circular') {
+        return 2 * Math.PI * column_radius
+    }
+}
+
+module.exports.get_v_max = () => {
+    return 0.5 * v * f_cd
+}
+
+module.exports.get_P_u_0 = () => {
+    return v_max * 1000 * u_0 / 1000 * ef_height / 1000
+}
+
+module.exports.get_u_1 = () => {
+    if (column_shape == 'rectangular') {
+        if (rho == 0) {
+            return 2 * (column_length + column_width + 2 * Math.PI * ef_height)
+        } else {
+            return 2 * (column_length + column_width + 2 * Math.PI * ef_height)
+        }
+    } else if (column_shape == 'circular') {
+        if (rho == 0) {
+            return 2 * Math.PI * (column_radius + 2 * ef_height)
+        } else {
+            return 2 * Math.PI * (column_radius + 2 * ef_height)
+        }
+    }
+}
+
+module.exports.get_P_u_1 = () => {
+    if (include_fiber != "on") {
+        return v_r * 1000 * u_1 / 1000 * ef_height / 1000
+    } else {
+        return (v_r + v_f) * 1000 * u_1 / 1000 * ef_height / 1000
+    }
+}
+
 module.exports.get_gamma_m = () => {
     return 1.5
 }
@@ -2098,6 +2142,32 @@ module.exports.get_rho = () => {
         return A_s / (1000 * 1000) / A_c * 100;
     }
 }
+module.exports.get_rho_total = () => {
+    return Math.sqrt(rho * rho)
+}
+
+module.exports.get_k = () => {
+    if (rho_total == 0) {
+        return Math.min(1 + Math.sqrt(200 / (ef_height)), 2);
+    } else {
+        return Math.min(1 + Math.sqrt(200 / ef_height), 2);
+    }
+}
+
+get_v_c = () => {
+    return 0.035 * Math.pow(k, 1.5) * Math.pow(f_ck, 0.5)
+}
+module.exports.get_v_c = get_v_c
+
+get_v_r = () => {
+    return Math.max(0.18 * k / gamma_c * Math.pow(100 * rho_total / 100 * f_ck, 1 / 3),v_c)
+}
+module.exports.get_v_r = get_v_r
+
+get_v_f = () => {
+    return 0.015 * (f_R_1 + f_R_2 + f_R_3 + f_R_4)
+}
+module.exports.get_v_f = get_v_f
 
 module.exports.get_h_ux = () => {
     var temp_h_ux;
@@ -3325,7 +3395,7 @@ get_fn_M_dim_l = (x) => {
 }
 module.exports.get_fn_M_dim_l = get_fn_M_dim_l
 
-get_fn_t_bez_l = () => {
+get_fn_t_bez_l = (x) => {
     if (column_shape == "rectangular") {
         return Math.abs(-column_length / 2 / 1000 - x) / (column_length / 1000)
     } else {
@@ -3456,57 +3526,57 @@ module.exports.get_P_bez_2_dim_l = () => {
     return get_fn_M_dim_l(0.001)
 }
 
-get_fn_B_dr_st_l = () => {
+get_fn_B_dr_st_l = (x) => {
     if (Math.abs(P_bez_1_dr_st_l - P_bez_2_dr_st_l) < 0.1) {
         //Quadratic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(), 2) * P_bez_0_dr_st_l + 2 * (1 - get_fn_t_bez_l()) * get_fn_t_bez_l() * P_bez_2_dr_st_l + Math.pow(get_fn_t_bez_l(), 2) * P_bez_3_dr_st_l
+        return Math.pow(1 - get_fn_t_bez_l(x), 2) * P_bez_0_dr_st_l + 2 * (1 - get_fn_t_bez_l(x)) * get_fn_t_bez_l(x) * P_bez_2_dr_st_l + Math.pow(get_fn_t_bez_l(x), 2) * P_bez_3_dr_st_l
     } else {
         //Cubic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(), 3) * P_bez_0_dr_st_l + 3 * Math.pow(1 - get_fn_t_bez_l(), 2) * get_fn_t_bez_l() * P_bez_1_dr_st_l + 3 * (1 - get_fn_t_bez_l()) * Math.pow(get_fn_t_bez_l(), 2) * P_bez_2_dr_st_l + Math.pow(get_fn_t_bez_l(), 3) * P_bez_3_dr_st_l
+        return Math.pow(1 - get_fn_t_bez_l(x), 3) * P_bez_0_dr_st_l + 3 * Math.pow(1 - get_fn_t_bez_l(x), 2) * get_fn_t_bez_l(x) * P_bez_1_dr_st_l + 3 * (1 - get_fn_t_bez_l(x)) * Math.pow(get_fn_t_bez_l(x), 2) * P_bez_2_dr_st_l + Math.pow(get_fn_t_bez_l(x), 3) * P_bez_3_dr_st_l
     }
 }
 module.exports.get_fn_B_dr_st_l = get_fn_B_dr_st_l
 
-get_fn_B_dr_lt_l = () => {
+get_fn_B_dr_lt_l = (x) => {
     if (Math.abs(P_bez_1_dr_lt_l - P_bez_2_dr_lt_l) < 0.1) {
         //Quadratic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(), 2) * P_bez_0_dr_lt_l + 2 * (1 - get_fn_t_bez_l()) * get_fn_t_bez_l() * P_bez_2_dr_lt_l + Math.pow(get_fn_t_bez_l(), 2) * P_bez_3_dr_lt_l
+        return Math.pow(1 - get_fn_t_bez_l(x), 2) * P_bez_0_dr_lt_l + 2 * (1 - get_fn_t_bez_l(x)) * get_fn_t_bez_l(x) * P_bez_2_dr_lt_l + Math.pow(get_fn_t_bez_l(x), 2) * P_bez_3_dr_lt_l
     } else {
         //Cubic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(), 3) * P_bez_0_dr_lt_l + 3 * Math.pow(1 - get_fn_t_bez_l(), 2) * get_fn_t_bez_l() * P_bez_1_dr_lt_l + 3 * (1 - get_fn_t_bez_l()) * Math.pow(get_fn_t_bez_l(), 2) * P_bez_2_dr_lt_l + Math.pow(get_fn_t_bez_l(), 3) * P_bez_3_dr_lt_l
+        return Math.pow(1 - get_fn_t_bez_l(x), 3) * P_bez_0_dr_lt_l + 3 * Math.pow(1 - get_fn_t_bez_l(x), 2) * get_fn_t_bez_l(x) * P_bez_1_dr_lt_l + 3 * (1 - get_fn_t_bez_l(x)) * Math.pow(get_fn_t_bez_l(x), 2) * P_bez_2_dr_lt_l + Math.pow(get_fn_t_bez_l(x), 3) * P_bez_3_dr_lt_l
     }
 }
 module.exports.get_fn_B_dr_lt_l = get_fn_B_dr_lt_l
 
-get_fn_B_ud_st_l = () => {
+get_fn_B_ud_st_l = (x) => {
     if (Math.abs(P_bez_1_ud_st_l - P_bez_2_ud_st_l) < 0.1) {
         //Quaudatic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(), 2) * P_bez_0_ud_st_l + 2 * (1 - get_fn_t_bez_l()) * get_fn_t_bez_l() * P_bez_2_ud_st_l + Math.pow(get_fn_t_bez_l(), 2) * P_bez_3_ud_st_l
+        return Math.pow(1 - get_fn_t_bez_l(x), 2) * P_bez_0_ud_st_l + 2 * (1 - get_fn_t_bez_l(x)) * get_fn_t_bez_l(x) * P_bez_2_ud_st_l + Math.pow(get_fn_t_bez_l(x), 2) * P_bez_3_ud_st_l
     } else {
         //Cubic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(), 3) * P_bez_0_ud_st_l + 3 * Math.pow(1 - get_fn_t_bez_l(), 2) * get_fn_t_bez_l() * P_bez_1_ud_st_l + 3 * (1 - get_fn_t_bez_l()) * Math.pow(get_fn_t_bez_l(), 2) * P_bez_2_ud_st_l + Math.pow(get_fn_t_bez_l(), 3) * P_bez_3_ud_st_l
+        return Math.pow(1 - get_fn_t_bez_l(x), 3) * P_bez_0_ud_st_l + 3 * Math.pow(1 - get_fn_t_bez_l(x), 2) * get_fn_t_bez_l(x) * P_bez_1_ud_st_l + 3 * (1 - get_fn_t_bez_l(x)) * Math.pow(get_fn_t_bez_l(x), 2) * P_bez_2_ud_st_l + Math.pow(get_fn_t_bez_l(x), 3) * P_bez_3_ud_st_l
     }
 }
 module.exports.get_fn_B_ud_st_l = get_fn_B_ud_st_l
 
-get_fn_B_ud_lt_l = () => {
+get_fn_B_ud_lt_l = (x) => {
     if (Math.abs(P_bez_1_ud_lt_l - P_bez_2_ud_lt_l) < 0.1) {
         //Quaudatic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(), 2) * P_bez_0_ud_lt_l + 2 * (1 - get_fn_t_bez_l()) * get_fn_t_bez_l() * P_bez_2_ud_lt_l + Math.pow(get_fn_t_bez_l(), 2) * P_bez_3_ud_lt_l
+        return Math.pow(1 - get_fn_t_bez_l(x), 2) * P_bez_0_ud_lt_l + 2 * (1 - get_fn_t_bez_l(x)) * get_fn_t_bez_l(x) * P_bez_2_ud_lt_l + Math.pow(get_fn_t_bez_l(x), 2) * P_bez_3_ud_lt_l
     } else {
         //Cubic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(), 3) * P_bez_0_ud_lt_l + 3 * Math.pow(1 - get_fn_t_bez_l(), 2) * get_fn_t_bez_l() * P_bez_1_ud_lt_l + 3 * (1 - get_fn_t_bez_l()) * Math.pow(get_fn_t_bez_l(), 2) * P_bez_2_ud_lt_l + Math.pow(get_fn_t_bez_l(), 3) * P_bez_3_ud_lt_l
+        return Math.pow(1 - get_fn_t_bez_l(x), 3) * P_bez_0_ud_lt_l + 3 * Math.pow(1 - get_fn_t_bez_l(x), 2) * get_fn_t_bez_l(x) * P_bez_1_ud_lt_l + 3 * (1 - get_fn_t_bez_l(x)) * Math.pow(get_fn_t_bez_l(x), 2) * P_bez_2_ud_lt_l + Math.pow(get_fn_t_bez_l(x), 3) * P_bez_3_ud_lt_l
     }
 }
 module.exports.get_fn_B_ud_lt_l = get_fn_B_ud_lt_l
 
-get_fn_B_dim_l = () => {
+get_fn_B_dim_l = (x) => {
     if (Math.abs(P_bez_1_dim_l - P_bez_2_dim_l) < 0.1) {
         //Quaudatic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(), 2) * P_bez_0_dim_l + 2 * (1 - get_fn_t_bez_l()) * get_fn_t_bez_l() * P_bez_2_dim_l + Math.pow(get_fn_t_bez_l(), 2) * P_bez_3_dim_l
+        return Math.pow(1 - get_fn_t_bez_l(x), 2) * P_bez_0_dim_l + 2 * (1 - get_fn_t_bez_l(x)) * get_fn_t_bez_l(x) * P_bez_2_dim_l + Math.pow(get_fn_t_bez_l(x), 2) * P_bez_3_dim_l
     } else {
         //Cubic Bezier
-        return Math.pow(1 - get_fn_t_bez_l(), 3) * P_bez_0_dim_l + 3 * Math.pow(1 - get_fn_t_bez_l(), 2) * get_fn_t_bez_l() * P_bez_1_dim_l + 3 * (1 - get_fn_t_bez_l()) * Math.pow(get_fn_t_bez_l(), 2) * P_bez_2_dim_l + Math.pow(get_fn_t_bez_l(), 3) * P_bez_3_dim_l
+        return Math.pow(1 - get_fn_t_bez_l(x), 3) * P_bez_0_dim_l + 3 * Math.pow(1 - get_fn_t_bez_l(x), 2) * get_fn_t_bez_l(x) * P_bez_1_dim_l + 3 * (1 - get_fn_t_bez_l(x)) * Math.pow(get_fn_t_bez_l(x), 2) * P_bez_2_dim_l + Math.pow(get_fn_t_bez_l(x), 3) * P_bez_3_dim_l
     }
 }
 module.exports.get_fn_B_dim_l = get_fn_B_dim_l
@@ -3519,7 +3589,7 @@ module.exports.get_fn_M_dr_st_l_corr = (x) => {
             } else if (x < -column_length / 2 / 1000) {
                 return get_M_c_dr_st_l_2(-x)
             } else {
-                return get_fn_B_dr_st_l()
+                return get_fn_B_dr_st_l(x)
             }
         } else {
             if (x >= column_radius / 1000) {
@@ -3527,7 +3597,7 @@ module.exports.get_fn_M_dr_st_l_corr = (x) => {
             } else if (x < -column_radius / 1000) {
                 return get_M_c_dr_st_l_2(-x)
             } else {
-                return get_fn_B_dr_st_l()
+                return get_fn_B_dr_st_l(x)
             }
         }
     } else {
@@ -3537,7 +3607,7 @@ module.exports.get_fn_M_dr_st_l_corr = (x) => {
             } else if (x >= column_length / 2 / 1000) {
                 return get_M_c_dr_st_l_2(x)
             } else {
-                return get_fn_B_dr_st_l()
+                return get_fn_B_dr_st_l(x)
             }
         } else {
             if (x < -column_radius / 1000) {
@@ -3559,7 +3629,7 @@ module.exports.get_fn_M_dr_lt_l_corr = (x) => {
             } else if (x < -column_length / 2 / 1000) {
                 return get_M_c_dr_lt_l_2(-x)
             } else {
-                return get_fn_B_dr_lt_l()
+                return get_fn_B_dr_lt_l(x)
             }
         } else {
             if (x >= column_radius / 1000) {
@@ -3567,7 +3637,7 @@ module.exports.get_fn_M_dr_lt_l_corr = (x) => {
             } else if (x < -column_radius / 1000) {
                 return get_M_c_dr_lt_l_2(-x)
             } else {
-                return get_fn_B_dr_lt_l()
+                return get_fn_B_dr_lt_l(x)
             }
         }
     } else {
@@ -3577,7 +3647,7 @@ module.exports.get_fn_M_dr_lt_l_corr = (x) => {
             } else if (x >= column_length / 2 / 1000) {
                 return get_M_c_dr_lt_l_2(x)
             } else {
-                return get_fn_B_dr_lt_l()
+                return get_fn_B_dr_lt_l(x)
             }
         } else {
             if (x < -column_radius / 1000) {
@@ -3585,7 +3655,7 @@ module.exports.get_fn_M_dr_lt_l_corr = (x) => {
             } else if (x >= column_radius / 1000) {
                 return get_M_c_dr_lt_l_2(x)
             } else {
-                return get_fn_B_dr_lt_l()
+                return get_fn_B_dr_lt_l(x)
             }
         }
     }
@@ -3599,7 +3669,7 @@ module.exports.get_fn_M_ud_st_l_corr = (x) => {
             } else if (x < -column_length / 2 / 1000) {
                 return get_M_c_ud_st_l_2(-x)
             } else {
-                return get_fn_B_ud_st_l()
+                return get_fn_B_ud_st_l(x)
             }
         } else {
             if (x >= column_radius / 1000) {
@@ -3607,7 +3677,7 @@ module.exports.get_fn_M_ud_st_l_corr = (x) => {
             } else if (x < -column_radius / 1000) {
                 return get_M_c_ud_st_l_2(-x)
             } else {
-                return get_fn_B_ud_st_l()
+                return get_fn_B_ud_st_l(x)
             }
         }
     } else {
@@ -3617,7 +3687,7 @@ module.exports.get_fn_M_ud_st_l_corr = (x) => {
             } else if (x >= column_length / 2 / 1000) {
                 return get_M_c_ud_st_l_2(x)
             } else {
-                return get_fn_B_ud_st_l()
+                return get_fn_B_ud_st_l(x)
             }
         } else {
             if (x < -column_radius / 1000) {
@@ -3625,7 +3695,7 @@ module.exports.get_fn_M_ud_st_l_corr = (x) => {
             } else if (x >= column_radius / 1000) {
                 return get_M_c_ud_st_l_2(x)
             } else {
-                return get_fn_B_ud_st_l()
+                return get_fn_B_ud_st_l(x)
             }
         }
     }
@@ -3639,7 +3709,7 @@ module.exports.get_fn_M_ud_lt_l_corr = (x) => {
             } else if (x < -column_length / 2 / 1000) {
                 return get_M_c_ud_lt_l_2(-x)
             } else {
-                return get_fn_B_ud_lt_l()
+                return get_fn_B_ud_lt_l(x)
             }
         } else {
             if (x >= column_radius / 1000) {
@@ -3647,7 +3717,7 @@ module.exports.get_fn_M_ud_lt_l_corr = (x) => {
             } else if (x < -column_radius / 1000) {
                 return get_M_c_ud_lt_l_2(-x)
             } else {
-                return get_fn_B_ud_lt_l()
+                return get_fn_B_ud_lt_l(x)
             }
         }
     } else {
@@ -3657,7 +3727,7 @@ module.exports.get_fn_M_ud_lt_l_corr = (x) => {
             } else if (x >= column_length / 2 / 1000) {
                 return get_M_c_ud_lt_l_2(x)
             } else {
-                return get_fn_B_ud_lt_l()
+                return get_fn_B_ud_lt_l(x)
             }
         } else {
             if (x < -column_radius / 1000) {
@@ -3665,7 +3735,7 @@ module.exports.get_fn_M_ud_lt_l_corr = (x) => {
             } else if (x >= column_radius / 1000) {
                 return get_M_c_ud_lt_l_2(x)
             } else {
-                return get_fn_B_ud_lt_l()
+                return get_fn_B_ud_lt_l(x)
             }
         }
     }
@@ -5202,7 +5272,7 @@ get_M_r_dr_lt_b_2 = (x) => {
 }
 module.exports.get_M_r_dr_lt_b_2 = get_M_r_dr_lt_b_2
 
-get_M_r_ud_st_b_2 = (z) => {
+get_M_r_ud_st_b_2 = (x) => {
     if (x < L_w_ud_st_b_2) {
         return R_A_ud_st_b_2 * x + M_A_ud_st_b_2 - w_ud_st_b * Math.pow(x - a_ud_st_b_2, 2) / 2
     } else if (x >= L_w_ud_st_b_2) {
@@ -6717,17 +6787,181 @@ get_x_width_value_interval = () => {
 }
 module.exports.get_x_width_value_interval = get_x_width_value_interval
 
+get_M_dr_st_l = () => {
+    return Math.max(...fn_M_dr_st_l_arr.map(Math.abs))
+}
+module.exports.get_M_dr_st_l = get_M_dr_st_l
+
+get_M_dr_lt_l = () => {
+    return Math.max(...fn_M_dr_lt_l_arr.map(Math.abs))
+}
+module.exports.get_M_dr_lt_l = get_M_dr_lt_l
+
+get_M_ud_st_l = () => {
+    return Math.max(...fn_M_ud_st_l_arr.map(Math.abs))
+}
+module.exports.get_M_ud_st_l = get_M_ud_st_l
+
+get_M_ud_lt_l = () => {
+    return Math.max(...fn_M_ud_lt_l_arr.map(Math.abs))
+}
+module.exports.get_M_ud_lt_l = get_M_ud_lt_l
+
+get_M_dr_st_b = () => {
+    return Math.max(...fn_M_dr_st_b_arr.map(Math.abs))
+}
+module.exports.get_M_dr_st_b = get_M_dr_st_b
+
+get_M_dr_lt_b = () => {
+    return Math.max(...fn_M_dr_lt_b_arr.map(Math.abs))
+}
+module.exports.get_M_dr_lt_b = get_M_dr_lt_b
+
+get_M_ud_st_b = () => {
+    return Math.max(...fn_M_ud_st_b_arr.map(Math.abs))
+}
+module.exports.get_M_ud_st_b = get_M_ud_st_b
+
+get_M_ud_lt_b = () => {
+    return Math.max(...fn_M_ud_lt_b_arr.map(Math.abs))
+}
+module.exports.get_M_ud_lt_b = get_M_ud_lt_b
+
+// verification4a = () => {
+//     if (M_Ed_l <= M_p_l) {
+//         verification4a.push(1)
+//     } else if (M_Ed_l > M_p_l) {
+//         verification4a.push(0)
+//     }
+// }
+// module.exports.verification4a = verification4a
+
+verification4a = () => {
+    if (M_Ed_l <= M_p_l) {
+        return 1
+    } else if (M_Ed_l > M_p_l) {
+        return 0
+    }
+}
+module.exports.verification4a = verification4a
+
+// verification4b = () => {
+//         if (M_Ed_b <= M_p_b) {
+//             verification4b.push(1)
+//         } else if (M_Ed_b > M_p_b) {
+//             verification4b.push(0)
+//         }
+// }
+// module.exports.verification4b = verification4b
+
+verification4b = () => {
+    if (M_Ed_b <= M_p_b) {
+        return 1
+    } else if (M_Ed_b > M_p_b) {
+        return 0
+    }
+}
+module.exports.verification4b = verification4b
+
+get_R_total_dr_st = () => {
+    return (R_q_dr_st + R_c_dr_st + R_g_dr_st) * A_eff_dr_st
+}
+module.exports.get_R_total_dr_st = get_R_total_dr_st
+
+get_R_total_dr_lt = () => {
+    return (R_q_dr_lt + R_c_dr_lt + R_g_dr_lt) * A_eff_dr_lt
+}
+module.exports.get_R_total_dr_lt = get_R_total_dr_lt
+
+get_R_total_ud_st = () => {
+    return (R_q_ud_st + R_c_ud_st + R_g_ud_st) * A_eff_ud_st
+}
+module.exports.get_R_total_ud_st = get_R_total_ud_st
+
+get_R_total_ud_lt = () => {
+    return (R_q_ud_lt + R_c_ud_lt + R_g_ud_lt) * A_eff_ud_lt
+}
+module.exports.get_R_total_ud_lt = get_R_total_ud_lt
+
+get_R_total = () => {
+    return Math.min(R_total_dr_st, R_total_dr_lt, R_total_ud_st, R_total_ud_lt)
+}
+module.exports.get_R_total = get_R_total
+
+// verification5 = () => {
+//     if (vl_total <= R_total) {
+//         verification5.push(1)
+//     } else if (vl_total > R_total) {
+//         verification5.push(0)
+//     }
+// }
+// module.exports.verification5 = verification5
+
+verification5 = () => {
+    if (vl_total <= R_total) {
+        return 1
+    } else if (vl_total > R_total) {
+        return 0
+    }
+}
+module.exports.verification5 = verification5
 
 
 
+get_H_res_both = () => {
+    return Math.max(H_res_dr_st, H_res_dr_lt, H_res_ud_st, H_res_ud_lt)
+}
+module.exports.get_H_res_both = get_H_res_both
+
+// verification6 = () => {
+//     if (H_res_both <= H_total) {
+//         verification6.push(1)
+//     } else if (H_res_both > H_total) {
+//         verification6.push(0)
+
+//     }
+// }
+// module.exports.verification6 = verification6
+
+verification6 = () => {
+    if (H_res_both <= H_total) {
+        return 1
+    } else if (H_res_both > H_total) {
+        return 0
+
+    }
+}
+module.exports.verification6 = verification6
+
+get_P_u = () => {
+    return Math.min(P_u_0,P_u_1)
+}
+module.exports.get_P_u = get_P_u
+
+// verification7 = () => {
+//     if (vl_external <= P_u) {
+//         verification7.push(1)
+//     } else if (vl_external > P_u) {
+//         verification7.classList.push(0)
+//     }
+// }
+// module.exports.verification7 = verification7
+
+verification7 = () => {
+    if (vl_external <= P_u) {
+        return 1
+    } else if (vl_external > P_u) {
+        return 0
+    }
+}
+module.exports.verification7 = verification7
 
 
-
-
-
-
-
-
+range = (start, end) => {
+    if(start === end) return [start];
+    return [start, ...range(start + 50, end)];
+}
+module.exports.range = range
 
 
 

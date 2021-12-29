@@ -10,3 +10,32 @@ N: 4090
 lmd_known = "on": 250
 lmd_known = !"on":  
 
+
+Verification variables:
+
+verification4a: M_Ed_l, M_p_l
+		M_Ed_l: Math.max(M_Edp_l)
+			M_Edp_l: Math.max(M_Edp_dr_l, M_Edp_ud_l)
+				M_Edp_dr_l: Math.max(M_dr_st_l, M_dr_lt_l)
+					M_dr_st_l: Math.max(...fn_M_dr_st_l_arr_pos)
+						fn_M_dr_st_l_arr_pos: fn_M_dr_st_l_arr.map(Math.abs)
+					M_dr_lt_l: Math.max(...fn_M_dr_lt_l_arr_pos)
+						fn_M_dr_lt_l_arr_pos: fn_M_dr_lt_l_arr.map(Math.abs)
+				M_Edp_ud_l: Math.max(M_ud_st_l, M_ud_lt_l)
+					M_ud_st_l: Math.max(...fn_M_ud_st_l_arr_pos)
+						fn_M_ud_st_l_arr_pos: fn_M_ud_st_l_arr.map(Math.abs)
+					M_ud_lt_l: Math.max(...fn_M_ud_lt_l_arr_pos)
+						fn_M_ud_lt_l_arr_pos. fn_M_ud_lt_l_arr.map(Math.abs)
+
+		M_p_l: matix.get_M_p_l()
+
+
+4b: M_Ed_b, M_p_b
+
+5: vl_total, R_total 
+	R_total: Math.min(R_total_dr_st, R_total_dr_lt, R_total_ud_st, R_total_ud_lt)
+
+6: H_res_both, H_total
+
+7: vl_external, P_u
+

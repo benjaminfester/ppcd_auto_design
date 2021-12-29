@@ -1,0 +1,27 @@
+{
+  "name": "ppcd_auto_design",
+  "version": "1.0.0",
+  "description": "",
+  "main": "calc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminfester/ppcd_auto_design.git"
+  },
+  "keywords": [
+    "polypropylene",
+    "concrete",
+    "designs"
+  ],
+  "author": "benjamin fester henningsen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjaminfester/ppcd_auto_design/issues"
+  },
+  "homepage": "https://github.com/benjaminfester/ppcd_auto_design#readme",
+  "dependencies": {
+    "csv-writer": "^1.6.0"
+  }
+}
