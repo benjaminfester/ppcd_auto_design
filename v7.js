@@ -56,13 +56,13 @@ length_min = Math.max((column_length), (2 * Math.abs(ec_vl_length)), (2 * (colum
 width_min = Math.max((column_width), (2 * Math.abs(ec_vl_width)), (2 * (column_width / 2 + Math.abs(ec_vl_width))))
 lengths = matix.range(length_min, 8000)
 
-const matrix = []
+const v7_matrix = []
 const header = [null]
 
 for(i = 0; i < lengths.length; i++) {
 
     length = lengths[i]
-    matrix.push([length])
+    v7_matrix.push([length])
     width_max = length * 7
     widths = matix.range(width_min, 8000)
 
@@ -70,7 +70,7 @@ for(i = 0; i < lengths.length; i++) {
 
         width = widths[j]
         if(!header.includes(width)) { header.push(width) }
-        // matrix[i].push(matix.verification0())
+        // v7_matrix[i].push(matix.verification0())
         if(matix.verification0() === 0) { continue }
     
         //set calculated variables
@@ -244,7 +244,7 @@ for(i = 0; i < lengths.length; i++) {
         m_dim_r_length = matix.get_m_dim_r_length()
         m_dim_r_width = matix.get_m_dim_r_width()
 
-        // //EFFECTIVE DIMENSIONS
+        //EFFECTIVE DIMENSIONS
         e_total_dr_st_l = matix.get_e_total_dr_st_l()
         e_total_dr_lt_l = matix.get_e_total_dr_lt_l()
         e_total_ud_st_l = matix.get_e_total_ud_st_l()
@@ -291,7 +291,7 @@ for(i = 0; i < lengths.length; i++) {
         A_eff_ud_lt = matix.get_A_eff_ud_lt()
         A_dim_eff = matix.get_A_dim_eff()
 
-        // // GROUND BEARING CAPACITY
+        // GROUND BEARING CAPACITY
         N_q_dr_st = matix.get_N_q_dr_st()
         N_c_dr_st = matix.get_N_c_dr_st()
         N_g_dr_st = matix.get_N_g_dr_st()
@@ -351,7 +351,7 @@ for(i = 0; i < lengths.length; i++) {
         H_ud_lt = matix.get_H_ud_lt()
         H_total = matix.get_H_total()
 
-        // // MOMENT CAPACITY
+        // MOMENT CAPACITY
         f_cd = matix.get_f_cd()
         f_cm = matix.get_f_cm()
         f_ctm = matix.get_f_ctm()
@@ -788,33 +788,6 @@ for(i = 0; i < lengths.length; i++) {
             fn_V_dim_b_corr = matix.get_fn_V_dim_b_corr(x)
         }
 
-        //verification4a lengtha
-        M_dr_st_l = matix.get_M_dr_st_l()
-        M_dr_lt_l = matix.get_M_dr_lt_l()
-        M_ud_st_l = matix.get_M_ud_st_l()
-        M_ud_lt_l = matix.get_M_ud_lt_l()
-        M_Edp_dr_l = Math.max(M_dr_st_l, M_dr_lt_l)
-        M_Edp_ud_l = Math.max(M_ud_st_l, M_ud_lt_l)
-        M_Ed_l = Math.max(M_Edp_dr_l, M_Edp_ud_l)
-
-        ///verification4b width
-        M_dr_st_b = matix.get_M_dr_st_b()
-        M_dr_lt_b = matix.get_M_dr_lt_b()
-        M_ud_st_b = matix.get_M_ud_st_b()
-        M_ud_lt_b = matix.get_M_ud_lt_b()
-        M_Edp_dr_b = Math.max(M_dr_st_b, M_dr_lt_b)
-        M_Edp_ud_b = Math.max(M_ud_st_b, M_ud_lt_b)
-        M_Ed_b = Math.max(M_Edp_dr_b, M_Edp_ud_b)
-        
-        //verification5
-        R_total_dr_st = matix.get_R_total_dr_st()
-        R_total_dr_lt = matix.get_R_total_dr_lt()
-        R_total_ud_st = matix.get_R_total_ud_st()
-        R_total_ud_lt = matix.get_R_total_ud_lt()
-        R_total = matix.get_R_total()
-
-        //verification6
-        
         //verification7
         P_u_0 = matix.get_P_u_0()
         k = matix.get_k()
@@ -825,26 +798,16 @@ for(i = 0; i < lengths.length; i++) {
         P_u_1 = matix.get_P_u_1()
         P_u = matix.get_P_u()
 
-        // //put a single 0 or 1 in matrix.csv
-        temp = []
-        temp.push(matix.verification4a())
-        temp.push(matix.verification4b())
-        temp.push(matix.verification5())
-        temp.push(matix.verification6())
-        temp.push(matix.verification7())
-        if(temp.includes(0)) { matrix[i].push(0) } else { matrix[i].push(1) } 
-
-        //put in 0s and 1s for each verification 
-        // matrix[i].push([matix.verification0()])
+        v7_matrix[i].push([matix.verification7()])
     }
 }
 
 const csvWriter = createCsvWriter({
     header: header,
-    path: './matrices/matrix.csv'
+    path: './matrices/v7_matrix.csv'
 })
 
-csvWriter.writeRecords(matrix)
+csvWriter.writeRecords(v7_matrix)
     .then(() => {
-        console.log('...loops completed and csv file updated!');
+        console.log('...v7_matrix.csv updated!');
     });

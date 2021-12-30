@@ -525,7 +525,7 @@ module.exports.get_h_res_dr_lt_b = () => {
     }
 }
 
-module.exports.get_h_res_ud_st_b = () => {
+get_h_res_ud_st_b = () => {
     if (F_p_ud_st_b >= Math.abs(hl_width) + F_a_ud_st_b) {
         return 0
     } else {
@@ -536,8 +536,9 @@ module.exports.get_h_res_ud_st_b = () => {
         }
     }
 }
+module.exports.get_h_res_ud_st_b = get_h_res_ud_st_b
 
-module.exports.get_h_res_ud_lt_b = () => {
+get_h_res_ud_lt_b = () => {
     if (F_p_ud_lt_b >= Math.abs(hl_width) + F_a_ud_lt_b) {
         return 0
     } else {
@@ -548,8 +549,9 @@ module.exports.get_h_res_ud_lt_b = () => {
         }
     }
 }
+module.exports.get_h_res_ud_lt_b = get_h_res_ud_lt_b
 
-module.exports.get_h_res_dr_st_rl = () => {
+get_h_res_dr_st_rl = () => {
     if (F_p_dr_st_r >= Math.abs(hl_length) + F_a_dr_st_r) {
         return 0
     } else {
@@ -560,8 +562,9 @@ module.exports.get_h_res_dr_st_rl = () => {
         }
     }
 }
+module.exports.get_h_res_dr_st_rl = get_h_res_dr_st_rl
 
-module.exports.get_h_res_dr_lt_rl = () => {
+get_h_res_dr_lt_rl = () => {
     if (F_p_dr_lt_r >= Math.abs(hl_length) + F_a_dr_lt_r) {
         return 0
     } else {
@@ -572,8 +575,9 @@ module.exports.get_h_res_dr_lt_rl = () => {
         }
     }
 }
+module.exports.get_h_res_dr_lt_rl = get_h_res_dr_lt_rl
 
-module.exports.get_h_res_ud_st_rl = () => {
+get_h_res_ud_st_rl = () => {
     if (F_p_ud_st_r >= Math.abs(hl_length) + F_a_ud_st_r) {
         return 0
     } else {
@@ -584,8 +588,9 @@ module.exports.get_h_res_ud_st_rl = () => {
         }
     }
 }
+module.exports.get_h_res_ud_st_rl = get_h_res_ud_st_rl
 
-module.exports.get_h_res_ud_lt_rl = () => {
+get_h_res_ud_lt_rl = () => {
     if (F_p_ud_lt_r >= Math.abs(hl_length) + F_a_ud_lt_r) {
         return 0
     } else {
@@ -596,8 +601,9 @@ module.exports.get_h_res_ud_lt_rl = () => {
         }
     }
 }
+module.exports.get_h_res_ud_lt_rl = get_h_res_ud_lt_rl
 
-module.exports.get_h_res_dr_st_rb = () => {
+get_h_res_dr_st_rb = () => {
     if (F_p_dr_st_r >= Math.abs(hl_width) + F_a_dr_st_r) {
         return 0
     } else {
@@ -608,8 +614,9 @@ module.exports.get_h_res_dr_st_rb = () => {
         }
     }
 }
+module.exports.get_h_res_dr_st_rb =  get_h_res_dr_st_rb
 
-module.exports.get_h_res_dr_lt_rb = () => {
+get_h_res_dr_lt_rb = () => {
     if (F_p_dr_lt_r >= Math.abs(hl_width) + F_a_dr_lt_r) {
         return 0
     } else {
@@ -620,8 +627,9 @@ module.exports.get_h_res_dr_lt_rb = () => {
         }
     }
 }
+module.exports.get_h_res_dr_lt_rb = get_h_res_dr_lt_rb
 
-module.exports.get_h_res_ud_st_rb = () => {
+get_h_res_ud_st_rb = () => {
     if (F_p_ud_st_r >= Math.abs(hl_width) + F_a_ud_st_r) {
         return 0
     } else {
@@ -632,8 +640,9 @@ module.exports.get_h_res_ud_st_rb = () => {
         }
     }
 }
+module.exports.get_h_res_ud_st_rb = get_h_res_ud_st_rb
 
-module.exports.get_h_res_ud_lt_rb = () => {
+get_h_res_ud_lt_rb = () => {
     if (F_p_ud_lt_r >= Math.abs(hl_width) + F_a_ud_lt_r) {
         return 0
     } else {
@@ -644,8 +653,9 @@ module.exports.get_h_res_ud_lt_rb = () => {
         }
     }
 }
+module.exports.get_h_res_ud_lt_rb = get_h_res_ud_lt_rb
 
-module.exports.get_H_res_dr_st = () => {
+get_H_res_dr_st = () => {
 
     if (point_foundation_shape == 'rectangular') {
         return Math.sqrt(Math.pow(h_res_dr_st_l, 2) + Math.pow(h_res_dr_st_b, 2))
@@ -654,34 +664,39 @@ module.exports.get_H_res_dr_st = () => {
         return Math.sqrt(Math.pow(h_res_dr_st_rl, 2) + Math.pow(h_res_dr_st_rb, 2))
     }
 }
+module.exports.get_H_res_dr_st = get_H_res_dr_st
 
-module.exports.get_H_res_dr_lt = () => {
+get_H_res_dr_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         return Math.sqrt(Math.pow(h_res_dr_lt_l, 2) + Math.pow(h_res_dr_lt_b, 2))
     } else if (point_foundation_shape == 'circular') {
         return Math.sqrt(Math.pow(h_res_dr_lt_rl, 2) + Math.pow(h_res_dr_lt_rb, 2))
     }
 }
+module.exports.get_H_res_dr_lt = get_H_res_dr_lt
 
-module.exports.get_H_res_ud_st = () => {
+get_H_res_ud_st = () => {
     if (point_foundation_shape == 'rectangular') {
         return Math.sqrt(Math.pow(h_res_ud_st_l, 2) + Math.pow(h_res_ud_st_b, 2))
     } else if (point_foundation_shape == 'circular') {
         return Math.sqrt(Math.pow(h_res_ud_st_rl, 2) + Math.pow(h_res_ud_st_rb, 2))
     }
 }
+module.exports.get_H_res_ud_st = get_H_res_ud_st
 
-module.exports.get_H_res_ud_lt = () => {
+get_H_res_ud_lt = () => {
     if (point_foundation_shape == 'rectangular') {
         return Math.sqrt(Math.pow(h_res_ud_lt_l, 2) + Math.pow(h_res_ud_lt_b, 2))
     } else if (point_foundation_shape == 'circular') {
         return Math.sqrt(Math.pow(h_res_ud_lt_rl, 2) + Math.pow(h_res_ud_lt_rb, 2))
     }
 }
+module.exports.get_H_res_ud_lt = get_H_res_ud_lt
 
-module.exports.get_H_res_both = () => {
+get_H_res_both = () => {
     return Math.max(H_res_dr_st, H_res_dr_lt, H_res_ud_st, H_res_ud_lt)
 }
+module.exports.get_H_res_both = get_H_res_both
 
 module.exports.get_h_cg_a_dr_st = () => {
     if (d_0_dr_st >= depth) {
@@ -1997,49 +2012,59 @@ module.exports.get_R_g_ud_lt = () => {
     }
 }
 
-module.exports.get_R_total_dr_st = () => {
+get_R_total_dr_st = () => {
     return (R_q_dr_st + R_c_dr_st + R_g_dr_st) * A_eff_dr_st
 }
+module.exports.get_R_total_dr_st = get_R_total_dr_st
 
-module.exports.get_R_total_dr_lt = () => {
+get_R_total_dr_lt = () => {
     return (R_q_dr_lt + R_c_dr_lt + R_g_dr_lt) * A_eff_dr_lt
 }
+module.exports.get_R_total_dr_lt = get_R_total_dr_lt
 
-module.exports.get_R_total_ud_st = () => {
+get_R_total_ud_st = () => {
     return (R_q_ud_st + R_c_ud_st + R_g_ud_st) * A_eff_ud_st
 }
+module.exports.get_R_total_ud_st = get_R_total_ud_st
 
-module.exports.get_R_total_ud_lt = () => {
+get_R_total_ud_lt = () => {
     return (R_q_ud_lt + R_c_ud_lt + R_g_ud_lt) * A_eff_ud_lt
 }
+module.exports.get_R_total_ud_lt = get_R_total_ud_lt
 
-module.exports.get_R_total = () => {
+get_R_total = () => {
     return Math.min(R_total_dr_st, R_total_dr_lt, R_total_ud_st, R_total_ud_lt)
 }
+module.exports.get_R_total = get_R_total
 
-module.exports.get_H_dr_st = () => {
+get_H_dr_st = () => {
     return vl_total_dr_st * Math.tan(dr_st_af_d * Math.PI / 180) + A_eff_dr_st * a_d_dr_st
 }
+module.exports.get_H_dr_st = get_H_dr_st
 
-module.exports.get_H_dr_lt = () => {
+get_H_dr_lt = () => {
     return vl_total_dr_lt * Math.tan(dr_lt_af_d * Math.PI / 180) + A_eff_dr_lt * a_d_dr_lt
 }
+module.exports.get_H_dr_lt = get_H_dr_lt
 
-module.exports.get_H_ud_st = () => {
+get_H_ud_st = () => {
     return Math.min(A_eff_ud_st * ud_st_cohesion_d, 0.4 * vl_total_ud_st)
 }
+module.exports.get_H_ud_st = get_H_ud_st
 
-module.exports.get_H_ud_lt = () => {
+get_H_ud_lt = () => {
     if (ud_lt_af_d == 0) {
         return Math.min(A_eff_ud_lt * ud_lt_cohesion_d, 0.4 * vl_total_ud_lt)
     } else {
         return vl_total_ud_lt * Math.tan(ud_lt_af_d * Math.PI / 180) + A_eff_ud_lt * ud_lt_cohesion_d
     }
 }
+module.exports.get_H_ud_lt = get_H_ud_lt
 
-module.exports.get_H_total = () => {
+get_H_total = () => {
     return Math.min(H_dr_st, H_dr_lt, H_ud_st, H_ud_lt);
 }
+module.exports.get_H_total = get_H_total
 
 // MOMENT CAPACITY
 module.exports.get_f_cd = () => {
@@ -6827,141 +6852,95 @@ get_M_ud_lt_b = () => {
 }
 module.exports.get_M_ud_lt_b = get_M_ud_lt_b
 
-// verification4a = () => {
-//     if (M_Ed_l <= M_p_l) {
-//         verification4a.push(1)
-//     } else if (M_Ed_l > M_p_l) {
-//         verification4a.push(0)
-//     }
-// }
-// module.exports.verification4a = verification4a
-
-verification4a = () => {
-    if (M_Ed_l <= M_p_l) {
-        return 1
-    } else if (M_Ed_l > M_p_l) {
-        return 0
-    }
-}
-module.exports.verification4a = verification4a
-
-// verification4b = () => {
-//         if (M_Ed_b <= M_p_b) {
-//             verification4b.push(1)
-//         } else if (M_Ed_b > M_p_b) {
-//             verification4b.push(0)
-//         }
-// }
-// module.exports.verification4b = verification4b
-
-verification4b = () => {
-    if (M_Ed_b <= M_p_b) {
-        return 1
-    } else if (M_Ed_b > M_p_b) {
-        return 0
-    }
-}
-module.exports.verification4b = verification4b
-
-get_R_total_dr_st = () => {
-    return (R_q_dr_st + R_c_dr_st + R_g_dr_st) * A_eff_dr_st
-}
-module.exports.get_R_total_dr_st = get_R_total_dr_st
-
-get_R_total_dr_lt = () => {
-    return (R_q_dr_lt + R_c_dr_lt + R_g_dr_lt) * A_eff_dr_lt
-}
-module.exports.get_R_total_dr_lt = get_R_total_dr_lt
-
-get_R_total_ud_st = () => {
-    return (R_q_ud_st + R_c_ud_st + R_g_ud_st) * A_eff_ud_st
-}
-module.exports.get_R_total_ud_st = get_R_total_ud_st
-
-get_R_total_ud_lt = () => {
-    return (R_q_ud_lt + R_c_ud_lt + R_g_ud_lt) * A_eff_ud_lt
-}
-module.exports.get_R_total_ud_lt = get_R_total_ud_lt
-
-get_R_total = () => {
-    return Math.min(R_total_dr_st, R_total_dr_lt, R_total_ud_st, R_total_ud_lt)
-}
-module.exports.get_R_total = get_R_total
-
-// verification5 = () => {
-//     if (vl_total <= R_total) {
-//         verification5.push(1)
-//     } else if (vl_total > R_total) {
-//         verification5.push(0)
-//     }
-// }
-// module.exports.verification5 = verification5
-
-verification5 = () => {
-    if (vl_total <= R_total) {
-        return 1
-    } else if (vl_total > R_total) {
-        return 0
-    }
-}
-module.exports.verification5 = verification5
-
-
-
-get_H_res_both = () => {
-    return Math.max(H_res_dr_st, H_res_dr_lt, H_res_ud_st, H_res_ud_lt)
-}
-module.exports.get_H_res_both = get_H_res_both
-
-// verification6 = () => {
-//     if (H_res_both <= H_total) {
-//         verification6.push(1)
-//     } else if (H_res_both > H_total) {
-//         verification6.push(0)
-
-//     }
-// }
-// module.exports.verification6 = verification6
-
-verification6 = () => {
-    if (H_res_both <= H_total) {
-        return 1
-    } else if (H_res_both > H_total) {
-        return 0
-
-    }
-}
-module.exports.verification6 = verification6
-
 get_P_u = () => {
     return Math.min(P_u_0,P_u_1)
 }
 module.exports.get_P_u = get_P_u
-
-// verification7 = () => {
-//     if (vl_external <= P_u) {
-//         verification7.push(1)
-//     } else if (vl_external > P_u) {
-//         verification7.classList.push(0)
-//     }
-// }
-// module.exports.verification7 = verification7
-
-verification7 = () => {
-    if (vl_external <= P_u) {
-        return 1
-    } else if (vl_external > P_u) {
-        return 0
-    }
-}
-module.exports.verification7 = verification7
-
 
 range = (start, end) => {
     if(start === end) return [start];
     return [start, ...range(start + 50, end)];
 }
 module.exports.range = range
+
+
+//VERIFICATIONS
+
+//geometric restriction
+verification0 = () => {
+    if(length > width * 7 || width > length * 7) {
+        return 0
+    } else {
+        return 1
+    }
+}
+module.exports.verification0 = verification0
+
+verification4a = () => {
+    if(verification0() === 0) {
+        return 0
+    } else {
+        if (M_Ed_l <= M_p_l) {
+            return 1
+        } else if (M_Ed_l > M_p_l) {
+            return 0
+        }
+    }
+}
+module.exports.verification4a = verification4a
+
+verification4b = () => {
+    if(verification0() === 0) {
+        return 0
+    } else {
+        if (M_Ed_b <= M_p_b) {
+            return 1
+        } else if (M_Ed_b > M_p_b) {
+            return 0
+        }
+    }
+}
+module.exports.verification4b = verification4b
+
+verification5 = () => {
+    if(verification0() === 0) {
+        return 0
+    } else {
+        if (vl_total <= R_total) {
+            return 1
+        } else if (vl_total > R_total) {
+            return 0
+        }
+    }
+}
+module.exports.verification5 = verification5
+
+verification6 = () => {
+    if(verification0() === 0) {
+        return 0
+    } else {
+        if (H_res_both <= H_total) {
+            return 1
+        } else if (H_res_both > H_total) {
+            return 0
+        }
+    }
+}
+module.exports.verification6 = verification6
+
+verification7 = () => {
+    if(verification0() === 0) {
+        return 0
+    } else {
+        if (vl_external <= P_u) {
+            return 1
+        } else if (vl_external > P_u) {
+            return 0
+        }
+    }
+}
+module.exports.verification7 = verification7
+
 
 
 
