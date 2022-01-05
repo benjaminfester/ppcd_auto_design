@@ -1,78 +1,95 @@
 const matix = require('./mathematix')
-const createCsvWriter = require('csv-writer').createArrayCsvWriter
+const createCsvWriter  = require('csv-writer').createArrayCsvWriter
+const vars = require('./input_variables.js')
+const { v4: uuidv4 } = require('uuid')
+
 
 //set input variables
-lmd_known = undefined
-dimensions_known = undefined
-point_foundation_shape = 'rectangular'
-gamma_c = 1.5
-gamma_s = 1.2
-f_R_1 = 1.8
-f_R_2 = 1.9
-f_R_3 = 2.1
-f_R_4 = 2
-radius = 100
-height = 650
-height_p_hor = height
-depth = 900
-column_shape = 'rectangular'
-column_length = 150
-column_width = 150
-column_radius = 0
-ec_vl_length = 0
-ec_vl_width = 0
-geo_known = undefined
-ground_density = 18
-dr_st_af_k = 33
-dr_lt_af_k = 33
-ud_st_af_k = 0
-ud_lt_af_k = 25
-dr_st_cohesion_k = 0
-dr_lt_cohesion_k = 0
-ud_st_cohesion_k = 80
-ud_lt_cohesion_k = 8
-ground_type = 'both'
+national_annex = (vars.national_annex === undefined) ? "undefined" : vars.national_annex
+lmd_known = (vars.lmd_known === undefined) ? "undefined" : vars.lmd_known
+dimensions_known = (vars.dimensions_known === undefined) ? "undefined" : vars.dimensions_known
+
+point_foundation_shape = vars.point_foundation_shape
+gamma_c = vars.gamma_c
+gamma_s = vars.gamma_s
+f_R_1 = vars.f_R_1
+f_R_2 = vars.f_R_2
+f_R_3 = vars.f_R_3
+f_R_4 = vars.f_R_4
+radius = vars.radius
+height = vars.height
+height_p_hor = vars.height_p_hor
+depth = vars.depth
+column_shape = vars.column_shape
+column_length = vars.column_length
+column_width = vars.column_width
+column_radius = vars.column_radius
+ec_vl_length = vars.ec_vl_length
+ec_vl_width = vars.ec_vl_width
+geo_known = (vars.geo_known === undefined) ? "undefined" : vars.geo_known
+ground_density = vars.ground_density
+dr_st_af_k = vars.dr_st_af_k
+dr_lt_af_k = vars.dr_lt_af_k
+ud_st_af_k = vars.ud_st_af_k
+ud_lt_af_k = vars.ud_lt_af_k
+dr_st_cohesion_k = vars.dr_st_cohesion_k
+dr_lt_cohesion_k = vars.dr_lt_cohesion_k
+ud_st_cohesion_k = vars.ud_st_cohesion_k
+ud_lt_cohesion_k = vars.ud_lt_cohesion_k
+ground_type = vars.ground_type
 
 //loads
-vl_external = 150
-terrain_live_load = 0
-hl_length = 0
-hl_width = 0
-m_length = 0
-m_width = 0
+vl_external = vars.vl_external
+terrain_live_load = vars.terrain_live_load
+hl_length = vars.hl_length
+hl_width = vars.hl_width
+m_length = vars.m_length
+m_width = vars.m_width
+internal_moment = vars.internal_moment
 
-concrete_type = 25
-f_ck = concrete_type
-f_yk = 0
-A_s = 0
-cover_layer = 0
-concrete_density = 24
-fabrication_method = 'in_situ'
-include_fiber = 'on'
-fiber_dosage = '1.8,1.9,2.1,2,4'
-include_steel = undefined
+concrete_type = vars.concrete_type
+f_ck = vars.f_ck
+f_yk = vars.f_yk
+A_s = vars.A_s
+concrete_density = vars.concrete_density
+fabrication_method = vars.fabrication_method
+include_fiber = (vars.include_fiber === undefined) ? "undefined" : vars.include_fiber
+fiber_dosage = vars.fiber_dosage
+include_steel = (vars.include_steel === undefined) ? "undefined" : vars.include_steel
+steel_quality = vars.steel_quality
+steel_mesh_type = vars.steel_mesh_type
+cover_layer = vars.cover_layer
 
-length_min = Math.max((column_length), (2 * Math.abs(ec_vl_length)), (2 * (column_length / 2 + Math.abs(ec_vl_length))))
-width_min = Math.max((column_width), (2 * Math.abs(ec_vl_width)), (2 * (column_width / 2 + Math.abs(ec_vl_width))))
-lengths = matix.range(length_min, 8000)
+check_until = vars.check_until
+length_min = matix.get_length_min()
+width_min = matix.get_width_min()
+lengths = matix.range(length_min, check_until)
+
+//end input values
 
 const matrix = []
 const header = [null]
+const volume_values = []
+const length_values = []
+const width_values = []
 
 for(i = 0; i < lengths.length; i++) {
 
     length = lengths[i]
     matrix.push([length])
     width_max = length * 7
-    widths = matix.range(width_min, 8000)
-
+    widths = matix.range(width_min, check_until)
+    
     for(j = 0; j < widths.length; j++) {
 
         width = widths[j]
         if(!header.includes(width)) { header.push(width) }
-        // matrix[i].push(matix.verification0())
-        if(matix.verification0() === 0) { continue }
-    
+        if(matix.verification0() === 0) {
+            matrix[i].push(0)
+            continue
+        }
+
+
         //set calculated variables
         volume = matix.get_volume()
         q = matix.get_q()
@@ -126,7 +143,7 @@ for(i = 0; i < lengths.length; i++) {
         vl_total = matix.get_vl_total()
         vl_dim_total = matix.get_vl_dim_total()
         vl_total_internal = matix.get_vl_total_internal()
-        vl_total_max = matix.get_vl_total_max()
+        vl_total = matix.get_vl_total()
         hl_total = matix.get_hl_total()
         d_0_dr_st = matix.get_d_0_dr_st()
         d_0_dr_lt = matix.get_d_0_dr_lt()
@@ -358,18 +375,14 @@ for(i = 0; i < lengths.length; i++) {
         E_cm = matix.get_E_cm()
         sigma_r1 = matix.get_sigma_r1()
         sigma_r4 = matix.get_sigma_r4()
-        v = matix.get_v()
         gamma_m = matix.get_gamma_m()
         f_ctd_fl = matix.get_f_ctd_fl()
         M_n = matix.get_M_n()
         f_yd = matix.get_f_yd()
         A_c = matix.get_A_c()
         rho = matix.get_rho()
-        rho_total = matix.get_rho_total()
         h_ux = matix.get_h_ux()
         ef_height = matix.get_ef_height()
-        v_max = matix.get_v_max()
-        u_0 = matix.get_u_0()
         lambda = matix.get_lambda()
         eta = matix.get_eta()
         omega = matix.get_omega()
@@ -378,6 +391,7 @@ for(i = 0; i < lengths.length; i++) {
         M_p_l = matix.get_M_p_l()
         M_p_b = matix.get_M_p_b()
         M_p_internal = matix.get_M_p_internal()
+
         w_dr_st_l = matix.get_w_dr_st_l()
         w_dr_lt_l = matix.get_w_dr_lt_l()
         w_ud_st_l = matix.get_w_ud_st_l()
@@ -472,13 +486,14 @@ for(i = 0; i < lengths.length; i++) {
 
         // dimensions_known = Yes
         // Y Values Chart 1
-        // fn_M_dim_l_arr = []
+        fn_M_dim_l_arr = []
         // // Y Values Chart 2
-        // fn_M_dim_b_arr = []
+        fn_M_dim_b_arr = []
         // // Y Values Chart 3
-        // fn_V_dim_l_arr = []
+        fn_V_dim_l_arr = []
         // // Y Values Chart 4
-        // fn_V_dim_b_arr = []
+        fn_V_dim_b_arr = []
+
         for(var x = x_length_value_start / 1000; x <= x_length_value_end / 1000; x = x + x_length_value_interval / 1000) {
             //length
             M_r_dr_st_l_1 = matix.get_M_r_dr_st_l_1(x)
@@ -543,16 +558,12 @@ for(i = 0; i < lengths.length; i++) {
             fn_B_ud_lt_l = matix.get_fn_B_ud_lt_l(x)
             fn_B_dim_l = matix.get_fn_B_dim_l()
     
-            //dimensions_known = No
-            // y value calculations chart 1
             fn_M_dr_st_l_arr.push(matix.get_fn_M_dr_st_l_corr(x))
             fn_M_dr_lt_l_arr.push(matix.get_fn_M_dr_lt_l_corr(x))
             fn_M_ud_st_l_arr.push(matix.get_fn_M_ud_st_l_corr(x))
             fn_M_ud_lt_l_arr.push(matix.get_fn_M_ud_lt_l_corr(x))
-    
-            // y value calculations chart 3
-    
-            fn_M_dim_l_corr = matix.get_fn_M_dim_l_corr(x)
+            fn_M_dim_l_arr.push(matix.get_fn_M_dim_l_corr(x))
+            
             V_r_dr_st_l_1 = matix.get_V_r_dr_st_l_1(x)
             V_r_dr_lt_l_1 = matix.get_V_r_dr_lt_l_1(x)
             V_r_ud_st_l_1 = matix.get_V_r_ud_st_l_1(x)
@@ -729,8 +740,8 @@ for(i = 0; i < lengths.length; i++) {
             fn_M_dr_lt_b_arr.push(matix.get_fn_M_dr_lt_b_corr(x))
             fn_M_ud_st_b_arr.push(matix.get_fn_M_ud_st_b_corr(x))
             fn_M_ud_lt_b_arr.push(matix.get_fn_M_ud_lt_b_corr(x))
+            fn_M_dim_b_arr.push(matix.get_fn_M_dim_b_corr(x))
         
-            fn_M_dim_b_corr = matix.get_fn_M_dim_b_corr(x)
             V_r_dr_st_b_1 = matix.get_V_r_dr_st_b_1(x)
             V_r_dr_lt_b_1 = matix.get_V_r_dr_lt_b_1(x)
             V_r_ud_st_b_1 = matix.get_V_r_ud_st_b_1(x)
@@ -788,63 +799,93 @@ for(i = 0; i < lengths.length; i++) {
             fn_V_dim_b_corr = matix.get_fn_V_dim_b_corr(x)
         }
 
-        //verification4a lengtha
+        
         M_dr_st_l = matix.get_M_dr_st_l()
         M_dr_lt_l = matix.get_M_dr_lt_l()
         M_ud_st_l = matix.get_M_ud_st_l()
         M_ud_lt_l = matix.get_M_ud_lt_l()
-        M_Edp_dr_l = Math.max(M_dr_st_l, M_dr_lt_l)
-        M_Edp_ud_l = Math.max(M_ud_st_l, M_ud_lt_l)
-        M_Ed_l = Math.max(M_Edp_dr_l, M_Edp_ud_l)
+        M_Edp_dr_l = matix.get_M_Edp_dr_l()
+        M_Edp_ud_l = matix.get_M_Edp_ud_l()
+        M_Ed_l = matix.get_M_Ed_l()
 
-        ///verification4b width
         M_dr_st_b = matix.get_M_dr_st_b()
         M_dr_lt_b = matix.get_M_dr_lt_b()
         M_ud_st_b = matix.get_M_ud_st_b()
         M_ud_lt_b = matix.get_M_ud_lt_b()
-        M_Edp_dr_b = Math.max(M_dr_st_b, M_dr_lt_b)
-        M_Edp_ud_b = Math.max(M_ud_st_b, M_ud_lt_b)
-        M_Ed_b = Math.max(M_Edp_dr_b, M_Edp_ud_b)
+        M_Edp_dr_b = matix.get_M_Edp_dr_b()
+        M_Edp_ud_b = matix.get_M_Edp_ud_b()
+        M_Ed_b = matix.get_M_Ed_b()
         
-        //verification5
-        R_total_dr_st = matix.get_R_total_dr_st()
-        R_total_dr_lt = matix.get_R_total_dr_lt()
-        R_total_ud_st = matix.get_R_total_ud_st()
-        R_total_ud_lt = matix.get_R_total_ud_lt()
-        R_total = matix.get_R_total()
-
-        //verification6
-        
-        //verification7
-        P_u_0 = matix.get_P_u_0()
+        v = matix.get_v()
+        rho_total = matix.get_rho_total()
         k = matix.get_k()
+        v_max = matix.get_v_max()
         v_c = matix.get_v_c()
         v_r = matix.get_v_r()
         v_f = matix.get_v_f()
+        u_0 = matix.get_u_0()
         u_1 = matix.get_u_1()
+        P_u_0 = matix.get_P_u_0()
         P_u_1 = matix.get_P_u_1()
         P_u = matix.get_P_u()
 
         // //put a single 0 or 1 in matrix.csv
         temp = []
+        temp.push(matix.verification0())
         temp.push(matix.verification4a())
         temp.push(matix.verification4b())
         temp.push(matix.verification5())
         temp.push(matix.verification6())
         temp.push(matix.verification7())
-        if(temp.includes(0)) { matrix[i].push(0) } else { matrix[i].push(1) } 
 
-        //put in 0s and 1s for each verification 
-        // matrix[i].push([matix.verification0()])
+        //put in volumes in cells in csv files
+        if(temp.includes(0)) { 
+            matrix[i].push(0) 
+            continue
+        } else { 
+            matrix[i].push(matix.get_volume())
+            volume_values.push(matix.get_volume())
+            length_values.push(length)
+            width_values.push(width)
+        } 
     }
 }
 
-const csvWriter = createCsvWriter({
+//get optimal volume and corresponding length and width
+min_vol_index = volume_values.indexOf(Math.min(...volume_values))
+optimal_length = length_values[min_vol_index]
+optimal_width = width_values[min_vol_index]
+optimal_volume = volume_values[min_vol_index]
+
+//print optimal values
+matix.get_dimensions(volume_values, length_values, width_values)
+
+
+//write to matrix.csv
+csvWriter  = createCsvWriter({
     header: header,
     path: './matrices/matrix.csv'
 })
 
 csvWriter.writeRecords(matrix)
     .then(() => {
-        console.log('...loops completed and csv file updated!');
+        console.log('...loops completed and matrix.csv file updated!')
+    });
+
+
+const records = [
+    [uuidv4(), national_annex, lmd_known, dimensions_known, point_foundation_shape, gamma_c, gamma_s, f_R_1, f_R_2, f_R_3, f_R_4, radius, height, height_p_hor, depth, column_shape, column_length, column_width, column_radius, ec_vl_length, ec_vl_width, geo_known, ground_type, ground_density, dr_st_af_k, dr_lt_af_k, ud_st_af_k, ud_lt_af_k, dr_st_cohesion_k, dr_lt_cohesion_k, ud_st_cohesion_k, ud_lt_cohesion_k, vl_external, terrain_live_load, hl_length, hl_width, m_length, m_width, internal_moment, concrete_type, f_ck, f_yk, A_s, concrete_density, fabrication_method, include_fiber, fiber_dosage, include_steel, steel_quality, steel_mesh_type, cover_layer, optimal_length, optimal_width, optimal_volume],
+]
+
+//write to volumes.csv
+csvVolumeWriter  = createCsvWriter({
+    header: ['id', 'national_annex', 'lmd_known', 'dimensions_known', 'point_foundation_shape', 'gamma_c', 'gamma_s', 'f_R_1', 'f_R_2', 'f_R_3', 'f_R_4', 'radius', 'height', 'height_p_hor', 'depth', 'column_shape', 'column_length', 'column_width', 'column_radius', 'ec_vl_length', 'ec_vl_width', 'geo_known', 'ground_type', 'ground_density', 'dr_st_af_k', 'dr_lt_af_k', 'ud_st_af_k', 'ud_lt_af_k', 'dr_st_cohesion_k', 'dr_lt_cohesion_k', 'ud_st_cohesion_k', 'ud_lt_cohesion_k', 'vl_external', 'terrain_live_load', 'hl_length', 'hl_width', 'm_length', 'm_width', 'internal_moment', 'concrete_type', 'f_ck', 'f_yk', 'A_s', 'concrete_density', 'fabrication_method', 'include_fiber', 'fiber_dosage', 'include_steel', 'steel_quality', 'steel_mesh_type', 'cover_layer', 'optimal_length', 'optimal_width', 'optimal_volume'],
+    path: './matrices/volumes.csv',
+    // comment out "append: true" for the first entry in volumes to include header
+    append: true,
+})
+
+csvVolumeWriter.writeRecords(records)
+    .then(() => {
+        console.log('...volumes.csv file updated!')
     });

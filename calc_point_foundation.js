@@ -414,6 +414,7 @@ function calc() {
        } else if (point_foundation_shape == 'circular') {
            var volume = Math.PI * Math.pow(radius, 2) * height / 1000000000
        }
+       var volume = matix.get_volume()
    
        var q = depth / 1000 * ground_density
    

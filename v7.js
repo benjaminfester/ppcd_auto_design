@@ -1,77 +1,86 @@
 const matix = require('./mathematix')
 const createCsvWriter = require('csv-writer').createArrayCsvWriter
+const vars = require('./input_variables.js')
 
 //set input variables
-lmd_known = undefined
-dimensions_known = undefined
-point_foundation_shape = 'rectangular'
-gamma_c = 1.5
-gamma_s = 1.2
-f_R_1 = 1.8
-f_R_2 = 1.9
-f_R_3 = 2.1
-f_R_4 = 2
-radius = 100
-height = 650
-height_p_hor = height
-depth = 900
-column_shape = 'rectangular'
-column_length = 150
-column_width = 150
-column_radius = 0
-ec_vl_length = 0
-ec_vl_width = 0
-geo_known = undefined
-ground_density = 18
-dr_st_af_k = 33
-dr_lt_af_k = 33
-ud_st_af_k = 0
-ud_lt_af_k = 25
-dr_st_cohesion_k = 0
-dr_lt_cohesion_k = 0
-ud_st_cohesion_k = 80
-ud_lt_cohesion_k = 8
-ground_type = 'both'
+lmd_known = vars.lmd_known
+dimensions_known = vars.dimensions_known
+point_foundation_shape = vars.point_foundation_shape
+gamma_c = vars.gamma_c
+gamma_s = vars.gamma_s
+f_R_1 = vars.f_R_1
+f_R_2 = vars.f_R_2
+f_R_3 = vars.f_R_3
+f_R_4 = vars.f_R_4
+radius = vars.radius
+height = vars.height
+height_p_hor = vars.height_p_hor
+depth = vars.depth
+column_shape = vars.column_shape
+column_length = vars.column_length
+column_width = vars.column_width
+column_radius = vars.column_radius
+ec_vl_length = vars.ec_vl_length
+ec_vl_width = vars.ec_vl_width
+geo_known = vars.geo_known
+ground_density = vars.ground_density
+dr_st_af_k = vars.dr_st_af_k
+dr_lt_af_k = vars.dr_lt_af_k
+ud_st_af_k = vars.ud_st_af_k
+ud_lt_af_k = vars.ud_lt_af_k
+dr_st_cohesion_k = vars.dr_st_cohesion_k
+dr_lt_cohesion_k = vars.dr_lt_cohesion_k
+ud_st_cohesion_k = vars.ud_st_cohesion_k
+ud_lt_cohesion_k = vars.ud_lt_cohesion_k
+ground_type = vars.ground_type
 
 //loads
-vl_external = 150
-terrain_live_load = 0
-hl_length = 0
-hl_width = 0
-m_length = 0
-m_width = 0
+vl_external = vars.vl_external
+terrain_live_load = vars.terrain_live_load
+hl_length = vars.hl_length
+hl_width = vars.hl_width
+m_length = vars.m_length
+m_width = vars.m_width
 
-concrete_type = 25
-f_ck = concrete_type
-f_yk = 0
-A_s = 0
-cover_layer = 0
-concrete_density = 24
-fabrication_method = 'in_situ'
-include_fiber = 'on'
-fiber_dosage = '1.8,1.9,2.1,2,4'
-include_steel = undefined
+concrete_type = vars.concrete_type
+f_ck = vars.f_ck
+f_yk = vars.f_yk
+A_s = vars.A_s
+cover_layer = vars.cover_layer
+concrete_density = vars.concrete_density
+fabrication_method = vars.fabrication_method
+include_fiber = vars.include_fiber
+fiber_dosage = vars.fiber_dosage
+include_steel = vars.include_steel
 
-length_min = Math.max((column_length), (2 * Math.abs(ec_vl_length)), (2 * (column_length / 2 + Math.abs(ec_vl_length))))
-width_min = Math.max((column_width), (2 * Math.abs(ec_vl_width)), (2 * (column_width / 2 + Math.abs(ec_vl_width))))
-lengths = matix.range(length_min, 8000)
+check_until = vars.check_until
+length_min = matix.get_length_min()
+width_min = matix.get_width_min()
+lengths = matix.range(length_min, check_until)
+
+//end input values
 
 const v7_matrix = []
 const header = [null]
+const volume_values = []
+const length_values = []
+const width_values = []
 
 for(i = 0; i < lengths.length; i++) {
 
     length = lengths[i]
     v7_matrix.push([length])
     width_max = length * 7
-    widths = matix.range(width_min, 8000)
+    widths = matix.range(width_min, check_until)
 
     for(j = 0; j < widths.length; j++) {
 
         width = widths[j]
         if(!header.includes(width)) { header.push(width) }
-        // v7_matrix[i].push(matix.verification0())
-        if(matix.verification0() === 0) { continue }
+        if(matix.verification0() === 0) {
+            v7_matrix[i].push(0)
+            continue
+        }
     
         //set calculated variables
         volume = matix.get_volume()
@@ -123,10 +132,9 @@ for(i = 0; i < lengths.length; i++) {
         vl_total_dr_lt = matix.get_vl_total_dr_lt()
         vl_total_ud_st = matix.get_vl_total_ud_st()
         vl_total_ud_lt = matix.get_vl_total_ud_lt()
-        vl_total = matix.get_vl_total()
         vl_dim_total = matix.get_vl_dim_total()
         vl_total_internal = matix.get_vl_total_internal()
-        vl_total_max = matix.get_vl_total_max()
+        vl_total = matix.get_vl_total()
         hl_total = matix.get_hl_total()
         d_0_dr_st = matix.get_d_0_dr_st()
         d_0_dr_lt = matix.get_d_0_dr_lt()
@@ -798,9 +806,19 @@ for(i = 0; i < lengths.length; i++) {
         P_u_1 = matix.get_P_u_1()
         P_u = matix.get_P_u()
 
-        v7_matrix[i].push([matix.verification7()])
+        if(matix.verification7() === 0) {
+            v7_matrix[i].push(0)
+        } else {
+            v7_matrix[i].push(matix.get_volume())
+            volume_values.push(matix.get_volume())
+            length_values.push(length)
+            width_values.push(width)
+        }
     }
 }
+
+//print optimal values
+matix.get_dimensions(volume_values, length_values, width_values)
 
 const csvWriter = createCsvWriter({
     header: header,

@@ -1,3 +1,11 @@
+module.exports.get_length_min = () => {
+    return Math.max((column_length), (2 * Math.abs(ec_vl_length)), (2 * (column_length / 2 + Math.abs(ec_vl_length))))
+}
+
+module.exports.get_width_min = () => {
+    return Math.max((column_width), (2 * Math.abs(ec_vl_width)), (2 * (column_width / 2 + Math.abs(ec_vl_width))))
+}
+
 module.exports.get_volume = () => {
     if (point_foundation_shape == 'rectangular') {
         return length * width * height / 1000000000
@@ -13,6 +21,26 @@ module.exports.get_g = () => {
         return ground_density * (depth - height) / 1000;
     } else if (height >= depth) {
             return 0;
+    }
+}
+
+module.exports.get_national_annex = (national_annex) => {
+    return national_annex
+}
+
+module.exports.get_gamma_c = () => {
+    if(national_annex != 'Denmark') {
+        return 1.5
+    } else {
+        return 1.45
+    }
+}
+
+module.exports.get_gamma_s = () => {
+    if(national_annex != 'Denmark') {
+        return 1.15
+    } else {
+        return 1.2
     }
 }
 
@@ -122,13 +150,11 @@ module.exports.get_vl_total_ud_lt = () => {
     return self_weight + ground_weight + vl_external
 }
 
-module.exports.get_vl_total = () => self_weight + ground_weight + vl_external
-
 module.exports.get_vl_dim_total = () => vl_external + self_weight
 
 module.exports.get_vl_total_internal = () => vl_external + self_weight
 
-module.exports.get_vl_total_max = () => Math.max(vl_total_dr_st, vl_total_dr_lt, vl_total_ud_st, vl_total_ud_lt)
+module.exports.get_vl_total = () => Math.max(vl_total_dr_st, vl_total_dr_lt, vl_total_ud_st, vl_total_ud_lt)
 
 module.exports.get_hl_total = () => Math.sqrt(Math.pow(hl_length, 2) + Math.pow(hl_width, 2))
 
@@ -2091,50 +2117,6 @@ module.exports.get_sigma_r4 = () => {
     return 0.37 * f_R_4;
 }
 
-module.exports.get_v = () => {
-    return 0.6 * (1 - f_ck / 250)
-}
-
-module.exports.get_u_0 = () => {
-    if (column_shape == 'rectangular') {
-        return 2 * (column_length + column_width)
-    } else if (column_shape == 'circular') {
-        return 2 * Math.PI * column_radius
-    }
-}
-
-module.exports.get_v_max = () => {
-    return 0.5 * v * f_cd
-}
-
-module.exports.get_P_u_0 = () => {
-    return v_max * 1000 * u_0 / 1000 * ef_height / 1000
-}
-
-module.exports.get_u_1 = () => {
-    if (column_shape == 'rectangular') {
-        if (rho == 0) {
-            return 2 * (column_length + column_width + 2 * Math.PI * ef_height)
-        } else {
-            return 2 * (column_length + column_width + 2 * Math.PI * ef_height)
-        }
-    } else if (column_shape == 'circular') {
-        if (rho == 0) {
-            return 2 * Math.PI * (column_radius + 2 * ef_height)
-        } else {
-            return 2 * Math.PI * (column_radius + 2 * ef_height)
-        }
-    }
-}
-
-module.exports.get_P_u_1 = () => {
-    if (include_fiber != "on") {
-        return v_r * 1000 * u_1 / 1000 * ef_height / 1000
-    } else {
-        return (v_r + v_f) * 1000 * u_1 / 1000 * ef_height / 1000
-    }
-}
-
 module.exports.get_gamma_m = () => {
     return 1.5
 }
@@ -2160,39 +2142,14 @@ module.exports.get_A_c = () => {
     return height / 1000;
 }
 
-module.exports.get_rho = () => {
+get_rho = () => {
     if (include_steel != 'on') {
-        return 0;
+        return 0
     } else  {
         return A_s / (1000 * 1000) / A_c * 100;
     }
 }
-module.exports.get_rho_total = () => {
-    return Math.sqrt(rho * rho)
-}
-
-module.exports.get_k = () => {
-    if (rho_total == 0) {
-        return Math.min(1 + Math.sqrt(200 / (ef_height)), 2);
-    } else {
-        return Math.min(1 + Math.sqrt(200 / ef_height), 2);
-    }
-}
-
-get_v_c = () => {
-    return 0.035 * Math.pow(k, 1.5) * Math.pow(f_ck, 0.5)
-}
-module.exports.get_v_c = get_v_c
-
-get_v_r = () => {
-    return Math.max(0.18 * k / gamma_c * Math.pow(100 * rho_total / 100 * f_ck, 1 / 3),v_c)
-}
-module.exports.get_v_r = get_v_r
-
-get_v_f = () => {
-    return 0.015 * (f_R_1 + f_R_2 + f_R_3 + f_R_4)
-}
-module.exports.get_v_f = get_v_f
+module.exports.get_rho = get_rho
 
 module.exports.get_h_ux = () => {
     var temp_h_ux;
@@ -6832,6 +6789,21 @@ get_M_ud_lt_l = () => {
 }
 module.exports.get_M_ud_lt_l = get_M_ud_lt_l
 
+get_M_Edp_dr_l = () => {
+    return Math.max(M_dr_st_l, M_dr_lt_l)
+}
+module.exports.get_M_Edp_dr_l = get_M_Edp_dr_l
+
+get_M_Edp_ud_l = () => {
+    return Math.max(M_ud_st_l, M_ud_lt_l)
+}
+module.exports.get_M_Edp_ud_l = get_M_Edp_ud_l
+
+get_M_Ed_l = () => {
+    return Math.max(M_Edp_dr_l, M_Edp_ud_l)
+}
+module.exports.get_M_Ed_l = get_M_Ed_l
+
 get_M_dr_st_b = () => {
     return Math.max(...fn_M_dr_st_b_arr.map(Math.abs))
 }
@@ -6852,6 +6824,95 @@ get_M_ud_lt_b = () => {
 }
 module.exports.get_M_ud_lt_b = get_M_ud_lt_b
 
+get_M_Edp_dr_b = () => {
+    return Math.max(M_dr_st_b, M_dr_lt_b)
+}
+module.exports.get_M_Edp_dr_b = get_M_Edp_dr_b
+
+get_M_Edp_ud_b = () => {
+    return Math.max(M_ud_st_b, M_ud_lt_b)
+}
+module.exports.get_M_Edp_ud_b = get_M_Edp_ud_b
+
+get_M_Ed_b = () => {
+    return Math.max(M_Edp_dr_b, M_Edp_ud_b)
+}
+module.exports.get_M_Ed_b = get_M_Ed_b
+
+get_v = () => {
+    return 0.6 * (1 - f_ck / 250)
+}
+module.exports.get_v = get_v
+
+get_rho_total = () => {
+    return Math.sqrt(rho * rho)
+}
+module.exports.get_rho_total = get_rho_total
+
+get_k = () => {
+    if (rho_total == 0) {
+        return Math.min(1 + Math.sqrt(200 / (ef_height)), 2);
+    } else {
+        return Math.min(1 + Math.sqrt(200 / ef_height), 2);
+    }
+}
+module.exports.get_k = get_k
+
+module.exports.get_v_max = () => {
+    return 0.5 * v * f_cd
+}
+
+get_v_c = () => {
+    return 0.035 * Math.pow(k, 1.5) * Math.pow(f_ck, 0.5)
+}
+module.exports.get_v_c = get_v_c
+
+get_v_r = () => {
+    return Math.max(0.18 * k / gamma_c * Math.pow(100 * rho_total / 100 * f_ck, 1 / 3),v_c)
+}
+module.exports.get_v_r = get_v_r
+
+get_v_f = () => {
+    return 0.015 * (f_R_1 + f_R_2 + f_R_3 + f_R_4)
+}
+module.exports.get_v_f = get_v_f
+
+module.exports.get_u_0 = () => {
+    if (column_shape == 'rectangular') {
+        return 2 * (column_length + column_width)
+    } else if (column_shape == 'circular') {
+        return 2 * Math.PI * column_radius
+    }
+}
+
+module.exports.get_u_1 = () => {
+    if (column_shape == 'rectangular') {
+        if (rho == 0) {
+            return 2 * (column_length + column_width + 2 * Math.PI * ef_height)
+        } else {
+            return 2 * (column_length + column_width + 2 * Math.PI * ef_height)
+        }
+    } else if (column_shape == 'circular') {
+        if (rho == 0) {
+            return 2 * Math.PI * (column_radius + 2 * ef_height)
+        } else {
+            return 2 * Math.PI * (column_radius + 2 * ef_height)
+        }
+    }
+}
+
+module.exports.get_P_u_0 = () => {
+    return v_max * 1000 * u_0 / 1000 * ef_height / 1000
+}
+
+module.exports.get_P_u_1 = () => {
+    if (include_fiber != "on") {
+        return v_r * 1000 * u_1 / 1000 * ef_height / 1000
+    } else {
+        return (v_r + v_f) * 1000 * u_1 / 1000 * ef_height / 1000
+    }
+}
+
 get_P_u = () => {
     return Math.min(P_u_0,P_u_1)
 }
@@ -6863,6 +6924,13 @@ range = (start, end) => {
 }
 module.exports.range = range
 
+get_dimensions = (volume_values, length_values, width_values) => {
+    min_vol_index = volume_values.indexOf(Math.min(...volume_values))
+    console.log("length: ", length_values[min_vol_index])
+    console.log("width: ", width_values[min_vol_index])
+    console.log("volume: ", volume_values[min_vol_index])
+}
+module.exports.get_dimensions = get_dimensions
 
 //VERIFICATIONS
 
@@ -6890,53 +6958,37 @@ verification4a = () => {
 module.exports.verification4a = verification4a
 
 verification4b = () => {
-    if(verification0() === 0) {
+    if (M_Ed_b <= M_p_b) {
+        return 1
+    } else if (M_Ed_b > M_p_b) {
         return 0
-    } else {
-        if (M_Ed_b <= M_p_b) {
-            return 1
-        } else if (M_Ed_b > M_p_b) {
-            return 0
-        }
     }
 }
 module.exports.verification4b = verification4b
 
 verification5 = () => {
-    if(verification0() === 0) {
+    if (vl_total <= R_total) {
+        return 1
+    } else if (vl_total > R_total) {
         return 0
-    } else {
-        if (vl_total <= R_total) {
-            return 1
-        } else if (vl_total > R_total) {
-            return 0
-        }
     }
 }
 module.exports.verification5 = verification5
 
 verification6 = () => {
-    if(verification0() === 0) {
+    if (H_res_both <= H_total) {
+        return 1
+    } else if (H_res_both > H_total) {
         return 0
-    } else {
-        if (H_res_both <= H_total) {
-            return 1
-        } else if (H_res_both > H_total) {
-            return 0
-        }
     }
 }
 module.exports.verification6 = verification6
 
 verification7 = () => {
-    if(verification0() === 0) {
+    if (vl_external <= P_u) {
+        return 1
+    } else if (vl_external > P_u) {
         return 0
-    } else {
-        if (vl_external <= P_u) {
-            return 1
-        } else if (vl_external > P_u) {
-            return 0
-        }
     }
 }
 module.exports.verification7 = verification7

@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/benjaminfester/ppcd_auto_design#readme",
   "dependencies": {
-    "csv-writer": "^1.6.0"
+    "csv-writer": "^1.6.0",
+    "uuid": "^8.3.2"
   }
 }
