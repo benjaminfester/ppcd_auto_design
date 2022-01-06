@@ -67,6 +67,7 @@ const volume_values = []
 const length_values = []
 const width_values = []
 
+
 for(i = 0; i < lengths.length; i++) {
 
     length = lengths[i]
@@ -102,3 +103,5 @@ csvWriter.writeRecords(v0_matrix)
     .then(() => {
         console.log('...loops completed and csv file updated!');
     });
+    
+

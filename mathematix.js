@@ -1,3 +1,5 @@
+const { vl_external, point_foundation_shape } = require("./input_variables")
+
 module.exports.get_length_min = () => {
     return Math.max((column_length), (2 * Math.abs(ec_vl_length)), (2 * (column_length / 2 + Math.abs(ec_vl_length))))
 }
@@ -24,17 +26,14 @@ module.exports.get_g = () => {
     }
 }
 
-module.exports.get_national_annex = (national_annex) => {
-    return national_annex
-}
-
-module.exports.get_gamma_c = () => {
+get_gamma_c = () => {
     if(national_annex != 'Denmark') {
         return 1.5
     } else {
         return 1.45
     }
 }
+module.exports.get_gamma_c = get_gamma_c
 
 module.exports.get_gamma_s = () => {
     if(national_annex != 'Denmark') {
@@ -6932,6 +6931,162 @@ get_dimensions = (volume_values, length_values, width_values) => {
 }
 module.exports.get_dimensions = get_dimensions
 
+//PREVERIFICATIONS
+pre_verification1 = () => {
+    if ((Math.abs(vl_external) <= self_weight * 0.9)) {
+        return 1
+    } else if ((Math.abs(vl_external) > self_weight * 0.9)) {
+        return 0
+    }
+}
+module.exports.pre_verification1 = pre_verification1
+
+pre_verification2 = () => {
+    if (Math.abs(vl_external) <= (self_weight + ground_weight) * 0.9) {
+        return 1
+    } else if (Math.abs(vl_external) > (self_weight + ground_weight) * 0.9) {
+        return 0
+    }
+}
+module.exports.pre_verification2 = pre_verification2
+
+pre_verification3 = () => {
+    if (e_total_dr_st_l <= (length / 2) ) {
+        return 1
+    } else if (e_total_dr_st_l > (length / 2)) {
+        return 0
+    }
+}
+module.exports.pre_verification3 = pre_verification3
+
+pre_verification4 = () => {
+    if (e_total_dr_lt_l <= (length / 2) ) {
+        return 1
+    } else if (e_total_dr_lt_l > (length / 2)) {
+        return 0
+    }
+}
+module.exports.pre_verification4 = pre_verification4
+
+pre_verification5 = () => {
+    if (e_total_ud_st_l <= (length / 2) ) {
+        return 1
+    } else if (e_total_ud_st_l > (length / 2)) {
+        return 0
+    }
+}
+module.exports.pre_verification5 = pre_verification5
+
+pre_verification6 = () => {
+    if (e_total_ud_lt_l <= (length / 2) ) {
+        return 1
+    } else if (e_total_ud_lt_l > (length / 2)) {
+        return 0
+    }
+}
+module.exports.pre_verification6 = pre_verification6
+
+pre_verification7 = () => {
+    if (e_total_dr_st_b <= (width / 2) ) {
+        return 1
+    } else if (e_total_dr_st_b > (width / 2)) {
+        return 0
+    }
+}
+module.exports.pre_verification7 = pre_verification7
+
+pre_verification8 = () => {
+    if (e_total_dr_lt_b <= (width / 2) ) {
+        return 1
+    } else if (e_total_dr_lt_b > (width / 2)) {
+        return 0
+    }
+}
+module.exports.pre_verification8 = pre_verification8
+
+pre_verification9 = () => {
+    if (e_total_ud_st_b <= (width / 2) ) {
+        return 1
+    } else if (e_total_ud_st_b > (width / 2)) {
+        return 0
+    }
+}
+module.exports.pre_verification9 = pre_verification9
+
+pre_verification10 = () => {
+    if (e_total_ud_lt_b <= (width / 2) ) {
+        return 1
+    } else if (e_total_ud_lt_b > (width / 2)) {
+        return 0
+    }
+}
+module.exports.pre_verification10 = pre_verification10
+
+pre_verification11 = () => {
+    if (e_total_dr_st_r <= radius ) {
+        return 1
+    } else if (e_total_dr_st_r > radius) {
+        return 0
+    }
+}
+module.exports.pre_verification11 = pre_verification11
+
+pre_verification12 = () => {
+    if (e_total_dr_lt_r <= radius ) {
+        return 1
+    } else if (e_total_dr_lt_r > radius) {
+        return 0
+    }
+}
+module.exports.pre_verification12 = pre_verification12
+
+pre_verification13 = () => {
+    if (e_total_ud_st_r <= radius ) {
+        return 1
+    } else if (e_total_ud_st_r > radius) {
+        return 0
+    }
+}
+module.exports.pre_verification13 = pre_verification13
+
+pre_verification14 = () => {
+    if (e_total_ud_lt_r <= radius ) {
+        return 1
+    } else if (e_total_ud_lt_r > radius) {
+        return 0
+    }
+}
+module.exports.pre_verification14 = pre_verification14
+
+pre_verification15 = () => {
+    if (e_dim_l <= length / 2) {
+        return 1
+    } else if (e_dim_l > length / 2) {
+        return 0
+    }
+}
+module.exports.pre_verification15 = pre_verification15
+
+pre_verification16 = () => {
+    if (e_dim_b <= width / 2) {
+        return 1
+    } else if (e_dim_b > width / 2) {
+        return 0
+    }
+}
+module.exports.pre_verification16 = pre_verification16
+
+pre_verification17 = () => {
+    if (e_dim_r <= radius) {
+        return 1
+    } else if (e_dim_r > radius) {
+        return 0
+    }
+}
+module.exports.pre_verification17 = pre_verification17
+
+
+
 //VERIFICATIONS
 
 //geometric restriction
@@ -6945,14 +7100,10 @@ verification0 = () => {
 module.exports.verification0 = verification0
 
 verification4a = () => {
-    if(verification0() === 0) {
+    if (M_Ed_l <= M_p_l) {
+        return 1
+    } else if (M_Ed_l > M_p_l) {
         return 0
-    } else {
-        if (M_Ed_l <= M_p_l) {
-            return 1
-        } else if (M_Ed_l > M_p_l) {
-            return 0
-        }
     }
 }
 module.exports.verification4a = verification4a

@@ -1,5 +1,25 @@
-- Create project in LateX
-- Generate data containing information regarding thresholds for when a point foundation calculation is verified
-	- Extract functions from calc_point_foundation.js
-	- Do this for several fixed values in the (talk to Daniel about what values are realistic to fix and generate dat from)
-- Create matrix for geometry restriction and for each verification
+- Create report outlines:
+	- Objective section. Text about the project's objective
+	- Add Chapters:
+		- Introduction (what is the software, what do we want to implement and how is this achieved)
+		- Generate data (optimized volumes)
+			- Variables (what are they)
+			- Scope (lock some variables)
+			- What "customer groups" can be looked at. 
+			- Statistically find out what is most interesting to look at
+		- Analysis and visualization of generated data
+		- Analysis (and visualization) of collected data (from database)
+		- Per
+	- Add figures to chapters
+- calc2.js: calc.js must break faster. I.e. an optimized calc.js that continues/breaks when (for each length) it has found
+volumes
+- Load and interpret collected data from the database.
+- Test some Regression models:
+	- Linear (baseline) (!)
+	- Ridge 
+	- Neural Network (!)
+	- Lasso
+	- Decision Tree (!)
+	- Random Forest (!)
+	- KNN
+	- SVM

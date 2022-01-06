@@ -1,7 +1,5 @@
-const matix = require('./mathematix')
-
 //set input variables
-national_annex = matix.get_national_annex('Denmark')
+national_annex = 'Denmark'
 module.exports.national_annex = national_annex
 
 lmd_known = undefined
@@ -13,10 +11,10 @@ module.exports.dimensions_known = dimensions_known
 point_foundation_shape = 'rectangular'
 module.exports.point_foundation_shape = point_foundation_shape
 
-gamma_c = matix.get_gamma_c()
+gamma_c = (national_annex === 'Denmark') ? 1.45 : 1.5
 module.exports.gamma_c = gamma_c
 
-gamma_s = matix.get_gamma_s()
+gamma_s = (national_annex === 'Denmark') ? 1.2 : 1.15
 module.exports.gamma_s = gamma_s
 
 f_R_1 = 1.8
@@ -34,7 +32,7 @@ module.exports.f_R_4 = f_R_4
 radius = 0
 module.exports.radius = radius
 
-height = 650
+height = 550
 module.exports.height = height
 
 height_p_hor = height
@@ -49,19 +47,20 @@ module.exports.column_shape = column_shape
 column_length = 150
 module.exports.column_length = column_length
 
-column_width = 150
+column_width = 250
 module.exports.column_width = column_width
 
 column_radius = 0
 module.exports.column_radius = column_radius
 
-ec_vl_length = 0
+ec_vl_length = 100
 module.exports.ec_vl_length = ec_vl_length
 
-ec_vl_width = 0
+ec_vl_width = -150
 module.exports.ec_vl_width = ec_vl_width
 
-geo_known = undefined
+//geotechnical parameters
+geo_known = 'on'
 module.exports.geo_known = geo_known
 
 ground_density = 18
@@ -91,32 +90,32 @@ module.exports.ud_st_cohesion_k = ud_st_cohesion_k
 ud_lt_cohesion_k = 8
 module.exports.ud_lt_cohesion_k = ud_lt_cohesion_k
 
-ground_type = 'both'
+ground_type = 'drained'
 module.exports.ground_type = ground_type
 
-
 //loads
-vl_external = -40
+vl_external = 50
 module.exports.vl_external = vl_external
 
 terrain_live_load = 0
 module.exports.terrain_live_load = terrain_live_load
 
-hl_length = 0
+hl_length = 10
 module.exports.hl_length = hl_length
 
-hl_width = 0
+hl_width = 10
 module.exports.hl_width = hl_width
 
-m_length = 0
+m_length = -5
 module.exports.m_length = m_length
 
-m_width = 0
+m_width = 15
 module.exports.m_width = m_width
 
 internal_moment = 0
 module.exports.internal_moment = internal_moment
 
+//material properties
 concrete_type = 25
 module.exports.concrete_type = concrete_type
 
@@ -129,6 +128,7 @@ module.exports.f_yk = f_yk
 A_s = 0
 module.exports.A_s = A_s
 
+//reinforcement
 steel_quality = 0
 module.exports.steel_quality = steel_quality
 
@@ -155,7 +155,7 @@ module.exports.include_steel = include_steel
 
 //end input values
 
+
 //loop values
 check_until = 8000
 module.exports.check_until = check_until
-
