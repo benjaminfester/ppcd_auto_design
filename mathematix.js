@@ -6924,10 +6924,9 @@ range = (start, end) => {
 module.exports.range = range
 
 get_dimensions = (volume_values, length_values, width_values) => {
-    min_vol_index = volume_values.indexOf(Math.min(...volume_values))
-    console.log("length: ", length_values[min_vol_index])
-    console.log("width: ", width_values[min_vol_index])
-    console.log("volume: ", volume_values[min_vol_index])
+    min_vol_index = volume_values.indexOf(Math.min(...volume_values), "width: ")
+    console.log("length: ", length_values[min_vol_index], "width: ", width_values[min_vol_index], "volume: ", volume_values[min_vol_index])
+    
 }
 module.exports.get_dimensions = get_dimensions
 

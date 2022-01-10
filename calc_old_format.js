@@ -80,6 +80,8 @@ for(i = 0; i < lengths.length; i++) {
     matrix.push([length])
     width_max = length * 7
     widths = matix.range(width_min, check_until)
+
+    
     
     for(j = 0; j < widths.length; j++) {
 
@@ -464,10 +466,8 @@ for(i = 0; i < lengths.length; i++) {
         x_width_value_end = matix.get_x_width_value_end()
         x_width_value_interval = matix.get_x_width_value_interval()
 
-        pre_temp = []
-
         //PRE_VERIFICATIONS
-
+        pre_temp = []
         if(lmd_known == 'on') {
             if(point_foundation_shape == 'rectangular') {
                 // Only check for negative vl_external values
@@ -932,6 +932,7 @@ for(i = 0; i < lengths.length; i++) {
     }
 }
 
+
 //get optimal volume and corresponding length and width
 min_vol_index = volume_values.indexOf(Math.min(...volume_values))
 optimal_length = length_values[min_vol_index]
@@ -945,7 +946,7 @@ matix.get_dimensions(volume_values, length_values, width_values)
 //write to matrix.csv
 csvWriter  = createCsvWriter({
     header: header,
-    path: './matrices/matrix.csv'
+    path: './matrices/ex3/ex3_all_matrix.csv'
 })
 
 csvWriter.writeRecords(matrix)

@@ -1,0 +1,24 @@
+Fixed for all examples:
+    height: 650
+    depth: 900
+    column_length: 200
+    column_width: 200
+    vl_external: 100
+
+example 1:
+    ec_vl_length = 0
+    ec_vl_width = 0
+    hl_length = 0
+    hl_width = 0
+
+example 2: 
+    ec_vl_length = 100
+    ec_vl_width = 0
+    hl_length = 50
+    hl_width = 0
+
+example 2: 
+    ec_vl_length = 0
+    ec_vl_width = 100
+    hl_length = 0
+    hl_width = 50

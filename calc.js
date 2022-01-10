@@ -60,7 +60,8 @@ steel_mesh_type = vars.steel_mesh_type
 cover_layer = vars.cover_layer
 
 check_until = vars.check_until
-length_min = matix.get_length_min()
+// length_min = matix.get_length_min()
+length_min = 300
 width_min = matix.get_width_min()
 lengths = matix.range(length_min, check_until)
 
@@ -71,20 +72,33 @@ const header = [null]
 const volume_values = []
 const length_values = []
 const width_values = []
+const tried_widths = []
 
+
+//start timer
 console.time('length_width_loop')
 
+best_width = null
+
+lengthLoop:
 for(i = 0; i < lengths.length; i++) {
 
+    
+    
     length = lengths[i]
     matrix.push([length])
     width_max = length * 7
     widths = matix.range(width_min, check_until)
-    
+
+
     for(j = 0; j < widths.length; j++) {
 
-
         width = widths[j]
+
+        if(width === best_width) {
+            matrix[i].push(0)
+            continue lengthLoop
+        }
 
         if(!header.includes(width)) { header.push(width) }
         if(matix.verification0() === 0) {
@@ -919,18 +933,27 @@ for(i = 0; i < lengths.length; i++) {
         temp.push(matix.verification6())
         temp.push(matix.verification7())
 
+        
         //put in volumes in cells in csv files
         if(temp.includes(0)) { 
             matrix[i].push(0) 
             continue
         } else { 
-            matrix[i].push(matix.get_volume())
-            volume_values.push(matix.get_volume())
+            //verified
+
+            if(width < best_width || best_width == null) {
+                best_width = width
+            }
+
+            matrix[i].push(volume)
+            volume_values.push(volume)
             length_values.push(length)
             width_values.push(width)
+            continue lengthLoop
         } 
     }
 }
+
 
 //get optimal volume and corresponding length and width
 min_vol_index = volume_values.indexOf(Math.min(...volume_values))
@@ -938,11 +961,12 @@ optimal_length = length_values[min_vol_index]
 optimal_width = width_values[min_vol_index]
 optimal_volume = volume_values[min_vol_index]
 
+
+
 //print optimal values
 matix.get_dimensions(volume_values, length_values, width_values)
 
-
-//write to matrix.csv
+//write to matrix2.csv
 csvWriter  = createCsvWriter({
     header: header,
     path: './matrices/matrix.csv'
@@ -952,7 +976,6 @@ csvWriter.writeRecords(matrix)
     .then(() => {
         console.log('...loops completed and matrix.csv file updated!')
     });
-
 
 const records = [
     [uuidv4(), national_annex, lmd_known, dimensions_known, point_foundation_shape, gamma_c, gamma_s, f_R_1, f_R_2, f_R_3, f_R_4, radius, height, height_p_hor, depth, column_shape, column_length, column_width, column_radius, ec_vl_length, ec_vl_width, geo_known, ground_type, ground_density, dr_st_af_k, dr_lt_af_k, ud_st_af_k, ud_lt_af_k, dr_st_cohesion_k, dr_lt_cohesion_k, ud_st_cohesion_k, ud_lt_cohesion_k, vl_external, terrain_live_load, hl_length, hl_width, m_length, m_width, internal_moment, concrete_type, f_ck, f_yk, A_s, concrete_density, fabrication_method, include_fiber, fiber_dosage, include_steel, steel_quality, steel_mesh_type, cover_layer, optimal_length, optimal_width, optimal_volume],
@@ -970,6 +993,6 @@ csvVolumeWriter.writeRecords(records)
     .then(() => {
         console.log('...volumes.csv file updated!')
     });
-
+    
 
 console.timeEnd('length_width_loop')

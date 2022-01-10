@@ -9,7 +9,7 @@
 			- Statistically find out what is most interesting to look at
 		- Analysis and visualization of generated data
 		- Analysis (and visualization) of collected data (from database)
-		- Per
+		- Perspec / future things to look at and expand
 	- Add figures to chapters
 - calc2.js: calc.js must break faster. I.e. an optimized calc.js that continues/breaks when (for each length) it has found
 volumes
@@ -23,3 +23,16 @@ volumes
 	- Random Forest (!)
 	- KNN
 	- SVM
+
+
+
+
+Verifications:
+	lmd_known on: 1, 2
+
+	dimensions_known on: 27, 28, 29
+
+	lmd_known off, dimensions_known off:
+		drained: 9a, 9b, 10, 11, 12, 13, 14
+		undrained: 18a, a8b, 19, 20, 21, 22, 23
+		both: 4a, 4b, 5, 6, 7

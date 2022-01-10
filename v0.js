@@ -96,7 +96,7 @@ matix.get_dimensions(volume_values, length_values, width_values)
 
 const csvWriter = createCsvWriter({
     header: header,
-    path: './matrices/v0_matrix.csv'
+    path: './matrices/ex3/ex3_v0_matrix.csv'
 })
 
 csvWriter.writeRecords(v0_matrix)

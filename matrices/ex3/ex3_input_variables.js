@@ -2,15 +2,12 @@
 national_annex = 'Denmark'
 module.exports.national_annex = national_annex
 
-//LOCK THIS TO KEEP DOING VERIFICATIONS 4A, 4B, 5, 6 AND 7
 lmd_known = undefined
 module.exports.lmd_known = lmd_known
 
-//LOCK THIS TO KEEP DOING VERIFICATIONS 4A, 4B, 5, 6 AND 7
 dimensions_known = undefined
 module.exports.dimensions_known = dimensions_known
 
-//LOCK THIS TO BE ABLE TO DO LOOP
 point_foundation_shape = 'rectangular'
 module.exports.point_foundation_shape = point_foundation_shape
 
@@ -47,10 +44,10 @@ module.exports.depth = depth
 column_shape = 'rectangular'
 module.exports.column_shape = column_shape
 
-column_length = 150
+column_length = 200
 module.exports.column_length = column_length
 
-column_width = 150
+column_width = 200
 module.exports.column_width = column_width
 
 column_radius = 0
@@ -59,7 +56,7 @@ module.exports.column_radius = column_radius
 ec_vl_length = 0
 module.exports.ec_vl_length = ec_vl_length
 
-ec_vl_width = 0
+ec_vl_width = 100
 module.exports.ec_vl_width = ec_vl_width
 
 //geotechnical parameters
@@ -93,7 +90,6 @@ module.exports.ud_st_cohesion_k = ud_st_cohesion_k
 ud_lt_cohesion_k = 8
 module.exports.ud_lt_cohesion_k = ud_lt_cohesion_k
 
-//LOCK THIS TO KEEP DOING VERIFICATIONS 4A, 4B, 5, 6 AND 7
 ground_type = 'both'
 module.exports.ground_type = ground_type
 
@@ -107,7 +103,7 @@ module.exports.terrain_live_load = terrain_live_load
 hl_length = 0
 module.exports.hl_length = hl_length
 
-hl_width = 0
+hl_width = 50
 module.exports.hl_width = hl_width
 
 m_length = 0

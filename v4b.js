@@ -457,6 +457,81 @@ for(i = 0; i < lengths.length; i++) {
         x_width_value_end = matix.get_x_width_value_end()
         x_width_value_interval = matix.get_x_width_value_interval()
 
+        //PRE_VERIFICATIONS
+        pre_temp = []
+        if(lmd_known == 'on') {
+            if(point_foundation_shape == 'rectangular') {
+                // Only check for negative vl_external values
+                if (vl_external < 0) {
+                    pre_temp.push(pre_verification2())          
+                } 
+                pre_temp.push(pre_verification3())
+                pre_temp.push(pre_verification4())
+                pre_temp.push(pre_verification5())
+                pre_temp.push(pre_verification6())
+                pre_temp.push(pre_verification7())
+                pre_temp.push(pre_verification8())
+                pre_temp.push(pre_verification9())
+                pre_temp.push(pre_verification10())
+            } else if(point_foundation_shape == 'circular') {
+                // Only check for negative vl_external values
+                if (vl_external < 0) {
+                    pre_temp.push(pre_verification2())          
+                } 
+                pre_temp.push(pre_verification11())
+                pre_temp.push(pre_verification12())
+                pre_temp.push(pre_verification13())
+                pre_temp.push(pre_verification14())
+            }
+        } else {
+            if(dimensions_known == 'on') {
+                if(point_foundation_shape == 'rectangular') {
+                    // Only check for negative vl_external values
+                    if (vl_external < 0) {
+                        pre_temp.push(pre_verification1())          
+                    } 
+                    pre_temp.push(pre_verification15())
+                    pre_temp.push(pre_verification16())
+                } else if(point_foundation_shape == 'circular') {
+                    // Only check for negative vl_external values
+                    if (vl_external < 0) {
+                        pre_temp.push(pre_verification1())          
+                    }
+                    pre_temp.push(pre_verification17())
+                }
+            } else {
+                if(point_foundation_shape == 'rectangular') {
+                    // Only check for negative vl_external values
+                    if (vl_external < 0) {
+                        pre_temp.push(pre_verification2())          
+                    }
+                    pre_temp.push(pre_verification3())
+                    pre_temp.push(pre_verification4())
+                    pre_temp.push(pre_verification5())
+                    pre_temp.push(pre_verification6())
+                    pre_temp.push(pre_verification7())
+                    pre_temp.push(pre_verification8())
+                    pre_temp.push(pre_verification9())
+                    pre_temp.push(pre_verification10())
+                } else if(point_foundation_shape == 'circular') {
+                    // Only check for negative vl_external values
+                    if (vl_external < 0) {
+                        pre_temp.push(pre_verification2())          
+                    }
+                    pre_temp.push(pre_verification11())
+                    pre_temp.push(pre_verification12())
+                    pre_temp.push(pre_verification13())
+                    pre_temp.push(pre_verification14())
+                }
+            }
+        }
+
+        if(pre_temp.includes(0)) {
+            v4b_matrix[i].push(0)
+            continue
+        }
+
+
         //dimensions_known = No
         // Y Values Chart 1
         fn_M_dr_st_l_arr = []
@@ -822,7 +897,7 @@ matix.get_dimensions(volume_values, length_values, width_values)
 
 const csvWriter = createCsvWriter({
     header: header,
-    path: './matrices/v4b_matrix.csv'
+    path: './matrices/ex3/ex3_v4b_matrix.csv'
 })
 
 csvWriter.writeRecords(v4b_matrix)
