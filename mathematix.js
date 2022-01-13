@@ -1,4 +1,4 @@
-const { vl_external, point_foundation_shape } = require("./input_variables")
+
 
 module.exports.get_length_min = () => {
     return Math.max((column_length), (2 * Math.abs(ec_vl_length)), (2 * (column_length / 2 + Math.abs(ec_vl_length))))
@@ -15,6 +15,10 @@ module.exports.get_volume = () => {
         return Math.PI * Math.pow(radius, 2) * height / 1000000000
     }
 }
+
+
+
+
 
 module.exports.get_q = () => depth / 1000 * ground_density
 
@@ -153,9 +157,13 @@ module.exports.get_vl_dim_total = () => vl_external + self_weight
 
 module.exports.get_vl_total_internal = () => vl_external + self_weight
 
-module.exports.get_vl_total = () => Math.max(vl_total_dr_st, vl_total_dr_lt, vl_total_ud_st, vl_total_ud_lt)
+module.exports.get_vl_total = () => {
+    return Math.max(vl_total_dr_st, vl_total_dr_lt, vl_total_ud_st, vl_total_ud_lt)
+}
 
-module.exports.get_hl_total = () => Math.sqrt(Math.pow(hl_length, 2) + Math.pow(hl_width, 2))
+module.exports.get_hl_total = () => {
+    return Math.sqrt(Math.pow(hl_length, 2) + Math.pow(hl_width, 2))
+}
 
 module.exports.get_d_0_dr_st = () => -((K_c_a_dr_st * dr_st_cohesion_d + K_p_a_dr_st * terrain_live_load) / (ground_density * K_g_a_dr_st)) * 1000
 
@@ -1467,48 +1475,37 @@ module.exports.get_N_q_dr_st = () => {
         if (e_total_dr_st_l < 0.3 * length && e_total_dr_st_b < 0.3 * width) {
             return Math.exp(Math.PI * Math.tan(dr_st_af_d * Math.PI / 180)) * (1 + Math.sin(dr_st_af_d * Math.PI / 180)) / (1 - Math.sin(dr_st_af_d * Math.PI / 180))
         } else if (e_total_dr_st_l >= 0.3 * length || e_total_dr_st_b >= 0.3 * width) {
-            return Math.exp(Math.PI * Math.tan(dr_st_af_d * Math.PI / 180)) * (1 + Math.sin(dr_st_af_d * Math.PI / 180)) / (1 - Math.sin(dr_st_af_d * Math.PI / 180))  
+            return Math.exp(Math.PI * Math.tan(dr_st_af_d * Math.PI / 180)) * (1 + Math.sin(dr_st_af_d * Math.PI / 180)) / (1 - Math.sin(dr_st_af_d * Math.PI / 180))            
         }
-    } else if (point_foundation_shape == 'circular') {
-        if (e_total_dr_st_r < 0.3 * 2 * radius) {
-            return Math.exp(Math.PI * Math.tan(dr_st_af_d * Math.PI / 180)) * (1 + Math.sin(dr_st_af_d * Math.PI / 180)) / (1 - Math.sin(dr_st_af_d * Math.PI / 180))
-        } else if (e_total_dr_st_r >= 0.3 * 2 * radius) {
-            return Math.exp(Math.PI * Math.tan(dr_st_af_d * Math.PI / 180)) * (1 + Math.sin(dr_st_af_d * Math.PI / 180)) / (1 - Math.sin(dr_st_af_d * Math.PI / 180))
-        }
-    }
+    } 
 }
 
 module.exports.get_N_c_dr_st = () => {
     if (point_foundation_shape == 'rectangular') {
         if (e_total_dr_st_l < 0.3 * length && e_total_dr_st_b < 0.3 * width) {
+
             return (N_q_dr_st - 1) / Math.tan(dr_st_af_d * Math.PI / 180)
+            
         } else if (e_total_dr_st_l >= 0.3 * length || e_total_dr_st_b >= 0.3 * width) {
+
             return (1.05 + Math.pow(Math.tan(dr_st_af_d * Math.PI / 180), 3)) * (N_q_dr_st - 1) / Math.tan(dr_st_af_d * Math.PI / 180)
+            
         }
-    } else if (point_foundation_shape == 'circular') {
-        if (e_total_dr_st_r < 0.3 * 2 * radius) {
-            return (N_q_dr_st - 1) / Math.tan(dr_st_af_d * Math.PI / 180)
-        } else if (e_total_dr_st_r >= 0.3 * 2 * radius) {
-            return (1.05 + Math.pow(Math.tan(dr_st_af_d * Math.PI / 180), 3)) * (N_q_dr_st - 1) / Math.tan(dr_st_af_d * Math.PI / 180)
-        }
-    }
+    } 
 }
 
 module.exports.get_N_g_dr_st = () => {
     if (point_foundation_shape == 'rectangular') {
-
         if (e_total_dr_st_l < 0.3 * length && e_total_dr_st_b < 0.3 * width) {
+
             return 1 / 4 * Math.pow((N_q_dr_st - 1) * Math.cos(dr_st_af_d * Math.PI / 180), (3 / 2))
+            
         } else if (e_total_dr_st_l >= 0.3 * length || e_total_dr_st_b >= 0.3 * width) {
+
             return 2 * (1 / 4 * Math.pow((N_q_dr_st - 1) * Math.cos(dr_st_af_d * Math.PI / 180), (3 / 2)))
+            
         }
-    } else if (point_foundation_shape == 'circular') {
-        if (e_total_dr_st_r < 0.3 * 2 * radius) {
-            return 1 / 4 * Math.pow((N_q_dr_st - 1) * Math.cos(dr_st_af_d * Math.PI / 180), (3 / 2))
-        } else if (e_total_dr_st_r >= 0.3 * 2 * radius) {
-            return 2 * (1 / 4 * Math.pow((N_q_dr_st - 1) * Math.cos(dr_st_af_d * Math.PI / 180), (3 / 2)))
-        }
-    }
+    } 
 }
 
 module.exports.get_N_q_dr_lt = () => {
@@ -1593,20 +1590,17 @@ module.exports.get_N_c_ud_st = () => {
     }
 }
 
-module.exports.get_N_g_ud_st = (e_total_ud_st_l, length, e_total_ud_st_b, width, e_total_ud_st_r, radius) => {
+module.exports.get_N_g_ud_st = () => {
     if (point_foundation_shape == 'rectangular') {
-        if (e_total_ud_st_l < 0.3 * length && e_total_ud_st_b < 0.3 * width) {    
+        
+        if (e_total_ud_st_l < 0.3 * length && e_total_ud_st_b < 0.3 * width) {
+    
             return 0
         } else if (e_total_ud_st_l >= 0.3 * length || e_total_ud_st_b >= 0.3 * width) {
+
             return 0      
         }
-    } else if (point_foundation_shape == 'circular') {
-        if (e_total_ud_st_r < 0.3 * 2 * radius) {    
-            return 0
-        } else if (e_total_ud_st_r >= 0.3 * 2 * radius) {
-            return 0
-        }
-    }
+    } 
 }
 
 module.exports.get_N_q_ud_lt = () => {
@@ -1705,52 +1699,63 @@ module.exports.get_N_g_ud_lt = () => {
     }
 }
 
-module.exports.get_s_g_dr_st = () => {
+get_s_g_dr_st = () => {
     return 1 - 0.4 * Math.min(ef_dr_st_l , ef_dr_st_b) / Math.max(ef_dr_st_l , ef_dr_st_b)
 }
+module.exports.get_s_g_dr_st = get_s_g_dr_st
 
-module.exports.get_s_g_dr_lt = () => {
+get_s_g_dr_lt = () => {
     return 1 - 0.4 * Math.min(ef_dr_lt_l , ef_dr_lt_b) / Math.max(ef_dr_lt_l , ef_dr_lt_b)
 }
+module.exports.get_s_g_dr_lt = get_s_g_dr_lt
 
-module.exports.get_s_g_ud_st = () => {
+get_s_g_ud_st = () => {
     return 1 - 0.4 * Math.min(ef_ud_st_l , ef_ud_st_b) / Math.max(ef_ud_st_l , ef_ud_st_b)
 }
+module.exports.get_s_g_ud_st = get_s_g_ud_st
 
-module.exports.get_s_g_ud_lt = () => {
+get_s_g_ud_lt = () => {
     return 1 - 0.4 * Math.min(ef_ud_lt_l , ef_ud_lt_b) / Math.max(ef_ud_lt_l , ef_ud_lt_b)
 }
+module.exports.get_s_g_ud_lt = get_s_g_ud_lt
 
-module.exports.get_s_q_dr_st = () => {
+get_s_q_dr_st = () => {
     return 1 + 0.2 * Math.min(ef_dr_st_l , ef_dr_st_b) / Math.max(ef_dr_st_l , ef_dr_st_b)
 }
+module.exports.get_s_q_dr_st = get_s_q_dr_st
 
-module.exports.get_s_q_dr_lt = () => {
+get_s_q_dr_lt = () => {
     return 1 + 0.2 * Math.min(ef_dr_lt_l , ef_dr_lt_b) / Math.max(ef_dr_lt_l , ef_dr_lt_b)
 }
+module.exports.get_s_q_dr_lt = get_s_q_dr_lt
 
-module.exports.get_s_q_ud_st = () => {
+get_s_q_ud_st = () => {
     return 1 + 0.2 * Math.min(ef_ud_st_l , ef_ud_st_b) / Math.max(ef_ud_st_l , ef_ud_st_b)
 }
+module.exports.get_s_q_ud_st = get_s_q_ud_st
 
-module.exports.get_s_q_ud_lt = () => {
+get_s_q_ud_lt = () => {
     return 1 + 0.2 * Math.min(ef_ud_lt_l , ef_ud_lt_b) / Math.max(ef_ud_lt_l , ef_ud_lt_b)
 }
+module.exports.get_s_q_ud_lt = get_s_q_ud_lt
 
-module.exports.get_s_c_dr_st = () => {
-    return s_q_dr_st
+get_s_c_dr_st = () => {
+    return get_s_q_dr_st()
 }
+module.exports.get_s_c_dr_st = get_s_c_dr_st
 
-module.exports.get_s_c_dr_lt = () => {
-    return s_q_dr_lt
+get_s_c_dr_lt = () => {
+    return get_s_q_dr_lt()
 }
+module.exports.get_s_c_dr_lt = get_s_c_dr_lt
 
-module.exports.get_s_c_ud_st = () => {
-    return s_q_ud_st
+get_s_c_ud_st = () => {
+    return get_s_q_ud_st()
 }
+module.exports.get_s_c_ud_st = get_s_c_ud_st
 
 module.exports.get_s_c_ud_lt = () => {
-    return s_q_ud_lt
+    return get_s_q_ud_lt()
 }
 
 module.exports.get_i_q_dr_st = () => {
@@ -6917,18 +6922,22 @@ get_P_u = () => {
 }
 module.exports.get_P_u = get_P_u
 
-range = (start, end) => {
-    if(start === end) return [start];
-    return [start, ...range(start + 50, end)];
+range = (start, step, end) => {
+    const arrayLength = Math.floor(((end - start) / step)) + 1
+    const range = [...Array(arrayLength).keys()].map(x => (x * step) + start)
+    return range
 }
 module.exports.range = range
 
-get_dimensions = (volume_values, length_values, width_values) => {
-    min_vol_index = volume_values.indexOf(Math.min(...volume_values), "width: ")
-    console.log("length: ", length_values[min_vol_index], "width: ", width_values[min_vol_index], "volume: ", volume_values[min_vol_index])
-    
+randomIntInSteps = (start, increments, end) => {
+    var numbers = [];
+    for(var n = start; n <= end; n += increments) {
+        numbers.push(n);
+    }
+    var randomIndex = Math.floor(Math.random() * numbers.length);
+    return numbers[randomIndex];
 }
-module.exports.get_dimensions = get_dimensions
+module.exports.randomIntInSteps = randomIntInSteps
 
 //PREVERIFICATIONS
 pre_verification1 = () => {
@@ -7088,7 +7097,8 @@ module.exports.pre_verification17 = pre_verification17
 
 //VERIFICATIONS
 
-//geometric restriction
+//geometric restrictions
+
 verification0 = () => {
     if(length > width * 7 || width > length * 7) {
         return 0
@@ -7117,10 +7127,13 @@ verification4b = () => {
 module.exports.verification4b = verification4b
 
 verification5 = () => {
-    if (vl_total <= R_total) {
-        return 1
-    } else if (vl_total > R_total) {
-        return 0
+
+    if (!isNaN(vl_total && R_total)) {
+        if (vl_total <= R_total) {
+            return 1
+        } else if (vl_total > R_total) {
+            return 0
+        }
     }
 }
 module.exports.verification5 = verification5

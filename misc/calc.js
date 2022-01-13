@@ -1,55 +1,61 @@
-const matix = require('./mathematix')
+const matix = require('../mathematix')
 const createCsvWriter  = require('csv-writer').createArrayCsvWriter
-require('./input_variables.js')
+const vars = require('../input_variables.js')
 const { v4: uuidv4 } = require('uuid')
 
+length_min = matix.get_length_min()
+width_min = matix.get_width_min()
 lengths = matix.range(0, 50, check_until)
 widths = matix.range(0, 50, check_until)
+//end input values
 
-matrix = []
-verified_sets = []
-
-console.log(column_length)
+const matrix = []
+const verified_sets = []
+// bw = null
 
 //start timer
 console.time('length_width_loop')
 
+
 lengthLoop:
-for(l in lengths) {
+for(i = 0; i < lengths.length; i++) {
+
+    length = lengths[i]
     
-    length = lengths[l]
-    //write all length values to first row
     matrix.push([length])
 
     if(length < 2 * (column_length / 2 + Math.abs(ec_vl_length))) {
-        matrix[l].push(null)
+        matrix[i].push(1)
         continue lengthLoop
     }
 
     widthLoop:
-    for(w in widths) {
-        
-        width = widths[w]
+    for(j = 0; j < widths.length; j++) {
 
-        if(width < 2 * (column_width / 2 + Math.abs(ec_vl_width))) {
-            matrix[l].push(null)
-            continue widthLoop
-        }
+        width = widths[j]
+
+        
 
         if(matix.verification0() === 0) {
-            matrix[l].push(null)
+            matrix[i].push(3)
             continue widthLoop
         }
 
         if(verified_sets.length > 0) {
             if(width == verified_sets.at(-1)[1]) {
-                matrix[l].push(null)
+                // console.log("lol")
+                matrix[i].push(4)
+                console.log(verified_sets)
                 continue lengthLoop
             }
+
             if(length > verified_sets.at(-1)[0] && width > verified_sets.at(-1)[1]) {
-                continue lengthLoop
+                break lengthLoop
             }
         }
+
+
+        
 
         
         //set calculated variables
@@ -448,11 +454,11 @@ for(l in lengths) {
         pre_temp.push(pre_verification10())
 
         if(pre_temp.includes(0)) {
-            matrix[l].push(null)
+            matrix[i].push(5)
             continue widthLoop
         }
 
-        
+
         //dimensions_known = No
         // Y Values Chart 1
         fn_M_dr_st_l_arr = []
@@ -789,7 +795,6 @@ for(l in lengths) {
             fn_V_ud_lt_b_corr = matix.get_fn_V_ud_lt_b_corr(x)
             fn_V_dim_b_corr = matix.get_fn_V_dim_b_corr(x)
         }
-
         
         M_dr_st_l = matix.get_M_dr_st_l()
         M_dr_lt_l = matix.get_M_dr_lt_l()
@@ -820,6 +825,9 @@ for(l in lengths) {
         P_u_1 = matix.get_P_u_1()
         P_u = matix.get_P_u()
 
+        
+
+        // //put a single 0 or 1 in matrix.csv
         temp = []
         temp.push(matix.verification4a())
         temp.push(matix.verification4b())
@@ -827,35 +835,47 @@ for(l in lengths) {
         temp.push(matix.verification6())
         temp.push(matix.verification7())
 
-
+        // console.log(length, width, matix.verification0(), matix.verification4a(), matix.verification4b(), matix.verification5(), matix.verification6(), matix.verification7())
+        
+        //put in volumes in cells in csv files
         if(temp.includes(0)) { 
 
 
-            matrix[l].push(null)
+            matrix[i].push(6)
         } else { 
+            //verified
+
+            // if(bw === null || width < bw) {
+            //     bw = width
+            // }
+
             
 
             
             if(verified_sets.length > 0) {
 
+                
+
                 if((length > verified_sets.at(-1)[0] && width >= verified_sets.at(-1)[1]) || (width > verified_sets.at(-1)[1] && length >= verified_sets.at(-1)[0])) {
 
-                    matrix[l].push(7)
+                    matrix[i].push(7)
                     continue lengthLoop
                 } 
+                
+
             }
+            
+            
 
-            //verified
-
-            matrix[l].push(volume)
+            matrix[i].push(volume)
             verified_sets.push([length, width, volume])
             continue lengthLoop
         } 
-
     }
 
-}
+    
 
+}
 
 ls = verified_sets.map(function(arr) {
     return arr[0]
@@ -871,11 +891,6 @@ vs = verified_sets.map(function(arr) {
 
 opt_index = vs.indexOf(Math.min(...vs))
 
-widths.unshift(0)
-csvWriter  = createCsvWriter({
-    header: widths,
-    path: './matrices/matrix.csv'
-})
 
 opt_length = verified_sets[opt_index][0]
 opt_width = verified_sets[opt_index][1]
@@ -899,10 +914,39 @@ console.log("hl_width:",hl_width)
 console.log("m_length:",m_length)
 console.log("m_width:",m_width)
 
+
+//write to matrix.csv
+
+// add 0 to the widths array before putting in the matrix.csv
+widths.unshift(0)
+csvWriter  = createCsvWriter({
+    header: widths,
+    path: './matrices/matrix.csv'
+})
+
 csvWriter.writeRecords(matrix)
     .then(() => {
         console.log('...loops completed and matrix.csv file updated!')
     });
 
+const records = [
+    [uuidv4(), national_annex, lmd_known, dimensions_known, point_foundation_shape, gamma_c, gamma_s, f_R_1, f_R_2, f_R_3, f_R_4, radius, height, height_p_hor, depth, column_shape, column_length, column_width, column_radius, ec_vl_length, ec_vl_width, geo_known, ground_type, ground_density, dr_st_af_k, dr_lt_af_k, ud_st_af_k, ud_lt_af_k, dr_st_cohesion_k, dr_lt_cohesion_k, ud_st_cohesion_k, ud_lt_cohesion_k, vl_external, terrain_live_load, hl_length, hl_width, m_length, m_width, internal_moment, concrete_type, f_ck, f_yk, A_s, concrete_density, fabrication_method, include_fiber, fiber_dosage, include_steel, steel_quality, steel_mesh_type, cover_layer, opt_length, opt_width, opt_volume],
+]
+
+// write to volumes.csv
+csvVolumeWriter  = createCsvWriter({
+    header: ['id', 'national_annex', 'lmd_known', 'dimensions_known', 'point_foundation_shape', 'gamma_c', 'gamma_s', 'f_R_1', 'f_R_2', 'f_R_3', 'f_R_4', 'radius', 'height', 'height_p_hor', 'depth', 'column_shape', 'column_length', 'column_width', 'column_radius', 'ec_vl_length', 'ec_vl_width', 'geo_known', 'ground_type', 'ground_density', 'dr_st_af_k', 'dr_lt_af_k', 'ud_st_af_k', 'ud_lt_af_k', 'dr_st_cohesion_k', 'dr_lt_cohesion_k', 'ud_st_cohesion_k', 'ud_lt_cohesion_k', 'vl_external', 'terrain_live_load', 'hl_length', 'hl_width', 'm_length', 'm_width', 'internal_moment', 'concrete_type', 'f_ck', 'f_yk', 'A_s', 'concrete_density', 'fabrication_method', 'include_fiber', 'fiber_dosage', 'include_steel', 'steel_quality', 'steel_mesh_type', 'cover_layer', 'opt_length', 'opt_width', 'opt_volume'],
+    path: './matrices/volumes.csv',
+    // comment out "append: true" for the first entry in volumes to include header
+    append: true,
+})
+
+csvVolumeWriter.writeRecords(records)
+    .then(() => {
+        console.log('...appended to volumes.csv')
+    });
+    
+
 
 console.timeEnd('length_width_loop')
+

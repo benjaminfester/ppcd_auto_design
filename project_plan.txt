@@ -36,3 +36,8 @@ Verifications:
 		drained: 9a, 9b, 10, 11, 12, 13, 14
 		undrained: 18a, a8b, 19, 20, 21, 22, 23
 		both: 4a, 4b, 5, 6, 7
+
+
+TODO:
+	- if there are no solutions, what message should the user receive
+	- add all preverifications later (see file pre_veri_later.js)
