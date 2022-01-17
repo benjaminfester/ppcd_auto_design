@@ -1,6 +1,10 @@
 const matix = require('./mathematix')
-const { v4: uuidv4 } = require('uuid')
-const vars = require('./input_variables.js')
 
 
-console.log(height)
+vl = matix.randomIntInStepsNotZero(-60, 20, 200)
+
+console.log(vl)
+
+for(l = 0; l < 200; l++) {
+    console.log(matix.randomIntInStepsNotZero(-60, 20, 200))
+}

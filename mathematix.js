@@ -6939,6 +6939,24 @@ randomIntInSteps = (start, increments, end) => {
 }
 module.exports.randomIntInSteps = randomIntInSteps
 
+randomIntInStepsNotZero = (start, increments, end) => {
+    var numbers = [];
+    for(var n = start; n <= end; n += increments) {
+        numbers.push(n);
+    }
+    numbers.splice(numbers.indexOf(0), 1)
+    var randomIndex = Math.floor(Math.random() * numbers.length);
+    return numbers[randomIndex];
+}
+module.exports.randomIntInStepsNotZero = randomIntInStepsNotZero
+
+restr_1 = (direction_value, column_direction_value, eccentricity_direction_value) => {
+    if(direction_value < 2 * (column_direction_value / 2 + Math.abs(eccentricity_direction_value))) {
+        return true
+    }
+}
+module.exports.restr_1 = restr_1
+
 //PREVERIFICATIONS
 pre_verification1 = () => {
     if ((Math.abs(vl_external) <= self_weight * 0.9)) {

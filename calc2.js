@@ -5,14 +5,16 @@ const { v4: uuidv4 } = require('uuid')
 national_annex = 'Denmark'
 lmd_known = undefined
 dimensions_known = undefined
-point_foundation_shape = 'rectangular'
 gamma_c = (national_annex === 'Denmark') ? 1.45 : 1.5
 gamma_s = (national_annex === 'Denmark') ? 1.2 : 1.15
 f_R_1 = 1.8
 f_R_2 = 1.9
 f_R_3 = 2.1
 f_R_4 = 2
+point_foundation_shape = 'rectangular'
+radius = 0
 column_shape = 'rectangular'
+column_radius = 0
 terrain_live_load = 0
 geo_known = undefined
 ground_density = 18
@@ -25,6 +27,7 @@ dr_lt_cohesion_k = 0
 ud_st_cohesion_k = 80
 ud_lt_cohesion_k = 8
 ground_type = 'both'
+internal_moment = 0
 concrete_type = 25
 f_ck = concrete_type
 f_yk = 0
@@ -42,23 +45,27 @@ check_until = 8000
 lengths = matix.range(0, 50, check_until)
 widths = matix.range(0, 50, check_until)
 
+n = 10
 
-for(i = 0; i < 2; i++) {
+randLoop:
+for(i = 0; i < n; i++) {
 
+    //randomize following values
     height = matix.randomIntInSteps(200, 200, 1200)
     height_p_hor = height
     depth = matix.randomIntInSteps(0, 200, 1200)
-    column_length = matix.randomIntInSteps(0, 100, 400)
-    column_width = matix.randomIntInSteps(0, 100, 400)
+    column_length = matix.randomIntInSteps(100, 100, 400)
+    column_width = matix.randomIntInSteps(100, 100, 400)
     ec_vl_length = matix.randomIntInSteps(0, 100, 300)
     ec_vl_width = matix.randomIntInSteps(0, 100, 300)
-    vl_external = matix.randomIntInSteps(-60, 20, 200)
+    vl_external = matix.randomIntInStepsNotZero(-60, 20, 200)
     hl_length = matix.randomIntInSteps(0, 5, 20)
     hl_width = matix.randomIntInSteps(0, 5, 20)
     m_length = matix.randomIntInSteps(0, 5, 10)
     m_width = matix.randomIntInSteps(0, 5, 10)
 
-    
+    //matrix is used for writing to a csv for each randLoop. disregard for this data generating file. 
+    //see calc.js for standalone loop
     matrix = []
     verified_sets = []
 
@@ -920,12 +927,6 @@ for(i = 0; i < 2; i++) {
 
     opt_index = vs.indexOf(Math.min(...vs))
 
-    // widths.unshift(0)
-    // csvWriter  = createCsvWriter({
-    //     header: widths,
-    //     path: './matrices/matrix2.csv'
-    // })
-
     opt_length = verified_sets[opt_index][0]
     opt_width = verified_sets[opt_index][1]
     opt_volume = verified_sets[opt_index][2]
@@ -948,11 +949,24 @@ for(i = 0; i < 2; i++) {
     console.log("m_length:",m_length)
     console.log("m_width:",m_width)
 
-    // csvWriter.writeRecords(matrix)
-    //     .then(() => {
-    //         console.log('...loops completed and matrix2.csv file updated!')
-    //     });
-
+    // write to volumes2.csv
+    const records = [
+        [uuidv4(), national_annex, lmd_known, dimensions_known, point_foundation_shape, gamma_c, gamma_s, f_R_1, f_R_2, f_R_3, f_R_4, radius, height, height_p_hor, depth, column_shape, column_length, column_width, column_radius, ec_vl_length, ec_vl_width, geo_known, ground_type, ground_density, dr_st_af_k, dr_lt_af_k, ud_st_af_k, ud_lt_af_k, dr_st_cohesion_k, dr_lt_cohesion_k, ud_st_cohesion_k, ud_lt_cohesion_k, vl_external, terrain_live_load, hl_length, hl_width, m_length, m_width, internal_moment, concrete_type, f_ck, f_yk, A_s, concrete_density, fabrication_method, include_fiber, fiber_dosage, include_steel, steel_quality, steel_mesh_type, cover_layer, opt_length, opt_width, opt_volume],
+    ]
+    
+    // write to volumes2.csv
+    csvVolumeWriter  = createCsvWriter({
+        header: ['id', 'national_annex', 'lmd_known', 'dimensions_known', 'point_foundation_shape', 'gamma_c', 'gamma_s', 'f_R_1', 'f_R_2', 'f_R_3', 'f_R_4', 'radius', 'height', 'height_p_hor', 'depth', 'column_shape', 'column_length', 'column_width', 'column_radius', 'ec_vl_length', 'ec_vl_width', 'geo_known', 'ground_type', 'ground_density', 'dr_st_af_k', 'dr_lt_af_k', 'ud_st_af_k', 'ud_lt_af_k', 'dr_st_cohesion_k', 'dr_lt_cohesion_k', 'ud_st_cohesion_k', 'ud_lt_cohesion_k', 'vl_external', 'terrain_live_load', 'hl_length', 'hl_width', 'm_length', 'm_width', 'internal_moment', 'concrete_type', 'f_ck', 'f_yk', 'A_s', 'concrete_density', 'fabrication_method', 'include_fiber', 'fiber_dosage', 'include_steel', 'steel_quality', 'steel_mesh_type', 'cover_layer', 'opt_length', 'opt_width', 'opt_volume'],
+        path: './matrices/volumes2.csv',
+        // comment out "append: true" for the first entry in volumes to include header
+        append: true,
+    })
+    
+    csvVolumeWriter.writeRecords(records)
+        .then(() => {
+            console.log('...appended to volumes2.csv')
+        });
+        
     
 
 }

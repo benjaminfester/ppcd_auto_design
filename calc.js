@@ -1,15 +1,75 @@
 const matix = require('./mathematix')
 const createCsvWriter  = require('csv-writer').createArrayCsvWriter
-require('./input_variables.js')
+// require('./input_variables.js')
 const { v4: uuidv4 } = require('uuid')
 
-lengths = matix.range(0, 50, check_until)
-widths = matix.range(0, 50, check_until)
+
+national_annex = 'Denmark'
+lmd_known = undefined
+dimensions_known = undefined
+gamma_c = (national_annex === 'Denmark') ? 1.45 : 1.5
+gamma_s = (national_annex === 'Denmark') ? 1.2 : 1.15
+f_R_1 = 1.8
+f_R_2 = 1.9
+f_R_3 = 2.1
+f_R_4 = 2
+point_foundation_shape = 'rectangular'
+radius = 0
+column_shape = 'rectangular'
+column_radius = 0
+terrain_live_load = 0
+geo_known = undefined
+ground_density = 18
+dr_st_af_k = 33
+dr_lt_af_k = 33
+ud_st_af_k = 0
+ud_lt_af_k = 25
+dr_st_cohesion_k = 0
+dr_lt_cohesion_k = 0
+ud_st_cohesion_k = 80
+ud_lt_cohesion_k = 8
+ground_type = 'both'
+internal_moment = 0
+concrete_type = 25
+f_ck = concrete_type
+f_yk = 0
+A_s = 0
+steel_quality = 0
+steel_mesh_type = 0
+cover_layer = 0
+concrete_density = 24
+fabrication_method = 'in_situ'
+include_fiber = 'on'
+fiber_dosage = '1.8,1.9,2.1,2,4'
+include_steel = undefined
+
+end = 8000
+big_step = 400
+small_step = 50
+lengths = matix.range(0, small_step, end)
+widths = matix.range(0, small_step, end)
+widths_big_steps = matix.range(0, big_step, end)
+widths_small_steps = matix.range(0, small_step, end)
+
+//randomize following values
+height = matix.randomIntInSteps(200, 200, 1200)
+height_p_hor = height
+depth = matix.randomIntInSteps(0, 200, 1200)
+column_length = matix.randomIntInSteps(100, 100, 400)
+column_width = matix.randomIntInSteps(100, 100, 400)
+ec_vl_length = matix.randomIntInSteps(0, 100, 300)
+ec_vl_width = matix.randomIntInSteps(0, 100, 300)
+vl_external = matix.randomIntInStepsNotZero(-60, 20, 200)
+hl_length = matix.randomIntInSteps(0, 5, 20)
+hl_width = matix.randomIntInSteps(0, 5, 20)
+m_length = matix.randomIntInSteps(0, 5, 10)
+m_width = matix.randomIntInSteps(0, 5, 10)
+
+
 
 matrix = []
 verified_sets = []
 
-console.log(column_length)
 
 //start timer
 console.time('length_width_loop')
@@ -829,8 +889,6 @@ for(l in lengths) {
 
 
         if(temp.includes(0)) { 
-
-
             matrix[l].push(null)
         } else { 
             
@@ -840,7 +898,7 @@ for(l in lengths) {
 
                 if((length > verified_sets.at(-1)[0] && width >= verified_sets.at(-1)[1]) || (width > verified_sets.at(-1)[1] && length >= verified_sets.at(-1)[0])) {
 
-                    matrix[l].push(7)
+                    matrix[l].push(null)
                     continue lengthLoop
                 } 
             }
@@ -874,7 +932,7 @@ opt_index = vs.indexOf(Math.min(...vs))
 widths.unshift(0)
 csvWriter  = createCsvWriter({
     header: widths,
-    path: './matrices/matrix.csv'
+path: `./matrices/matrices_opt/${uuidv4()}.csv`
 })
 
 opt_length = verified_sets[opt_index][0]
