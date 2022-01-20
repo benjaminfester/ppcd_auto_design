@@ -3,7 +3,6 @@ const createCsvWriter  = require('csv-writer').createArrayCsvWriter
 // require('./input_variables.js')
 const { v4: uuidv4 } = require('uuid')
 
-
 national_annex = 'Denmark'
 lmd_known = undefined
 dimensions_known = undefined
@@ -43,14 +42,6 @@ include_fiber = 'on'
 fiber_dosage = '1.8,1.9,2.1,2,4'
 include_steel = undefined
 
-end = 8000
-big_step = 400
-small_step = 50
-lengths = matix.range(0, small_step, end)
-widths = matix.range(0, small_step, end)
-widths_big_steps = matix.range(0, big_step, end)
-widths_small_steps = matix.range(0, small_step, end)
-
 //randomize following values
 height = matix.randomIntInSteps(200, 200, 1200)
 height_p_hor = height
@@ -65,7 +56,13 @@ hl_width = matix.randomIntInSteps(0, 5, 20)
 m_length = matix.randomIntInSteps(0, 5, 10)
 m_width = matix.randomIntInSteps(0, 5, 10)
 
-
+end = 8000
+big_step = 400
+small_step = 50
+lengths = matix.range(0, small_step, end)
+widths = matix.range(0, small_step, end)
+widths_big_steps = matix.range(0, big_step, end)
+widths_small_steps = matix.range(0, small_step, end)
 
 matrix = []
 verified_sets = []
@@ -932,7 +929,7 @@ opt_index = vs.indexOf(Math.min(...vs))
 widths.unshift(0)
 csvWriter  = createCsvWriter({
     header: widths,
-path: `./matrices/matrices_opt/${uuidv4()}.csv`
+    path: `./matrices/matrices_opt/${uuidv4()}.csv`
 })
 
 opt_length = verified_sets[opt_index][0]

@@ -3,7 +3,6 @@ const veri = require('./verified')
 const createCsvWriter  = require('csv-writer').createArrayCsvWriter
 const { v4: uuidv4 } = require('uuid')
 
-
 national_annex = 'Denmark'
 lmd_known = undefined
 dimensions_known = undefined
@@ -51,7 +50,7 @@ widths = matix.range(0, small_step, end)
 widths_big_steps = matix.range(0, big_step, end)
 widths_small_steps = matix.range(0, small_step, end)
 
-const n = 10
+const n = 200
 
 findVolumes = () => {
 

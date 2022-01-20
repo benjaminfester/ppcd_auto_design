@@ -38,13 +38,13 @@ module.exports.f_R_4 = f_R_4
 radius = 0
 module.exports.radius = radius
 
-height = 400
+height = 650
 module.exports.height = height
 
 height_p_hor = height
 module.exports.height_p_hor = height_p_hor
 
-depth = 200
+depth = 900
 module.exports.depth = depth
 
 column_length = 200
@@ -59,19 +59,19 @@ module.exports.ec_vl_length = ec_vl_length
 ec_vl_width = 0
 module.exports.ec_vl_width = ec_vl_width
 
-vl_external = 140
+vl_external = 100
 module.exports.vl_external = vl_external
 
-hl_length = 20
+hl_length = 50
 module.exports.hl_length = hl_length
 
 hl_width = 0
 module.exports.hl_width = hl_width
 
-m_length = 10
+m_length = 0
 module.exports.m_length = m_length
 
-m_width = 5
+m_width = 0
 module.exports.m_width = m_width
 
 column_shape = 'rectangular'

@@ -1,97 +1,46 @@
 const matix = require('./mathematix')
 const createCsvWriter  = require('csv-writer').createArrayCsvWriter
-const vars = require('./input_variables.js')
-const { v4: uuidv4 } = require('uuid')
+const vars = require('./input_variables')
 
-//set input variables
-national_annex = vars.national_annex
-lmd_known = (vars.lmd_known === undefined) ? "undefined" : vars.lmd_known
-dimensions_known = (vars.dimensions_known === undefined) ? "undefined" : vars.dimensions_known
-
-point_foundation_shape = vars.point_foundation_shape
-gamma_c = vars.gamma_c
-gamma_s = vars.gamma_s
-f_R_1 = vars.f_R_1
-f_R_2 = vars.f_R_2
-f_R_3 = vars.f_R_3
-f_R_4 = vars.f_R_4
-radius = vars.radius
-height = vars.height
-height_p_hor = vars.height_p_hor
-depth = vars.depth
-column_shape = vars.column_shape
-column_length = vars.column_length
-column_width = vars.column_width
-column_radius = vars.column_radius
-ec_vl_length = vars.ec_vl_length
-ec_vl_width = vars.ec_vl_width
-geo_known = (vars.geo_known === undefined) ? "undefined" : vars.geo_known
-ground_density = vars.ground_density
-dr_st_af_k = vars.dr_st_af_k
-dr_lt_af_k = vars.dr_lt_af_k
-ud_st_af_k = vars.ud_st_af_k
-ud_lt_af_k = vars.ud_lt_af_k
-dr_st_cohesion_k = vars.dr_st_cohesion_k
-dr_lt_cohesion_k = vars.dr_lt_cohesion_k
-ud_st_cohesion_k = vars.ud_st_cohesion_k
-ud_lt_cohesion_k = vars.ud_lt_cohesion_k
-ground_type = vars.ground_type
-
-//loads
-vl_external = vars.vl_external
-terrain_live_load = vars.terrain_live_load
-hl_length = vars.hl_length
-hl_width = vars.hl_width
-m_length = vars.m_length
-m_width = vars.m_width
-internal_moment = vars.internal_moment
-
-concrete_type = vars.concrete_type
-f_ck = vars.f_ck
-f_yk = vars.f_yk
-A_s = vars.A_s
-concrete_density = vars.concrete_density
-fabrication_method = vars.fabrication_method
-include_fiber = (vars.include_fiber === undefined) ? "undefined" : vars.include_fiber
-fiber_dosage = vars.fiber_dosage
-include_steel = (vars.include_steel === undefined) ? "undefined" : vars.include_steel
-steel_quality = vars.steel_quality
-steel_mesh_type = vars.steel_mesh_type
-cover_layer = vars.cover_layer
-
-check_until = vars.check_until
-length_min = matix.get_length_min()
-width_min = matix.get_width_min()
-lengths = matix.range(length_min, check_until)
+lengths = matix.range(0, 100, 8000)
+widths = matix.range(0, 100, 8000)
 
 //end input values
 
 const matrix = []
-const header = [null]
 const volume_values = []
 const length_values = []
 const width_values = []
 
 console.time('length_width_loop')
 
+lengthLoop:
 for(i = 0; i < lengths.length; i++) {
 
     length = lengths[i]
+    
+    console.log(length)
     matrix.push([length])
-    width_max = length * 7
-    widths = matix.range(width_min, check_until)
 
+    if(length < 2 * (column_length / 2 + Math.abs(ec_vl_length))) {
+        matrix[i].push(0)
+        continue lengthLoop
+    }
     
-    
+    widthLoop:
     for(j = 0; j < widths.length; j++) {
 
 
         width = widths[j]
 
-        if(!header.includes(width)) { header.push(width) }
+        if(width < 2 * (column_width / 2 + Math.abs(ec_vl_width))) {
+            matrix[i].push(0)
+            continue widthLoop
+        }
+
         if(matix.verification0() === 0) {
             matrix[i].push(0)
-            continue
+            continue widthLoop
         }
 
         //set calculated variables
@@ -933,19 +882,12 @@ for(i = 0; i < lengths.length; i++) {
 }
 
 
-//get optimal volume and corresponding length and width
-min_vol_index = volume_values.indexOf(Math.min(...volume_values))
-optimal_length = length_values[min_vol_index]
-optimal_width = width_values[min_vol_index]
-optimal_volume = volume_values[min_vol_index]
-
-//print optimal values
-matix.get_dimensions(volume_values, length_values, width_values)
 
 
-//write to matrix.csv
+
+widths.unshift(0)
 csvWriter  = createCsvWriter({
-    header: header,
+    header: widths,
     path: './matrices/ex3/ex3_all_matrix.csv'
 })
 
@@ -955,22 +897,6 @@ csvWriter.writeRecords(matrix)
     });
 
 
-const records = [
-    [uuidv4(), national_annex, lmd_known, dimensions_known, point_foundation_shape, gamma_c, gamma_s, f_R_1, f_R_2, f_R_3, f_R_4, radius, height, height_p_hor, depth, column_shape, column_length, column_width, column_radius, ec_vl_length, ec_vl_width, geo_known, ground_type, ground_density, dr_st_af_k, dr_lt_af_k, ud_st_af_k, ud_lt_af_k, dr_st_cohesion_k, dr_lt_cohesion_k, ud_st_cohesion_k, ud_lt_cohesion_k, vl_external, terrain_live_load, hl_length, hl_width, m_length, m_width, internal_moment, concrete_type, f_ck, f_yk, A_s, concrete_density, fabrication_method, include_fiber, fiber_dosage, include_steel, steel_quality, steel_mesh_type, cover_layer, optimal_length, optimal_width, optimal_volume],
-]
-
-// write to volumes.csv
-csvVolumeWriter  = createCsvWriter({
-    header: ['id', 'national_annex', 'lmd_known', 'dimensions_known', 'point_foundation_shape', 'gamma_c', 'gamma_s', 'f_R_1', 'f_R_2', 'f_R_3', 'f_R_4', 'radius', 'height', 'height_p_hor', 'depth', 'column_shape', 'column_length', 'column_width', 'column_radius', 'ec_vl_length', 'ec_vl_width', 'geo_known', 'ground_type', 'ground_density', 'dr_st_af_k', 'dr_lt_af_k', 'ud_st_af_k', 'ud_lt_af_k', 'dr_st_cohesion_k', 'dr_lt_cohesion_k', 'ud_st_cohesion_k', 'ud_lt_cohesion_k', 'vl_external', 'terrain_live_load', 'hl_length', 'hl_width', 'm_length', 'm_width', 'internal_moment', 'concrete_type', 'f_ck', 'f_yk', 'A_s', 'concrete_density', 'fabrication_method', 'include_fiber', 'fiber_dosage', 'include_steel', 'steel_quality', 'steel_mesh_type', 'cover_layer', 'optimal_length', 'optimal_width', 'optimal_volume'],
-    path: './matrices/volumes.csv',
-    // comment out "append: true" for the first entry in volumes to include header
-    append: true,
-})
-
-csvVolumeWriter.writeRecords(records)
-    .then(() => {
-        console.log('...volumes.csv file updated!')
-    });
 
 
 console.timeEnd('length_width_loop')
