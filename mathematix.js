@@ -6721,7 +6721,6 @@ module.exports.get_fn_V_dim_b_corr = get_fn_V_dim_b_corr
 get_x_length_value_start = () => {
     if (point_foundation_shape == 'rectangular') {
         return -(length / 2 + ec_vl_length)
-
     } else if (point_foundation_shape == 'circular') {
         return -(radius + ec_vl_length)
     }

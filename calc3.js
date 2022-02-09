@@ -52,12 +52,15 @@ widths_small_steps = matix.range(0, small_step, end)
 
 const n = 200
 
+
 findVolumes = () => {
 
-    console.time('rand_loop')
+    calc_times = []
 
     randLoop:
     for(r = 0; r < n; r++) {
+
+        var start_time = Date.now()
 
         //randomize following values
         height = matix.randomIntInSteps(200, 200, 1200)
@@ -76,15 +79,15 @@ findVolumes = () => {
         // [length, width, volume]
         verified_sets = []
 
-        console.time('length_loop')
+        
+
+        
         lengthLoop:
         for(l in lengths) {
-
             length = lengths[l]
             if(matix.restr_1(length, column_length, ec_vl_length)) {
                 continue lengthLoop
             } 
-
             widthLoop:
             for(w in widths_big_steps) {
                 width = widths_big_steps[w]
@@ -94,13 +97,10 @@ findVolumes = () => {
                 if(matix.verification0() === 0) {
                     continue widthLoop
                 }
-
                 if(veri.verifyFromLengthAndWidth()[0]) {
-                
                     startAt = veri.verifyFromLengthAndWidth()[2] - big_step + small_step
                     endAt = veri.verifyFromLengthAndWidth()[2]
                     smallWidths = matix.range(startAt, small_step, endAt)
-                    
                     for(s in smallWidths) {
                         width = smallWidths[s]
 
@@ -118,12 +118,10 @@ findVolumes = () => {
                         }
                     }
                 }
-            }
+            } //widthLoop end
         } //lengthLoop end
 
         
-        console.timeEnd('length_loop')
-        console.log('------------------------------------------------------------------')
 
         ls = verified_sets.map(function(arr) {
             return arr[0]
@@ -172,27 +170,36 @@ findVolumes = () => {
         ]
         
         // write to volumes3.csv
-        csvVolumeWriter  = createCsvWriter({
-            header: ['id', 'national_annex', 'lmd_known', 'dimensions_known', 'point_foundation_shape', 'gamma_c', 'gamma_s', 'f_R_1', 'f_R_2', 'f_R_3', 'f_R_4', 'radius', 'height', 'height_p_hor', 'depth', 'column_shape', 'column_length', 'column_width', 'column_radius', 'ec_vl_length', 'ec_vl_width', 'geo_known', 'ground_type', 'ground_density', 'dr_st_af_k', 'dr_lt_af_k', 'ud_st_af_k', 'ud_lt_af_k', 'dr_st_cohesion_k', 'dr_lt_cohesion_k', 'ud_st_cohesion_k', 'ud_lt_cohesion_k', 'vl_external', 'terrain_live_load', 'hl_length', 'hl_width', 'm_length', 'm_width', 'internal_moment', 'concrete_type', 'f_ck', 'f_yk', 'A_s', 'concrete_density', 'fabrication_method', 'include_fiber', 'fiber_dosage', 'include_steel', 'steel_quality', 'steel_mesh_type', 'cover_layer', 'opt_length', 'opt_width', 'opt_volume'],
-            path: './matrices/volumes3.csv',
-            // if first entry, comment out "append: true"
-            append: true,
-        })
+        // csvVolumeWriter  = createCsvWriter({
+        //     header: ['id', 'national_annex', 'lmd_known', 'dimensions_known', 'point_foundation_shape', 'gamma_c', 'gamma_s', 'f_R_1', 'f_R_2', 'f_R_3', 'f_R_4', 'radius', 'height', 'height_p_hor', 'depth', 'column_shape', 'column_length', 'column_width', 'column_radius', 'ec_vl_length', 'ec_vl_width', 'geo_known', 'ground_type', 'ground_density', 'dr_st_af_k', 'dr_lt_af_k', 'ud_st_af_k', 'ud_lt_af_k', 'dr_st_cohesion_k', 'dr_lt_cohesion_k', 'ud_st_cohesion_k', 'ud_lt_cohesion_k', 'vl_external', 'terrain_live_load', 'hl_length', 'hl_width', 'm_length', 'm_width', 'internal_moment', 'concrete_type', 'f_ck', 'f_yk', 'A_s', 'concrete_density', 'fabrication_method', 'include_fiber', 'fiber_dosage', 'include_steel', 'steel_quality', 'steel_mesh_type', 'cover_layer', 'opt_length', 'opt_width', 'opt_volume'],
+        //     path: './matrices/volumes3.csv',
+        //     // if first entry, comment out "append: true"
+        //     append: true,
+        // })
         
-        csvVolumeWriter.writeRecords(records)
-            .then(() => {
-                // console.log('...appended to volumes3.csv')
-            });
+        // csvVolumeWriter.writeRecords(records)
+        //     .then(() => {
+        //         // console.log('...appended to volumes3.csv')
+        //     });
 
     
-            
+        calc_time = (Date.now() - start_time) / 1000
+        calc_times.push(calc_time)
+        console.log(calc_time)
+        console.log('----------------------------------------')
+
         
         
     } //randLoop end
 
 
-    console.timeEnd('rand_loop')
-    console.log(r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r)
+    console.log(calc_times)
+        
+    const sum = calc_times.reduce((a, b) => a + b, 0)
+    const avg = (sum / calc_times.length) || 0
+
+    console.log(sum)
+    console.log(avg)
     
 }
 

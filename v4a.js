@@ -16,7 +16,6 @@ for(i = 0; i < lengths.length; i++) {
 
     length = lengths[i]
     
-    console.log(length)
     matrix.push([length])
 
     if(length < 2 * (column_length / 2 + Math.abs(ec_vl_length))) {
@@ -518,8 +517,13 @@ for(i = 0; i < lengths.length; i++) {
         // fn_V_dim_l_arr = []
         // // Y Values Chart 4
         // fn_V_dim_b_arr = []
+        console.log(length)
+        console.log(x_length_value_start)
+        console.log('----------------')
         for(var x = x_length_value_start / 1000; x <= x_length_value_end / 1000; x = x + x_length_value_interval / 1000) {
             //length
+
+
             M_r_dr_st_l_1 = matix.get_M_r_dr_st_l_1(x)
             M_r_dr_lt_l_1 = matix.get_M_r_dr_lt_l_1(x)
             M_r_ud_st_l_1 = matix.get_M_r_ud_st_l_1(x)
@@ -827,7 +831,6 @@ for(i = 0; i < lengths.length; i++) {
             fn_V_dim_b_corr = matix.get_fn_V_dim_b_corr(x)
         }
 
-
         //verification4a
         M_dr_st_l = matix.get_M_dr_st_l()
         M_dr_lt_l = matix.get_M_dr_lt_l()
@@ -848,13 +851,13 @@ for(i = 0; i < lengths.length; i++) {
     }
 }
 
-widths.unshift(0)
-const csvWriter = createCsvWriter({
-    header: widths,
-    path: './matrices/ex2/ex2_v4a_matrix.csv'
-})
+// widths.unshift(0)
+// const csvWriter = createCsvWriter({
+//     header: widths,
+//     path: './matrices/ex2/ex2_v4a_matrix.csv'
+// })
 
-csvWriter.writeRecords(matrix)
-    .then(() => {
-        console.log('...matrix.csv updated!');
-    });
+// csvWriter.writeRecords(matrix)
+//     .then(() => {
+//         console.log('...matrix.csv updated!');
+//     });

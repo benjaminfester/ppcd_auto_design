@@ -1092,3 +1092,495 @@ Algorithm: RandomForestRegressor
        r2 score: 97.35% +/- 0.36
 
 
+--------------------------------------------------------------------------------
+
+K_inner 3, K_outer = 6:
+
+lin_grid = [{}] # no hyper parameters for linear regression
+
+nn_grid = [{'nnreg__solver': ['sgd', 'adam'], # adam
+            'nnreg__alpha': [0.01, 0.1, 1.0, 10], # 0.1
+            'nnreg__hidden_layer_sizes': [(60, 60, 60), (50,100,50), (100,50,25), (75, 75, 75), (50, 75, 50)] # (75, 75, 75)
+            }]
+            
+dt_grid = [{'dtreg__min_samples_leaf': [1,2,3,4,5,6], # 3?
+            'dtreg__max_depth': [10, 20, 30, 40, 50, 150, 200] + [None], # (None?)
+            'dtreg__max_leaf_nodes': [300, 400, 500, 600, 700, 800, 1000, 1200, 1400] + [None] # (400?)
+            }]
+
+rf_grid = [{'rfreg__n_estimators': [100, 150, 200, 250, 300, 400, 500], # 100? 400?
+            'rfreg__max_features': ['auto', 'sqrt', 'log2'], # auto
+            'rfreg__max_depth': [10, 50, 100, 150, 200, None] # 150? None?
+            }] 
+--------------------------------------------------------------------------------
+Algorithm: LinearRegression
+   Inner loop:
+     Best r2_score: (average of inner test fold): 82.40%
+     Best parameters: {}
+     r2 score on outer test fold: 82.35%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.35%
+     Best parameters: {}
+     r2 score on outer test fold: 83.10%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.55%
+     Best parameters: {}
+     r2 score on outer test fold: 81.74%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.34%
+     Best parameters: {}
+     r2 score on outer test fold: 83.17%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.54%
+     Best parameters: {}
+     r2 score on outer test fold: 81.96%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.45%
+     Best parameters: {}
+     r2 score on outer test fold: 82.53%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 82.47% +/- 0.53
+--------------------------------------------------------------------------------
+Algorithm: MLPRegressor
+   Inner loop:
+     Best r2_score: (average of inner test fold): 99.48%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (50, 100, 50), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.76%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.46%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (50, 100, 50), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.77%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.49%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (50, 75, 50), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.64%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.54%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (100, 50, 25), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.68%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.48%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (50, 100, 50), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.72%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.49%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (50, 100, 50), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.77%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 99.72% +/- 0.05
+--------------------------------------------------------------------------------
+Algorithm: DecisionTreeRegressor
+   Inner loop:
+     Best r2_score: (average of inner test fold): 92.04%
+     Best parameters: {'dtreg__max_depth': 50, 'dtreg__max_leaf_nodes': 500, 'dtreg__min_samples_leaf': 3}
+     r2 score on outer test fold: 94.36%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 91.72%
+     Best parameters: {'dtreg__max_depth': 40, 'dtreg__max_leaf_nodes': 600, 'dtreg__min_samples_leaf': 4}
+     r2 score on outer test fold: 94.34%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 92.48%
+     Best parameters: {'dtreg__max_depth': 30, 'dtreg__max_leaf_nodes': 600, 'dtreg__min_samples_leaf': 2}
+     r2 score on outer test fold: 94.21%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 92.37%
+     Best parameters: {'dtreg__max_depth': 50, 'dtreg__max_leaf_nodes': 1400, 'dtreg__min_samples_leaf': 2}
+     r2 score on outer test fold: 92.62%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 92.12%
+     Best parameters: {'dtreg__max_depth': 50, 'dtreg__max_leaf_nodes': 1000, 'dtreg__min_samples_leaf': 1}
+     r2 score on outer test fold: 93.54%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 91.56%
+     Best parameters: {'dtreg__max_depth': 30, 'dtreg__max_leaf_nodes': 1000, 'dtreg__min_samples_leaf': 2}
+     r2 score on outer test fold: 94.90%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 93.99% +/- 0.73
+--------------------------------------------------------------------------------
+Algorithm: RandomForestRegressor
+   Inner loop:
+     Best r2_score: (average of inner test fold): 96.83%
+     Best parameters: {'rfreg__max_depth': 150, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 250}
+     r2 score on outer test fold: 97.70%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.44%
+     Best parameters: {'rfreg__max_depth': 200, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 150}
+     r2 score on outer test fold: 97.38%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.77%
+     Best parameters: {'rfreg__max_depth': 200, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 500}
+     r2 score on outer test fold: 97.83%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.58%
+     Best parameters: {'rfreg__max_depth': 150, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 150}
+     r2 score on outer test fold: 96.89%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.84%
+     Best parameters: {'rfreg__max_depth': 100, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 500}
+     r2 score on outer test fold: 97.46%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.51%
+     Best parameters: {'rfreg__max_depth': 50, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 400}
+     r2 score on outer test fold: 98.18%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 97.57% +/- 0.40
+
+
+--------------------------------------------------------------------------------
+
+K_inner 2, K_outer = 6:
+
+lin_grid = [{}] # no hyper parameters for linear regression
+
+nn_grid = [{'nnreg__solver': ['sgd', 'adam'], # adam
+            'nnreg__alpha': [0.01, 0.1, 1.0, 10], # 0.1
+            'nnreg__hidden_layer_sizes': [(60, 60, 60), (50,100,50), (100,50,25), (75, 75, 75), (50, 75, 50)] # (75, 75, 75) or (50, 100, 50)
+            }]
+            
+dt_grid = [{'dtreg__min_samples_leaf': [1,2,3,4,5,6], # 3?
+            'dtreg__max_depth': [10, 20, 30, 40, 50, 150, 200] + [None], # (None?)
+            'dtreg__max_leaf_nodes': [300, 400, 500, 600, 700, 800, 1000, 1200, 1400] + [None] # (400?)
+            }]
+
+rf_grid = [{'rfreg__n_estimators': [100, 150, 200, 250, 300, 400, 500], # 100? 400?
+            'rfreg__max_features': ['auto', 'sqrt', 'log2'], # auto
+            'rfreg__max_depth': [10, 50, 100, 150, 200, None] # 150? None?
+            }] 
+
+
+--------------------------------------------------------------------------------
+Algorithm: LinearRegression
+   Inner loop:
+     Best r2_score: (average of inner test fold): 82.29%
+     Best parameters: {}
+     r2 score on outer test fold: 82.66%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.36%
+     Best parameters: {}
+     r2 score on outer test fold: 82.76%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.20%
+     Best parameters: {}
+     r2 score on outer test fold: 82.73%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.40%
+     Best parameters: {}
+     r2 score on outer test fold: 82.20%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.39%
+     Best parameters: {}
+     r2 score on outer test fold: 82.26%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 82.52% +/- 0.24
+--------------------------------------------------------------------------------
+Algorithm: MLPRegressor
+   Inner loop:
+     Best r2_score: (average of inner test fold): 99.20%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (100, 50, 25), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.70%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.12%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (100, 50, 25), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.72%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.04%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (60, 60, 60), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.62%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.14%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (100, 50, 25), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.61%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.21%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (75, 75, 75), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.66%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 99.66% +/- 0.04
+--------------------------------------------------------------------------------
+Algorithm: DecisionTreeRegressor
+   Inner loop:
+     Best r2_score: (average of inner test fold): 90.76%
+     Best parameters: {'dtreg__max_depth': 40, 'dtreg__max_leaf_nodes': 300, 'dtreg__min_samples_leaf': 3}
+     r2 score on outer test fold: 94.00%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 90.44%
+     Best parameters: {'dtreg__max_depth': 20, 'dtreg__max_leaf_nodes': None, 'dtreg__min_samples_leaf': 4}
+     r2 score on outer test fold: 93.86%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 91.37%
+     Best parameters: {'dtreg__max_depth': None, 'dtreg__max_leaf_nodes': 600, 'dtreg__min_samples_leaf': 3}
+     r2 score on outer test fold: 93.91%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 90.70%
+     Best parameters: {'dtreg__max_depth': 150, 'dtreg__max_leaf_nodes': 700, 'dtreg__min_samples_leaf': 3}
+     r2 score on outer test fold: 93.95%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 91.02%
+     Best parameters: {'dtreg__max_depth': 30, 'dtreg__max_leaf_nodes': 1400, 'dtreg__min_samples_leaf': 2}
+     r2 score on outer test fold: 94.63%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 94.07% +/- 0.28
+--------------------------------------------------------------------------------
+Algorithm: RandomForestRegressor
+   Inner loop:
+     Best r2_score: (average of inner test fold): 96.34%
+     Best parameters: {'rfreg__max_depth': None, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 100}
+     r2 score on outer test fold: 97.56%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 95.71%
+     Best parameters: {'rfreg__max_depth': 150, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 400}
+     r2 score on outer test fold: 97.26%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.18%
+     Best parameters: {'rfreg__max_depth': 150, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 300}
+     r2 score on outer test fold: 97.05%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.28%
+     Best parameters: {'rfreg__max_depth': 50, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 150}
+     r2 score on outer test fold: 97.04%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.35%
+     Best parameters: {'rfreg__max_depth': 100, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 300}
+     r2 score on outer test fold: 97.88%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 97.36% +/- 0.32
+
+
+
+
+--------------------------------------------------------------------------------
+
+K_inner 5, K_outer = 5:
+
+--------------------------------------------------------------------------------
+Algorithm: LinearRegression
+   Inner loop:
+     Best r2_score: (average of inner test fold): 82.34%
+     Best parameters: {}
+     r2 score on outer test fold: 82.66%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.40%
+     Best parameters: {}
+     r2 score on outer test fold: 82.76%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.30%
+     Best parameters: {}
+     r2 score on outer test fold: 82.73%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.55%
+     Best parameters: {}
+     r2 score on outer test fold: 82.20%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 82.47%
+     Best parameters: {}
+     r2 score on outer test fold: 82.26%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 82.52% +/- 0.24
+--------------------------------------------------------------------------------
+Algorithm: MLPRegressor
+   Inner loop:
+     Best r2_score: (average of inner test fold): 99.57%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (50, 100, 50), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.71%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.60%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (50, 100, 50), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.68%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.57%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (50, 100, 50), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.51%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.50%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (50, 100, 50), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.70%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 99.59%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (50, 100, 50), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.70%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 99.66% +/- 0.08
+--------------------------------------------------------------------------------
+Algorithm: DecisionTreeRegressor
+   Inner loop:
+     Best r2_score: (average of inner test fold): 93.18%
+     Best parameters: {'dtreg__max_depth': 20, 'dtreg__max_leaf_nodes': 700, 'dtreg__min_samples_leaf': 3}
+     r2 score on outer test fold: 94.68%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 92.60%
+     Best parameters: {'dtreg__max_depth': 30, 'dtreg__max_leaf_nodes': 800, 'dtreg__min_samples_leaf': 3}
+     r2 score on outer test fold: 93.25%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 93.03%
+     Best parameters: {'dtreg__max_depth': 50, 'dtreg__max_leaf_nodes': 1000, 'dtreg__min_samples_leaf': 2}
+     r2 score on outer test fold: 94.09%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 93.02%
+     Best parameters: {'dtreg__max_depth': 200, 'dtreg__max_leaf_nodes': 1200, 'dtreg__min_samples_leaf': 2}
+     r2 score on outer test fold: 93.91%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 93.30%
+     Best parameters: {'dtreg__max_depth': 30, 'dtreg__max_leaf_nodes': 1000, 'dtreg__min_samples_leaf': 3}
+     r2 score on outer test fold: 94.51%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 94.09% +/- 0.50
+--------------------------------------------------------------------------------
+Algorithm: RandomForestRegressor
+   Inner loop:
+     Best r2_score: (average of inner test fold): 97.25%
+     Best parameters: {'rfreg__max_depth': None, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 500}
+     r2 score on outer test fold: 97.58%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.95%
+     Best parameters: {'rfreg__max_depth': None, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 300}
+     r2 score on outer test fold: 97.32%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.95%
+     Best parameters: {'rfreg__max_depth': 50, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 400}
+     r2 score on outer test fold: 97.01%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 97.17%
+     Best parameters: {'rfreg__max_depth': 100, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 400}
+     r2 score on outer test fold: 97.15%
+     ---------------------------------------------------------------------------
+     Best r2_score: (average of inner test fold): 96.89%
+     Best parameters: {'rfreg__max_depth': 150, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 400}
+     r2 score on outer test fold: 97.94%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 97.40% +/- 0.33
+
+
+
+K_inner = 2, K_outer = 5
+--------------------------------------------------------------------------------
+Algorithm: LinearRegression
+   Inner loop:
+Fitting 2 folds for each of 1 candidates, totalling 2 fits
+     Best r2_score: (average of inner test fold): 82.29%
+     Best parameters: {}
+     r2 score on outer test fold: 82.66%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 1 candidates, totalling 2 fits
+     Best r2_score: (average of inner test fold): 82.36%
+     Best parameters: {}
+     r2 score on outer test fold: 82.76%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 1 candidates, totalling 2 fits
+     Best r2_score: (average of inner test fold): 82.20%
+     Best parameters: {}
+     r2 score on outer test fold: 82.73%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 1 candidates, totalling 2 fits
+     Best r2_score: (average of inner test fold): 82.40%
+     Best parameters: {}
+     r2 score on outer test fold: 82.20%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 1 candidates, totalling 2 fits
+     Best r2_score: (average of inner test fold): 82.39%
+     Best parameters: {}
+     r2 score on outer test fold: 82.26%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 82.52% +/- 0.24
+--------------------------------------------------------------------------------
+Algorithm: MLPRegressor
+   Inner loop:
+Fitting 2 folds for each of 40 candidates, totalling 80 fits
+     Best r2_score: (average of inner test fold): 99.20%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (100, 50, 25), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.70%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 40 candidates, totalling 80 fits
+     Best r2_score: (average of inner test fold): 99.12%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (100, 50, 25), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.72%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 40 candidates, totalling 80 fits
+     Best r2_score: (average of inner test fold): 99.04%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (60, 60, 60), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.62%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 40 candidates, totalling 80 fits
+     Best r2_score: (average of inner test fold): 99.14%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (100, 50, 25), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.61%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 40 candidates, totalling 80 fits
+     Best r2_score: (average of inner test fold): 99.21%
+     Best parameters: {'nnreg__alpha': 0.1, 'nnreg__hidden_layer_sizes': (75, 75, 75), 'nnreg__solver': 'adam'}
+     r2 score on outer test fold: 99.66%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 99.66% +/- 0.04
+--------------------------------------------------------------------------------
+Algorithm: DecisionTreeRegressor
+   Inner loop:
+Fitting 2 folds for each of 480 candidates, totalling 960 fits
+     Best r2_score: (average of inner test fold): 90.78%
+     Best parameters: {'dtreg__max_depth': 20, 'dtreg__max_leaf_nodes': 300, 'dtreg__min_samples_leaf': 3}
+     r2 score on outer test fold: 93.92%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 480 candidates, totalling 960 fits
+     Best r2_score: (average of inner test fold): 90.41%
+     Best parameters: {'dtreg__max_depth': None, 'dtreg__max_leaf_nodes': 600, 'dtreg__min_samples_leaf': 4}
+     r2 score on outer test fold: 93.91%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 480 candidates, totalling 960 fits
+     Best r2_score: (average of inner test fold): 91.32%
+     Best parameters: {'dtreg__max_depth': 200, 'dtreg__max_leaf_nodes': 1200, 'dtreg__min_samples_leaf': 3}
+     r2 score on outer test fold: 93.90%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 480 candidates, totalling 960 fits
+     Best r2_score: (average of inner test fold): 90.63%
+     Best parameters: {'dtreg__max_depth': 150, 'dtreg__max_leaf_nodes': 700, 'dtreg__min_samples_leaf': 3}
+     r2 score on outer test fold: 94.09%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 480 candidates, totalling 960 fits
+     Best r2_score: (average of inner test fold): 91.03%
+     Best parameters: {'dtreg__max_depth': 30, 'dtreg__max_leaf_nodes': 700, 'dtreg__min_samples_leaf': 2}
+     r2 score on outer test fold: 94.82%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 94.13% +/- 0.35
+--------------------------------------------------------------------------------
+Algorithm: RandomForestRegressor
+   Inner loop:
+Fitting 2 folds for each of 126 candidates, totalling 252 fits
+     Best r2_score: (average of inner test fold): 96.38%
+     Best parameters: {'rfreg__max_depth': 150, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 400}
+     r2 score on outer test fold: 97.57%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 126 candidates, totalling 252 fits
+     Best r2_score: (average of inner test fold): 95.68%
+     Best parameters: {'rfreg__max_depth': 100, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 150}
+     r2 score on outer test fold: 97.30%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 126 candidates, totalling 252 fits
+     Best r2_score: (average of inner test fold): 96.19%
+     Best parameters: {'rfreg__max_depth': 200, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 250}
+     r2 score on outer test fold: 97.04%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 126 candidates, totalling 252 fits
+     Best r2_score: (average of inner test fold): 96.24%
+     Best parameters: {'rfreg__max_depth': 50, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 500}
+     r2 score on outer test fold: 97.15%
+     ---------------------------------------------------------------------------
+Fitting 2 folds for each of 126 candidates, totalling 252 fits
+     Best r2_score: (average of inner test fold): 96.38%
+     Best parameters: {'rfreg__max_depth': 150, 'rfreg__max_features': 'auto', 'rfreg__n_estimators': 100}
+     r2 score on outer test fold: 97.84%
+     ---------------------------------------------------------------------------
+   Outer loop
+       r2 score: 97.38% +/- 0.29

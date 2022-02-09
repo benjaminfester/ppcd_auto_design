@@ -437,7 +437,7 @@ verifyFromLengthAndWidth = () => {
     // // Y Values Chart 4
     fn_V_dim_b_arr = []
 
-    for(var x = x_length_value_start / 1000; x <= x_length_value_end / 1000; x = x + x_length_value_interval / 1000) {
+    for(var x =  x_length_value_start / 1000; x <= x_length_value_end / 1000; x = x + x_length_value_interval / 1000) {
         //length
         M_r_dr_st_l_1 = matix.get_M_r_dr_st_l_1(x)
         M_r_dr_lt_l_1 = matix.get_M_r_dr_lt_l_1(x)

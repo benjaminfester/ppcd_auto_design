@@ -43,18 +43,31 @@ fiber_dosage = '1.8,1.9,2.1,2,4'
 include_steel = undefined
 
 //randomize following values
-height = matix.randomIntInSteps(200, 200, 1200)
+// height = matix.randomIntInSteps(200, 200, 1200)
+// height_p_hor = height
+// depth = matix.randomIntInSteps(0, 200, 1200)
+// column_length = matix.randomIntInSteps(100, 100, 400)
+// column_width = matix.randomIntInSteps(100, 100, 400)
+// ec_vl_length = matix.randomIntInSteps(0, 100, 300)
+// ec_vl_width = matix.randomIntInSteps(0, 100, 300)
+// vl_external = matix.randomIntInStepsNotZero(-60, 20, 200)
+// hl_length = matix.randomIntInSteps(0, 5, 20)
+// hl_width = matix.randomIntInSteps(0, 5, 20)
+// m_length = matix.randomIntInSteps(0, 5, 10)
+// m_width = matix.randomIntInSteps(0, 5, 10)
+
+height = 600
 height_p_hor = height
-depth = matix.randomIntInSteps(0, 200, 1200)
-column_length = matix.randomIntInSteps(100, 100, 400)
-column_width = matix.randomIntInSteps(100, 100, 400)
-ec_vl_length = matix.randomIntInSteps(0, 100, 300)
-ec_vl_width = matix.randomIntInSteps(0, 100, 300)
-vl_external = matix.randomIntInStepsNotZero(-60, 20, 200)
-hl_length = matix.randomIntInSteps(0, 5, 20)
-hl_width = matix.randomIntInSteps(0, 5, 20)
-m_length = matix.randomIntInSteps(0, 5, 10)
-m_width = matix.randomIntInSteps(0, 5, 10)
+depth = 800
+column_length = 100
+column_width = 300
+ec_vl_length = 300
+ec_vl_width = 100
+vl_external = 40
+hl_length = 10
+hl_width = 5
+m_length = 0
+m_width = 10
 
 end = 8000
 big_step = 400
@@ -956,7 +969,7 @@ console.log("m_width:",m_width)
 
 csvWriter.writeRecords(matrix)
     .then(() => {
-        console.log('...loops completed and matrix.csv file updated!')
+        console.log('...loops completed and csv file updated!')
     });
 
 

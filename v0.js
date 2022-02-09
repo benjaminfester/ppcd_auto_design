@@ -49,7 +49,7 @@ for(i = 0; i < lengths.length; i++) {
 widths.unshift(0)
 const csvWriter = createCsvWriter({
     header: widths,
-    path: './matrices/ex3/ex3_v0_matrix.csv'
+    path: './matrices/ex4/ex4_v0_matrix.csv'
 })
 
 csvWriter.writeRecords(matrix)
