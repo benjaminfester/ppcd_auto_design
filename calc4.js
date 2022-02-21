@@ -1,8 +1,7 @@
 const matix = require('./mathematix')
 const veri = require('./verified')
-const createCsvWriter  = require('csv-writer').createArrayCsvWriter
-const { v4: uuidv4 } = require('uuid')
 
+//fixed values
 national_annex = 'Denmark'
 lmd_known = undefined
 dimensions_known = undefined
@@ -50,45 +49,49 @@ widths = matix.range(0, small_step, end)
 widths_big_steps = matix.range(0, big_step, end)
 widths_small_steps = matix.range(0, small_step, end)
 
-const n = 200
 
+// set geometrical values for all n load combinations
+height = 600
+height_p_hor = height
+depth = 600
+column_length = 200
+column_width = 200
+ec_vl_length = 0
+ec_vl_width = 0
 
-findVolumes = () => {
+//simulation of n sets of load combinations
+vl_externals = [20, 80, 60]
+hl_lengths = [0, 10, 0]
+hl_widths = [5, 15, 0]
+m_lengths = [0, 10, 5]
+m_widths = [0, 10, 5]
+load_combinations = zip(vl_externals, hl_lengths, hl_widths, m_lengths, m_widths)
 
-    calc_times = []
+findMinimalVolume = () => {
 
-    randLoop:
-    for(r = 0; r < n; r++) {
+    // load combination loop
+    lcLoop:
+    for(lc in load_combinations) {
+        vl_external = vl_externals[lc]
+        hl_length = hl_lengths[lc]
+        hl_width = hl_widths[lc]
+        m_length = m_lengths[lc]
+        m_width = m_widths[lc]
 
-        var start_time = Date.now()
-
-        //randomize following values
-        height = matix.randomIntInSteps(200, 200, 1200)
-        height_p_hor = height
-        depth = matix.randomIntInSteps(0, 200, 1200)
-        column_length = matix.randomIntInSteps(100, 100, 400)
-        column_width = matix.randomIntInSteps(100, 100, 400)
-        ec_vl_length = matix.randomIntInSteps(0, 100, 300)
-        ec_vl_width = matix.randomIntInSteps(0, 100, 300)
-        vl_external = matix.randomIntInStepsNotZero(-60, 20, 200)
-        hl_length = matix.randomIntInSteps(0, 5, 20)
-        hl_width = matix.randomIntInSteps(0, 5, 20)
-        m_length = matix.randomIntInSteps(0, 5, 10)
-        m_width = matix.randomIntInSteps(0, 5, 10)
-
-        // [length, width, volume]
         verified_sets = []
 
         lengthLoop:
         for(l in lengths) {
             length = lengths[l]
-            if(matix.restr_1(length, column_length, ec_vl_length)) continue lengthLoop
+            if(matix.restr_1(length, column_length, ec_vl_length)) {
+                continue lengthLoop
+            } 
             widthLoop:
             for(w in widths_big_steps) {
                 width = widths_big_steps[w]
                 if(matix.restr_1(width, column_width, ec_vl_width)) continue widthLoop
-                
                 if(matix.verification0() === 0) continue widthLoop
+                
                 if(veri.verifyFromLengthAndWidth()[0]) {
                     startAt = veri.verifyFromLengthAndWidth()[2] - big_step + small_step
                     endAt = veri.verifyFromLengthAndWidth()[2]
@@ -96,10 +99,10 @@ findVolumes = () => {
                     for(s in smallWidths) {
                         width = smallWidths[s]
 
-                        // two following if statements... was missing... 
+                        // needed in the calc3.js
                         if(matix.restr_1(width, column_width, ec_vl_width)) continue widthLoop
                         if(matix.verification0() === 0) continue widthLoop
-
+                        
                         if(verified_sets.length > 0) {
                             if(width == verified_sets.at(-1)[1]) {
                                 continue lengthLoop
@@ -117,24 +120,14 @@ findVolumes = () => {
             } //widthLoop end
         } //lengthLoop end
 
-        
+        ls = verified_sets.map(function(arr) { return arr[0] })
 
-        ls = verified_sets.map(function(arr) {
-            return arr[0]
-        })
-        
-        ws = verified_sets.map(function(arr) {
-            return arr[1]
-        })
-        
-        vs = verified_sets.map(function(arr) {
-            return arr[2]
-        })
-        
+        ws = verified_sets.map(function(arr) { return arr[1] })
+
+        vs = verified_sets.map(function(arr) { return arr[2]})
+
         opt_index = vs.indexOf(Math.min(...vs))
 
-
-        
         if(verified_sets.length == 0) {
             console.log("no solutions found for following settings:")
             console.log("height:",height, "depth:",depth)
@@ -143,7 +136,7 @@ findVolumes = () => {
             console.log("vl_external:",vl_external)
             console.log("hl_length:",hl_length, "hl_width:",hl_width)
             console.log("m_length:",m_length, "m_width:",m_width)
-            continue randLoop
+            continue lcLoop
         }
     
         opt_length = verified_sets[opt_index][0]
@@ -160,44 +153,24 @@ findVolumes = () => {
         console.log("hl_length:",hl_length, "hl_width:",hl_width)
         console.log("m_length:",m_length, "m_width:",m_width)
 
-        // write to volumes3.csv
-        const records = [
-            [uuidv4(), national_annex, lmd_known, dimensions_known, point_foundation_shape, gamma_c, gamma_s, f_R_1, f_R_2, f_R_3, f_R_4, radius, height, height_p_hor, depth, column_shape, column_length, column_width, column_radius, ec_vl_length, ec_vl_width, geo_known, ground_type, ground_density, dr_st_af_k, dr_lt_af_k, ud_st_af_k, ud_lt_af_k, dr_st_cohesion_k, dr_lt_cohesion_k, ud_st_cohesion_k, ud_lt_cohesion_k, vl_external, terrain_live_load, hl_length, hl_width, m_length, m_width, internal_moment, concrete_type, f_ck, f_yk, A_s, concrete_density, fabrication_method, include_fiber, fiber_dosage, include_steel, steel_quality, steel_mesh_type, cover_layer, opt_length, opt_width, opt_volume],
-        ]
-        
-        // write to volumes3.csv
-        // csvVolumeWriter  = createCsvWriter({
-        //     header: ['id', 'national_annex', 'lmd_known', 'dimensions_known', 'point_foundation_shape', 'gamma_c', 'gamma_s', 'f_R_1', 'f_R_2', 'f_R_3', 'f_R_4', 'radius', 'height', 'height_p_hor', 'depth', 'column_shape', 'column_length', 'column_width', 'column_radius', 'ec_vl_length', 'ec_vl_width', 'geo_known', 'ground_type', 'ground_density', 'dr_st_af_k', 'dr_lt_af_k', 'ud_st_af_k', 'ud_lt_af_k', 'dr_st_cohesion_k', 'dr_lt_cohesion_k', 'ud_st_cohesion_k', 'ud_lt_cohesion_k', 'vl_external', 'terrain_live_load', 'hl_length', 'hl_width', 'm_length', 'm_width', 'internal_moment', 'concrete_type', 'f_ck', 'f_yk', 'A_s', 'concrete_density', 'fabrication_method', 'include_fiber', 'fiber_dosage', 'include_steel', 'steel_quality', 'steel_mesh_type', 'cover_layer', 'opt_length', 'opt_width', 'opt_volume'],
-        //     path: './matrices/volumes3.csv',
-        //     // if first entry, comment out "append: true"
-        //     append: true,
-        // })
-        
-        // csvVolumeWriter.writeRecords(records)
-        //     .then(() => {
-        //         // console.log('...appended to volumes3.csv')
-        //     });
+       console.log("---------------LC DONE---------------")
 
-    
-        calc_time = (Date.now() - start_time) / 1000
-        calc_times.push(calc_time)
-        console.log(calc_time)
-        console.log('----------------------------------------')
+   }
 
-        
-        
-    } //randLoop end
-
-
-    console.log(calc_times)
-        
-    const sum = calc_times.reduce((a, b) => a + b, 0)
-    const avg = (sum / calc_times.length) || 0
-
-    console.log(sum)
-    console.log(avg)
-    
 }
 
-findVolumes()
+findMinimalVolume()
 
+
+
+//python's zip function
+function zip() {
+    var args = [].slice.call(arguments);
+    var shortest = args.length==0 ? [] : args.reduce(function(a,b){
+        return a.length<b.length ? a : b
+    });
+
+    return shortest.map(function(_,i){
+        return args.map(function(array){return array[i]})
+    });
+}

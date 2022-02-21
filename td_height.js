@@ -2,7 +2,6 @@ const matix = require('./mathematix')
 const veri = require('./verified')
 const createCsvWriter  = require('csv-writer').createArrayCsvWriter
 
-
 national_annex = 'Denmark'
 lmd_known = undefined
 dimensions_known = undefined
@@ -65,15 +64,11 @@ max_h = 1500
 heights = matix.range(min_h, small_step, max_h)
 
 
-
 threedee = () => {
 
     var start_time = Date.now()
 
-    heightz = []
-    lengthz = []
-    widthz = []
-    coordz = []
+    records = []
 
     heightLoop:
     for (h = 0; h < heights.length; h++) {
@@ -115,6 +110,7 @@ threedee = () => {
                         }
                         if(veri.verifyFromLengthAndWidth()[0]) {
                             verified_sets.push([length, width, matix.get_volume()])
+                            records.push([height, length, width, matix.get_volume()])
                             continue lengthLoop
                         }
                     }
@@ -147,36 +143,29 @@ threedee = () => {
             continue heightLoop
         }
 
+        // verified_sets = [height, length, width, opt_volume]
         opt_length = verified_sets[opt_index][0]
         opt_width = verified_sets[opt_index][1]
         opt_volume = verified_sets[opt_index][2]
 
-        console.log("height: ", height, "length: ", length, "width: ", width,"opt_volume: ", opt_volume)
-
-
-        heightz.push(height)
-        lengthz.push(opt_length)
-        widthz.push(opt_width)
-
-
-        coordz.push([height, opt_length, opt_width])
 
     }
 
     height_time = (Date.now() - start_time) / 1000
     console.log("heights loop time: ", height_time)
+    console.log(records)
+        
 
-    
-    
     csvCoordWriter  = createCsvWriter({
-        header: ['height', 'opt_length', 'opt_width'],
-        path: './matrices/three.csv'
+        header: ['height', 'opt_length', 'opt_width', 'volume'],
+        path: './matrices/td_height.csv'
     })
 
-    csvCoordWriter.writeRecords(coordz).then(() => {
-        console.log('...appended to three.csv')
+    csvCoordWriter.writeRecords(records).then(() => {
+        console.log('...td_height.csv created')
     });
     
+
 
     
 }

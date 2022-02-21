@@ -58,16 +58,16 @@ include_steel = undefined
 
 height = 600
 height_p_hor = height
-depth = 800
-column_length = 100
-column_width = 300
-ec_vl_length = 300
-ec_vl_width = 100
-vl_external = 40
-hl_length = 10
+depth = 600
+column_length = 200
+column_width = 200
+ec_vl_length = 0
+ec_vl_width = 0
+vl_external = 20
+hl_length = 0
 hl_width = 5
 m_length = 0
-m_width = 10
+m_width = 0
 
 end = 8000
 big_step = 400

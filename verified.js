@@ -375,7 +375,7 @@ verifyFromLengthAndWidth = () => {
     M_A_ud_st_l_2 = matix.get_M_A_ud_st_l_2()
     M_A_ud_lt_l_2 = matix.get_M_A_ud_lt_l_2()
     M_A_dim_l_2 = matix.get_M_A_dim_l_2()
-    delta = 500
+    delta = 250
     x_length_value_start = matix.get_x_length_value_start()
     x_length_value_end = matix.get_x_length_value_end()
     x_length_value_interval = matix.get_x_length_value_interval()

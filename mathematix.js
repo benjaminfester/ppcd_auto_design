@@ -1,5 +1,6 @@
 
 
+
 module.exports.get_length_min = () => {
     return Math.max((column_length), (2 * Math.abs(ec_vl_length)), (2 * (column_length / 2 + Math.abs(ec_vl_length))))
 }
@@ -8,6 +9,7 @@ module.exports.get_width_min = () => {
     return Math.max((column_width), (2 * Math.abs(ec_vl_width)), (2 * (column_width / 2 + Math.abs(ec_vl_width))))
 }
 
+
 module.exports.get_volume = () => {
     if (point_foundation_shape == 'rectangular') {
         return length * width * height / 1000000000
@@ -15,9 +17,6 @@ module.exports.get_volume = () => {
         return Math.PI * Math.pow(radius, 2) * height / 1000000000
     }
 }
-
-
-
 
 
 module.exports.get_q = () => depth / 1000 * ground_density

@@ -1,16 +1,12 @@
-const matix = require('./mathematix')
-
-
 
 
 checkForNumber = (...args) => {
 
-    for(i in args) {
-        if(!isNaN(args[i])) {
-            console.log("NO")
-        }
+    for(vqqq in args) {
+        console.log(vqqq)
+        
     }
    
 }
 
-checkForNumber(3,5,NaN)
+checkForNumber(10, 20 , 30)
